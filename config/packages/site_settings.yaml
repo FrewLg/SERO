@@ -1,0 +1,15 @@
+twig:
+    globals: { 
+        app_name: 'NTC Management  ', 
+        app_description: '  NTC', 
+        organization: null, 
+        app_url: research.ju.edu.et, 
+        site_logo: ephi.png, 
+        copyright: '  AND ETHICAL REVIEW PORTAL', 
+        navbar_background: dark, 
+        acronym: 'SCIENTIFIC AND ETHICAL REVIEW PORTAL', 
+        corporate_color: '#54b4', 
+        motto: 'We are in the community!', 
+        contact_us: 'SCIENTIFIC AND ETHICAL REVIEW PORTAL', 
+        about: 'SCIENTIFIC AND ETHICAL REVIEW PORTAL',
+        privacy_statement: 'SCIENTIFIC AND ETHICAL REVIEW PORTAL' }

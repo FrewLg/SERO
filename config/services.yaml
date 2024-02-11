@@ -4,6 +4,29 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    site_settingsfile: '%kernel.project_dir%/config/packages/site_settings.yaml'
+    submission_files: '%kernel.project_dir%/public/files/proposals/submissions'
+    upload_destination: '%kernel.project_dir%/public/uploads/submission'
+    college_guidelines: '%kernel.project_dir%/public/files/guidelines'
+    site_backup_settings_file: '/home/ghost/Desktop/projects/harona/ParameterVariables.sh'
+    site_backup_file: '/home/ghost/Desktop/projects/harona/jubackup.sh'
+    project_dir: '%kernel.project_dir%/'
+    review_files: '%kernel.project_dir%/public/files/proposals/review_files'
+    irb_uploads: '%kernel.project_dir%/public/files/irb_uploads'
+    uploads_folder: '%kernel.project_dir%/public/files/uploads'
+    profile_pictures: '%kernel.project_dir%/public/files/profile_pictures'
+    users_publications: '%kernel.project_dir%/public/files/users_publications'
+    site_setting: '%kernel.project_dir%/public/files/site_setting'
+    collaborators_cv: '%kernel.project_dir%/public/files/collaborators_cv'
+    grant_winners_award: '%kernel.project_dir%/public/files/grant_winners_award'
+    datasets: '%kernel.project_dir%/public/files/proposals/datasets'
+    research_report: '%kernel.project_dir%/public/files/uploads'
+    env(DATABASE_URL): "mysql://root:r00tme@127.0.0.1:3306/juresearch?serverVersion=5.7"
+    # env(MAILER_DSN): "gmail://firewlegese74@gmail.com:PassMaDick1212@localhost?encryption=tls&auth_mode=oauth"
+    # env(MAILER_URL): "gmail://firewlegese74@gmail.com:PassMaDick1212@localhost?encryption=tls&auth_mode=oauth"
+    ldap_dc_value : '%env(resolve:LDAP_DC_VALUE)%'
+
+    app_name  : 'EPHI-NTC'
 
 services:
     # default configuration for services in *this* file
