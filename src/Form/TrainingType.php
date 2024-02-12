@@ -16,11 +16,10 @@ class TrainingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('name')
-            ->add('startingDate')
-            ->add('endDate')
-            ->add('description')
-            ->add('createdAt')
+        ->add('TrainingRequest', EntityType::class, [
+            'class' => TrainingRequest::class,
+'choice_label' => 'id',
+        ])
             ->add('modality', EntityType::class, [
                 'class' => Modality::class,
                 'multiple' => true,
@@ -29,13 +28,14 @@ class TrainingType extends AbstractType
                     return $category->getName();
                 }
                             ])
-            ->add('TrainingRequest', EntityType::class, [
-                'class' => TrainingRequest::class,
-'choice_label' => 'id',
-            ])
+          
+            ->add('description')
+
+            ->add('startingDate')
+            ->add('endDate')
             ->add('venue', EntityType::class, [
                 'class' => Room::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
             ])
         ;
     }

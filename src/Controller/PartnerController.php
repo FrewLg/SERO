@@ -30,6 +30,8 @@ class PartnerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $partner->setCreatedAt(new \Datetime());
+
             $entityManager->persist($partner);
             $entityManager->flush();
 

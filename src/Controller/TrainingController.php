@@ -34,6 +34,8 @@ class TrainingController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $training->setCreatedAt(new \Datetime());
+            
             $entityManager->persist($training);
             $entityManager->flush();
             $this->addFlash("success", " created successflly !");
