@@ -2,11 +2,8 @@
 	<!--begin::Head-->
 	<head> 
 		<meta charset="utf-8" />
-		<title>{% block title %}{% endblock %}|
-
-
-			{{app_name}}</title>
-		<meta name="description" content="Wizard examples" />
+		<title>{% block title %}{% endblock %}| {{app_name}}</title>
+		<meta name="{{app_name}}" content="{{app_name}}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
@@ -3468,11 +3465,8 @@
 									<!--end::Wizard-->
  							</div>
  							
+						</div>  
 						</div>
- 							 
-
-							<!--end::Container-->
-				</div>
 						<!--end::Entry-->
 					 
 					<!--end::Content-->
@@ -3502,25 +3496,13 @@
 			</div>
 			<!--end::Page-->
 		</div>
-		<!--end::Main-->
-		<!-- begin::User Panel-->
-		 
-		<!-- end::User Panel-->
-		<!--begin::Quick Panel-->
- 
-		<!--end::Sticky Toolbar-->
-		<!--begin::Demo Panel-->
-		 
-		<!--end::Demo Panel-->
- 		<!--begin::Global Config(global config for global JS scripts)-->
- 		<!--end::Global Config-->
-		<!--begin::Global Theme Bundle(used by all pages)-->
+	
 		<script src="{{ asset('theme/assets/plugins/global/plugins.bundle.js' ) }}"></script>
 		<script src="{{ asset('theme/assets/plugins/custom/prismjs/prismjs.bundle.js' ) }}"></script>
 		<script src="{{ asset('theme/assets/js/scripts.bundle.js' ) }}"></script>
 		<!--end::Global Theme Bundle-->
 		<!--begin::Page Scripts(used by this page)-->
-		<script src="{{ asset('theme/assets/js/pages/custom/wizard/wizard-1.js' ) }}"></script>
+		{# <script src="{{ asset('theme/assets/js/pages/custom/wizard/wizard-1.js' ) }}"></script> #}
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

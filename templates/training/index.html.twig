@@ -12,6 +12,8 @@
                 <th>Name</th>
                 <th>Request name</th>
                 <th>Modality</th>                 
+                <th>Participants</th>                 
+                <th>Allowed vouchures</th>                 
                 <th>Venue</th>                 
                 <th>StartingDate</th>
                 <th>EndDate</th>                 
@@ -27,12 +29,19 @@
                 <td>
                     {% if   training.modality  %}
                     {% for mod in training.modality %}
-                     {{ mod.name }}
-
-                    {% endfor %}
+                     
+                     
+                <span class="label label-lg label-light-{% if mod.id ==1%}danger{% elseif mod.id ==2 %}success{% else %}danger{% endif %} label-inline"> {{ mod.name }} </span>
+               {% endfor %}
                     {% else %}
                     Not specified
                     {% endif %}
+                </td>
+                <td>{{ training.trainingParticipants|length }}</td>
+                <td>{{ training.trainingRequest.numberOfParticipants|length }} 
+               {% if training.trainingRequest.numberOfParticipants|length >= training.trainingParticipants|length %} 
+               <span class="label label-lg label-light-info label-inline"> {{training.trainingRequest.numberOfParticipants|length - training.trainingParticipants|length }} Seats available {% else  %} {% endif %} </span>
+                
                 </td>
                 <td>{{ training.venue.name }}</td>
 

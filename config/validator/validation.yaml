@@ -1,0 +1,9 @@
+# config/validator/validation.yaml
+App\Entity\Profile:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: nationalId
+              fields: ['nationalId', 'nationalId']
+              ignoreNull: 'phoneNumber'    
+    properties:
+        nationalId:
+            - nationalId: ~
