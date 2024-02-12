@@ -16,9 +16,7 @@ class Training
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $name = null;
-
+   
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $startingDate = null;
 
@@ -52,6 +50,9 @@ class Training
     #[ORM\OneToMany(targetEntity: TrainingParticipant::class, mappedBy: 'trainings', orphanRemoval: true)]
     private Collection $trainingParticipants;
 
+    #[ORM\OneToMany(targetEntity: Feedback::class, mappedBy: 'training', orphanRemoval: true)]
+    private Collection $feedback;
+
     
     
     public function __construct()
@@ -59,6 +60,7 @@ class Training
         // $this->organizers = new ArrayCollection();
         $this->modality = new ArrayCollection();
         $this->trainingParticipants = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
      }
 
     public function getId(): ?int
@@ -66,17 +68,7 @@ class Training
         return $this->id;
     }
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
+ 
 
     public function getStartingDate(): ?\DateTimeInterface
     {
@@ -213,6 +205,36 @@ class Training
             // set the owning side to null (unless already changed)
             if ($trainingParticipant->getTrainings() === $this) {
                 $trainingParticipant->setTrainings(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Feedback>
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    public function addFeedback(Feedback $feedback): static
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback->add($feedback);
+            $feedback->setTraining($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedback(Feedback $feedback): static
+    {
+        if ($this->feedback->removeElement($feedback)) {
+            // set the owning side to null (unless already changed)
+            if ($feedback->getTraining() === $this) {
+                $feedback->setTraining(null);
             }
         }
 

@@ -52,17 +52,17 @@
 
                 <td nowrap="nowrap">{{ training.startingDate ? training.startingDate|date('d M   ') : '' }} -{{ training.endDate ? training.endDate|date('d M Y ') : '' }}
                  <span class="label label-lg label-light-dark label-inline">
- {% set datePost = training.startingDate|date('d-m-Y') %}
-{# {% set today = "now"|date('d-m-Y') %} #}
-{% set today = training.endDate|date('d-m-Y') %}
+                {% set datePost = training.startingDate|date('d-m-Y') %}
+                {# {% set today = "now"|date('d-m-Y') %} #}
+                {% set today = training.endDate|date('d-m-Y') %}
 
-{% set difference = date(today).diff(date(datePost))%}
-{% set leftDays = difference.days %}
-{% if datePost == today %}
-1 day
-{% else %}
-{{ leftDays }} days
-{% endif %}
+                {% set difference = date(today).diff(date(datePost))%}
+                {% set leftDays = difference.days %}
+                {% if datePost == today %}
+                1 day
+                {% else %}
+                {{ leftDays }} days
+                {% endif %}
 
 </span>
                 </td>
