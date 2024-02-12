@@ -2,36 +2,27 @@
 
 namespace App\Entity;
 
-use App\Repository\PartnerRepository;
+use App\Repository\FacilityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PartnerRepository::class)]
-class Partner
+#[ORM\Entity(repositoryClass: FacilityRepository::class)]
+class Facility
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updatedAt = null;
-
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $logo = null;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: TrainingRequest::class, mappedBy: 'organizer')]
+    #[ORM\ManyToMany(targetEntity: TrainingRequest::class, mappedBy: 'facility')]
     private Collection $trainingRequests;
 
     public function __construct()
@@ -39,15 +30,6 @@ class Partner
         $this->trainingRequests = new ArrayCollection();
     }
 
-  
-   
-    // public function __construct()
-    // {
-
-        
-    // }
-
-    
     public function getId(): ?int
     {
         return $this->id;
@@ -58,45 +40,9 @@ class Partner
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getLogo(): ?string
-    {
-        return $this->logo;
-    }
-
-    public function setLogo(?string $logo): static
-    {
-        $this->logo = $logo;
 
         return $this;
     }
@@ -112,12 +58,6 @@ class Partner
 
         return $this;
     }
- 
-    public function __toString()
-    {
-        
-   return $this->name;
-    }
 
     /**
      * @return Collection<int, TrainingRequest>
@@ -131,7 +71,7 @@ class Partner
     {
         if (!$this->trainingRequests->contains($trainingRequest)) {
             $this->trainingRequests->add($trainingRequest);
-            $trainingRequest->addOrganizer($this);
+            $trainingRequest->addFacility($this);
         }
 
         return $this;
@@ -140,11 +80,9 @@ class Partner
     public function removeTrainingRequest(TrainingRequest $trainingRequest): static
     {
         if ($this->trainingRequests->removeElement($trainingRequest)) {
-            $trainingRequest->removeOrganizer($this);
+            $trainingRequest->removeFacility($this);
         }
 
         return $this;
     }
-  
-
 }

@@ -44,6 +44,10 @@ class Profile
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $signature = null;
 
+    #[ORM\ManyToOne(inversedBy: 'profiles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Directorate $dirctorate = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +169,18 @@ class Profile
     public function setSignature(?string $signature): static
     {
         $this->signature = $signature;
+
+        return $this;
+    }
+
+    public function getDirctorate(): ?Directorate
+    {
+        return $this->dirctorate;
+    }
+
+    public function setDirctorate(?Directorate $dirctorate): static
+    {
+        $this->dirctorate = $dirctorate;
 
         return $this;
     }

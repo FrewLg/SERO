@@ -3,13 +3,13 @@
 {% block title %}TrainingRequest index{% endblock %}
 
 {% block body %}
-    <h1>TrainingRequest index</h1>
+    <h1>Training Requests</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>TrainingName</th>
+                <th>#</th>
+                <th>Training Name</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>ProgramDetails</th>
@@ -21,7 +21,7 @@
         {% for training_request in training_requests %}
             <tr>
                 <td>{{ training_request.id }}</td>
-                <td>{{ training_request.trainingName }}</td>
+                <td>{{ training_request.trainingTopic }}</td>
                 <td>{{ training_request.createdAt ? training_request.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ training_request.updatedAt ? training_request.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ training_request.programDetails }}</td>

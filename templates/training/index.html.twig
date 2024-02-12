@@ -10,13 +10,12 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Request name</th>
+                <th>Organizers</th>
                 <th>Modality</th>                 
                 <th>Participants</th>                 
-                <th>Allowed vouchures</th>                 
+                <th>Allowed vouchers</th>                 
                 <th>Venue</th>                 
-                <th>StartingDate</th>
-                <th>EndDate</th>                 
+                <th nowrap="nowrap">Duration </th>                 
                 <th></th>
             </tr>
         </thead>
@@ -24,9 +23,15 @@
         {% for training in trainings %}
             <tr>
                 <td>{{ training.id }}</td>
-                <td>{{ training.name }}</td>
-                <td>{{ training.trainingRequest.trainingName }}</td>
-                <td>
+                <td>{{ training.trainingRequest.trainingTopic.name }}</td>
+                                <td>
+                                {% for organizers in training.trainingRequest.organizer %}
+                     
+                     
+                <span class="label label-lg label-light-info label-inline"> {{ organizers.name }} </span>
+               {% endfor %}
+                                </td>
+<td>
                     {% if   training.modality  %}
                     {% for mod in training.modality %}
                      
@@ -45,8 +50,22 @@
                 </td>
                 <td>{{ training.venue.name }}</td>
 
-                <td>{{ training.startingDate ? training.startingDate|date('Y-m-d  ') : '' }}</td>
-                <td>{{ training.endDate ? training.endDate|date('Y-m-d  ') : '' }}</td>
+                <td nowrap="nowrap">{{ training.startingDate ? training.startingDate|date('d M   ') : '' }} -{{ training.endDate ? training.endDate|date('d M Y ') : '' }}
+                 <span class="label label-lg label-light-success label-inline">
+ {% set datePost = training.startingDate|date('d-m-Y') %}
+{# {% set today = "now"|date('d-m-Y') %} #}
+{% set today = training.endDate|date('d-m-Y') %}
+
+{% set difference = date(today).diff(date(datePost))%}
+{% set leftDays = difference.days %}
+{% if datePost == today %}
+1 day
+{% else %}
+{{ leftDays }} days
+{% endif %}
+
+</span>
+                </td>
                   <td>
                     <a href="{{ path('app_training_show', {'id': training.id}) }}">show</a>
                     <a href="{{ path('app_training_edit', {'id': training.id}) }}">edit</a>

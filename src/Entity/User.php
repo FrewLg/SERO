@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -34,6 +36,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Profile $profile = null;
+
+    #[ORM\OneToMany(targetEntity: TrainingMaterial::class, mappedBy: 'uploadedBy', orphanRemoval: true)]
+    private Collection $trainingMaterials;
+
+    public function __construct()
+    {
+        $this->trainingMaterials = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,6 +145,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TrainingMaterial>
+     */
+    public function getTrainingMaterials(): Collection
+    {
+        return $this->trainingMaterials;
+    }
+
+    public function addTrainingMaterial(TrainingMaterial $trainingMaterial): static
+    {
+        if (!$this->trainingMaterials->contains($trainingMaterial)) {
+            $this->trainingMaterials->add($trainingMaterial);
+            $trainingMaterial->setUploadedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrainingMaterial(TrainingMaterial $trainingMaterial): static
+    {
+        if ($this->trainingMaterials->removeElement($trainingMaterial)) {
+            // set the owning side to null (unless already changed)
+            if ($trainingMaterial->getUploadedBy() === $this) {
+                $trainingMaterial->setUploadedBy(null);
+            }
+        }
 
         return $this;
     }

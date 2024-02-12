@@ -2,27 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Partner;
-use App\Entity\Training;
-
-use App\Entity\TrainingOrganizer;
+use App\Entity\TrainingMaterial;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TrainingOrganizerType extends AbstractType
+class TrainingMaterialType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('name')
+            ->add('material')
             ->add('createdAt')
-//             ->add('training', EntityType::class, [
-//                 'class' => Training::class,
-// 'choice_label' => 'id',
-//             ])    n
-            ->add('name', EntityType::class, [
-                'class' => Partner::class,
+            ->add('updatedAt')
+            ->add('uploadedBy', EntityType::class, [
+                'class' => User::class,
 'choice_label' => 'id',
             ])
         ;
@@ -31,7 +28,7 @@ class TrainingOrganizerType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => TrainingOrganizer::class,
+            'data_class' => TrainingMaterial::class,
         ]);
     }
 }

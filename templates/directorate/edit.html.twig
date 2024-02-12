@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Directorate{% endblock %}
+
+{% block body %}
+    <h1>Edit Directorate</h1>
+
+    {{ include('directorate/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_directorate_index') }}">back to list</a>
+
+    {{ include('directorate/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TrainingTopic index{% endblock %}
+
+{% block body %}
+    <h1>TrainingTopic index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Requests</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for training_topic in training_topics %}
+            <tr>
+                <td>{{ training_topic.id }}</td>
+                <td>{{ training_topic.name }}</td>
+                <td> 
+                
+               <span class="label label-lg label-light-success label-inline">  <b> {{ training_topic.trainingRequests|length }}  </b>  Requests </span>
+                
+                </td>
+                
+                <td>{{ training_topic.createdAt ? training_topic.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ training_topic.updatedAt ? training_topic.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_training_topic_show', {'id': training_topic.id}) }}">show</a>
+                    <a href="{{ path('app_training_topic_edit', {'id': training_topic.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_training_topic_new') }}">Create new</a>
+{% endblock %}

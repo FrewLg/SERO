@@ -37,8 +37,8 @@ class Training
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(targetEntity: TrainingOrganizer::class, mappedBy: 'training', orphanRemoval: true)]
-    private Collection $organizers; 
+    // #[ORM\OneToMany(targetEntity: TrainingOrganizer::class, mappedBy: 'training', orphanRemoval: true)]
+    // private Collection $organizers; 
  
    
    
@@ -56,7 +56,7 @@ class Training
     
     public function __construct()
     {
-        $this->organizers = new ArrayCollection();
+        // $this->organizers = new ArrayCollection();
         $this->modality = new ArrayCollection();
         $this->trainingParticipants = new ArrayCollection();
      }
@@ -150,35 +150,7 @@ class Training
         return $this;
     }
 
-    /**
-     * @return Collection<int, TrainingOrganizer>
-     */
-    public function getOrganizers(): Collection
-    {
-        return $this->organizers;
-    }
-
-    public function addOrganizer(TrainingOrganizer $organizer): static
-    {
-        if (!$this->organizers->contains($organizer)) {
-            $this->organizers->add($organizer);
-            $organizer->setTraining($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrganizer(TrainingOrganizer $organizer): static
-    {
-        if ($this->organizers->removeElement($organizer)) {
-            // set the owning side to null (unless already changed)
-            if ($organizer->getTraining() === $this) {
-                $organizer->setTraining(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     public function getVenue(): ?Room
     {

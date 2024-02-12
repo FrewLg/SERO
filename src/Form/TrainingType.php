@@ -16,7 +16,7 @@ class TrainingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            // ->add('name')
             ->add('startingDate')
             ->add('endDate')
             ->add('description')

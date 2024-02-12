@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Directorate index{% endblock %}
+
+{% block body %}
+    <h1>Directorate index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for directorate in directorates %}
+            <tr>
+                <td>{{ directorate.id }}</td>
+                <td>{{ directorate.name }}</td>
+                <td>{{ directorate.description }}</td>
+                <td>{{ directorate.createdAt ? directorate.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_directorate_show', {'id': directorate.id}) }}">show</a>
+                    <a href="{{ path('app_directorate_edit', {'id': directorate.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_directorate_new') }}">Create new</a>
+{% endblock %}

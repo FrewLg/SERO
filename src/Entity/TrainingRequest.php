@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TrainingRequestRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
@@ -16,8 +18,8 @@ class TrainingRequest
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $trainingName = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $trainingName = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
@@ -34,23 +36,29 @@ class TrainingRequest
     #[ORM\OneToOne(mappedBy: 'TrainingRequest', cascade: ['persist', 'remove'])]
     private ?Training $training = null;
 
+    #[ORM\ManyToOne(inversedBy: 'trainingRequests')]
+    private ?TrainingTopic $trainingTopic = null;
+
+    #[ORM\ManyToMany(targetEntity: Facility::class, inversedBy: 'trainingRequests')]
+    private Collection $facility;
+
+    #[ORM\ManyToMany(targetEntity: Partner::class, inversedBy: 'trainingRequests')]
+    private Collection $organizer;
+
+   
+    
+    public function __construct()
+    {
+        $this->facility = new ArrayCollection();
+        $this->organizer = new ArrayCollection();
+      }
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTrainingName(): ?string
-    {
-        return $this->trainingName;
-    }
-
-    public function setTrainingName(?string $trainingName): static
-    {
-        $this->trainingName = $trainingName;
-
-        return $this;
-    }
-
+  
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -120,4 +128,71 @@ class TrainingRequest
 
         return $this;
     }
+
+    public function getTrainingTopic(): ?TrainingTopic
+    {
+        return $this->trainingTopic;
+    }
+
+    public function setTrainingTopic(?TrainingTopic $trainingTopic): static
+    {
+        $this->trainingTopic = $trainingTopic;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Facility>
+     */
+    public function getFacility(): Collection
+    {
+        return $this->facility;
+    }
+
+    public function addFacility(Facility $facility): static
+    {
+        if (!$this->facility->contains($facility)) {
+            $this->facility->add($facility);
+        }
+
+        return $this;
+    }
+
+    public function removeFacility(Facility $facility): static
+    {
+        $this->facility->removeElement($facility);
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        
+   return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Partner>
+     */
+    public function getOrganizer(): Collection
+    {
+        return $this->organizer;
+    }
+
+    public function addOrganizer(Partner $organizer): static
+    {
+        if (!$this->organizer->contains($organizer)) {
+            $this->organizer->add($organizer);
+        }
+
+        return $this;
+    }
+
+    public function removeOrganizer(Partner $organizer): static
+    {
+        $this->organizer->removeElement($organizer);
+
+        return $this;
+    }
+  
 }

@@ -2,36 +2,33 @@
 
 namespace App\Entity;
 
-use App\Repository\PartnerRepository;
+use App\Repository\TrainingTopicRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PartnerRepository::class)]
-class Partner
+#[ORM\Entity(repositoryClass: TrainingTopicRepository::class)]
+class TrainingTopic
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $logo = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
-
-    #[ORM\ManyToMany(targetEntity: TrainingRequest::class, mappedBy: 'organizer')]
+    #[ORM\OneToMany(targetEntity: TrainingRequest::class, mappedBy: 'trainingTopic')]
     private Collection $trainingRequests;
 
     public function __construct()
@@ -39,15 +36,6 @@ class Partner
         $this->trainingRequests = new ArrayCollection();
     }
 
-  
-   
-    // public function __construct()
-    // {
-
-        
-    // }
-
-    
     public function getId(): ?int
     {
         return $this->id;
@@ -58,9 +46,21 @@ class Partner
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
@@ -70,7 +70,7 @@ class Partner
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
+    public function setCreatedAt(?\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -89,36 +89,6 @@ class Partner
         return $this;
     }
 
-    public function getLogo(): ?string
-    {
-        return $this->logo;
-    }
-
-    public function setLogo(?string $logo): static
-    {
-        $this->logo = $logo;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
- 
-    public function __toString()
-    {
-        
-   return $this->name;
-    }
-
     /**
      * @return Collection<int, TrainingRequest>
      */
@@ -131,7 +101,7 @@ class Partner
     {
         if (!$this->trainingRequests->contains($trainingRequest)) {
             $this->trainingRequests->add($trainingRequest);
-            $trainingRequest->addOrganizer($this);
+            $trainingRequest->setTrainingTopic($this);
         }
 
         return $this;
@@ -140,11 +110,19 @@ class Partner
     public function removeTrainingRequest(TrainingRequest $trainingRequest): static
     {
         if ($this->trainingRequests->removeElement($trainingRequest)) {
-            $trainingRequest->removeOrganizer($this);
+            // set the owning side to null (unless already changed)
+            if ($trainingRequest->getTrainingTopic() === $this) {
+                $trainingRequest->setTrainingTopic(null);
+            }
         }
 
         return $this;
     }
-  
 
+    public function __toString()
+    {
+        
+   return $this->name;
+    }
+    
 }
