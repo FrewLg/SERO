@@ -59,6 +59,8 @@ class PartnerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $partner->setUpdatedAt(new \Datetime());
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_partner_index', [], Response::HTTP_SEE_OTHER);

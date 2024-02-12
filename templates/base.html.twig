@@ -121,7 +121,7 @@ License: You must have a valid license purchased only from themeforest(the above
 									</a>
 								</li>
 								<li class="menu-section">
-									<h4 class="menu-text">Custom</h4>
+									<h4 class="menu-text"></h4>
 									<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 								</li>
 								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -137,7 +137,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											</svg>
 											<!--end::Svg Icon-->
 										</span>
-										<span class="menu-text">Applications</span>
+										<span class="menu-text">User Management</span>
 										<i class="menu-arrow"></i>
 									</a>
 									<div class="menu-submenu">
@@ -145,7 +145,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<ul class="menu-subnav">
 											<li class="menu-item menu-item-parent" aria-haspopup="true">
 												<span class="menu-link">
-													<span class="menu-text">Applications</span>
+													<span class="menu-text">User Management</span>
 												</span>
 											</li>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -160,20 +160,27 @@ License: You must have a valid license purchased only from themeforest(the above
 													<i class="menu-arrow"></i>
 													<ul class="menu-subnav">
 														<li class="menu-item" aria-haspopup="true">
-															<a href="custom/apps/user/list-default.html" class="menu-link">
+															<a href="#" class="menu-link">
 																<i class="menu-bullet menu-bullet-dot">
 																	<span></span>
 																</i>
-																<span class="menu-text">List - Default</span>
+																<span class="menu-text">Users</span>
 															</a>
 														</li>
 													 
 														<li class="menu-item" aria-haspopup="true">
-															<a href="custom/apps/user/edit-user.html" class="menu-link">
+															<a href="#" class="menu-link">
 																<i class="menu-bullet menu-bullet-dot">
 																	<span></span>
 																</i>
-																<span class="menu-text">Edit User</span>
+																<span class="menu-text">Roles</span>
+															</a>
+														</li><li class="menu-item" aria-haspopup="true">
+															<a href="#" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Group</span>
 															</a>
 														</li>
 													</ul>
@@ -195,9 +202,9 @@ License: You must have a valid license purchased only from themeforest(the above
 													<path d="M6,18 L9,18 C9.66666667,18.1143819 10,18.4477153 10,19 C10,19.5522847 9.66666667,19.8856181 9,20 L4,20 L4,15 C4,14.3333333 4.33333333,14 5,14 C5.66666667,14 6,14.3333333 6,15 L6,18 Z M18,18 L18,15 C18.1143819,14.3333333 18.4477153,14 19,14 C19.5522847,14 19.8856181,14.3333333 20,15 L20,20 L15,20 C14.3333333,20 14,19.6666667 14,19 C14,18.3333333 14.3333333,18 15,18 L18,18 Z M18,6 L15,6 C14.3333333,5.88561808 14,5.55228475 14,5 C14,4.44771525 14.3333333,4.11438192 15,4 L20,4 L20,9 C20,9.66666667 19.6666667,10 19,10 C18.3333333,10 18,9.66666667 18,9 L18,6 Z M6,6 L6,9 C5.88561808,9.66666667 5.55228475,10 5,10 C4.44771525,10 4.11438192,9.66666667 4,9 L4,4 L9,4 C9.66666667,4 10,4.33333333 10,5 C10,5.66666667 9.66666667,6 9,6 L6,6 Z" fill="#000000" fill-rule="nonzero" />
 												</g>
 											</svg>
-											<!--end::Svg Icon-->
+											<!--end::Svg app_training_request_index -->
 										</span>
-										<span class="menu-text">Pages</span>
+										<span class="menu-text">Settings</span>
 										<i class="menu-arrow"></i>
 									</a>
 									<div class="menu-submenu">
@@ -205,7 +212,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<ul class="menu-subnav">
 											<li class="menu-item menu-item-parent" aria-haspopup="true">
 												<span class="menu-link">
-													<span class="menu-text">Pages</span>
+													<span class="menu-text">Workflow setting</span>
 												</span>
 											</li>
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -213,26 +220,90 @@ License: You must have a valid license purchased only from themeforest(the above
 													<i class="menu-bullet menu-bullet-dot">
 														<span></span>
 													</i>
-													<span class="menu-text">Wizard</span>
+													<span class="menu-text">Workflow setting</span>
 													<i class="menu-arrow"></i>
 												</a>
 												<div class="menu-submenu">
 													<i class="menu-arrow"></i>
 													<ul class="menu-subnav">
 														<li class="menu-item" aria-haspopup="true">
-															<a href="custom/pages/wizard/wizard-1.html" class="menu-link">
+															<a href="{{ path('app_modality_index') }}" class="menu-link">
 																<i class="menu-bullet menu-bullet-dot">
 																	<span></span>
 																</i>
-																<span class="menu-text">Wizard 1</span>
+																<span class="menu-text">Modlaity</span>
+															</a>
+														</li>
+														 <li class="menu-item" aria-haspopup="true">
+															<a href="{{ path('app_facility_index') }}" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Facilities</span>
+															</a>
+														</li>
+														<li class="menu-item" aria-haspopup="true">
+															<a href="{{ path('app_room_index') }}" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Training venues</span>
+															</a>
+														</li>
+														<li class="menu-item" aria-haspopup="true">
+															<a href="{{ path('app_partner_index') }}" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Partner organizations</span>
+															</a>
+														</li>
+															<li class="menu-item" aria-haspopup="true">
+															<a href="{{ path('app_training_topic_index') }}" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Training Topics</span>
+															</a>
+														</li>
+														<li class="menu-item" aria-haspopup="true">
+															<a href="{{ path('app_directorate_index') }}" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Directorates</span>
+															</a>
+														</li>
+														 
+
+													</ul>
+												</div>
+											</li>
+										 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+												<a href="javascript:;" class="menu-link menu-toggle">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">System</span>
+													<i class="menu-arrow"></i>
+												</a>
+												<div class="menu-submenu">
+													<i class="menu-arrow"></i>
+													<ul class="menu-subnav">
+														<li class="menu-item" aria-haspopup="true">
+															<a href="#" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Site Setting</span>
 															</a>
 														</li>
 														 
 													</ul>
 												</div>
 											</li>
-										 
 										</ul>
+										
 									</div>
 								</li>
 								 
@@ -1223,11 +1294,11 @@ License: You must have a valid license purchased only from themeforest(the above
 								<!--begin::Info-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Page Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Aside Light</h5>
+									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{ app_name}}</h5>
 									<!--end::Page Title-->
 									<!--begin::Actions-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-									<span class="text-muted font-weight-bold mr-4">#XRS-45670</span>
+									<span class="text-muted font-weight-bold mr-4"> Muted</span>
 									<a href="#" class="btn btn-light-warning font-weight-bolder btn-sm">Add New</a>
 									<!--end::Actions-->
 								</div>
@@ -1432,7 +1503,7 @@ License: You must have a valid license purchased only from themeforest(the above
 				<!--begin::Nav-->
 				<div class="navi navi-spacer-x-0 p-0">
 					<!--begin::Item-->
-					<a href="custom/apps/user/profile-1/personal-information.html" class="navi-item">
+					<a href="#" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -1458,7 +1529,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<!--end:Item-->
 					<!--begin::Item-->
-					<a href="custom/apps/user/profile-3.html" class="navi-item">
+					<a href="#" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -1485,7 +1556,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<!--end:Item-->
 					<!--begin::Item-->
-					<a href="custom/apps/user/profile-2.html" class="navi-item">
+					<a href="#" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -1510,7 +1581,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					</a>
 					<!--end:Item-->
 					<!--begin::Item-->
-					<a href="custom/apps/userprofile-1/overview.html" class="navi-item">
+					<a href="#" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">

@@ -30,6 +30,8 @@ class ModalityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $modality->setCreatedAt(new \Datetime());
+
             $entityManager->persist($modality);
             $entityManager->flush();
 

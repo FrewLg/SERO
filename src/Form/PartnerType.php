@@ -15,8 +15,7 @@ class PartnerType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('createdAt')
-            ->add('updatedAt')
+            
             ->add('logo')
             ->add('description')
  

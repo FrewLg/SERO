@@ -30,6 +30,9 @@ class DirectorateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+             
+            $directorate->setCreatedAt(new \Datetime());
+
             $entityManager->persist($directorate);
             $entityManager->flush();
 
@@ -57,6 +60,8 @@ class DirectorateController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $directorate->setUpdatedAt(new \Datetime());
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_directorate_index', [], Response::HTTP_SEE_OTHER);

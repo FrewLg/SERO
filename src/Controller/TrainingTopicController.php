@@ -30,6 +30,8 @@ class TrainingTopicController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trainingTopic->setCreatedAt(new \Datetime());
+
             $entityManager->persist($trainingTopic);
             $entityManager->flush();
 
@@ -57,6 +59,8 @@ class TrainingTopicController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trainingTopic->setUpdatedAt(new \Datetime());
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_training_topic_index', [], Response::HTTP_SEE_OTHER);

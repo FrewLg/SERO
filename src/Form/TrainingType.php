@@ -18,7 +18,7 @@ class TrainingType extends AbstractType
         $builder
         ->add('TrainingRequest', EntityType::class, [
             'class' => TrainingRequest::class,
-'choice_label' => 'id',
+'choice_label' => 'trainingTopic',
         ])
             ->add('modality', EntityType::class, [
                 'class' => Modality::class,

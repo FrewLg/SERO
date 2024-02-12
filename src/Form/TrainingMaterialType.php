@@ -16,12 +16,12 @@ class TrainingMaterialType extends AbstractType
         $builder
             ->add('name')
             ->add('material')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('uploadedBy', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-            ])
+            // ->add('createdAt')
+            // ->add('updatedAt')
+//             ->add('uploadedBy', EntityType::class, [
+//                 'class' => User::class,
+// 'choice_label' => 'id',
+//             ])
         ;
     }
 

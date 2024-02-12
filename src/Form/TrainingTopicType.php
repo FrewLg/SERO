@@ -14,8 +14,8 @@ class TrainingTopicType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('createdAt')
-            ->add('updatedAt')
+            // ->add('createdAt')
+            // ->add('updatedAt')
         ;
     }
 

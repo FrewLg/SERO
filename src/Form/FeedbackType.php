@@ -16,15 +16,14 @@ class FeedbackType extends AbstractType
     {
         $builder
             ->add('message')
-            ->add('createdAt')
-            ->add('sentBy', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-            ])
-            ->add('training', EntityType::class, [
-                'class' => Training::class,
-'choice_label' => 'id',
-            ])
+//              ->add('sentBy', EntityType::class, [
+//                 'class' => User::class,
+// 'choice_label' => 'id',
+//             ])
+//             ->add('training', EntityType::class, [
+//                 'class' => Training::class,
+// 'choice_label' => 'id',
+//             ])
         ;
     }
 
