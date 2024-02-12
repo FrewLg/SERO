@@ -17,8 +17,7 @@ class TrainingRequestType extends AbstractType
     {
         $builder
             // ->add('trainingName')
-            ->add('createdAt')
-            ->add('updatedAt')
+            
             ->add('programDetails')
             ->add('facility', EntityType::class, [
                 'class' => Facility::class,

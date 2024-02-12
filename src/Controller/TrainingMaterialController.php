@@ -11,12 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/training-material')]
+#[Route('/admin/training-material')]
 class TrainingMaterialController extends AbstractController
 {
-    #[Route('/', name: 'app_training_material_index', methods: ['GET'])]
+     #[Route('/', name: 'app_training_material_index', methods: ['GET'])]
     public function index(TrainingMaterialRepository $trainingMaterialRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_uSER');
+
         return $this->render('training_material/index.html.twig', [
             'training_materials' => $trainingMaterialRepository->findAll(),
         ]);
@@ -25,6 +27,8 @@ class TrainingMaterialController extends AbstractController
     #[Route('/new', name: 'app_training_material_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $trainingMaterial = new TrainingMaterial();
         $form = $this->createForm(TrainingMaterialType::class, $trainingMaterial);
         $form->handleRequest($request);
@@ -45,6 +49,8 @@ class TrainingMaterialController extends AbstractController
     #[Route('/{id}', name: 'app_training_material_show', methods: ['GET'])]
     public function show(TrainingMaterial $trainingMaterial): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('training_material/show.html.twig', [
             'training_material' => $trainingMaterial,
         ]);
@@ -53,6 +59,8 @@ class TrainingMaterialController extends AbstractController
     #[Route('/{id}/edit', name: 'app_training_material_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, TrainingMaterial $trainingMaterial, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $form = $this->createForm(TrainingMaterialType::class, $trainingMaterial);
         $form->handleRequest($request);
 

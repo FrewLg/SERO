@@ -60,6 +60,7 @@ security:
         # require ROLE_ADMIN for /admin*
         - { path: '^/admin', roles: ROLE_ADMIN }
         - { path: '^/training', roles: ROLE_ADMIN }
+        - { path: '^/trainings', roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
 
         # or require ROLE_ADMIN or IS_AUTHENTICATED_FULLY for /admin*

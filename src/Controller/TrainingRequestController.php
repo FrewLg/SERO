@@ -29,9 +29,16 @@ class TrainingRequestController extends AbstractController
         $form = $this->createForm(TrainingRequestType::class, $trainingRequest);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+
+
+            $trainingRequest->setCreatedAt(new \Datetime());
+            // $trainingRequest->setCreatedAt(new \Datetime());
+
             $entityManager->persist($trainingRequest);
             $entityManager->flush();
+            $this->addFlash("success", " created successflly !");
 
             return $this->redirectToRoute('app_training_request_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -57,6 +64,8 @@ class TrainingRequestController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $trainingRequest->setUpdatedAt(new \Datetime());
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_training_request_index', [], Response::HTTP_SEE_OTHER);
