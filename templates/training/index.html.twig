@@ -28,7 +28,7 @@
                                 {% for organizers in training.trainingRequest.organizer %}
                      
                      
-                <span class="label label-lg label-light-info label-inline"> {{ organizers.name }} </span>
+                <span class="label label-lg label-light-primary label-inline"> {{ organizers.name }} </span>
                {% endfor %}
                                 </td>
 <td>
@@ -51,7 +51,7 @@
                 <td>{{ training.venue.name }}</td>
 
                 <td nowrap="nowrap">{{ training.startingDate ? training.startingDate|date('d M   ') : '' }} -{{ training.endDate ? training.endDate|date('d M Y ') : '' }}
-                 <span class="label label-lg label-light-success label-inline">
+                 <span class="label label-lg label-light-dark label-inline">
  {% set datePost = training.startingDate|date('d-m-Y') %}
 {# {% set today = "now"|date('d-m-Y') %} #}
 {% set today = training.endDate|date('d-m-Y') %}
