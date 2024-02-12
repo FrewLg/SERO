@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Modality;
 use App\Entity\Room;
 use App\Entity\Training;
 use App\Entity\TrainingRequest;
@@ -20,7 +21,14 @@ class TrainingType extends AbstractType
             ->add('endDate')
             ->add('description')
             ->add('createdAt')
-            // ->add('updatedAt')
+            ->add('modality', EntityType::class, [
+                'class' => Modality::class,
+                'multiple' => true,
+                'expanded' => true,
+                'choice_label' => function (Modality $category): string {
+                    return $category->getName();
+                }
+                            ])
             ->add('TrainingRequest', EntityType::class, [
                 'class' => TrainingRequest::class,
 'choice_label' => 'id',

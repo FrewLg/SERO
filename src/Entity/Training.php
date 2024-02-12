@@ -41,18 +41,21 @@ class Training
     private Collection $organizers; 
  
    
-    #[ORM\OneToMany(targetEntity: Modality::class, mappedBy: 'training', orphanRemoval: true)]
-    private Collection $modality;
-
+   
     #[ORM\ManyToOne(inversedBy: 'trainings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Room $venue = null;
 
+    #[ORM\ManyToMany(targetEntity: Modality::class, inversedBy: 'trainings')]
+    private Collection $modality;
+
+    
+    
     public function __construct()
     {
         $this->organizers = new ArrayCollection();
         $this->modality = new ArrayCollection();
-    }
+     }
 
     public function getId(): ?int
     {
@@ -184,6 +187,7 @@ class Training
 
         return $this;
     }
+ 
 
     /**
      * @return Collection<int, Modality>
@@ -197,7 +201,6 @@ class Training
     {
         if (!$this->modality->contains($modality)) {
             $this->modality->add($modality);
-            $modality->setTraining($this);
         }
 
         return $this;
@@ -205,13 +208,11 @@ class Training
 
     public function removeModality(Modality $modality): static
     {
-        if ($this->modality->removeElement($modality)) {
-            // set the owning side to null (unless already changed)
-            if ($modality->getTraining() === $this) {
-                $modality->setTraining(null);
-            }
-        }
+        $this->modality->removeElement($modality);
 
         return $this;
     }
+
+    
+   
 }
