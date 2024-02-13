@@ -17,6 +17,7 @@ class DirectorateController extends AbstractController
     #[Route('/', name: 'app_directorate_index', methods: ['GET'])]
     public function index(DirectorateRepository $directorateRepository): Response
     {
+       
         return $this->render('directorate/index.html.twig', [
             'directorates' => $directorateRepository->findAll(),
         ]);

@@ -28,9 +28,16 @@ class Directorate
     #[ORM\OneToMany(targetEntity: Profile::class, mappedBy: 'dirctorate', orphanRemoval: true)]
     private Collection $profiles;
 
+    #[ORM\OneToMany(targetEntity: Coupon::class, mappedBy: 'directorate')]
+    private Collection $coupons;
+
+    #[ORM\Column(length: 255)]
+    private ?string $acronym = null;
+
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
+        $this->coupons = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -100,6 +107,48 @@ class Directorate
                 $profile->setDirctorate(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Coupon>
+     */
+    public function getCoupons(): Collection
+    {
+        return $this->coupons;
+    }
+
+    public function addCoupon(Coupon $coupon): static
+    {
+        if (!$this->coupons->contains($coupon)) {
+            $this->coupons->add($coupon);
+            $coupon->setDirectorate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCoupon(Coupon $coupon): static
+    {
+        if ($this->coupons->removeElement($coupon)) {
+            // set the owning side to null (unless already changed)
+            if ($coupon->getDirectorate() === $this) {
+                $coupon->setDirectorate(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAcronym(): ?string
+    {
+        return $this->acronym;
+    }
+
+    public function setAcronym(string $acronym): static
+    {
+        $this->acronym = $acronym;
 
         return $this;
     }

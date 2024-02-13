@@ -30,6 +30,12 @@ class TrainingParticipant
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $registeredAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $certId = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $certIssuedAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +97,30 @@ class TrainingParticipant
     public function setRegisteredAt(?\DateTimeInterface $registeredAt): static
     {
         $this->registeredAt = $registeredAt;
+
+        return $this;
+    }
+
+    public function getCertId(): ?int
+    {
+        return $this->certId;
+    }
+
+    public function setCertId(?int $certId): static
+    {
+        $this->certId = $certId;
+
+        return $this;
+    }
+
+    public function getCertIssuedAt(): ?\DateTimeInterface
+    {
+        return $this->certIssuedAt;
+    }
+
+    public function setCertIssuedAt(?\DateTimeInterface $certIssuedAt): static
+    {
+        $this->certIssuedAt = $certIssuedAt;
 
         return $this;
     }

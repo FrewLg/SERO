@@ -53,6 +53,9 @@ class Training
     #[ORM\OneToMany(targetEntity: Feedback::class, mappedBy: 'training', orphanRemoval: true)]
     private Collection $feedback;
 
+    #[ORM\OneToMany(targetEntity: Coupon::class, mappedBy: 'training')]
+    private Collection $coupons;
+
     
     
     public function __construct()
@@ -61,6 +64,7 @@ class Training
         $this->modality = new ArrayCollection();
         $this->trainingParticipants = new ArrayCollection();
         $this->feedback = new ArrayCollection();
+        $this->coupons = new ArrayCollection();
      }
 
     public function getId(): ?int
@@ -235,6 +239,36 @@ class Training
             // set the owning side to null (unless already changed)
             if ($feedback->getTraining() === $this) {
                 $feedback->setTraining(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Coupon>
+     */
+    public function getCoupons(): Collection
+    {
+        return $this->coupons;
+    }
+
+    public function addCoupon(Coupon $coupon): static
+    {
+        if (!$this->coupons->contains($coupon)) {
+            $this->coupons->add($coupon);
+            $coupon->setTraining($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCoupon(Coupon $coupon): static
+    {
+        if ($this->coupons->removeElement($coupon)) {
+            // set the owning side to null (unless already changed)
+            if ($coupon->getTraining() === $this) {
+                $coupon->setTraining(null);
             }
         }
 

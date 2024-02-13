@@ -15,7 +15,8 @@ License: You must have a valid license purchased only from themeforest(the above
 	<!--begin::Head-->
 	<head><base href="{{ asset('../../' ) }}">
 		<meta charset="utf-8" />
-		<title>Metronic | Aside Light</title>
+		<title>{% block title %}{% endblock %}|
+			{{app_name}}</title>
 		<meta name="description" content="Aside light theme example" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<!--begin::Fonts-->
@@ -45,7 +46,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 			<!--begin::Logo-->
 			<a href="#">
-				<img alt="Logo" src="{{ asset('theme/assets/media/logos/logo-dark.png' ) }}" />
+				<img alt="Logo" src="{{ asset('files/site_setting/'~site_logo ) }}" />
 			</a>
 			<!--end::Logo-->
 			<!--begin::Toolbar-->
@@ -622,9 +623,20 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="topbar-item">
 									<div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ app.user.email }}</span>
+										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+										{% if app.user  and app.user.profile %}
+
+						<img src="{{ asset('files/profile_pictures/'~app.user.profile ) }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
+					{% else %}
+
+						<img src="{{ asset('img/defaultuser.png') }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
+					{% endif %}
+
+										{% if app.user %} {{ app.user.email }}
+					{% endif %}
+										</span>
 										<span class="symbol symbol-35 symbol-light-success">
-											<span class="symbol-label font-size-h5 font-weight-bold text-uppercase">{{ app.user.email|striptags|slice(0, 1)|raw }}  </span>
+											<span class="symbol-label font-size-h5 font-weight-bold text-uppercase">	{% if app.user %}{{ app.user.email|striptags|slice(0, 1)|raw }} {% endif %} </span>
 										</span>
 									</div>
 								</div>
@@ -645,15 +657,15 @@ License: You must have a valid license purchased only from themeforest(the above
 									<!--begin::Page Heading-->
 									<div class="d-flex align-items-baseline mr-5">
 										<!--begin::Page Title-->
-										<h5 class="text-dark font-weight-bold my-2 mr-5">Tabbed Subheader</h5>
+										<h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
 										<!--end::Page Title-->
 										<!--begin::Breadcrumb-->
 										<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
 											<li class="breadcrumb-item">
-												<a href="" class="text-muted">Subheaders</a>
+												<a href="" class="text-muted">{% block subheader %} {% endblock  %}</a>
 											</li>
 											<li class="breadcrumb-item">
-												<a href="" class="text-muted">Classic</a>
+												<a href="" class="text-muted">{% block pagetitle %} {% endblock  %}</a>
 											</li>
 										</ul>
 										<!--end::Breadcrumb-->
@@ -810,8 +822,8 @@ License: You must have a valid license purchased only from themeforest(the above
 						<i class="symbol-badge bg-success"></i>
 					</div>
 					<div class="d-flex flex-column">
-						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">{{ app.user.email }} </a>
-						<div class="text-muted mt-1">{{ app.user.email }} role</div>
+						<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"> {% if app.user %}{{ app.user.email }} {% endif %}</a>
+						<div class="text-muted mt-1">{% if app.user %}{{ app.user.email }} {% endif %} role</div>
 						<div class="navi mt-2">
 							<a href="#" class="navi-item">
 								<span class="navi-link p-0 pb-2">
@@ -828,7 +840,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											<!--end::Svg Icon-->
 										</span>
 									</span>
-									<span class="navi-text text-muted text-hover-primary">{{ app.user.email }}</span>
+									<span class="navi-text text-muted text-hover-primary">{% if app.user %}{{ app.user.email }} {% endif %}</span>
 								</span>
 							</a>
 						</div>

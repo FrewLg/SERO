@@ -71,6 +71,9 @@
                 </td>
                 <td>{{ training.trainingParticipants|length }}</td>
                 <td>{{ training.trainingRequest.numberOfParticipants|length }} 
+
+             =   {{ training.coupons|length }}  available coupons 
+
                {% if training.trainingRequest.numberOfParticipants|length >= training.trainingParticipants|length %} 
                <span class="label label-lg label-light-info label-inline"> {{training.trainingRequest.numberOfParticipants|length - training.trainingParticipants|length }} Seats  {% else  %} {% endif %} </span>
                 
@@ -97,7 +100,7 @@
                    
                
                 <td class="text-right pr-0">
-																	<a href="{{ path('app_training_show', {'id': training.id}) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
+																	<a href="{{ path('generate_coupons', {'id': training.id}) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
 																		<span class="svg-icon svg-icon-md svg-icon-primary">
 																			<!--begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg-->
 																			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

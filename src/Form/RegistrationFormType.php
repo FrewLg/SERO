@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\TextType;
+use PharIo\Manifest\Email;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,9 +20,23 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+            ->add('email'
+            ,  EmailType::class,[
+                'label'=>false,
+                'attr'=>['placeholder'=>'Email ',
+                'label'=>false,
+
+                       'class' => 'form-control h-auto form-control-solid py-4 px-8 ',
+                'required' => false, 
+                  ],])
+
             ->add('agreeTerms', CheckboxType::class, [
                                 'mapped' => false,
+                                'label' => "I Agree the terms and conditions",
+                                'attr'=>[ 
+                                'class' => 'form-control checkbox m-0  h-auto form-control-solid py-4 px-8 ',
+                         'required' => false, 
+            ],
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',
@@ -27,10 +44,16 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('plainPassword', PasswordType::class, [
-                                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+                           
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'label'=>false,
+
+                'attr' => ['autocomplete' => 'new-password',
+                'placeholder'=>'Password ',
+                'class' => 'form-control checkbox m-0  h-auto form-control-solid py-4 px-8 ',
+            
+            ], 
+                
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',

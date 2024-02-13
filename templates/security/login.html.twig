@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'loginbase.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Log in{% endblock %}
 
 {% block body %}
-    <form method="post">
+    <form method="post" name="form">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
@@ -15,30 +15,27 @@
         {% endif %}
 
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
-
-
-<a href="{{ path('app_forgot_password_request') }}">Reset password</a><br>
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
-            </div>
-        #}
-
-        <button class="btn btn-lg btn-primary" type="submit">
-            Sign in
-        </button>
-    </form>
+     
+         {# <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control h-auto form-control-solid py-4 px-8" autocomplete="email" required autofocus>
+         <input  type="password" name="_password" id="password" class="form-control h-auto form-control-solid py-4 px-8" autocomplete="current-password" required> #}
+{# ? #}
+<div class="form-group mb-5">
+									<input class="form-control h-auto form-control-solid py-4 px-8"   placeholder="Email"  type="email" value="{{ last_username }}" name="_username" id="username" autocomplete="email" required autofocus autocomplete="off" />
+								</div>
+								<div class="form-group mb-5">
+									<input class="form-control h-auto form-control-solid py-4 px-8"  type="password" name="_password" id="password" placeholder="Password"   />
+								</div>
+								<div class="form-group d-flex flex-wrap justify-content-between align-items-center">
+									<label class="checkbox m-0 text-muted">
+									<input type="checkbox" name="_remember_me" />Remember me
+									<span></span></label>
+									<a href="{{ path('app_forgot_password_request') }}" id="kt_login_forgot" class="text-muted text-hover-primary">Forget Password ?</a>
+								</div>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+								<button   class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">Sign In</button>
+							    </form>
+    <div class="mt-10">
+								<span class="opacity-70 mr-4">Don't have an account yet?</span>
+								<a href="{{ path('app_register') }}"   class="text-muted text-hover-primary font-weight-bold">Sign Up!</a>
+							</div>
 {% endblock %}
