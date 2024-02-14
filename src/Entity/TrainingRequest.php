@@ -55,12 +55,15 @@ class TrainingRequest
     #[ORM\Column(nullable: true)]
     private ?bool $AllowEdit = null;
 
-   
+    #[ORM\ManyToOne(inversedBy: 'trainingRequests')]
+    private ?TrainingRequestStatus $status = null;
+
     
     public function __construct()
     {
         $this->facility = new ArrayCollection();
         $this->organizer = new ArrayCollection();
+        // $this->status = new ArrayCollection();
       }
 
     public function getId(): ?int
@@ -237,6 +240,19 @@ class TrainingRequest
     public function setAllowEdit(?bool $AllowEdit): static
     {
         $this->AllowEdit = $AllowEdit;
+
+        return $this;
+    }
+ 
+
+    public function getStatus(): ?TrainingRequestStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?TrainingRequestStatus $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

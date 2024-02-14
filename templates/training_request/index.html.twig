@@ -150,10 +150,11 @@
             <tr>
                 <th>#</th>
                 <th>Training Name</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>ProgramDetails</th>
-                <th>NumberOfParticipants</th>
+                <th>Request date</th>
+                <th>Directorate</th>
+                <th>Topic</th>
+                <th>Number Of Participants</th>
+                <th>Status</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -162,14 +163,17 @@
             <tr>
                 <td>{{ training_request.id }}</td>
                 <td>{{ training_request.trainingTopic }}</td>
-                <td>{{ training_request.createdAt ? training_request.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ training_request.updatedAt ? training_request.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ training_request.createdAt ? training_request.createdAt|date('M d, y  H:i') : '' }}</td>
+                <td>{{ training_request.requestedBy.directorate.name }}</td>
                 <td>{{ training_request.programDetails }}</td>
                 <td>{{ training_request.numberOfParticipants }}</td>
+                <td>{{ training_request.status }}</td>
                 <td>
 				
+				
                     <a href="{{ path('app_training_add_details', {'id': training_request.id}) }}">Add details</a>
-                    <a href="{{ path('details', {'id': training_request.id}) }}">show</a>
+                    <a href="{{ path('app_training_request_show', {'id': training_request.id}) }}"> show</a>
+                    <a href="{{ path('details', {'id': training_request.id}) }}">Training</a>
                     <a href="{{ path('app_training_request_edit', {'id': training_request.id}) }}">edit</a>
                 </td>
             </tr>

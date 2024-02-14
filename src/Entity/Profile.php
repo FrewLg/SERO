@@ -53,6 +53,13 @@ class Profile
         return $this->id;
     }
 
+    public function __toString()
+    {
+        
+   return $this->firstName;
+    }
+
+    
     public function getUser(): ?User
     {
         return $this->user;

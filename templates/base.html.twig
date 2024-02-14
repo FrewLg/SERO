@@ -346,6 +346,16 @@
 																<span class="menu-text">Training Topics</span>
 															</a>
 														</li>
+														</li>
+															<li class="menu-item" aria-haspopup="true">
+															<a href="{{ path('app_training_request_status_index') }}" class="menu-link">
+																<i class="menu-bullet menu-bullet-dot">
+																	<span></span>
+																</i>
+																<span class="menu-text">Request Status </span>
+															</a>
+														</li>
+
 														<li class="menu-item" aria-haspopup="true">
 															<a href="{{ path('app_directorate_index') }}" class="menu-link">
 																<i class="menu-bullet menu-bullet-dot">
@@ -655,16 +665,13 @@
 									<div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 										<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"></span>
 										<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-										{% if app.user  and app.user.profile %}
+											{% if app.user  and app.user.profile %}
+												<img src="{{ asset('files/profile_pictures/'~app.user.profile ) }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
+											{% else %}
+												<img src="{{ asset('defaultuser.png') }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
+											{% endif %}
 
-						<img src="{{ asset('files/profile_pictures/'~app.user.profile ) }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
-					{% else %}
-
-						<img src="{{ asset('defaultuser.png') }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
-					{% endif %}
-
-										{% if app.user %} {{ app.user.email }}
-					{% endif %}
+										{% if app.user %} {{ app.user.email }}	{% endif %}
 										</span>
 										<span class="symbol symbol-35 symbol-light-success">
 											<span class="symbol-label font-size-h5 font-weight-bold text-uppercase">	{% if app.user %}{{ app.user.email|striptags|slice(0, 1)|raw }} {% endif %} </span>

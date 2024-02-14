@@ -3,7 +3,7 @@
 {% block title %}TrainingRequest{% endblock %}
 
 {% block body %}
-    <h1>TrainingRequest</h1>
+    <h1>Training Request</h1>
 
     <table class="table">
         <tbody>
@@ -34,6 +34,7 @@
         </tbody>
     </table>
 
+{{ training_request.requestedBy.profile }}
     <a href="{{ path('app_training_request_index') }}">back to list</a>
 
     <a href="{{ path('app_training_request_edit', {'id': training_request.id}) }}">edit</a>
