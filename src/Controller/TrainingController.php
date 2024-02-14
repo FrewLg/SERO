@@ -45,10 +45,16 @@ class TrainingController extends AbstractController
 
 
     #[Route('/{id}/add', name: 'app_training_add_details', methods: ['GET', 'POST'])]
-    public function new(Request $request, TrainingRequest $trainingrequest, EntityManagerInterface $entityManager): Response
+    public function adddata(Request $request, TrainingRequest $trainingrequest, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        $training = new Training();
+        if(!$trainingrequest->getTraining()){
+                     $training = new Training();
+        }
+        else
+        {
+            $training =   $trainingrequest->getTraining();
+        }
         $form = $this->createForm(TrainingType::class, $training);
         $form->handleRequest($request);
 

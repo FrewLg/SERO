@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 class TrainingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -31,8 +31,16 @@ class TrainingType extends AbstractType
           
             ->add('description')
 
-            ->add('startingDate')
-            ->add('endDate')
+            ->add('startingDate', DateType::class, [
+                'widget' => 'single_text',
+             
+                'attr' => ['class' => 'js-datepicker'],
+            ])
+            ->add('endDate', DateType::class, [
+                'widget' => 'single_text',
+             
+                'attr' => ['class' => 'js-datepicker'],
+            ])
             ->add('venue', EntityType::class, [
                 'class' => Room::class,
 'choice_label' => 'name',

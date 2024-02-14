@@ -3,25 +3,33 @@
 {% block title %}Coupon index{% endblock %}
 
 {% block body %}
-    <h1>Coupon </h1>
+    <h1>Coupon </h1>{{coupons|length}}
 <h4>
                 {{ training.trainingRequest.trainingTopic.name }}
 </h4>
-    <a href="{{ path('app_training_index') }}">back to training</a>
+
+    
  <table class="table">
          
             <tr>
 {% for coupon in alldirectorates %}
-<td>
+<td class="badge bg-lg bg-light-info  ">
 {{ coupon.name }}={{ coupon.coupons|length }}
+<br>
+Employees:{{ coupon.users|length }}<p>
+{% set quota =coupon.users|length * 100 / allusers|length %}
+Quota:    {{ quota|number_format(0, '.', ',')}} %
+</p>
 </td>
         {% endfor %}
-        <td>Issued :{{coupons|length}}
+<td class="badge bg-lg bg-light-info  ">
+        Issued :{{coupons|length}}
         <br>
       Requested:  {{training.trainingRequest.numberOfParticipants}}
         </td>
         </tr>
  </table >
+    <a href="{{ path('app_training_index') }}">back to training</a>
         
     <table class="table">
         <thead>

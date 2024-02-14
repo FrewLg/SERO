@@ -7,6 +7,7 @@ use App\Entity\Training;
 use App\Form\CouponType;
 use App\Repository\CouponRepository;
 use App\Repository\DirectorateRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,11 +18,13 @@ use Symfony\Component\Routing\Attribute\Route;
 class CouponController extends AbstractController
 {
     #[Route('/{id}/s', name: 'tr_coupon', methods: ['GET'])]
-    public function index(Training $training, CouponRepository $couponRepository, DirectorateRepository $directorateRepository): Response
+    public function index(Training $training, UserRepository $userRepository, CouponRepository $couponRepository, DirectorateRepository $directorateRepository): Response
     {
  
         return $this->render('coupon/index.html.twig', [
-            'training' => $training,
+        'training' => $training,
+        'allusers' => $userRepository->findAll(),
+
         'alldirectorates'=>  $directorateRepository->findAll(),
         'coupons' => $couponRepository->findBy(['training'=>$training]),
 
