@@ -15,6 +15,8 @@ class DirectorateType extends AbstractType
             ->add('name')
             ->add('description')
             // ->add('createdAt')
+            ->add('acronym')
+
         ;
     }
 

@@ -167,7 +167,9 @@
                 <td>{{ training_request.programDetails }}</td>
                 <td>{{ training_request.numberOfParticipants }}</td>
                 <td>
-                    <a href="{{ path('app_training_request_show', {'id': training_request.id}) }}">show</a>
+				
+                    <a href="{{ path('details', {'id': training_request.id}) }}">Add details</a>
+                    <a href="{{ path('details', {'id': training_request.id}) }}">show</a>
                     <a href="{{ path('app_training_request_edit', {'id': training_request.id}) }}">edit</a>
                 </td>
             </tr>

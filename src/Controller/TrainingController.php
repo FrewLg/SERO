@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Coupon;
-use App\Entity\Training;
+use App\Entity\Training; 
+use App\Entity\TrainingRequest;
 use App\Form\CouponType;
 use App\Form\TrainingType;
 use App\Repository\DirectorateRepository;
@@ -28,25 +29,33 @@ class TrainingController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_training_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/r', name: 'details', methods: ['GET'])]
+    public function details(TrainingRepository $trainingRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
+        return $this->render('training/index.html.twig', [
+            'trainings' => $trainingRepository->findAll(),
+        ]);
+    }
+
+
+    #[Route('/{id}/add', name: 'app_training_add_details', methods: ['GET', 'POST'])]
+    public function new(Request $request, TrainingRequest $trainingrequest, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $training = new Training();
         $form = $this->createForm(TrainingType::class, $training);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $training->setCreatedAt(new \Datetime());
-            
+            $training->setTrainingRequest($trainingrequest);
             $entityManager->persist($training);
             $entityManager->flush();
-            $this->addFlash("success", " created successflly !");
-
-            return $this->redirectToRoute('app_training_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash("success", "Details added successflly !");
+            return $this->redirectToRoute('details', ['id'=>$training->getId()], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('training/new.html.twig', [
             'training' => $training,
             'form' => $form,
@@ -62,7 +71,6 @@ class TrainingController extends AbstractController
             'training' => $training,
         ]);
     }
-
 
     #[Route('/{id}/coupons', name: 'generate_coupons', methods: ['GET', 'POST'])]
     public function coupons(Request $request, Training $training,  DirectorateRepository $directorateRepository, EntityManagerInterface $entityManager): Response

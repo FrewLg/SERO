@@ -16,10 +16,10 @@ class TrainingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('TrainingRequest', EntityType::class, [
-            'class' => TrainingRequest::class,
-'choice_label' => 'trainingTopic',
-        ])
+//         ->add('TrainingRequest', EntityType::class, [
+//             'class' => TrainingRequest::class,
+// 'choice_label' => 'trainingTopic',
+//         ])
             ->add('modality', EntityType::class, [
                 'class' => Modality::class,
                 'multiple' => true,
