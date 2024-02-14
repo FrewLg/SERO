@@ -3,7 +3,10 @@
 {% block title %}Coupon index{% endblock %}
 
 {% block body %}
-    <h1>Coupon index</h1>
+    <h1>Coupon </h1>
+<h4>
+                {{ training.trainingRequest.trainingTopic.name }}
+</h4>
     <a href="{{ path('app_training_index') }}">back to training</a>
  <table class="table">
          
@@ -13,8 +16,12 @@
 {{ coupon.name }}={{ coupon.coupons|length }}
 </td>
         {% endfor %}
+        <td>Issued :{{coupons|length}}
+        <br>
+      Requested:  {{training.trainingRequest.numberOfParticipants}}
+        </td>
         </tr>
- <table class="table">
+ </table >
         
     <table class="table">
         <thead>
@@ -22,20 +29,26 @@
                 <th>Id</th>
                 <th>CouponNumber</th>
                 <th>Directorate</th>
-                <th>Training</th>
-                <th>CreatedAt</th>
+                {# <th>Training</th> #}
+                <th>Status</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for coupon in coupons %}
             <tr>
-                <td>{{ coupon.id }}</td>
+                <td>{{ loop.index  }}</td>
                 <td>{{ coupon.couponNumber }}</td>
                 <td>{{ coupon.directorate.name }}</td>
-                <td>{{ coupon.training.trainingRequest.trainingTopic.name }}</td>
-                <td>{{ coupon.reservedAt ? coupon.reservedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ coupon.createdAt ? coupon.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                {% if coupon.reservedAt %}
+                <span class="label label-lg label-light-danger label-inline"> Reserved {{ coupon.reservedAt ? coupon.reservedAt|date('Y-m-d H:i') : '' }}</span>
+                  
+                {% else %}
+                <span class="label label-lg label-light-success label-inline">Free</span>
+                 {% endif %}
+               </td>
+                {# <td>{{ coupon.createdAt ? coupon.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
                 <td>
                     <a href="{{ path('app_coupon_show', {'id': coupon.id}) }}">show</a>
                     <a href="{{ path('app_coupon_edit', {'id': coupon.id}) }}">edit</a>

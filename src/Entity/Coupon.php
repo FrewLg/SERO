@@ -29,6 +29,10 @@ class Coupon
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $consumed = null;
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -93,4 +97,18 @@ class Coupon
 
         return $this;
     }
+
+    public function isConsumed(): ?bool
+    {
+        return $this->consumed;
+    }
+
+    public function setConsumed(?bool $consumed): static
+    {
+        $this->consumed = $consumed;
+
+        return $this;
+    }
+
+  
 }

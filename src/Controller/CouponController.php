@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Coupon;
+use App\Entity\Training;
 use App\Form\CouponType;
 use App\Repository\CouponRepository;
 use App\Repository\DirectorateRepository;
@@ -15,17 +16,30 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/coupon')]
 class CouponController extends AbstractController
 {
-    #[Route('/', name: 'app_coupon_index', methods: ['GET'])]
-    public function index(CouponRepository $couponRepository, DirectorateRepository $directorateRepository): Response
+    #[Route('/{id}/s', name: 'tr_coupon', methods: ['GET'])]
+    public function index(Training $training, CouponRepository $couponRepository, DirectorateRepository $directorateRepository): Response
     {
  
         return $this->render('coupon/index.html.twig', [
-            'coupons' => $couponRepository->findAll(),
+            'training' => $training,
         'alldirectorates'=>  $directorateRepository->findAll(),
+        'coupons' => $couponRepository->findBy(['training'=>$training]),
+
         
         ]);
     }
+    #[Route('/', name: 'app_coupon_index', methods: ['GET'])]
+    public function indextwo(Training $training, CouponRepository $couponRepository, DirectorateRepository $directorateRepository): Response
+    {
+ 
+        return $this->render('coupon/index.html.twig', [
+            'training' => $training,
+        'alldirectorates'=>  $directorateRepository->findAll(),
+        'coupons' => $couponRepository->findBy(['training'=>$training]),
 
+        
+        ]);
+    }
     #[Route('/new', name: 'app_coupon_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

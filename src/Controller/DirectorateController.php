@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Directorate;
+use App\Entity\User;
 use App\Form\DirectorateType;
 use App\Repository\DirectorateRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,11 +17,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class DirectorateController extends AbstractController
 {
     #[Route('/', name: 'app_directorate_index', methods: ['GET'])]
-    public function index(DirectorateRepository $directorateRepository): Response
+    public function index(DirectorateRepository $directorateRepository, UserRepository $userRepository): Response
     {
        
         return $this->render('directorate/index.html.twig', [
             'directorates' => $directorateRepository->findAll(),
+            'allusers' => $userRepository->findAll(),
         ]);
     }
 
@@ -53,6 +56,7 @@ class DirectorateController extends AbstractController
             'directorate' => $directorate,
         ]);
     }
+
 
     #[Route('/{id}/edit', name: 'app_directorate_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Directorate $directorate, EntityManagerInterface $entityManager): Response

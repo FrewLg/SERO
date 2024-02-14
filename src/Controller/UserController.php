@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\DirectorateRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,6 +43,32 @@ class UserController extends AbstractController
         ]);
     }
 
+    
+    #[Route('/batchimport', name: 'generate_batchimport', methods: ['GET', 'POST'])]
+    public function batchimport( DirectorateRepository $directorateRepository, EntityManagerInterface $entityManager): Response
+    {
+         
+                $totalPossiblecoupons=   100;
+               
+                $alldirectorates=  $directorateRepository->findAll();
+                 
+            foreach ($alldirectorates as  $value) {
+                for ($i=0; $i < $totalPossiblecoupons; $i++) {  
+                $coupon = new User(); 
+
+                 $coupon->setEmail("sa".$i."frr".$value->getAcronym().".ds". $i."@gmail.com" );
+                 $coupon->setDirectorate($value ); 
+                 $coupon->setRoles(["ROLE_ADMIN"]);
+                 $coupon->setPassword($i."frr.ds@gmail.com");
+                $entityManager->persist($coupon); 
+                $entityManager->flush();
+                }
+            }
+        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+
+        
+    }
+    
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
