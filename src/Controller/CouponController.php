@@ -9,6 +9,7 @@ use App\Repository\CouponRepository;
 use App\Repository\DirectorateRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,13 +33,21 @@ class CouponController extends AbstractController
         ]);
     }
     #[Route('/', name: 'app_coupon_index', methods: ['GET'])]
-    public function indextwo(Training $training, CouponRepository $couponRepository, DirectorateRepository $directorateRepository): Response
+    public function indextwo( CouponRepository $couponRepository, PaginatorInterface $paginator, Request $request): Response
     {
  
-        return $this->render('coupon/index.html.twig', [
-            'training' => $training,
-        'alldirectorates'=>  $directorateRepository->findAll(),
-        'coupons' => $couponRepository->findBy(['training'=>$training]),
+        $res = $paginator->paginate(
+            // Doctrine Query, not results
+            $couponRepository->findAll(),
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            25
+        );
+        return $this->render('coupon/all.html.twig', [
+            // 'training' => $training,
+        // 'alldirectorates'=>  $directorateRepository->findAll(),
+        'coupons' => $res,
 
         
         ]);

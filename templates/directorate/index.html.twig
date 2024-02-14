@@ -12,10 +12,7 @@
 <td>
 {{ coupon.name }}={{ coupon.users|length }}
 {% set quota =coupon.users|length * 100 / allusers|length %}
-
-            <br> Quota:    {{ quota|number_format(0, '.', ',')}} %
-
-</td>
+            <br> Quota:    {{ quota|number_format(0, '.', ',')}} %</td>
         {% endfor %}
         </tr>
  </table >
