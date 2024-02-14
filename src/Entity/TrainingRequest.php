@@ -45,6 +45,16 @@ class TrainingRequest
     #[ORM\ManyToMany(targetEntity: Partner::class, inversedBy: 'trainingRequests')]
     private Collection $organizer;
 
+    #[ORM\ManyToOne(inversedBy: 'trainingRequests')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $requestedBy = null;
+
+    #[ORM\ManyToOne]
+    private ?User $ApprovedBy = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $AllowEdit = null;
+
    
     
     public function __construct()
@@ -191,6 +201,42 @@ class TrainingRequest
     public function removeOrganizer(Partner $organizer): static
     {
         $this->organizer->removeElement($organizer);
+
+        return $this;
+    }
+
+    public function getRequestedBy(): ?User
+    {
+        return $this->requestedBy;
+    }
+
+    public function setRequestedBy(?User $requestedBy): static
+    {
+        $this->requestedBy = $requestedBy;
+
+        return $this;
+    }
+
+    public function getApprovedBy(): ?User
+    {
+        return $this->ApprovedBy;
+    }
+
+    public function setApprovedBy(?User $ApprovedBy): static
+    {
+        $this->ApprovedBy = $ApprovedBy;
+
+        return $this;
+    }
+
+    public function isAllowEdit(): ?bool
+    {
+        return $this->AllowEdit;
+    }
+
+    public function setAllowEdit(?bool $AllowEdit): static
+    {
+        $this->AllowEdit = $AllowEdit;
 
         return $this;
     }

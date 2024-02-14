@@ -3,7 +3,22 @@
 {% block title %}Directorate index{% endblock %}
 
 {% block body %}
-    <h1>Directorate index</h1>
+    <h1>Directorate </h1>
+<span class="label label-lg label-light-info label-inline">{{allusers|length}} Employees in total</span>
+ <table class="table">
+         
+            <tr>
+{% for coupon in directorates %}
+<td>
+{{ coupon.name }}={{ coupon.users|length }}
+{% set quota =coupon.users|length * 100 / allusers|length %}
+
+            <br> Quota:    {{ quota|number_format(0, '.', ',')}} %
+
+</td>
+        {% endfor %}
+        </tr>
+ </table >
 
     <table class="table">
         <thead>

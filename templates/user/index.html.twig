@@ -5,6 +5,8 @@
 {% block body %}
     <h1>User index</h1>
 
+    <a href="{{ path('generate_batchimport') }}">generate_batchimport</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -36,6 +38,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+generate_batchimport
     <a href="{{ path('app_user_new') }}">Create new</a>
 {% endblock %}

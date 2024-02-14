@@ -9,11 +9,11 @@
 										<div class="card card-custom card-stretch gutter-b">
 											<!--begin::Header-->
 											<div class="card-header border-0 pt-5">
-												<h3 class="card-title align-items-start flex-column">
-													<span class="card-label font-weight-bolder text-dark">New Arrivals</span>
-													<span class="text-muted mt-3 font-weight-bold font-size-sm">More than 400+ new members</span>
-												</h3>
-												<div class="card-toolbar">
+												 <h3 class="card-title align-items-start flex-column">
+													<span class="card-label font-weight-bolder text-dark">Approved Training</span>
+													<span class="text-muted mt-3 font-weight-bold font-size-sm">Details</span>
+												 </h3>
+												 {# <div class="card-toolbar">
 													<ul class="nav nav-pills nav-pills-sm nav-dark-75">
 														<li class="nav-item">
 															<a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Month</a>
@@ -25,15 +25,20 @@
 															<a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Day</a>
 														</li>
 													</ul>
-												</div>
-											</div>
+												 </div> #}
+
+																	<a href="{{ path('app_training_new') }}" class="btn  btn-light btn-hover-primary btn-sm">Create  New</a>
+
+										     	</div>
+										 
+                                            
 											<!--end::Header-->
 											<!--begin::Body-->
 											<div class="card-body pt-3 pb-0">
 												<!--begin::Table-->
 												<div class="table-responsive">
 													<table class="table table-borderless table-vertical-center">
-														<thead> 
+                                        <thead> 
             <tr>
                 <th>#</th>
                 <th>Name</th>
@@ -43,7 +48,7 @@
                 <th>Allowed vouchers</th>                 
                 <th>Venue</th>                 
                 <th nowrap="nowrap">Duration </th>                 
-																<th class="p-0" style="min-width: 150px"></th>
+            <th class="p-0" style="min-width: 150px"></th>
             </tr>
         </thead>
         <tbody>
@@ -70,12 +75,17 @@
                     {% endif %}
                 </td>
                 <td>{{ training.trainingParticipants|length }}</td>
-                <td>{{ training.trainingRequest.numberOfParticipants|length }} 
-
+               
+                <td>
+                 <span class="label label-lg label-light-dark label-inline">
+                {{ training.trainingRequest.numberOfParticipants}} 
+</span>
              =   {{ training.coupons|length }}  available coupons 
 
-               {% if training.trainingRequest.numberOfParticipants|length >= training.trainingParticipants|length %} 
-               <span class="label label-lg label-light-info label-inline"> {{training.trainingRequest.numberOfParticipants|length - training.trainingParticipants|length }} Seats  {% else  %} {% endif %} </span>
+               {# {% if training.trainingRequest.numberOfParticipants >= training.trainingRequest.trainingParticipants %}  #}
+               <span class="label label-lg label-light-info label-inline"> {{training.trainingRequest.numberOfParticipants|length - training.trainingParticipants|length }}
+                {# Seats  {% else  %} {% endif %} #}
+                 </span>
                 
                 </td>
                 <td>{{ training.venue.name }}, {{ training.venue.address }}</td>
@@ -100,7 +110,7 @@
                    
                
                 <td class="text-right pr-0">
-																	<a href="{{ path('generate_coupons', {'id': training.id}) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
+																	<a href="{{ path('app_training_show', {'id': training.id}) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
 																		<span class="svg-icon svg-icon-md svg-icon-primary">
 																			<!--begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg-->
 																			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -126,7 +136,7 @@
 																			<!--end::Svg Icon-->
 																		</span>
 																	</a>
-																	<a href="{{ path('app_training_delete', {'id': training.id}) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
+																	<a href="{{ path('generate_coupons', {'id': training.id}) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
 																		<span class="svg-icon svg-icon-md svg-icon-primary">
 																			<!--begin::Svg Icon | path:assets/media/svg/icons/General/Trash.svg-->
 																			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

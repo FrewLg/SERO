@@ -5,10 +5,14 @@ namespace App\Controller;
 use App\Entity\Coupon;
 use App\Entity\Training; 
 use App\Entity\TrainingRequest;
+use App\Entity\Directorate;
+use App\Entity\User;
 use App\Form\CouponType;
 use App\Form\TrainingType;
 use App\Repository\DirectorateRepository;
 use App\Repository\TrainingRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,19 +67,21 @@ class TrainingController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_training_show', methods: ['GET'])]
-    public function show(Training $training): Response
+    public function show(Training $training, EntityManagerInterface $em): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
+        // $this->coupons($training, $em);
         return $this->render('training/show.html.twig', [
             'training' => $training,
         ]);
     }
 
     #[Route('/{id}/coupons', name: 'generate_coupons', methods: ['GET', 'POST'])]
-    public function coupons(Request $request, Training $training,  DirectorateRepository $directorateRepository, EntityManagerInterface $entityManager): Response
+    public function coupons( Training $training, EntityManagerInterface $entityManager ): Response
     {
-        
+        // use EntityManagerInterface
+        // use Doctrine\ORM\EntityManagerInterface as Em;
           //////////////////#####################check the call  deadline########################////////////////
         //   $deadline = $therequest->getDeadline();
         //   $today = new \DateTime();
@@ -85,31 +91,32 @@ class TrainingController extends AbstractController
         //       #    echo $day;
         //   }
           //////
-                $totalPossiblecoupons=   1 + $training->getTrainingRequest()->getNumberOfParticipants();
-                $quotas=  3;
-                // $training->getTrainingRequest()->getDirectorateQuota()->NumberOfParticipants();
-                $thisYear =  date_format(new \DateTime(''),"y"); 
-                //    dd($thisYear);
-                $alldirectorates=  $directorateRepository->findAll();
-                // $i=count($alldirectorates)*;
-            foreach ($alldirectorates as  $value) {
-                for ($i=0; $i < $totalPossiblecoupons; $i++) { 
-            // $random_numbers = range(1, 10+$totalPossiblecoupons);
-            // $randomCoupon= shuffle($random_numbers);
-                $coupon = new Coupon(); 
-                $randomCoupon=rand(1, 10+$totalPossiblecoupons);  
-                $randomCoupon2=rand(1, 95);  
-                $coupon->setTraining( $training);
-                $coupon->setCreatedAt(new \Datetime());
-                $coupon-> setCouponNumber($randomCoupon2.$randomCoupon."-".$value->getAcronym().$thisYear."");
-                $coupon->setDirectorate($value );
-                $entityManager->persist($coupon); 
-                $entityManager->flush();
-                }
-            }
-        return $this->redirectToRoute('app_coupon_index', [], Response::HTTP_SEE_OTHER);
 
-        
+        // $entityManager = $this->getDoctrine()->getManager();
+                $allUser = $entityManager->getRepository(User::class)->findAll();
+                $directorateRepository = $entityManager->getRepository(Directorate::class)->findAll();
+                $totalPossiblecoupons=   1 + $training->getTrainingRequest()->getNumberOfParticipants();
+                $thisYear =  date_format(new \DateTime(''),"y"); 
+                $allusers=count($allUser);
+                $alldirectorates=  $directorateRepository; 
+                foreach ($alldirectorates as  $value) {
+                $depEmp=count($value->getUsers());
+
+                $deppec= $depEmp*100/$allusers;
+                $depcuota= $deppec*$totalPossiblecoupons/100; 
+                    for ($i=0; $i < $depcuota ; $i++) { 
+                        $coupon = new Coupon(); 
+                        $randomCoupon=rand(1, 10+$totalPossiblecoupons);  
+                        $randomCoupon2=rand(1, 95);  
+                        $coupon->setTraining( $training);
+                        $coupon->setCreatedAt(new \Datetime());
+                        $coupon-> setCouponNumber($randomCoupon2.$randomCoupon."-".$value->getAcronym().$thisYear."");
+                        $coupon->setDirectorate($value );
+                        $entityManager->persist($coupon); 
+                        $entityManager->flush(); 
+            }
+            }
+        return $this->redirectToRoute('tr_coupon', ['id'=>$training->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/edit', name: 'app_training_edit', methods: ['GET', 'POST'])]

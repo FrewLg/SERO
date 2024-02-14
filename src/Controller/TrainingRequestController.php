@@ -22,6 +22,15 @@ class TrainingRequestController extends AbstractController
         ]);
     }
 
+    #[Route('/myrequests', name: 'myrequests', methods: ['GET'])]
+    public function myrequests(TrainingRequestRepository $trainingRequestRepository): Response
+    {
+        return $this->render('training_request/index.html.twig', [
+            'training_requests' => $trainingRequestRepository->findBy(['requestedBy'=>$this->getUser()]),
+        ]);
+    }
+   
+    
     #[Route('/new', name: 'app_training_request_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -34,8 +43,8 @@ class TrainingRequestController extends AbstractController
 
 
             $trainingRequest->setCreatedAt(new \Datetime());
-            // $trainingRequest->setCreatedAt(new \Datetime());
-
+            $trainingRequest->setRequestedBy($this->getUser());
+            
             $entityManager->persist($trainingRequest);
             $entityManager->flush();
             $this->addFlash("success", " created successflly !");
@@ -56,6 +65,8 @@ class TrainingRequestController extends AbstractController
             'training_request' => $trainingRequest,
         ]);
     }
+
+  
 
     #[Route('/{id}/edit', name: 'app_training_request_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, TrainingRequest $trainingRequest, EntityManagerInterface $entityManager): Response

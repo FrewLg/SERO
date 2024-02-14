@@ -43,10 +43,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Feedback::class, mappedBy: 'sentBy')]
     private Collection $feedback;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Directorate $directorate = null;
+
+    #[ORM\OneToMany(targetEntity: TrainingRequest::class, mappedBy: 'requestedBy', orphanRemoval: true)]
+    private Collection $trainingRequests;
+
+  
     public function __construct()
     {
         $this->trainingMaterials = new ArrayCollection();
         $this->feedback = new ArrayCollection();
+        $this->trainingRequests = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -212,4 +220,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getDirectorate(): ?Directorate
+    {
+        return $this->directorate;
+    }
+
+    public function setDirectorate(?Directorate $directorate): static
+    {
+        $this->directorate = $directorate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TrainingRequest>
+     */
+    public function getTrainingRequests(): Collection
+    {
+        return $this->trainingRequests;
+    }
+
+    public function addTrainingRequest(TrainingRequest $trainingRequest): static
+    {
+        if (!$this->trainingRequests->contains($trainingRequest)) {
+            $this->trainingRequests->add($trainingRequest);
+            $trainingRequest->setRequestedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrainingRequest(TrainingRequest $trainingRequest): static
+    {
+        if ($this->trainingRequests->removeElement($trainingRequest)) {
+            // set the owning side to null (unless already changed)
+            if ($trainingRequest->getRequestedBy() === $this) {
+                $trainingRequest->setRequestedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
 }

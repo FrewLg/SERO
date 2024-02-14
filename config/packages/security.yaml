@@ -59,7 +59,7 @@ security:
     access_control:
         # require ROLE_ADMIN for /admin*
         - { path: '^/admin', roles: ROLE_ADMIN }
-        - { path: '^/training', roles: ROLE_ADMIN }
+        - { path: '^/training/', roles: ROLE_ADMIN }
         - { path: '^/trainings', roles: PUBLIC_ACCESS }
         - { path: ^/login, roles: PUBLIC_ACCESS }
 
