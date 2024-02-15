@@ -37,22 +37,22 @@ class CalendarSubscriber implements EventSubscriberInterface
         $dates=$this->trainingRepository->findAll();
         foreach ($dates as $booking) {
 
-            $bookingEvent = new Event(
-                $booking->getTrainingRequest()->getTrainingTopic()->getName(),
+            $trainingEvent = new Event(
+                $booking->getTrainingRequest()->getTrainingTopic()->getName()." at ".$booking->getVenue()->getName(),
                 $booking->getStartingDate(),
                 $booking->getEndDate()
             );
  
-            $bookingEvent->setOptions([
+            $trainingEvent->setOptions([
                 'backgroundColor' => "#6993FF",
                 'borderColor' => "#6993FF",
             ]);
-            $bookingEvent->addOption(
+            $trainingEvent->addOption(
                 'url',
                 $this->router->generate('app_training_index')
             );
 
-            $calendar->addEvent($bookingEvent);
+            $calendar->addEvent($trainingEvent);
         }
          
     }

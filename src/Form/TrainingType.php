@@ -31,16 +31,20 @@ class TrainingType extends AbstractType
           
             ->add('description')
 
-            ->add('startingDate', DateType::class, [
-                'widget' => 'single_text',
+            ->add('startingDate'
+            )
+            // , DateType::class, [
+            //     'widget' => 'single_text',
              
-                'attr' => ['class' => 'js-datepicker'],
-            ])
-            ->add('endDate', DateType::class, [
-                'widget' => 'single_text',
+            //     'attr' => ['class' => 'js-datepicker'],
+            // ])
+            ->add('endDate'
+            )
+            // , DateType::class, [
+            //     'widget' => 'single_text',
              
-                'attr' => ['class' => 'js-datepicker'],
-            ])
+            //     'attr' => ['class' => 'js-datepicker'],
+            // ])
             ->add('venue', EntityType::class, [
                 'class' => Room::class,
 'choice_label' => 'name',

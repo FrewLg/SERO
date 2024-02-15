@@ -19,15 +19,24 @@ use Symfony\Component\Routing\Attribute\Route;
 class CouponController extends AbstractController
 {
     #[Route('/{id}/s', name: 'tr_coupon', methods: ['GET'])]
-    public function index(Training $training, UserRepository $userRepository, CouponRepository $couponRepository, DirectorateRepository $directorateRepository): Response
+    public function index(Training $training, UserRepository $userRepository,  PaginatorInterface $paginator,  CouponRepository $couponRepository, DirectorateRepository $directorateRepository, Request $request): Response
     {
  
+        // couponRepository->findBy(['training'=>$training]);
+        $res = $paginator->paginate(
+            // Doctrine Query, not results
+            $couponRepository->findBy(['training'=>$training]),
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            25
+        );
         return $this->render('coupon/index.html.twig', [
         'training' => $training,
         'allusers' => $userRepository->findAll(),
 
         'alldirectorates'=>  $directorateRepository->findAll(),
-        'coupons' => $couponRepository->findBy(['training'=>$training]),
+        'coupons' => $res,
 
         
         ]);
@@ -45,8 +54,7 @@ class CouponController extends AbstractController
             25
         );
         return $this->render('coupon/all.html.twig', [
-            // 'training' => $training,
-        // 'alldirectorates'=>  $directorateRepository->findAll(),
+            
         'coupons' => $res,
 
         
