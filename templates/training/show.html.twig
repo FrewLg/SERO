@@ -1,43 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Training{% endblock %}
+{% block title %}Training Details
+{% endblock %}
 
 {% block body %}
-    <h1>Training</h1>
+	<h1>Training on " {{ training.trainingRequest.trainingTopic }}"   topic</h1>
+	<tr>
+		<th>StartingDate</th>
+		<td>{{ training.startingDate ? training.startingDate|date('Y-m-d H:i:s') : '' }}</td>
+	</tr>
+	<tr>
+		<th>EndDate</th>
+		<td>{{ training.endDate ? training.endDate|date('Y-m-d H:i:s') : '' }}</td>
+	</tr>
+	<tr>
+		<th>Description</th>
+		<td>{{ training.description }}</td>
+	</tr>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ training.id }}</td>
-            </tr>
-          
-            <tr>
-                <th>StartingDate</th>
-                <td>{{ training.startingDate ? training.startingDate|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>EndDate</th>
-                <td>{{ training.endDate ? training.endDate|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ training.description }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ training.createdAt ? training.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ training.updatedAt ? training.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+	
+	{{ training.venue.name }}
+	{{ training.trainingRequest.status }}
+	<ul>
+		{% for item in training.trainingRequest.Facility %}
+			<li>
+				{{item.name}}
+			</li>
+		{% endfor %}
+	</ul>
 
-    <a href="{{ path('app_training_index') }}">back to list</a>
+	<ul>
+		{% for item in training.modality %}
+			<li>
+				{{item.name}}
+			</li>
+		{% endfor %}
+	</ul>
+	<ul>
+		{% for item in training.trainingRequest.Organizer %}
+			<li>
+				{{item.name}}
+			</li>
+		{% endfor %}
+	</ul>
 
-    <a href="{{ path('app_training_edit', {'id': training.id}) }}">edit</a>
+	<br>
+	<a href="{{ path('app_training_index') }}">back to list</a>
 
-    {{ include('training/_delete_form.html.twig') }}
+	<a href="{{ path('app_training_edit', {'id': training.id}) }}">edit</a>
+
+	{{ include('training/_delete_form.html.twig') }}
 {% endblock %}
