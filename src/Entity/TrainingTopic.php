@@ -31,9 +31,13 @@ class TrainingTopic
     #[ORM\OneToMany(targetEntity: TrainingRequest::class, mappedBy: 'trainingTopic')]
     private Collection $trainingRequests;
 
+    #[ORM\OneToMany(targetEntity: Course::class, mappedBy: 'topic')]
+    private Collection $courses;
+
     public function __construct()
     {
         $this->trainingRequests = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,6 +127,36 @@ class TrainingTopic
     {
         
    return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Course>
+     */
+    public function getCourses(): Collection
+    {
+        return $this->courses;
+    }
+
+    public function addCourse(Course $course): static
+    {
+        if (!$this->courses->contains($course)) {
+            $this->courses->add($course);
+            $course->setTopic($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCourse(Course $course): static
+    {
+        if ($this->courses->removeElement($course)) {
+            // set the owning side to null (unless already changed)
+            if ($course->getTopic() === $this) {
+                $course->setTopic(null);
+            }
+        }
+
+        return $this;
     }
     
 }

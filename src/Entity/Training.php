@@ -35,10 +35,6 @@ class Training
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    // #[ORM\OneToMany(targetEntity: TrainingOrganizer::class, mappedBy: 'training', orphanRemoval: true)]
-    // private Collection $organizers; 
- 
-   
    
     #[ORM\ManyToOne(inversedBy: 'trainings')]
     #[ORM\JoinColumn(nullable: false)]
@@ -60,7 +56,6 @@ class Training
     
     public function __construct()
     {
-        // $this->organizers = new ArrayCollection();
         $this->modality = new ArrayCollection();
         $this->trainingParticipants = new ArrayCollection();
         $this->feedback = new ArrayCollection();

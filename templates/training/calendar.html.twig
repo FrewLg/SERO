@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar
+{% endblock %}
+
+{% block body %}
+
+	<div
+		class="col-xxl-8 order-2 order-xxl-1">
+		<!--begin::Advance Table Widget 2-->
+		<div
+			class="card card-custom card-stretch gutter-b">
+			<!--begin::Header-->
+			<div class="card-header border-0 pt-5">
+				<h3 class="card-title align-items-start flex-column">
+					<span class="card-label font-weight-bolder text-dark">Training Calendar</span>
+					<span class="text-muted mt-3 font-weight-bold font-size-sm">Details</span>
+				</h3>
+
+			</div>
+
+
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div
+				class="card-body  ">
+				<!--begin::Table-->
+
+				<div id="calendar-holder"></div>
+				<br>
+				<br>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
+{% block javascripts %} <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js" integrity="sha256-dHUNnePy81fXq4D/wfu7cPsEIP7zl6MvLb84jtZf+UY=" crossorigin="anonymous"></script>
+
+	 <script type="text/javascript">
+	        document.addEventListener('DOMContentLoaded', () => {
+	            var calendarEl = document.getElementById('calendar-holder');
+	
+	            var calendar = new FullCalendar.Calendar(calendarEl, {
+	                defaultView: 'dayGridMonth',
+	                editable: true,
+	                eventSources: [
+	                    {
+	                        url: "{{ path('fc_load_events') }}",
+	                        method: "POST",
+	                        extraParams: {
+	                            filters: JSON.stringify({})
+	                        },
+	                        failure: () => {
+	                            // alert("There was an error while fetching FullCalendar!");
+	                        },
+	                    },
+	                ],
+	                headerToolbar: {
+	                    start: 'prev,next today',
+	                    center: 'title',
+	                    end: 'dayGridMonth,timeGridWeek,timeGridDay'
+	                },
+	                timeZone: 'UTC',
+	            });
+	            calendar.render();
+	        });
+	    </script>
+{% endblock %}

@@ -49,12 +49,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: TrainingRequest::class, mappedBy: 'requestedBy', orphanRemoval: true)]
     private Collection $trainingRequests;
 
+    #[ORM\OneToMany(targetEntity: Course::class, mappedBy: 'createdBy')]
+    private Collection $preparedCourses;
+
   
     public function __construct()
     {
         $this->trainingMaterials = new ArrayCollection();
         $this->feedback = new ArrayCollection();
         $this->trainingRequests = new ArrayCollection();
+        $this->preparedCourses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -257,6 +261,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($trainingRequest->getRequestedBy() === $this) {
                 $trainingRequest->setRequestedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Course>
+     */
+    public function getPreparedCourses(): Collection
+    {
+        return $this->preparedCourses;
+    }
+
+    public function addPreparedCourse(Course $preparedCourse): static
+    {
+        if (!$this->preparedCourses->contains($preparedCourse)) {
+            $this->preparedCourses->add($preparedCourse);
+            $preparedCourse->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removePreparedCourse(Course $preparedCourse): static
+    {
+        if ($this->preparedCourses->removeElement($preparedCourse)) {
+            // set the owning side to null (unless already changed)
+            if ($preparedCourse->getCreatedBy() === $this) {
+                $preparedCourse->setCreatedBy(null);
             }
         }
 

@@ -172,6 +172,16 @@
 
 											</li>
 
+<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+												<a href="{{ path('training_calendar') }}" class="menu-link menu-toggle">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">Calendar</span>
+												</a>
+
+											</li>
+
 											<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 												<a href="{{ path('myrequests') }}" class="menu-link menu-toggle">
 													<i class="menu-bullet menu-bullet-dot">
@@ -429,11 +439,25 @@
 														</a>
 													</li>
 												</ul>
+												
 											</li>
+											
+											   
+											<li class="menu-item" aria-haspopup="true">
+												<a href="#" class="menu-link">
+													<i class="menu-bullet menu-bullet-dot">
+														<span></span>
+													</i>
+													<span class="menu-text">Site Setting</span>
+												</a>
+											</li>
+
+										 
+
 										</div>
 									</li>
 								</li>
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+								{# <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 									<a href="javascript:;" class="menu-link menu-toggle">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
@@ -441,7 +465,7 @@
 										<span class="menu-text">System</span>
 										<i class="menu-arrow"></i>
 									</a>
-									<div class="menu-submenu">
+									  <div class="menu-submenu">
 										<i class="menu-arrow"></i>
 										<ul class="menu-subnav">
 											<li class="menu-item" aria-haspopup="true">
@@ -454,8 +478,8 @@
 											</li>
 
 										</ul>
-									</div>
-								</li>
+									</div> 
+								</li> #}
 							</ul>
 
 						</div>
@@ -772,7 +796,7 @@ class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 <div
 	class="content d-flex flex-column flex-column-fluid" id="kt_content">
 	<!--begin::Subheader-->
-	<div class=" py-lg-4" id="kt_subheader">
+	<div class=" py-lg-4 mt-0 p-0"  >
 		<div
 			class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
 			<!--begin::Info-->
@@ -782,7 +806,7 @@ class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 				<div
 					class="d-flex align-items-baseline mr-5">
 					<!--begin::Page Title-->
-					<h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
+					<h5 class="text-dark font-weight-bold  mr-5">Home</h5>
 					<!--end::Page Title-->
 					<!--begin::Breadcrumb-->
 					<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
@@ -1138,3 +1162,6 @@ class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
 <!--begin::Page Scripts(used by this page)-->
  <script src="{{ asset('theme/assets/js/pages/widgets.js' ) }}"></script>
 <!--end::Page Scripts--></body><!--end::Body--></html>
+{% block javascripts %}
+    
+{% endblock %}

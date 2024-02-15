@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Constraints\Length;
 
 #[Route('/training')]
@@ -28,6 +29,18 @@ class TrainingController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
+        // $entityManager = $this->getEntityManager();
+        // $now= new \DateTime();
+        // $query = $entityManager->createQuery(
+        //     'SELECT p
+        //     FROM App\Entity\Training p
+        //     WHERE p.startingDate > :today
+        //     ORDER BY p.today ASC'
+        // )->setParameter('today', $now);
+
+        // // returns an array of Product objects
+        // $dates= $query->getResult();
+        // dd($dates);
         return $this->render('training/index.html.twig', [
             'trainings' => $trainingRepository->findAll(),
         ]);
@@ -39,6 +52,30 @@ class TrainingController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         return $this->render('training/index.html.twig', [
+            'trainings' => $trainingRepository->findAll(),
+        ]);
+    }
+
+    public function __construct(
+        private TrainingRepository $tr,
+        private UrlGeneratorInterface $router
+    )
+    {}
+    
+    #[Route('/calendar', name: 'training_calendar', methods: ['GET'])]
+    public function calendar(TrainingRepository $trainingRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $dates=$this->tr->findAll();
+
+        foreach ($dates as $d) {
+            // dd($d->getTrainingRequest()->getTrainingTopic()->getName());
+            // StartingDate()->format('Y-m-d H:i:s'));
+            // dd($d->getStartingDate()->format('Y-m-d H:i:s'));
+            // ->format('Y-m-d H:i:s'));
+
+        }
+        return $this->render('training/calendar.html.twig', [
             'trainings' => $trainingRepository->findAll(),
         ]);
     }
