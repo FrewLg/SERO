@@ -58,12 +58,16 @@ class TrainingRequest
     #[ORM\ManyToOne(inversedBy: 'trainingRequests')]
     private ?TrainingRequestStatus $status = null;
 
+    #[ORM\ManyToMany(targetEntity: Directorate::class, inversedBy: 'trainingRequests')]
+    private Collection $inclusions;
+ 
     
     public function __construct()
     {
         $this->facility = new ArrayCollection();
         $this->organizer = new ArrayCollection();
         // $this->status = new ArrayCollection();
+        $this->inclusions = new ArrayCollection();
       }
 
     public function getId(): ?int
@@ -256,5 +260,31 @@ class TrainingRequest
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Directorate>
+     */
+    public function getInclusions(): Collection
+    {
+        return $this->inclusions;
+    }
+
+    public function addInclusion(Directorate $inclusion): static
+    {
+        if (!$this->inclusions->contains($inclusion)) {
+            $this->inclusions->add($inclusion);
+        }
+
+        return $this;
+    }
+
+    public function removeInclusion(Directorate $inclusion): static
+    {
+        $this->inclusions->removeElement($inclusion);
+
+        return $this;
+    }
+
+    
   
 }

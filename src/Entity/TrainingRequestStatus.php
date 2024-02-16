@@ -59,17 +59,7 @@ class TrainingRequestStatus
         return $this;
     }
 
-    // public function getTrainingRequest(): ?TrainingRequest
-    // {
-    //     return $this->trainingRequest;
-    // }
-
-    // public function setTrainingRequest(?TrainingRequest $trainingRequest): static
-    // {
-    //     $this->trainingRequest = $trainingRequest;
-
-    //     return $this;
-    // }
+    
 
     /**
      * @return Collection<int, TrainingRequest>
@@ -92,8 +82,7 @@ class TrainingRequestStatus
     public function removeTrainingRequest(TrainingRequest $trainingRequest): static
     {
         if ($this->trainingRequests->removeElement($trainingRequest)) {
-            // set the owning side to null (unless already changed)
-            if ($trainingRequest->getStatus() === $this) {
+            if($trainingRequest->getStatus() === $this) {
                 $trainingRequest->setStatus(null);
             }
         }

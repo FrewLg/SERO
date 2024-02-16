@@ -18,31 +18,9 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/coupon')]
 class CouponController extends AbstractController
 {
-    #[Route('/{id}/s', name: 'tr_coupon', methods: ['GET'])]
-    public function index(Training $training, UserRepository $userRepository,  PaginatorInterface $paginator,  CouponRepository $couponRepository, DirectorateRepository $directorateRepository, Request $request): Response
-    {
- 
-        // couponRepository->findBy(['training'=>$training]);
-        $res = $paginator->paginate(
-            // Doctrine Query, not results
-            $couponRepository->findBy(['training'=>$training]),
-            // Define the page parameter
-            $request->query->getInt('page', 1),
-            // Items per page
-            25
-        );
-        return $this->render('coupon/index.html.twig', [
-        'training' => $training,
-        'allusers' => $userRepository->findAll(),
-
-        'alldirectorates'=>  $directorateRepository->findAll(),
-        'coupons' => $res,
-
-        
-        ]);
-    }
+   
     #[Route('/', name: 'app_coupon_index', methods: ['GET'])]
-    public function indextwo( CouponRepository $couponRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index( CouponRepository $couponRepository, PaginatorInterface $paginator, Request $request): Response
     {
  
         $res = $paginator->paginate(

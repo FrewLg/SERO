@@ -9,14 +9,20 @@ use App\Entity\Directorate;
 use App\Entity\User;
 use App\Form\CouponType;
 use App\Form\TrainingType;
+use App\Repository\CouponRepository;
 use App\Repository\DirectorateRepository;
+use App\Repository\EmailMessageRepository;
 use App\Repository\TrainingRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Constraints\Length;
@@ -119,23 +125,70 @@ class TrainingController extends AbstractController
             'training' => $training,
         ]);
     }
-
-    #[Route('/{id}/coupons', name: 'generate_coupons', methods: ['GET', 'POST'])]
-    public function coupons( Training $training, EntityManagerInterface $entityManager ): Response
+   
+    
+    #[Route('/{id}/coupons', name: 'tr_coupon', methods: ['GET'])]
+    public function trainingcoupons(Training $training, UserRepository $userRepository,  PaginatorInterface $paginator,  CouponRepository $couponRepository, DirectorateRepository $directorateRepository, Request $request): Response
     {
-        // use EntityManagerInterface
-        // use Doctrine\ORM\EntityManagerInterface as Em;
-          //////////////////#####################check the call  deadline########################////////////////
-        //   $deadline = $therequest->getDeadline();
-        //   $today = new \DateTime();
-        //   $message = '';
-        //   if ($deadline <= $today) {
-        //       $message = "Overdue!";
-        //       #    echo $day;
-        //   }
-          //////
+ 
+        // couponRepository->findBy(['training'=>$training]);
+        $res = $paginator->paginate(
+            // Doctrine Query, not results
+            $couponRepository->findBy(['training'=>$training]),
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            25
+        );
+        return $this->render('coupon/index.html.twig', [
+        'training' => $training,
+        'allusers' => $userRepository->findAll(),
 
-        // $entityManager = $this->getDoctrine()->getManager();
+        'alldirectorates'=>  $directorateRepository->findAll(),
+        'coupons' => $res,
+
+        
+        ]);
+    }
+
+
+ 
+
+ #[Route('/{id}/sendbatch', name: 'sendbatch_email', methods: ['GET', 'POST'])]
+
+public function sendbatch(Training $training,  MailerInterface $mailer, EmailMessageRepository $ema): Response {
+  
+    $messages = $ema->findOneBy(['email_key' => 'TRAINING_ANNOUNCEMENT']);
+    $subject = $messages->getSubject();
+    $body = $messages->getBody();
+    
+    ////////////
+     
+        $email = (new TemplatedEmail())
+            ->from(new Address('no-reply@ephi.gov.et', 'SNTC'))
+            //    ->to($theEmails)
+            ->to(new Address('frew.legese@gmail.com', "Firra"))
+            // ->bcc(new Address($theEmails[$i], $theFirstNames[$i]))
+            ->subject($subject)
+            ->htmlTemplate('emails/news.html.twig')
+            ->context([
+                'subject' => $subject,
+                'body' => $body.$training->getTrainingRequest()->getTrainingTopic(),
+                'name' => "fREE",
+                'Authoremail' => "firewlegese74@gmail.com",
+            ]);
+        $mailer->send($email);
+     
+    $this->addFlash("danger", "Email sent to short listed porposal PIs successfully!");
+    //////////////////////////// end emailing ///////////////////////
+    return $this->redirectToRoute('app_training_index');
+}
+
+    #[Route('/{id}/gencoupons', name: 'generate_coupons', methods: ['GET', 'POST'])]
+    public function gencoupons( Training $training, EntityManagerInterface $entityManager ): Response
+    {
+        
+        
                 $allUser = $entityManager->getRepository(User::class)->findAll();
                 $directorateRepository = $entityManager->getRepository(Directorate::class)->findAll();
                 $totalPossiblecoupons=   1 + $training->getTrainingRequest()->getNumberOfParticipants();
@@ -148,6 +201,12 @@ class TrainingController extends AbstractController
                 $deppec= $depEmp*100/$allusers;
                 $depcuota= $deppec*$totalPossiblecoupons/100; 
                     for ($i=0; $i < $depcuota ; $i++) { 
+                $excluded=$training->getTrainingRequest();
+                    // if (!$training->getTrainingRequest()->getInclusions())  
+                    // { 
+                    //     continue; 
+                    // } 
+                // dd($excluded);
                         $coupon = new Coupon(); 
                         $randomCoupon=rand(1, 10+$totalPossiblecoupons);  
                         $randomCoupon2=rand(1, 95);  

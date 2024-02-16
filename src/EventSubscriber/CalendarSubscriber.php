@@ -35,12 +35,12 @@ class CalendarSubscriber implements EventSubscriberInterface
     {
          
         $dates=$this->trainingRepository->findAll();
-        foreach ($dates as $booking) {
+        foreach ($dates as $training) {
 
             $trainingEvent = new Event(
-                $booking->getTrainingRequest()->getTrainingTopic()->getName()." at ".$booking->getVenue()->getName(),
-                $booking->getStartingDate(),
-                $booking->getEndDate()
+                $training->getTrainingRequest()->getTrainingTopic()->getName()." at ".$training->getVenue()->getName(),
+                $training->getStartingDate(),
+                $training->getEndDate()
             );
  
             $trainingEvent->setOptions([
@@ -49,7 +49,7 @@ class CalendarSubscriber implements EventSubscriberInterface
             ]);
             $trainingEvent->addOption(
                 'url',
-                $this->router->generate('app_training_index')
+                $this->router->generate('app_training_show',['id'=>$training->getId()])
             );
 
             $calendar->addEvent($trainingEvent);

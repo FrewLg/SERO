@@ -74,8 +74,8 @@
 											{{ training.trainingRequest.numberOfParticipants}}
 										</span>
 										{# =
-																				{{ training.coupons|length }}
-																				available coupons #}
+																														{{ training.coupons|length }}
+																														available coupons #}
 
 										{# {% if training.trainingRequest.numberOfParticipants >= training.trainingRequest.trainingParticipants %}  #}
 										<span class="label label-lg label-light-info label-inline">
@@ -135,6 +135,9 @@
 												<!--end::Svg Icon-->
 											</span>
 										</a>
+
+										<a href="{{ path('sendbatch_email', {'id': training.id}) }}" class="btn  btn-light btn-hover-primary btn-sm">mail</a>
+										<a href="{{ path('tr_coupon', {'id': training.id}) }}" class="btn  btn-light btn-hover-primary btn-sm">Coupon</a>
 										<a href="{{ path('generate_coupons', {'id': training.id}) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm">
 											<span
 												class="svg-icon svg-icon-md svg-icon-primary">
@@ -165,5 +168,6 @@
 			</div>
 			<!--end::Body-->
 		</div>
+	</div>
 
-	{% endblock %}
+{% endblock %}

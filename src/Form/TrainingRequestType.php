@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Directorate;
 use App\Entity\Facility;
 use App\Entity\Partner;
 use App\Entity\TrainingRequest;
@@ -30,10 +31,16 @@ class TrainingRequestType extends AbstractType
             // 'multiple' => true,
             ]) 
             ->add('organizer', EntityType::class, [
-            'class' => Partner::class,
-            'choice_label' => 'name',
-            'multiple' => true,
-                        ])
+                'class' => Partner::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                            ]) 
+            ->add('inclusions', EntityType::class, [
+                'class' => Directorate::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                            ])
+        
             ->add('numberOfParticipants')
         ;
     }

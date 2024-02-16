@@ -40,13 +40,20 @@ class Directorate
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[ORM\OneToMany(targetEntity: TrainingRequest::class, mappedBy: 'inclusion')]
+    private Collection $trainingRequestInclusions;
+
+    #[ORM\ManyToMany(targetEntity: TrainingRequest::class, mappedBy: 'inclusions')]
+    private Collection $trainingRequests;
+
     
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
         $this->coupons = new ArrayCollection();
         $this->users = new ArrayCollection();
-    }
+        $this->trainingRequests = new ArrayCollection();
+     }
 
     public function getId(): ?int
     {
@@ -202,5 +209,33 @@ class Directorate
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, TrainingRequest>
+     */
+    public function getTrainingRequests(): Collection
+    {
+        return $this->trainingRequests;
+    }
+
+    public function addTrainingRequest(TrainingRequest $trainingRequest): static
+    {
+        if (!$this->trainingRequests->contains($trainingRequest)) {
+            $this->trainingRequests->add($trainingRequest);
+            $trainingRequest->addInclusion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTrainingRequest(TrainingRequest $trainingRequest): static
+    {
+        if ($this->trainingRequests->removeElement($trainingRequest)) {
+            $trainingRequest->removeInclusion($this);
+        }
+
+        return $this;
+    }
+ 
  
 }
