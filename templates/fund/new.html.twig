@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Fund{% endblock %}
+
+{% block body %}
+    <h1>Create new Fund</h1>
+
+    {{ include('fund/_form.html.twig') }}
+
+    <a href="{{ path('app_fund_index') }}">back to list</a>
+{% endblock %}

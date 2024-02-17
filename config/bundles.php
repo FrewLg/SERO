@@ -18,4 +18,5 @@ return [
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     CalendarBundle\CalendarBundle::class => ['all' => true],
     Schranz\Search\Integration\Symfony\SearchBundle::class => ['all' => true],
+    Endroid\QrCodeBundle\EndroidQrCodeBundle::class => ['all' => true],
 ];

@@ -34,9 +34,13 @@ class Partner
     #[ORM\ManyToMany(targetEntity: TrainingRequest::class, mappedBy: 'organizer')]
     private Collection $trainingRequests;
 
+    #[ORM\OneToMany(targetEntity: Fund::class, mappedBy: 'partnerOrganization')]
+    private Collection $funds;
+
     public function __construct()
     {
         $this->trainingRequests = new ArrayCollection();
+        $this->funds = new ArrayCollection();
     }
 
   
@@ -141,6 +145,36 @@ class Partner
     {
         if ($this->trainingRequests->removeElement($trainingRequest)) {
             $trainingRequest->removeOrganizer($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Fund>
+     */
+    public function getFunds(): Collection
+    {
+        return $this->funds;
+    }
+
+    public function addFund(Fund $fund): static
+    {
+        if (!$this->funds->contains($fund)) {
+            $this->funds->add($fund);
+            $fund->setPartnerOrganization($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFund(Fund $fund): static
+    {
+        if ($this->funds->removeElement($fund)) {
+            // set the owning side to null (unless already changed)
+            if ($fund->getPartnerOrganization() === $this) {
+                $fund->setPartnerOrganization(null);
+            }
         }
 
         return $this;

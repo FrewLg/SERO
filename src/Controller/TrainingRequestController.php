@@ -34,6 +34,8 @@ class TrainingRequestController extends AbstractController
     #[Route('/new', name: 'app_training_request_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $trainingRequest = new TrainingRequest();
         $form = $this->createForm(TrainingRequestType::class, $trainingRequest);
         $form->handleRequest($request);
@@ -43,6 +45,7 @@ class TrainingRequestController extends AbstractController
 
 
             $trainingRequest->setCreatedAt(new \Datetime());
+            $trainingRequest->setRequestedBy($this->getUser());
             $trainingRequest->setRequestedBy($this->getUser());
             
             $entityManager->persist($trainingRequest);
@@ -76,6 +79,7 @@ class TrainingRequestController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $trainingRequest->setUpdatedAt(new \Datetime());
+            $trainingRequest->setRequestedBy($this->getUser());
 
             $entityManager->flush();
 

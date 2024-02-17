@@ -58,6 +58,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'users')]
     private Collection $permissions;
 
+    #[ORM\OneToMany(targetEntity: Fund::class, mappedBy: 'createdBy')]
+    private Collection $regFunds;
+
+    #[ORM\OneToMany(targetEntity: FundTransaction::class, mappedBy: 'createdBy')]
+    private Collection $fundTransactions;
+
   
     public function __construct()
     {
@@ -67,6 +73,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->preparedCourses = new ArrayCollection();
         $this->userGroup = new ArrayCollection();
         $this->permissions = new ArrayCollection();
+        $this->regFunds = new ArrayCollection();
+        $this->fundTransactions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -352,6 +360,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removePermission(Permission $permission): static
     {
         $this->permissions->removeElement($permission);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Fund>
+     */
+    public function getRegFunds(): Collection
+    {
+        return $this->regFunds;
+    }
+
+    public function addRegFund(Fund $regFund): static
+    {
+        if (!$this->regFunds->contains($regFund)) {
+            $this->regFunds->add($regFund);
+            $regFund->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRegFund(Fund $regFund): static
+    {
+        if ($this->regFunds->removeElement($regFund)) {
+            // set the owning side to null (unless already changed)
+            if ($regFund->getCreatedBy() === $this) {
+                $regFund->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FundTransaction>
+     */
+    public function getFundTransactions(): Collection
+    {
+        return $this->fundTransactions;
+    }
+
+    public function addFundTransaction(FundTransaction $fundTransaction): static
+    {
+        if (!$this->fundTransactions->contains($fundTransaction)) {
+            $this->fundTransactions->add($fundTransaction);
+            $fundTransaction->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFundTransaction(FundTransaction $fundTransaction): static
+    {
+        if ($this->fundTransactions->removeElement($fundTransaction)) {
+            // set the owning side to null (unless already changed)
+            if ($fundTransaction->getCreatedBy() === $this) {
+                $fundTransaction->setCreatedBy(null);
+            }
+        }
 
         return $this;
     }

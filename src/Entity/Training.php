@@ -52,6 +52,9 @@ class Training
     #[ORM\OneToMany(targetEntity: Coupon::class, mappedBy: 'training')]
     private Collection $coupons;
 
+    #[ORM\OneToOne(mappedBy: 'allotedTo', cascade: ['persist', 'remove'])]
+    private ?FundTransaction $fundTransaction = null;
+
     
     
     public function __construct()
@@ -266,6 +269,28 @@ class Training
                 $coupon->setTraining(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFundTransaction(): ?FundTransaction
+    {
+        return $this->fundTransaction;
+    }
+
+    public function setFundTransaction(?FundTransaction $fundTransaction): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($fundTransaction === null && $this->fundTransaction !== null) {
+            $this->fundTransaction->setAllotedTo(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($fundTransaction !== null && $fundTransaction->getAllotedTo() !== $this) {
+            $fundTransaction->setAllotedTo($this);
+        }
+
+        $this->fundTransaction = $fundTransaction;
 
         return $this;
     }
