@@ -445,6 +445,7 @@
 								<div class="d-flex flex-column-fluid">
 									<div class="container">
 										{% include "head.html.twig" %}
+										
 										{% block body %}{% endblock  %}
 									</div>
 								</div>
@@ -541,7 +542,7 @@
 								<div
 									class="navi navi-spacer-x-0 p-0">
 									<!--begin::Item-->
-									<a href="#" class="navi-item">
+									<a href="{{path('app_logout')}}" class="navi-item">
 										<div class="navi-link">
 											<div class="symbol symbol-40 bg-light mr-3">
 												<div class="symbol-label">
@@ -560,7 +561,7 @@
 												</div>
 											</div>
 											<div class="navi-text">
-												<div class="font-weight-bold">My Profile</div>
+												<div class="font-weight-bold">Logout</div>
 												<div class="text-muted">Account settings and more
 													<span class="label label-light-danger label-inline font-weight-bold">update</span>
 												</div>
