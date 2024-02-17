@@ -6,8 +6,9 @@ use App\Entity\Coupon;
 use App\Entity\Training; 
 use App\Entity\TrainingRequest;
 use App\Entity\Directorate;
+use App\Entity\TrainingParticipant;
 use App\Entity\User;
-use App\Form\CouponType;
+use Symfony\Component\Translation\TranslatableMessage;
 use App\Form\TrainingType;
 use App\Repository\CouponRepository;
 use App\Repository\DirectorateRepository;
@@ -68,19 +69,11 @@ class TrainingController extends AbstractController
     )
     {}
     
-    #[Route('/calendar', name: 'training_calendar', methods: ['GET'])]
+    #[Route('/schedule', name: 'training_calendar', methods: ['GET'])]
     public function calendar(TrainingRepository $trainingRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        $dates=$this->tr->findAll();
-
-        foreach ($dates as $d) {
-            // dd($d->getTrainingRequest()->getTrainingTopic()->getName());
-            // StartingDate()->format('Y-m-d H:i:s'));
-            // dd($d->getStartingDate()->format('Y-m-d H:i:s'));
-            // ->format('Y-m-d H:i:s'));
-
-        }
+        
         return $this->render('training/calendar.html.twig', [
             'trainings' => $trainingRepository->findAll(),
         ]);
@@ -106,6 +99,8 @@ class TrainingController extends AbstractController
             $training->setTrainingRequest($trainingrequest);
             $entityManager->persist($training);
             $entityManager->flush();
+            $message = new TranslatableMessage('Details added successflly!');
+
             $this->addFlash("success", "Details added successflly !");
             return $this->redirectToRoute('details', ['id'=>$training->getId()], Response::HTTP_SEE_OTHER);
         }
@@ -241,9 +236,9 @@ public function sendbatch(Training $training,  MailerInterface $mailer, EmailMes
         ]);
     }
 
-       /**
-     * @Route("/{id}/cert", name="cert", methods={"GET"})
-     */
+  
+    #[Route('/{id}/cert', name: 'cert', methods: ['GET','POST'])]
+
     public function exportcertnow(Request $request, TrainingParticipant $uid) {
  
         $em = $this->getDoctrine()->getManager(); 

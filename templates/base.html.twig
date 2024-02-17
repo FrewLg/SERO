@@ -25,6 +25,7 @@
 		href="{{ asset('theme/assets/css/themes/layout/aside/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<!--end::Layout Themes-->
 		<link rel="shortcut icon" href="{{ asset('files/site_setting/'~site_logo ) }}">
+{% block styles %} {% endblock %}
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -656,7 +657,7 @@
 								<!--end::Notifications-->
 							</div>
 
-
+						
 							 <script src="{{ asset('theme/assets/plugins/global/plugins.bundle.js' ) }}"></script>
 							 <script src="{{ asset('theme/assets/plugins/custom/prismjs/prismjs.bundle.js' ) }}"></script>
 							 <script src="{{ asset('theme/assets/js/scripts.bundle.js' ) }}"></script>
@@ -668,7 +669,8 @@
 							<!--end::Page Vendors-->
 							<!--begin::Page Scripts(used by this page)-->
 							 <script src="{{ asset('theme/assets/js/pages/widgets.js' ) }}"></script>
-							<!--end::Page Scripts-->{% block javascripts %}
+							<!--end::Page Scripts-->
+						{% block javascripts %}
 						{% endblock %}
 					</body>
 				</html>

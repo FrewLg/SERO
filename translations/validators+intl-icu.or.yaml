@@ -1,0 +1,6 @@
+'There is already an account with this email': '__There is already an account with this email'
+'Please enter a password': '__Please enter a password'
+'Your password should be at least {{ limit }} characters': '__Your password should be at least {{ limit }} characters'
+'You should agree to our terms.': '__You should agree to our terms.'
+'Please enter your email': '__Please enter your email'
+Error: __Error

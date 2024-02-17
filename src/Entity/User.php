@@ -52,6 +52,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Course::class, mappedBy: 'createdBy')]
     private Collection $preparedCourses;
 
+    #[ORM\ManyToMany(targetEntity: UserGroup::class, mappedBy: 'users')]
+    private Collection $userGroup;
+
+    #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'users')]
+    private Collection $permissions;
+
   
     public function __construct()
     {
@@ -59,6 +65,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->feedback = new ArrayCollection();
         $this->trainingRequests = new ArrayCollection();
         $this->preparedCourses = new ArrayCollection();
+        $this->userGroup = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -293,6 +301,57 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $preparedCourse->setCreatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserGroup>
+     */
+    public function getUserGroup(): Collection
+    {
+        return $this->userGroup;
+    }
+
+    public function addUserGroup(UserGroup $userGroup): static
+    {
+        if (!$this->userGroup->contains($userGroup)) {
+            $this->userGroup->add($userGroup);
+            $userGroup->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserGroup(UserGroup $userGroup): static
+    {
+        if ($this->userGroup->removeElement($userGroup)) {
+            $userGroup->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Permission>
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permission $permission): static
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions->add($permission);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permission $permission): static
+    {
+        $this->permissions->removeElement($permission);
 
         return $this;
     }

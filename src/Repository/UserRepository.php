@@ -26,42 +26,116 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
-    /**
+    
+     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
-    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
+    public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newEncodedPassword): void
     {
         if (!$user instanceof User) {
-            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
+            throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
-        $user->setPassword($newHashedPassword);
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
+        $user->setPassword($newEncodedPassword);
+        $this->_em->persist($user);
+        $this->_em->flush();
     }
 
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getData($filter=[])
+    {
+        $qb =$this->createQueryBuilder('ui');
 
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if (isset($filter['name'])) {
+
+            $qb->join("ui.userInfo","u");
+
+            $names = explode(" ", $filter['name']);
+            if (sizeof($names) == 3) {
+               
+                $qb->andWhere('u.first_name = :fname')
+                    ->setParameter('fname', $names[0])
+
+                    ->andWhere('u.midle_name = :mname')
+                    ->setParameter('mname', $names[1])
+                    ->andWhere('u.last_name = :lname')
+                    ->setParameter('lname', $names[2]);
+            } else if (sizeof($names) == 2) {
+
+                $qb->andWhere('u.first_name = :fname')
+                    ->setParameter('fname', $names[0])
+
+                    ->andWhere('u.midle_name = :mname')
+                    ->setParameter('mname', $names[1]);
+            } else if (sizeof($names) == 1) {
+
+            
+                $qb=$qb->andWhere("u.first_name LIKE '%" . $names[0] . "%' or u.midle_name LIKE '%" . $names[0] . "%' or u.last_name LIKE '%" . $names[0] . "%'  or ui.username LIKE '%" . $names[0] . "%' ");
+              
+            }
+        }
+           
+       return   $qb  ->orderBy('ui.id', 'ASC')
+         
+            ->getQuery()
+         
+        ;
+    }
+    
+
+
+    public function getUser($filter=[]): ?User
+    { 
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.username = :username')
+            ->orWhere('u.email = :username')
+            ->setParameter('username', $filter['email'])
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    public function search($key)
+    { 
+        return $this->createQueryBuilder('u')
+        ->select("u.id,u.username as username, u.first_name as name ,u.email as email")
+            ->orWhere("u.username like  '%".$key."%'")
+            ->orWhere("u.email like  '%".$key."%'")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+    public function getNotInUserGroup($filter=[])
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        if ( isset($filter['usergroup']) && sizeof($filter['usergroup'])) {
+
+            $qb->andWhere('u.id not in ( :usergroup )')
+                ->setParameter('usergroup', $filter['usergroup']);
+        }
+        $qb;
+
+
+
+        return $qb->orderBy('u.id', 'ASC')
+            ->getQuery()->getResult();
+    }
+    public function findForUserGroup($usergroup = null)
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        if (sizeof($usergroup)) {
+
+            $qb->andWhere('u.id not in ( :usergroup )')
+                ->setParameter('usergroup', $usergroup);
+        }
+        $qb;
+
+
+
+        return $qb->orderBy('u.id', 'ASC')
+            ->getQuery()->getResult();
+    }
+
 }
