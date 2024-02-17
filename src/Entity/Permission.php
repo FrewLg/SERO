@@ -105,6 +105,12 @@ class Permission
         return $this;
     }
 
+    function __toString()
+    {
+        // TODO: Implement __toString() method.
+        return $this->getName();
+    } 
+    
     /**
      * @return Collection<int, User>
      */

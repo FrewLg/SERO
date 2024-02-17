@@ -8,7 +8,7 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <td>{{ permission.id }}</td>
             </tr>
             <tr>
@@ -16,19 +16,18 @@
                 <td>{{ permission.name }}</td>
             </tr>
             <tr>
-                <th>Description</th>
-                <td>{{ permission.description }}</td>
-            </tr>
-            <tr>
                 <th>Code</th>
                 <td>{{ permission.code }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ permission.description }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_permission_index') }}">back to list</a>
+    <a href="{{ path('app_permission_index') }}" class="btn btn-soft-success btn-sm">back to list</a>
 
-    <a href="{{ path('app_permission_edit', {'id': permission.id}) }}">edit</a>
-
-    {{ include('permission/_delete_form.html.twig') }}
+    <a href="{{ path('app_permission_edit', {'id': permission.id}) }}" class="btn btn-soft-primary btn-sm" >edit</a>
+ 
 {% endblock %}

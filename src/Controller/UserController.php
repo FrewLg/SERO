@@ -56,10 +56,10 @@ class UserController extends AbstractController
                 for ($i=0; $i < $totalPossiblecoupons; $i++) {  
                 $coupon = new User(); 
 
-                 $coupon->setEmail("sa".$i."frr".$value->getAcronym().".ds". $i."@gmail.com" );
+                 $coupon->setEmail("f".$i."irew".$value->getAcronym().".legese74". $i."@gmail.com" );
                  $coupon->setDirectorate($value ); 
                  $coupon->setRoles(["ROLE_ADMIN"]);
-                 $coupon->setPassword($i."frr.ds@gmail.com");
+                 $coupon->setPassword($i."frew.legese@gmail.com");
                 $entityManager->persist($coupon); 
                 $entityManager->flush();
                 }

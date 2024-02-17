@@ -18,16 +18,16 @@ class PermissionType extends AbstractType
             ->add('name')
             ->add('description')
             ->add('code')
-            ->add('userGroups', EntityType::class, [
-                'class' => UserGroup::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
-            ->add('users', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
+//             ->add('userGroups', EntityType::class, [
+//                 'class' => UserGroup::class,
+// 'choice_label' => 'id',
+// 'multiple' => true,
+//             ])
+//             ->add('users', EntityType::class, [
+//                 'class' => User::class,
+// 'choice_label' => 'id',
+// 'multiple' => true,
+//             ])
         ;
     }
 

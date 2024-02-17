@@ -2,9 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\UserGroup;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @extends ServiceEntityRepository<UserGroup>
@@ -16,33 +19,49 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class UserGroupRepository extends ServiceEntityRepository
 {
+    // public function __construct(ManagerRegistry $registry)
+    // {
+    //     parent::__construct($registry, UserGroup::class);
+    // }
+
+    
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserGroup::class);
     }
 
-//    /**
-//     * @return UserGroup[] Returns an array of UserGroup objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   
+    public function countUserGroup()
+    {
+        $qb = $this->createQueryBuilder('u')
+        ->select('count(u.id)')
+        ->andWhere('u.isActive = 1')
+        ->getQuery()
+        ->getSingleScalarResult();
+      
+        return $qb;
 
-//    public function findOneBySomeField($value): ?UserGroup
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    }
+    public function findUserGroup($search=null)
+    {
+        $qb=$this->createQueryBuilder('u');
+        if($search)
+            $qb->andWhere("u.name  LIKE '%".$search."%'");
+
+            return 
+            $qb->orderBy('u.id', 'ASC')
+            ->getQuery()
+     
+        ;
+    }
+   
+    public function getData($filters=[])
+    {
+        return $this->createQueryBuilder('u')
+         ->orderBy('u.id','DESC')
+        ->getQuery()
+           
+        ;
+    }
+ 
 }

@@ -17,17 +17,17 @@ class UserGroupType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('createdAt')
-            ->add('updatedAt')
-            ->add('isActive')
-            ->add('users', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
+            // ->add('createdAt')
+            // ->add('updatedAt')
+            // ->add('isActive')
+//             ->add('users', EntityType::class, [
+//                 'class' => User::class,
+// 'choice_label' => 'id',
+// 'multiple' => true,
+//             ])
             ->add('permission', EntityType::class, [
                 'class' => Permission::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
 'multiple' => true,
             ])
         ;
