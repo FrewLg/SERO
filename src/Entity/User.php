@@ -64,6 +64,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: FundTransaction::class, mappedBy: 'createdBy')]
     private Collection $fundTransactions;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $locale = null;
+
   
     public function __construct()
     {
@@ -420,6 +423,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $fundTransaction->setCreatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLocale(): ?string
+    {
+        return $this->locale;
+    }
+
+    public function setLocale(?string $locale): static
+    {
+        $this->locale = $locale;
 
         return $this;
     }

@@ -6,16 +6,25 @@ use App\Entity\Fund;
 use App\Entity\FundTransaction;
 use App\Form\FundTransactionType;
 use App\Form\FundType;
+// use Skies\SkiesQRcodeBundle\Generator\Generator;
 use App\Repository\FundTransactionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Endroid\QrCode\Builder\Builder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Endroid\QrCodeBundle\Response\QrCodeResponse;
+use Skies\SkiesQRcodeBundle\Generator\Generator;
+use Endroid\QrCode\Builder\BuilderInterface;
+use Skies\QRcodeBundle\Generator\Generator as QRGenerator;
+use Symfony\Bundle\MakerBundle\Generator as MakerBundleGenerator;
 
-#[Route('/fund-transaction')]
+#[Route('/fundtrans')]
 class FundTransactionController extends AbstractController
 {
+ 
+        
     #[Route('/{id}/transactions', name: 'app_fund_transactions', methods: ['GET'])]
     public function index(FundTransactionRepository $fundTransactionRepository, Fund $fund): Response
     {
@@ -77,16 +86,54 @@ class FundTransactionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_fund_transaction_show', methods: ['GET'])]
-    public function show(FundTransaction $fundTransaction): Response
+
+    #[Route('/{id}/recpt', name: 'app_fund_transddactions', methods: ['GET'])]
+    public function qrc(FundTransaction $fundTransaction ): Response
     {
+
+        $srringToGenerate=$fundTransaction->getReferenceNubmer();
+        $options = array(
+            'code'   => $srringToGenerate,
+            'type'   => 'qrcode',
+            'format' => 'html',
+        );            
+        $generator = new QRGenerator();
+        $barcode = $generator->generate($options);          
+        return $this->render('fund_transaction/show.html.twig', [
+    //         'fund_transaction' => $fundTransaction->findBy(['id'=>$fundTransaction->getId()]),
+            'barcode' => $barcode,
+    //         // ''
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_fund_transaction_show', methods: ['GET'])]
+    public function show(FundTransaction $fundTransaction ): Response
+    {
+
+        $srringToGenerate=$fundTransaction->getReferenceNubmer();
+        $options = array(
+            'code'   => $srringToGenerate,
+            'type'   => 'qrcode',
+            'format' => 'html',
+            'code'   => 'string to encode',
+            // 'type'   => 'datamatrix',
+            'format' => 'png',
+            'width'  => 10,
+            'height' => 10,
+            'color'  => array(127, 127, 127),
+        );
+        $generator = new QRGenerator();
+        $barcode = $generator->generate($options);
+
         return $this->render('fund_transaction/show.html.twig', [
             'fund_transaction' => $fundTransaction,
+            'barcode' => $barcode,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_fund_transaction_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, FundTransaction $fundTransaction, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, FundTransaction $fundTransaction
+    ,EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(FundTransactionType::class, $fundTransaction);
         $form->handleRequest($request);

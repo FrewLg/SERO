@@ -43,9 +43,7 @@ class Training
     #[ORM\ManyToMany(targetEntity: Modality::class, inversedBy: 'trainings')]
     private Collection $modality;
 
-    #[ORM\OneToMany(targetEntity: TrainingParticipant::class, mappedBy: 'trainings', orphanRemoval: true)]
-    private Collection $trainingParticipants;
-
+    
     #[ORM\OneToMany(targetEntity: Feedback::class, mappedBy: 'training', orphanRemoval: true)]
     private Collection $feedback;
 
@@ -55,14 +53,17 @@ class Training
     #[ORM\OneToOne(mappedBy: 'allotedTo', cascade: ['persist', 'remove'])]
     private ?FundTransaction $fundTransaction = null;
 
+    #[ORM\OneToMany(targetEntity: TrainingParticipant::class, mappedBy: 'training', orphanRemoval: true)]
+    private Collection $enrollements;
+
     
     
     public function __construct()
     {
         $this->modality = new ArrayCollection();
-        $this->trainingParticipants = new ArrayCollection();
         $this->feedback = new ArrayCollection();
         $this->coupons = new ArrayCollection();
+        $this->enrollements = new ArrayCollection();
      }
 
     public function getId(): ?int
@@ -183,36 +184,8 @@ class Training
         return $this;
     }
 
-    /**
-     * @return Collection<int, TrainingParticipant>
-     */
-    public function getTrainingParticipants(): Collection
-    {
-        return $this->trainingParticipants;
-    }
-
-    public function addTrainingParticipant(TrainingParticipant $trainingParticipant): static
-    {
-        if (!$this->trainingParticipants->contains($trainingParticipant)) {
-            $this->trainingParticipants->add($trainingParticipant);
-            $trainingParticipant->setTrainings($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrainingParticipant(TrainingParticipant $trainingParticipant): static
-    {
-        if ($this->trainingParticipants->removeElement($trainingParticipant)) {
-            // set the owning side to null (unless already changed)
-            if ($trainingParticipant->getTrainings() === $this) {
-                $trainingParticipant->setTrainings(null);
-            }
-        }
-
-        return $this;
-    }
-
+   
+ 
     /**
      * @return Collection<int, Feedback>
      */
@@ -295,6 +268,13 @@ class Training
         return $this;
     }
 
-    
-   
+    /**
+     * @return Collection<int, TrainingParticipant>
+     */
+    public function getEnrollements(): Collection
+    {
+        return $this->enrollements;
+    }
+
+     
 }

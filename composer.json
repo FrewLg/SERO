@@ -12,7 +12,8 @@
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.0",
-        "endroid/qr-code-bundle": "*",
+        "dompdf/dompdf": "^2.0",
+        "endroid/qr-code-bundle": "^5.0",
         "knplabs/knp-paginator-bundle": "^6.3",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.25",
@@ -53,7 +54,10 @@
         "symfonycasts/verify-email-bundle": "^1.16",
         "tattali/calendar-bundle": "dev-master",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/intl-extra": "^3.8",
+        "twig/string-extra": "^3.8",
+        "twig/twig": "^2.12|^3.0",
+        "yellowskies/qr-code-bundle": "^1.2"
     },
     "config": {
         "allow-plugins": {

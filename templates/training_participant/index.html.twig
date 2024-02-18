@@ -30,7 +30,7 @@
                 <td>{{ training_participant.certIssuedAt ? training_participant.certIssuedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_training_participant_show', {'id': training_participant.id}) }}">show</a>
-                    <a href="{{ path('app_training_participant_edit', {'id': training_participant.id}) }}">edit</a>
+                    <a href="{{ path('show_my_cert', {'id': training_participant.id}) }}">show_my_cert</a>
                 </td>
             </tr>
         {% else %}

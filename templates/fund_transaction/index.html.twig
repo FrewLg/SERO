@@ -44,7 +44,12 @@
 							{% for fund_transaction in fund_transactions %}
 								<tr>
 									<td>{{ fund_transaction.id }}</td>
-									<td>{{ fund_transaction.referenceNubmer }}</td>
+									<td>{{ fund_transaction.referenceNubmer }}
+									
+									<img src="data:image/png;base64,
+{{ barcode({code:  fund_transaction.referenceNubmer , type: 'datamatrix', format: 'png', width: 10, height: 10, color: [127, 127, 127]}) }}
+" />
+</td>
 
 									<td>{{ fund_transaction.deducted |number_format(2, '.', ',') }} {{ fund_transaction.fundName.currency.name}}</td>
 									<td>{{ fund_transaction.currentBalance |number_format(2, '.', ',') }} {{ fund_transaction.fundName.currency.name}}</td>

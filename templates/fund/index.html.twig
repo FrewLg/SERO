@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Fund  {% endblock %}
+{% block title %}Fund
+{% endblock %}
 
 {% block body %}
- 
-   <div
+
+	<div
 		class="col-xxl-8 order-2 order-xxl-1">
 		<!--begin::Advance Table Widget 2-->
 		<div
@@ -25,77 +26,85 @@
 				class="card-body pt-3 pb-0">
 				<!--begin::Table-->
 				<div class="table-responsive">
-    <a href="{{ path('app_fund_new') }}">Create new</a>
+					<a href="{{ path('app_fund_new') }}">Create new</a>
 
-					<table class="table table-bordered  table-vertical-center">
-						 <thead>
-            <tr>
-                <th>Id</th>
-                <th>Funding organization</th>
-                <th>Name</th>
-                <th>Budget</th>
-                <th>Available Budget</th>
-                <th>Transactions</th>
-                {# <th>FiscalYear</th> #}
-                <th>Commenced Year</th>
-                <th>End Date</th>
-                {# <th>CreatedAt</th>
-                <th>UpdatedAt</th> #}
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for fund in funds %}
-            <tr>
-                <td>{{ fund.id }}</td>
-                <td>{{ fund.partnerOrganization }}</td>
-                <td>{{ fund.name }}</td> 
-                <td>{{ fund.budget|number_format(2, '.', ',') }} {{ fund.currency}}</td>
-                <td> 
-                {% if  fund.fundTransactions|length >0 %}
-    {% set sum = 0 %}
-        {% for buds in fund.fundTransactions %}
-   {% set sum = sum + buds.deducted %}
-        {% endfor %}
-                {{sum|number_format(2, '.', ',') }} {{ fund.currency}}
-                
-        {% else %}
-                       {{ fund.budget|number_format(2, '.', ',') }} {{ fund.currency }} 
-                {% endif %} 
-                </td>
-                <td>
-                 {% if  fund.fundTransactions|length >0 %}
- 
-				 	<span class="label label-lg label-light-success label-inline ">
-                {{fund.fundTransactions|length}}  
-                </span>
-        {% else %}
-                        <span class="label label-lg label-light-danger  label-inline">
-                               0   </span>
+					<table class="table table-bordered table-striped table-vertical-center">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Funders</th>
+								<th>Name</th>
+								<th>Budget</th>
+								<th>Available
+								</th>
+								<th>Transactions</th>
+								{# <th>FiscalYear</th> #}
+								<th>Commenced Year</th>
+								<th>End Date</th>
+								{# <th>CreatedAt</th>
+								                <th>UpdatedAt</th> #}
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for fund in funds %}
+								<tr>
+									<td>{{ fund.id }}</td>
+									<td>{{ fund.partnerOrganization }}</td>
+									<td>{{ fund.name }}</td>
+									<td>{{ fund.budget|number_format(2, '.', ',') }}
+										{{ fund.currency}}</td>
+									<td>
+										{% if  fund.fundTransactions|length >0 %}
+											{% set sum = 0 %}
+											{% for buds in fund.fundTransactions %}
+												{% set sum = sum + buds.deducted %}
+											{% endfor %}
+											{{sum|number_format(2, '.', ',') }}
+											{{ fund.currency}}
 
-                {% endif %} 
-                </td>
+										{% else %}
+											{{ fund.budget|number_format(2, '.', ',') }}
+											{{ fund.currency }}
+										{% endif %}
+									</td>
+									<td>
+										{% if  fund.fundTransactions|length >0 %}
 
-                {# <td>{{ fund.fiscalYear ? fund.fiscalYear|date('Y-m-d') : '' }}</td> #}
-                <td>{{ fund.commencedYear ? fund.commencedYear|date('Y-m-d') : '' }}</td>
-                <td>{{ fund.fundEndDate ? fund.fundEndDate|date('Y-m-d') : '' }}</td>
-                {# <td>{{ fund.createdAt ? fund.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ fund.updatedAt ? fund.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-                <td>
-                    <a href="{{ path('app_fund_transaction_new', {'id': fund.id}) }}">Dudect</a>
+											<span class="label label-lg label-light-success label-inline ">
+												{{fund.fundTransactions|length}}
+											</span>
+										{% else %}
+											<span class="label label-lg label-light-danger  label-inline">
+												0
+											</span>
 
-                    <a href="{{ path('app_fund_transactions', {'id': fund.id}) }}">Transactions</a>
-                    <a href="{{ path('app_fund_show', {'id': fund.id}) }}">show</a>
-                 </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+										{% endif %}
+									</td>
 
+
+									<td>{{ fund.commencedYear ? fund.commencedYear|date('Y-m-d') : '' }}</td>
+									<td>{{ fund.fundEndDate ? fund.fundEndDate|date('Y-m-d') : '' }}</td>
+									<td nowrap=nowrap>
+										<a href="{{ path('app_fund_transaction_new', {'id': fund.id}) }}">
+											<i class="fa  fa-money-bill text-success"></i>
+										</a>
+
+										<a href="{{ path('app_fund_transactions', {'id': fund.id}) }}">
+											<i class="fa fa-sharp fa-light fa-coins"></i>
+										</a>
+										<a href="{{ path('app_fund_show', {'id': fund.id}) }}">
+											<i class="fas fa-eye"></i>
+										</a>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="10">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
 
 
 				</div>

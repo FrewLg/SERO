@@ -336,5 +336,8 @@
     },
     "twig/extra-bundle": {
         "version": "v3.8.0"
+    },
+    "yellowskies/qr-code-bundle": {
+        "version": "1.2.11"
     }
 }

@@ -20,7 +20,7 @@ class TrainingParticipantType extends AbstractType
             ->add('registeredAt')
             ->add('certId')
             ->add('certIssuedAt')
-            ->add('trainings', EntityType::class, [
+            ->add('training', EntityType::class, [
                 'class' => Training::class,
 'choice_label' => 'id',
             ])

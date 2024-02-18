@@ -3,10 +3,27 @@
 {% block title %}Modality index{% endblock %}
 
 {% block body %}
-    <h1>Modality index</h1>
+    <div
+		class="col-xxl-8 order-2 order-xxl-1">
+		<!--begin::Advance Table Widget 2-->
+		<div
+			class="card card-custom card-stretch gutter-b">
+			<!--begin::Header-->
+			<div class="card-header border-0 pt-5">
+				<h3 class="card-title align-items-start flex-column">
+					<span class="card-label font-weight-bolder text-dark">Modality</span>
+					<span class="text-muted mt-3 font-weight-bold font-size-sm">Details</span>
+				</h3>
+    <a href="{{ path('app_modality_new') }}">Create new</a>
+  
+			</div> 
+			<div
+				class="card-body pt-3 pb-0">
+				<!--begin::Table-->
+				<div class="table-responsive">
+ <table class="table table-bordered">
 
-    <table class="table">
-        <thead>
+				  <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
@@ -37,5 +54,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_modality_new') }}">Create new</a>
+    		</div>
+				<!--end::Table-->
+			</div>
+			<!--end::Body-->
+		</div>
+	</div>
 {% endblock %}

@@ -14,10 +14,7 @@ class TrainingParticipant
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'trainingParticipants')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Training $trainings = null;
-
+ 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $voucher = null;
 
@@ -36,22 +33,16 @@ class TrainingParticipant
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $certIssuedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'enrollements')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Training $training = null;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTrainings(): ?Training
-    {
-        return $this->trainings;
-    }
-
-    public function setTrainings(?Training $trainings): static
-    {
-        $this->trainings = $trainings;
-
-        return $this;
-    }
+     
 
     public function getVoucher(): ?string
     {
@@ -121,6 +112,18 @@ class TrainingParticipant
     public function setCertIssuedAt(?\DateTimeInterface $certIssuedAt): static
     {
         $this->certIssuedAt = $certIssuedAt;
+
+        return $this;
+    }
+
+    public function getTraining(): ?Training
+    {
+        return $this->training;
+    }
+
+    public function setTraining(?Training $training): static
+    {
+        $this->training = $training;
 
         return $this;
     }
