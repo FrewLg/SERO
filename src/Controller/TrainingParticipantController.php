@@ -66,7 +66,7 @@ class TrainingParticipantController extends AbstractController
 
             // $webRoot = '/home/cornerstone/Desktop/projects/ntcms/';
             $orglogos="http://127.0.0.1:8000/files/site_setting/ephi.png";
-            $site_logo = 'http://127.0.0.1:8000/cert_templates/11.jpg';
+            $site_logo = 'http://127.0.0.1:8000/cert_templates/21.jpg';
             // Configure Dompdf according to your needs
             $pdfOptions = new Options();
             $pdfOptions->set('defaultFont', 'Arial');

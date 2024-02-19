@@ -67,7 +67,7 @@
 											Not specified
 										{% endif %}
 									</td>
-									<td>{{ training.trainingParticipants|length }}</td>
+									<td>{{ training.enrollements|length }}</td>
 
 									<td>
 										<span class="label label-lg label-light-dark label-inline">
@@ -79,7 +79,7 @@
 
 										{# {% if training.trainingRequest.numberOfParticipants >= training.trainingRequest.trainingParticipants %}  #}
 										<span class="label label-lg label-light-info label-inline">
-											{{training.trainingRequest.numberOfParticipants|length - training.trainingParticipants|length }}
+											{{training.trainingRequest.numberOfParticipants|length - training.enrollements|length }}
 											{# Seats  {% else  %} {% endif %} #}
 										</span>
 

@@ -6,6 +6,7 @@ use App\Entity\Fund;
 use App\Entity\FundTransaction;
 use App\Form\FundTransactionType;
 use App\Form\FundType;
+use App\Repository\FundRepository;
 // use Skies\SkiesQRcodeBundle\Generator\Generator;
 use App\Repository\FundTransactionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,9 +27,15 @@ class FundTransactionController extends AbstractController
  
         
     #[Route('/{id}/transactions', name: 'app_fund_transactions', methods: ['GET'])]
-    public function index(FundTransactionRepository $fundTransactionRepository, Fund $fund): Response
+    public function index(FundTransactionRepository $fundTransactionRepository, Fund $fund
+    ,FundRepository $fundepository,
+    
+    ): Response
     {
+        $fundname =  $fundepository->findOneBy(['id'=>$fund->getId()]);
         return $this->render('fund_transaction/index.html.twig', [
+            'fundName'=>$fundname->getName(),
+            // 'fundName'=>$fundname
             'fund_transactions' => $fundTransactionRepository->findBy(['fundName'=>$fund->getId()]),
         ]);
     }
@@ -37,6 +44,7 @@ class FundTransactionController extends AbstractController
     public function alltr(FundTransactionRepository $fundTransactionRepository): Response
     {
         return $this->render('fund_transaction/index.html.twig', [
+            'fundName'=>"All",
             'fund_transactions' => $fundTransactionRepository->findAll(),
         ]);
     }
@@ -82,7 +90,7 @@ class FundTransactionController extends AbstractController
 
         return $this->render('fund_transaction/new.html.twig', [
             'fund_transaction' => $fundTransaction,
-            'form' => $form,
+            'form' => $form, 
         ]);
     }
 

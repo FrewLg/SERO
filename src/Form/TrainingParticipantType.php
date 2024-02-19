@@ -34,3 +34,22 @@ class TrainingParticipantType extends AbstractType
         ]);
     }
 }
+
+class CertType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $builder
+             
+            ->add('certId')
+           
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => TrainingParticipant::class,
+        ]);
+    }
+}

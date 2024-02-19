@@ -14,7 +14,14 @@
 			<div class="card-header border-0 pt-5">
 				<h3 class="card-title align-items-start flex-column">
 					<span class="card-label font-weight-bolder text-dark">Fund Transaction</span>
-					<span class="text-muted mt-3 font-weight-bold font-size-sm">Details of fund transaction and history</span>
+					<span class="text-muted mt-3 font-weight-bold font-size-sm">
+					{# {% set fundName =""  %} #}
+					{% if  fundName  %}
+					Details of fund transaction and history of {{ fundName }}
+					{% else %}
+					All
+					{% endif %}
+					</span>
 				</h3>
 
 			</div>
@@ -32,6 +39,7 @@
 								<th>#</th>
 								<th>Ref. Nubmer</th>
 
+								<th>Budget</th>
 								<th>Deduction</th>
 								<th>Current Balance History</th>
 								<th>Deducted At</th>
@@ -43,13 +51,14 @@
 						<tbody>
 							{% for fund_transaction in fund_transactions %}
 								<tr>
-									<td>{{ fund_transaction.id }}</td>
+									<td>{{ loop.index }}</td>
 									<td>{{ fund_transaction.referenceNubmer }}
 									
-									<img src="data:image/png;base64,
+									<img   width="60" height="60" src="data:image/png;base64, 
 {{ barcode({code:  fund_transaction.referenceNubmer , type: 'datamatrix', format: 'png', width: 10, height: 10, color: [127, 127, 127]}) }}
 " />
 </td>
+									<td>{{ fund_transaction.fundName.budget |number_format(2, '.', ',') }} {{ fund_transaction.fundName.currency.name}}</td>
 
 									<td>{{ fund_transaction.deducted |number_format(2, '.', ',') }} {{ fund_transaction.fundName.currency.name}}</td>
 									<td>{{ fund_transaction.currentBalance |number_format(2, '.', ',') }} {{ fund_transaction.fundName.currency.name}}</td>
