@@ -10,6 +10,8 @@ use App\Repository\FundRepository;
 // use Skies\SkiesQRcodeBundle\Generator\Generator;
 use App\Repository\FundTransactionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Endroid\QrCode\Builder\Builder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +36,7 @@ class FundTransactionController extends AbstractController
     {
         $fundname =  $fundepository->findOneBy(['id'=>$fund->getId()]);
         return $this->render('fund_transaction/index.html.twig', [
-            'fundName'=>$fundname->getName(),
+            'fundName'=>$fundname,
             // 'fundName'=>$fundname
             'fund_transactions' => $fundTransactionRepository->findBy(['fundName'=>$fund->getId()]),
         ]);
@@ -48,6 +50,7 @@ class FundTransactionController extends AbstractController
             'fund_transactions' => $fundTransactionRepository->findAll(),
         ]);
     }
+
 
     #[Route('/{id}/ded', name: 'app_fund_transaction_new', methods: ['GET', 'POST'])]
     public function transact(Request $request, Fund $fundname, 
@@ -158,14 +161,63 @@ class FundTransactionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_fund_transaction_delete', methods: ['POST'])]
-    public function delete(Request $request, FundTransaction $fundTransaction, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$fundTransaction->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($fundTransaction);
-            $entityManager->flush();
-        }
+    #[Route('/{id}/statement', name: 'statement', methods: ['GET','POST'])]
 
-        return $this->redirectToRoute('app_fund_transaction_index', [], Response::HTTP_SEE_OTHER);
+    public function statement(FundTransactionRepository $fundTransactionRepository, Fund $fund
+    ,FundRepository $fundepository ) {
+ 
+            // $thestatement = $fundTransactionRepository->find(['fundName' => $fundepository->getId()]);
+            $thestatement =  $fundTransactionRepository->findOneBy(['fundName'=>$fund->getId()]);
+
+            $orglogos="http://127.0.0.1:8000/files/site_setting/ephi.png";
+            $site_logo = 'http://127.0.0.1:8000/cert_templates/21.jpg';
+            // Configure Dompdf according to your needs
+            $pdfOptions = new Options();
+            $pdfOptions->set('defaultFont', 'Arial');
+            $pdfOptions->set('isRemoteEnabled', true);
+            $pdfOptions->set('tempDir', '/tmp');
+            $pdfOptions->setIsHtml5ParserEnabled(true);
+            $dompdf = new Dompdf($pdfOptions);
+            $dompdf->set_option("isPhpEnabled", true);
+            $srringToGenerate=$thestatement->getFundName();
+            $options = array(
+                'code'   => $srringToGenerate,
+                'type'   => 'qrcode',
+                'format' => 'html',
+                'code'   => 'string to encode',
+                // 'type'   => 'datamatrix',
+                'format' => 'png',
+                'width'  => 10,
+                'height' => 10,
+                'color'  => array(127, 127, 127),
+            );
+        $generator = new QRGenerator();
+        $barcode = $generator->generate($options); 
+
+        $fundname =  $fundepository->findOneBy(['id'=>$fund->getId()]);
+
+        $html = $this->renderView('fund_transaction/statement.html.twig', [
+                
+               'orglogos'=>$orglogos,    
+             'twiglogo' => $site_logo,
+             'barcode' => $barcode,
+             'fundName'=>$fundname,
+             // 'fundName'=>$fundname
+             'fund_transactions' => $fundTransactionRepository->findBy(['fundName'=>$fund->getId()]),
+         
+              
+        ]);
+         $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+ 
+        ob_end_clean();
+        $filename = "mee";
+
+        $dompdf->stream($filename . "- statement.pdf", [
+            "Attachment" => true,
+        ]);
     }
+
+
 }

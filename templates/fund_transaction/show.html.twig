@@ -4,9 +4,35 @@
 {% endblock %}
 
 {% block body %}
-	<h1>FundTransaction</h1>
 
-	<table class="table">
+<div
+		class="col-xxl-8 order-2 order-xxl-1">
+		<!--begin::Advance Table Widget 2-->
+		<div
+			class="card card-custom card-stretch gutter-b">
+			<!--begin::Header-->
+			<div class="card-header border-0 pt-5">
+				<h3 class="card-title align-items-start flex-column">
+					<span class="card-label font-weight-bolder text-dark">Fund Transaction</span>
+					<span class="text-muted mt-3 font-weight-bold font-size-sm">
+					{# {% set fundName =""  %} #}
+													<td>{{ fund_transaction.fundName.name }}</td>
+
+					</span>
+				</h3> 
+{# <br> #}
+			</div>
+ 
+
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div
+				class="card-body pt-3 pb-0">
+				<!--begin::Table-->
+				<div class="table-responsive">
+					
+
+	<table class="table table-bordered">
 		<tbody>
 			<tr>
 				<th>Id</th>
@@ -35,6 +61,8 @@
 			<tr>
 				<th>ReferenceNubmer</th>
 				<td>{{ fund_transaction.referenceNubmer }}</td>
+				
+			<tr>
 				<td> 
 				 
  <img  width="60" height="60" src="data:image/png;base64,
@@ -48,7 +76,10 @@
 
 	<a href="{{ path('app_fund_transaction_index') }}">back to list</a>
 
-	<a href="{{ path('app_fund_transaction_edit', {'id': fund_transaction.id}) }}">edit</a>
-
-	{{ include('fund_transaction/_delete_form.html.twig') }}
-{% endblock %}
+ 	</div>
+				<!--end::Table-->
+			</div>
+			<!--end::Body-->
+		</div>
+	</div>
+ {% endblock %}
