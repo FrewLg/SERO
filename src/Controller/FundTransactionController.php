@@ -45,7 +45,7 @@ class FundTransactionController extends AbstractController
     #[Route('/all', name: 'app_fund_transaction_index', methods: ['GET'])]
     public function alltr(FundTransactionRepository $fundTransactionRepository): Response
     {
-        return $this->render('fund_transaction/index.html.twig', [
+        return $this->render('fund_transaction/indexall.html.twig', [
             'fundName'=>"All",
             'fund_transactions' => $fundTransactionRepository->findAll(),
         ]);

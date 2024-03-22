@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Profile;
 use App\Entity\User;
+use App\Form\ProfileType;
+use App\Form\UserProfilePictureType;
 use App\Form\UserType;
 use App\Repository\DirectorateRepository;
 use App\Repository\UserRepository;
@@ -43,9 +46,57 @@ class UserController extends AbstractController
         ]);
     }
 
-    
+    #[Route('/profile', name: 'my_profile', methods: ['GET','POST'])]
+    public function userprofile(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted("ROLE_USER");
+        $user = $this->getUser();
+        // if($user->getProfile()==''){
+        //     $userInfo=new Profile();
+        //     $profileform = $this->createForm(ProfileType::class, $userInfo); 
+        //     $profileform->handleRequest($request);
+        //     $userInfo->setUser($user);
+        //     $entityManager->persist($userInfo);
+        //     $entityManager->flush();
+        // }
+        // else{
+        //  $userInfo=$user->getProfile();
+        // }
+        $userInfo=$user->getProfile();
+        $profileform = $this->createForm(ProfileType::class, $userInfo);
+        // if ($profileform->isSubmitted() && $profileform->isValid()){
+            //         $entityManager->persist($profileform);
+        //         $entityManager->flush();
+        //     $this->addFlash('success', "Profile picture  has been updated successfully!");
+        // }
+        $profilepictureform = $this->createForm(UserProfilePictureType::class, $userInfo);
+        // $profilepictureform->handleRequest($request);
+        if ($profilepictureform->isSubmitted() && $profilepictureform->isValid()) {
+            $prifilepicture = $profilepictureform->get('image')->getData();
+             if ($prifilepicture == NULL) {
+                echo 'Image not uploaded';
+                 $prifilepicture = '';
+            } else {
+                 $fileName3 = 'PP-'.  md5(uniqid()) . '.' . $prifilepicture->guessExtension();
+                $prifilepicture->move($this->getParameter('profile_pictures'), $fileName3);
+                $userInfo->setImage($fileName3);
+                $entityManager->persist($profilepictureform);
+                $entityManager->flush();
+            $this->addFlash('success', "Profile picture  has been updated successfully!   ");
+ 
+            }
+        }
+      return $this->render('user/profile.html.twig', [
+            // 'published_research' => $publishedResearch,
+            'user' => $user,
+            'allform' => $profileform->createView(),
+            'form' => $profilepictureform->createView(),
+        ]);
+    }
+ 
     #[Route('/batchimport', name: 'generate_batchimport', methods: ['GET', 'POST'])]
-    public function batchimport( DirectorateRepository $directorateRepository, EntityManagerInterface $entityManager): Response
+    public function batchimport( DirectorateRepository $directorateRepository,
+     EntityManagerInterface $entityManager): Response
     {
          
                 $totalPossiblecoupons=   100;

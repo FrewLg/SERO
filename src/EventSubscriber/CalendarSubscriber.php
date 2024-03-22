@@ -26,10 +26,7 @@ class CalendarSubscriber implements EventSubscriberInterface
             CalendarEvents::SET_DATA => 'onCalendarSetData',
         ];
     }
-
-    
-    
-
+ 
     public function onCalendarSetData(CalendarEvent $calendar )
    
     {

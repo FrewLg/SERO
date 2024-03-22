@@ -48,6 +48,9 @@ class Profile
     #[ORM\JoinColumn(nullable: false)]
     private ?Directorate $dirctorate = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,6 +191,18 @@ class Profile
     public function setDirctorate(?Directorate $dirctorate): static
     {
         $this->dirctorate = $dirctorate;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
