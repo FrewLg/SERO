@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/email/message')]
+#[Route('{_locale<%app.supported_locales%>}/email-message')]
 class EmailMessageController extends AbstractController
 {
     #[Route('/', name: 'app_email_message_index', methods: ['GET'])]

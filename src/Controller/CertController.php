@@ -17,7 +17,7 @@ use Dompdf\Options;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-#[Route('/certificate')]
+#[Route('{_locale<%app.supported_locales%>}/certificate')]
 class CertController extends AbstractController
 {
      

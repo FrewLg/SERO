@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/profile')]
+#[Route('{_locale<%app.supported_locales%>}/profile')]
 class ProfileController extends AbstractController
 {
     #[Route('/', name: 'app_profile_index', methods: ['GET'])]

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/feedback')]
+#[Route('{_locale<%app.supported_locales%>}/feedback')]
 class FeedbackController extends AbstractController
 {
     #[Route('/', name: 'app_feedback_index', methods: ['GET'])]

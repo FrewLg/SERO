@@ -344,7 +344,10 @@
 									class="dropdown"> <!--begin::Toggle-->
 									<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
 										<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-											<img class="h-20px w-20px rounded-sm" src="{{ asset('theme/assets/media/svg/flags/226-united-states.svg' ) }}" alt=""/>
+									
+											 
+									<span class="text-capitalize text-dark-50 font-weight-bolder font-size-base">	{{ app.request.getLocale() }} </span>
+											{# <img class="h-20px w-20px rounded-sm" src="{{ asset('theme/assets/media/svg/flags/226-united-states.svg' ) }}" alt=""/> #}
 										</div>
 									</div>
 									<!--end::Toggle-->
@@ -356,23 +359,36 @@
 											class="navi navi-hover py-4">
 											<!--begin::Item-->
 											<li class="navi-item">
- 										<a href="{{ path('change_locale', {'locale':'or'}) }}" class="navi-link">
+											<a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({_locale: 'en'}))}}" class="navi-link"> 
+ 										{# <a href="{{ path('change_locale', {'locale':'or'}) }}" class="navi-link"> #}
 
 													<span class="symbol symbol-20 mr-3">
 														<img src="{{ asset('theme/assets/media/svg/flags/226-united-states.svg' ) }}" alt=""/>
 													</span>
 													<span class="navi-text">English</span>
+
 												</a>
 											</li>
 											 {# {{ app.request.locale|locale_name(app.request.locale) }} #}
 											<li class="navi-item">
-												<a href="#" class="navi-link">
+											<a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({_locale: 'am'}))}}" class="navi-link"> 
+
 													<span class="symbol symbol-20 mr-3">
-														<img src="{{ asset('theme/assets/media/svg/flags/195-france.svg' ) }}" alt=""/>
+														<img src="{{ asset('theme/assets/media/svg/flags/005-ethiopia.svg' ) }}" alt=""/>
 													</span>
 													<span class="navi-text">Amharic</span>
 												</a>
 											</li>
+											<li class="navi-item">
+											<a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({_locale: 'or'}))}}" class="navi-link"> 
+
+													<span class="symbol symbol-20 mr-3">
+														<img src="{{ asset('theme/assets/media/svg/flags/005-ethiopia.svg' ) }}" alt=""/>
+													</span>
+													<span class="navi-text">Afaan Oromoo</span>
+												</a>
+											</li>
+
 											<!--end::Item-->
 										</ul>
 										<!--end::Nav-->

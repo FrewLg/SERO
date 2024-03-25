@@ -28,7 +28,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Validator\Constraints\Length;
 
-#[Route('/training')]
+#[Route('{_locale<%app.supported_locales%>}/training')]
 class TrainingController extends AbstractController
 {
     #[Route('/', name: 'app_training_index', methods: ['GET'])]
@@ -99,7 +99,7 @@ class TrainingController extends AbstractController
             $training->setTrainingRequest($trainingrequest);
             $entityManager->persist($training);
             $entityManager->flush();
-            $message = new TranslatableMessage('Details added successflly!');
+            // $message = new TranslatableMessage('Details added successflly!');
 
             $this->addFlash("success", "Details added successflly !");
             return $this->redirectToRoute('details', ['id'=>$training->getId()], Response::HTTP_SEE_OTHER);

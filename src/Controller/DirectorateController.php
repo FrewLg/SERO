@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/directorate')]
+#[Route('{_locale<%app.supported_locales%>}/directorate')]
 class DirectorateController extends AbstractController
 {
     #[Route('/', name: 'app_directorate_index', methods: ['GET'])]

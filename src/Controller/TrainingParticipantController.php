@@ -15,7 +15,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-#[Route('/enrollement')]
+#[Route('{_locale<%app.supported_locales%>}/enrollement')]
 class TrainingParticipantController extends AbstractController
 {
     #[Route('/', name: 'app_training_participant_index', methods: ['GET'])]

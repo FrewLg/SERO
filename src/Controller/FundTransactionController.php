@@ -23,7 +23,7 @@ use Endroid\QrCode\Builder\BuilderInterface;
 use Skies\QRcodeBundle\Generator\Generator as QRGenerator;
 use Symfony\Bundle\MakerBundle\Generator as MakerBundleGenerator;
 
-#[Route('/fundtrans')]
+#[Route('{_locale<%app.supported_locales%>}/fundtrans')]
 class FundTransactionController extends AbstractController
 {
  

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/training-topic')]
+#[Route('{_locale<%app.supported_locales%>}/training-topic')]
 class TrainingTopicController extends AbstractController
 {
     #[Route('/', name: 'app_training_topic_index', methods: ['GET'])]

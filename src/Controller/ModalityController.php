@@ -11,14 +11,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/modality')]
+#[Route('{_locale<%app.supported_locales%>}/modality')]
 class ModalityController extends AbstractController
 {
     #[Route('/', name: 'app_modality_index', methods: ['GET'])]
-    public function index(ModalityRepository $modalityRepository): Response
+    public function index(ModalityRepository $modalityRepository, Request $request): Response
     {
+        $locale = $request->getLocale();
+
         return $this->render('modality/index.html.twig', [
             'modalities' => $modalityRepository->findAll(),
+            'locale'=>$locale
         ]);
     }
 
@@ -31,6 +34,9 @@ class ModalityController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $modality->setCreatedAt(new \Datetime());
+
+            
+            $this->addFlash('success','Details added successflly!');
 
             $entityManager->persist($modality);
             $entityManager->flush();

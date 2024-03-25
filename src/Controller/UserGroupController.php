@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/user-group')]
+#[Route('{_locale<%app.supported_locales%>}/user-group')]
 class UserGroupController extends AbstractController
 {
     #[Route('/', name: 'app_user_group_index', methods:  ['GET', 'POST'])]
