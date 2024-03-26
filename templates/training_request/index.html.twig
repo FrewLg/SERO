@@ -164,7 +164,9 @@
                 <td>{{ training_request.id }}</td>
                 <td>{{ training_request.trainingTopic }}</td>
                 <td>{{ training_request.createdAt ? training_request.createdAt|date('M d, y  H:i') : '' }}</td>
-                <td>{{ training_request.requestedBy.directorate.name }}</td>
+                <td>{{ training_request.requestedBy.profile.dirctorate }}
+				{# {{app.user.profile.dirctorate}} #}
+				</td>
                 <td>{{ training_request.programDetails }}</td>
                 <td>{{ training_request.numberOfParticipants }}</td>
                 <td>{{ training_request.status }}</td>

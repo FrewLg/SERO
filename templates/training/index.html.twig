@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Training index
+{% block title %}{% trans %}Training {% endtrans %}
 {% endblock %}
 
 {% block body %}
@@ -13,8 +13,8 @@
 			<!--begin::Header-->
 			<div class="card-header border-0 pt-5">
 				<h3 class="card-title align-items-start flex-column">
-					<span class="card-label font-weight-bolder text-dark">Approved Training</span>
-					<span class="text-muted mt-3 font-weight-bold font-size-sm">Details</span>
+					<span class="card-label font-weight-bolder text-dark">{% trans %}Approved Training{% endtrans %}</span>
+					<span class="text-muted mt-3 font-weight-bold font-size-sm">{% trans %}Details{% endtrans %}</span>
 				</h3>
 
 			</div>
@@ -30,13 +30,13 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Name</th>
-								<th>Organizers</th>
-								<th>Modality</th>
-								<th>Participants</th>
-								<th>Allowed vouchers</th>
-								<th>Venue</th>
-								<th nowrap="nowrap">Duration
+								<th>{% trans %}Name{% endtrans %}</th>
+								<th>{% trans %}Organizers{% endtrans %}</th>
+								<th>{% trans %}Modality{% endtrans %}</th>
+								<th>{% trans %}Participants{% endtrans %}</th>
+								<th>{% trans %}Allowed vouchers{% endtrans %}</th>
+								<th>{% trans %}Venue{% endtrans %}</th>
+								<th nowrap="nowrap">{% trans %}Duration{% endtrans %}
 								</th>
 								<th class="p-0" style="min-width: 150px"></th>
 							</tr>
@@ -64,7 +64,7 @@
 												</span>
 											{% endfor %}
 										{% else %}
-											Not specified
+											{% trans %}Not specified{% endtrans %}
 										{% endif %}
 									</td>
 									<td>{{ training.enrollements|length }}</td>
@@ -98,10 +98,10 @@
 											{% set difference = date(today).diff(date(datePost))%}
 											{% set leftDays = difference.days %}
 											{% if datePost == today %}
-												1 day
+												1 {% trans %}day{% endtrans %}
 											{% else %}
 												{{ leftDays }}
-												days
+												{% trans %}days{% endtrans %}
 											{% endif %}
 
 										</span>
@@ -157,7 +157,7 @@
 								</tr>
 							{% else %}
 								<tr>
-									<td colspan="8">no records found</td>
+									<td colspan="8">{% trans %}no records found{% endtrans %}</td>
 								</tr>
 							{% endfor %}
 						</tbody>

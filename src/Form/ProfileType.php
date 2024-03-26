@@ -25,13 +25,10 @@ class ProfileType extends AbstractType
             ->add('title')
             // ->add('nationalID')
             ->add('signature')
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-            ])
+           
             ->add('dirctorate', EntityType::class, [
                 'class' => Directorate::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
             ])
         ;
     }

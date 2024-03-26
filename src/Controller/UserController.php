@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+// use App\Entity\Profile;
+
 use App\Entity\Profile;
 use App\Entity\User;
 use App\Form\ProfileType;
@@ -50,6 +52,39 @@ class UserController extends AbstractController
     public function userprofile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted("ROLE_USER");
+        $user = $this->getUser(); 
+       if($this->getUser()->getProfile()){
+    $user=$user->getProfile();
+       }
+       else{
+
+        $user = new Profile();
+    }
+
+        $form = $this->createForm(ProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUser($this->getUser());
+            $entityManager->persist($user);
+
+            $entityManager->flush();
+            $this->addFlash('success', "Profile picture  has been updated successfully!");
+
+            return $this->redirectToRoute('my_profile');
+        }
+        
+      return $this->render('user/profile.html.twig', [
+            'user' => $user,
+            'allform' => $form->createView(),
+            // 'form' => $profileform->createView(),
+        ]);
+    }
+
+    #[Route('/profiles', name: 'my_psrofile', methods: ['GET','POST'])]
+    public function rofile(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted("ROLE_USER");
         $user = $this->getUser();
         // if($user->getProfile()==''){
         //     $userInfo=new Profile();
@@ -64,11 +99,11 @@ class UserController extends AbstractController
         // }
         $userInfo=$user->getProfile();
         $profileform = $this->createForm(ProfileType::class, $userInfo);
-        // if ($profileform->isSubmitted() && $profileform->isValid()){
-            //         $entityManager->persist($profileform);
-        //         $entityManager->flush();
-        //     $this->addFlash('success', "Profile picture  has been updated successfully!");
-        // }
+        if ($profileform->isSubmitted() && $profileform->isValid()){
+                $entityManager->persist($profileform);
+                $entityManager->flush();
+            $this->addFlash('success', "Profile picture  has been updated successfully!");
+        }
         $profilepictureform = $this->createForm(UserProfilePictureType::class, $userInfo);
         // $profilepictureform->handleRequest($request);
         if ($profilepictureform->isSubmitted() && $profilepictureform->isValid()) {

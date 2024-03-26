@@ -21,12 +21,9 @@ class CourseType extends AbstractType
             ->add('courseCode')
             ->add('topic', EntityType::class, [
                 'class' => TrainingTopic::class,
-'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
-            ->add('createdBy', EntityType::class, [
-                'class' => User::class,
-'choice_label' => 'id',
-            ])
+             
         ;
     }
 

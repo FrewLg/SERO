@@ -93,6 +93,7 @@ class TrainingTopic
         return $this;
     }
 
+    
     /**
      * @return Collection<int, TrainingRequest>
      */

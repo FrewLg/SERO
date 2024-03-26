@@ -24,11 +24,11 @@ class FundTransactionType extends AbstractType
             // ->add('referenceNubmer')
             ->add('fundName', EntityType::class, [
                 'class' => Fund::class,
-'choice_label' => 'id',
+'choice_label' => 'name',
             ])
             ->add('allotedTo', EntityType::class, [
                 'class' => Training::class,
-'choice_label' => 'id',
+// 'choice_label' => 'training_request',
             ])
 //             ->add('createdBy', EntityType::class, [
 //                 'class' => User::class,

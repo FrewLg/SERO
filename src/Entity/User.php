@@ -167,6 +167,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->profile;
     }
 
+    public function __toString()
+    {
+        
+   return $this->profile;
+    }
+
+
     public function setProfile(?Profile $profile): static
     {
         // unset the owning side of the relation if necessary
