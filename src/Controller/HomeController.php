@@ -17,7 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'homes')]
+    #[Route('{_locale<%app.supported_locales%>}/', name: 'homes')]
     public function index(
         TranslatorInterface $translator, Request $request,
         LocaleSwitcher $localeSwitcher): Response

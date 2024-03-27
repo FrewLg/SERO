@@ -1,8 +1,11 @@
-'Details added successflly!': '_dasdasd_Details added successflly!'
+Name: __Name
+'Sign In': '__Sign In'
+'Enter your details to login to your account:': '__Enter your details to login to your account:'
+Home: __Home
+Logout: __Logout
 Training: __Training
 'Approved Training': '__Approved Training'
 Details: __Details
-Name: __Name
 Organizers: __Organizers
 Modality: __Modality
 Participants: __Participants
@@ -13,10 +16,6 @@ Duration: __Duration
 day: __day
 days: __days
 'no records found': '__no records found'
-'Sign In': '__Sign In'
-'Enter your details to login to your account:': '__Enter your details to login to your account:'
-Home: __Home
-Logout: __Logout
 Trainings: __Trainings
 Courses: __Courses
 'Training Requests': '__Training Requests'

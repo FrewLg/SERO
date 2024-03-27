@@ -9,4 +9,3 @@ root_route_redirect:
     defaults: 
         path: /en
         permanent: true
-

@@ -1,14 +1,23 @@
 Training: Leenji
 'Approved Training': 'Fajjinoonni leenjubba'
 Details: Roore
-Name: Su'ma
+Name: "Su'ma"
 Organizers: Qineessaano
 Modality: Garubba
 Participants: Beeqqaano
 'Allowed vouchers': 'Fajjinnonni vochere'
 Venue: Base
 Duration: Geeshsha
-'Not specified': 'Dikulloonni'
+'Not specified': Dikulloonni
 day: barra
 days: Barrubba
 'no records found': 'woro di afantino'
+'Sign In': '__Sign In'
+'Enter your details to login to your account:': '__Enter your details to login to your account:'
+Home: __Home
+Logout: __Logout
+Trainings: __Trainings
+Courses: __Courses
+'Training Requests': '__Training Requests'
+'Training Schedules': '__Training Schedules'
+'My request': '__My request'

@@ -621,6 +621,10 @@
 							<!--begin::Page Scripts(used by this page)-->
 							 <script src="{{ asset('theme/assets/js/pages/widgets.js' ) }}"></script>
 							<!--end::Page Scripts-->
+							<script>
+    $("body").LoadingOverlay("show");
+</script>
+
 						{% block javascripts %}
 						{% endblock %}
 					</body>

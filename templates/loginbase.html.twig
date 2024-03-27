@@ -72,9 +72,39 @@
 						<!--end::Login Sign in form-->
 						<!--begin::Login Sign up form-->
 						
-						 
+<nav class="navbar mt-5" style="background-color: #e3f2fd;">
+ 
+											<a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({_locale: 'en'}))}}" class="navi-link"> 
+ 
+													{# <span class="symbol symbol-20 mr-2">
+														<img src="{{ asset('theme/assets/media/svg/flags/226-united-states.svg' ) }}" alt=""/>
+													</span> #}
+													<span class="navi-text">En</span>
 
+												</a>
+  											<a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({_locale: 'am'}))}}" class="navi-link"> 
 
+													<span class="symbol symbol-20 mr-2">
+														<img src="{{ asset('theme/assets/media/svg/flags/005-ethiopia.svg' ) }}" alt=""/>
+													</span>
+													<span class="navi-text">Am</span>
+												</a>
+											 
+											<a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({_locale: 'or'}))}}" class="navi-link"> 
+
+													<span class="symbol symbol-20 mr-2">
+														<img src="{{ asset('theme/assets/media/svg/flags/005-ethiopia.svg' ) }}" alt=""/>
+													</span>
+													<span class="navi-text">Or</span>
+												</a> 
+											<a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({_locale: 'sd'}))}}" class="navi-link"> 
+
+													<span class="symbol symbol-20 mr-2">
+														<img src="{{ asset('theme/assets/media/svg/flags/005-ethiopia.svg' ) }}" alt=""/>
+													</span>
+													<span class="navi-text">Sd</span>
+												</a> 
+</nav> 
 
 						<!--end::Login forgot password form-->
 					</div>

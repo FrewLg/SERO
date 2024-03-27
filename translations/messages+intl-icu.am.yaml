@@ -8,7 +8,16 @@ Participants: ተሳታፊዎች
 'Allowed vouchers': 'የተፈቀዱ ቫውቸሮች'
 Venue: ቦታ
 Duration: ቆይታ
-'Not specified': 'አልተገለጸም'
+'Not specified': አልተገለጸም
 day: ቀን
 days: ቀናት
 'no records found': 'ምንም መዝገቦች አልተገኙም።'
+'Sign In': '__Sign In'
+'Enter your details to login to your account:': '__Enter your details to login to your account:'
+Home: መነሻ
+Logout: __Logout
+Trainings: ስልጠናዎች
+Courses: __Courses
+'Training Requests': '__Training Requests'
+'Training Schedules': '__Training Schedules'
+'My request': '__My request'
