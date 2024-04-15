@@ -14,13 +14,16 @@ use Symfony\Component\Routing\Attribute\Route;
 use App\Utils\Constants;
 
 
-#[Route('/sero/board-member')]
+#[Route('{_locale<%app.supported_locales%>}/board-member')]
 class BoardMemberController extends AbstractController
 {
     #[Route('/', name: 'board_member_index',  methods: ['GET', "POST"])]
     public function index(Request $request , EntityManagerInterface $entityManager, BoardMemberRepository $boardMemberRepository, PaginatorInterface $paginator): Response
     {
         
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        // dd($request);
             $boardMember = new BoardMember();
             $form = $this->createForm(BoardMemberType::class, $boardMember);
     
@@ -46,7 +49,9 @@ class BoardMemberController extends AbstractController
                 if ($this->getUser()->getProfile()) {
                     $boardMember->setAssignedBy($this->getUser());
                     $boardMember->getUser()->addRole(Constants::ROLE_BOARD_MEMBER);
-                    $boardMember->getUser()->addRole($form['role']->getData());
+                    $boardMember->getUser()->addRole(
+                        // $form['role']->getData()
+                         $form->get('role')->getData());
                     // $boardMember->setDirectorate($this->getUser()->getProfile()->getDirectorate());
               
                     $entityManager->persist($boardMember);

@@ -50,10 +50,17 @@ class Application
     #[ORM\OneToMany(targetEntity: ReviewAssignment::class, mappedBy: 'application')]
     private Collection $reviewAssignments;
 
+    /**
+     * @var Collection<int, IrbCertificate>
+     */
+    #[ORM\OneToMany(targetEntity: IrbCertificate::class, mappedBy: 'irbApplication')]
+    private Collection $irbCertificates;
+
     public function __construct()
     {
         $this->applicationReviews = new ArrayCollection();
         $this->reviewAssignments = new ArrayCollection();
+        $this->irbCertificates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,6 +206,36 @@ class Application
             // set the owning side to null (unless already changed)
             if ($reviewAssignment->getApplication() === $this) {
                 $reviewAssignment->setApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, IrbCertificate>
+     */
+    public function getIrbCertificates(): Collection
+    {
+        return $this->irbCertificates;
+    }
+
+    public function addIrbCertificate(IrbCertificate $irbCertificate): static
+    {
+        if (!$this->irbCertificates->contains($irbCertificate)) {
+            $this->irbCertificates->add($irbCertificate);
+            $irbCertificate->setIrbApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIrbCertificate(IrbCertificate $irbCertificate): static
+    {
+        if ($this->irbCertificates->removeElement($irbCertificate)) {
+            // set the owning side to null (unless already changed)
+            if ($irbCertificate->getIrbApplication() === $this) {
+                $irbCertificate->setIrbApplication(null);
             }
         }
 

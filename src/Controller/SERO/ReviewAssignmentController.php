@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/sero/review-assignment')]
+#[Route('{_locale<%app.supported_locales%>}/review-assignment')]
 class ReviewAssignmentController extends AbstractController
 {
     #[Route('/', name: 'app_s_e_r_o_review_assignment_index', methods: ['GET'])]

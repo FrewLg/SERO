@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/sero/app-type')]
+#[Route('{_locale<%app.supported_locales%>}/app-type')]
 class ApplicationTypeController extends AbstractController
 {
     #[Route('/', name: 'app_s_e_r_o_application_type_index', methods: ['GET'])]

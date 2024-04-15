@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Entity\SERO\BoardMember;
+use App\Entity\SERO\IrbCertificate;
 use App\Entity\SERO\ReviewAssignment;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -81,6 +82,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: BoardMember::class, mappedBy: 'assignedBy')]
     private Collection $boardMembers;
 
+    /**
+     * @var Collection<int, IrbCertificate>
+     */
+    #[ORM\OneToMany(targetEntity: IrbCertificate::class, mappedBy: 'approvedBy')]
+    private Collection $irbCertificates;
+
   
     public function __construct()
     {
@@ -94,6 +101,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->fundTransactions = new ArrayCollection();
         $this->reviewAssignments = new ArrayCollection();
         $this->boardMembers = new ArrayCollection();
+        $this->irbCertificates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -529,6 +537,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($boardMember->getAssignedBy() === $this) {
                 $boardMember->setAssignedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, IrbCertificate>
+     */
+    public function getIrbCertificates(): Collection
+    {
+        return $this->irbCertificates;
+    }
+
+    public function addIrbCertificate(IrbCertificate $irbCertificate): static
+    {
+        if (!$this->irbCertificates->contains($irbCertificate)) {
+            $this->irbCertificates->add($irbCertificate);
+            $irbCertificate->setApprovedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIrbCertificate(IrbCertificate $irbCertificate): static
+    {
+        if ($this->irbCertificates->removeElement($irbCertificate)) {
+            // set the owning side to null (unless already changed)
+            if ($irbCertificate->getApprovedBy() === $this) {
+                $irbCertificate->setApprovedBy(null);
             }
         }
 

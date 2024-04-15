@@ -1,7 +1,8 @@
 <html
 	lang="en">
 	<!--begin::Head-->
-	<head><base href="{{ asset('../../' ) }}">
+	<head>
+	{# <base href="{{ asset('../../' ) }}"> #}
 		<meta charset="utf-8"/>
 		<title>
 			{% block title %}{% endblock %}|
@@ -15,6 +16,7 @@
 		<!--begin::Page Vendors Styles(used by this page)-->
 		<link href="{{ asset('theme/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' ) }}" rel="stylesheet" type="text/css"/> <!--end::Page Vendors Styles-->
 		<!--begin::Global Theme Styles(used by all pages)-->
+
 		<link href="{{ asset('theme/assets/plugins/global/plugins.bundle.css' ) }}" rel="stylesheet" type="text/css"/> <link href="{{ asset('theme/assets/plugins/custom/prismjs/prismjs.bundle.css' ) }}" rel="stylesheet" type="text/css"/>
 		<link href="{{ asset('theme/assets/css/style.bundle.css' ) }}" rel="stylesheet" type="text/css"/>
 		<!--end::Global Theme Styles-->
@@ -25,6 +27,8 @@
 		href="{{ asset('theme/assets/css/themes/layout/aside/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<!--end::Layout Themes-->
 		<link rel="stylesheet" href="{{ asset('plugins/tagsinput.css')}}"/>
+	{# <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" /><div class="row"> #}
+				<link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css')}}"/>
 
 		<link rel="shortcut icon" href="{{ asset('files/site_setting/'~site_logo ) }}">
 {% block styles %} {% endblock %}
@@ -610,6 +614,7 @@
 								<!--end::Notifications-->
 							</div>
 
+										{# <script src="{{ asset('plugins/select2/select2.min.js')}}"></script> #}
 						
 							 <script src="{{ asset('theme/assets/plugins/global/plugins.bundle.js' ) }}"></script>
 							 <script src="{{ asset('theme/assets/plugins/custom/prismjs/prismjs.bundle.js' ) }}"></script>
@@ -622,12 +627,23 @@
 							<!--end::Page Vendors-->
 							<!--begin::Page Scripts(used by this page)-->
 							 <script src="{{ asset('theme/assets/js/pages/widgets.js' ) }}"></script>
-							<!--end::Page Scripts-->
-									<script src="{{ asset('plugins/jquery-jvectormap-2.0.2.min.js')}}"></script>
-									<script src="{{ asset('plugins/jquery-jvectormap-us-aea-en.js')}}"></script>
+							<!--end::Page Scripts--> 
+									<script src="{{ asset('theme/assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
+									{# <script src="{{ asset('plugins/jquery-jvectormap-2.0.2.min.js')}}"></script> #}
+									{# <script src="{{ asset('plugins/jquery-jvectormap-us-aea-en.js')}}"></script> #}
+			{# <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> #}
+
 							<script>
+
     $("body").LoadingOverlay("show");
 </script>
+
+<script type="text/javascript">
+     $(document).ready(function() {
+$(".board_member_user").select2();
+});
+</script>
+
 
 						{% block javascripts %}
 						{% endblock %}

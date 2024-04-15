@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/sero/checklist-group')]
+#[Route('{_locale<%app.supported_locales%>}/checklist-group')]
 class ReviewChecklistGroupController extends AbstractController
 {
     #[Route('/', name: 'app_s_e_r_o_review_checklist_group_index', methods: ['GET'])]
