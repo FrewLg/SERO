@@ -14,8 +14,8 @@
 		</div>
 		<div class="card-body">
 			<p>
-				<b>INFORMATION FOR THE REVIEWER:</b>
-				This is a word document, so you may download it to your computer to complete. Each of the components below must be adequately addressed within the application in order to be approved by the IRB. Please indicate whether the PI has given adequate consideration and safeguards to the following areas of concern.
+				<b>INFORMATION FOR THE REVIEWER:</b> <br>Some information
+				{# This is a word document, so you may download it to your computer to complete. Each of the components below must be adequately addressed within the application in order to be approved by the IRB. Please indicate whether the PI has given adequate consideration and safeguards to the following areas of concern.
 				<span class="bg-warning">
 					Note any concerns, recommendations or questions in the reviewer’s comment section for each component.
 				</span>
@@ -26,7 +26,7 @@
 			<p>
 
 				Concerns and questions noted by reviewer(s) must be satisfactorily addressed by the applicant prior to final project approval.
-			</p>
+			</p> #}
 
 
 			<div>
@@ -45,9 +45,7 @@
 									<th>NO</th>
 									<th>NA</th>
 								</tr>
-								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  (checklist.answerType==1 )) %}
-                                
-                                {# |filter(checklist =>  (checklist.answerType==1 and not checklist.parent)) %} #}
+								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and not checklist.parent)) %}  
 
 									{% if checklist.reviewChecklists|length >0 %}
 										<tr>
@@ -98,7 +96,7 @@
 					</table>
 
 					
-					<button class="btn btn-primary float-end btn-block btn-lg">{{ button_label|default('Submit Review') }}</button>
+					<button class="btn btn-primary btn-lg">{{ button_label|default('Submit Review Response') }}</button>
 
 				</form>
 			</div>
@@ -109,11 +107,11 @@
 
 {% endblock %}
 {% block javascripts  %}
-	<script>
+	{# <script>
 		$('.form-check-input').change(function () {
 var min = $(this).attr('data-min');
 var max = $(this).attr('data-max');
 $(this).closest('.parent').find('.score').attr({"max": max, "min": min});
 });
-	</script>
+	</script> #}
 {% endblock javascripts  %}

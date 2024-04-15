@@ -58,7 +58,7 @@ class ReviewChecklistController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash("success", "Review sent.");
-            return $this->redirectToRoute('app_s_e_r_o_review_checklist_new');
+            return $this->redirectToRoute('review_result',['id'=>$reviewAssignment->getId()]);
         }
 
          $irb_review_checklist_group = $entityManager->getRepository(ReviewChecklistGroup::class)->findAll();

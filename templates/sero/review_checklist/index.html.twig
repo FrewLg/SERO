@@ -5,6 +5,14 @@
 {% block body %}
     <h1>Review Checklist  </h1>
  
+ <div class="card">
+ <div class="card-header ">
+  
+    <a href="{{ path('app_s_e_r_o_review_checklist_new') }}"  class="btn btn-light-success btn-sm"   >Create new</a>
+ </div>
+ <div class="card-body">
+<h3 class="text-muted"> Review Checklist information sheet</h3>
+<hr>
 {% for checklist in checklist_group %}
 {# .reviewChecklists|filter(checklist =>  (checklist.answerType==1 and not checklist.parent)) %} #}
          <b style="margin-left:10px">{{ toAlpha(loop.index)}}.
@@ -14,7 +22,14 @@
         {% for review_checklist in checklist.reviewChecklists %}
 
  										<li> <b style="margin-right:5">{{ loop.index}}.
-													{{review_checklist.name}}</b> <a href="{{ path('app_s_e_r_o_review_checklist_edit', {'id': review_checklist.id}) }}">edit</a></li>
+													{{review_checklist.name}}</b> {{review_checklist.answerType}} <a href="{{ path('app_s_e_r_o_review_checklist_edit', {'id': review_checklist.id}) }}">edit</a>
+                                                    
+                                                    <form method="post" action="{{ path('app_s_e_r_o_review_checklist_delete', {'id': review_checklist.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ review_checklist.id) }}">
+    <button class="btn">Delete</button>
+</form>
+
+                                                    </li>
 
 
         {% endfor %}
@@ -23,6 +38,5 @@
         {% endfor %}
  
      
-
-    <a href="{{ path('app_s_e_r_o_review_checklist_new') }}">Create new</a>
+ </div></div>
 {% endblock %}

@@ -27,8 +27,8 @@
 										<th>Response</th>
 									</tr>
 									{% set parents = {} %}
-									{% for checklist in review_assignment.reviewerResponses|filter(  checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.checklistGroup ==  checklist_group) ) %}
-
+									{% for checklist in review_assignment.reviewerResponses|filter(  checklist =>  (checklist.checklist.checklistGroup ==  checklist_group) ) %}
+  
 										{% if checklist.checklist.parent %}
 											{% set parents = parents|merge({("key" ~ checklist.checklist.parent.id):checklist.checklist.parent}) %}
 
