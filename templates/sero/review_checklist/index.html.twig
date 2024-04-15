@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Review Checklist  {% endblock %}
+
+{% block body %}
+    <h1>Review Checklist  </h1>
+ 
+{% for checklist in checklist_group %}
+{# .reviewChecklists|filter(checklist =>  (checklist.answerType==1 and not checklist.parent)) %} #}
+         <b style="margin-left:10px">{{ toAlpha(loop.index)}}.
+													{{checklist}}</b>
+                                                   <br>
+                                                    <ol style="list-style: none;">
+        {% for review_checklist in checklist.reviewChecklists %}
+
+ 										<li> <b style="margin-right:5">{{ loop.index}}.
+													{{review_checklist.name}}</b> <a href="{{ path('app_s_e_r_o_review_checklist_edit', {'id': review_checklist.id}) }}">edit</a></li>
+
+
+        {% endfor %}
+        </ol>
+  
+        {% endfor %}
+ 
+     
+
+    <a href="{{ path('app_s_e_r_o_review_checklist_new') }}">Create new</a>
+{% endblock %}

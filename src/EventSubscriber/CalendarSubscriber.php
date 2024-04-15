@@ -18,7 +18,9 @@ class CalendarSubscriber implements EventSubscriberInterface
         private EntityManagerInterface $em,
         private UrlGeneratorInterface $router
     )
-    {}
+    {
+        
+    }
 
     public static function getSubscribedEvents()
     {

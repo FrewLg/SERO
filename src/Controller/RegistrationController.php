@@ -15,7 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
-
+use ReCaptcha\ReCaptcha; // Include the recaptcha lib
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
@@ -31,7 +31,9 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
+        $recaptcha = new ReCaptcha('here-is-the-secret-key-that-no-one-but-you-shouldKnow');
+        $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
+      
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -41,6 +43,15 @@ class RegistrationController extends AbstractController
                 )
             );
 
+        ##################
+        if (!$resp->isSuccess()) {
+            // Do something if the submit wasn't valid ! Use the message to show something
+            $message = "The reCAPTCHA wasn't entered correctly. Go back and try it again." . "(reCAPTCHA said: " . "Error occured" . ")";
+        }else{
+            // Everything works good ;) your contact has been saved.
+        }
+        ######################
+        $user->setRoles(["ROLE_USER"]);
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -78,7 +89,6 @@ class RegistrationController extends AbstractController
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
         $this->addFlash('success', 'Your email address has been verified.');
-
-        return $this->redirectToRoute('app_register');
+         return $this->redirectToRoute('app_register');
     }
 }

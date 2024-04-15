@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReviewStatus index{% endblock %}
+
+{% block body %}
+    <h1>ReviewStatus index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for review_status in review_statuses %}
+            <tr>
+                <td>{{ review_status.id }}</td>
+                <td>{{ review_status.name }}</td>
+                <td>{{ review_status.description }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_review_status_show', {'id': review_status.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_review_status_edit', {'id': review_status.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_review_status_new') }}">Create new</a>
+{% endblock %}

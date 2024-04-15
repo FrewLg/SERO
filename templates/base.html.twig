@@ -5,12 +5,12 @@
 		<meta charset="utf-8"/>
 		<title>
 			{% block title %}{% endblock %}|
-			{{app_name}}</title>
+			{{app_name|trans}}</title>
 		<meta name="description" content="Aside light theme example"/>
 		<meta
 		name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
+		{# <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/> #}
 		<!--end::Fonts-->
 		<!--begin::Page Vendors Styles(used by this page)-->
 		<link href="{{ asset('theme/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' ) }}" rel="stylesheet" type="text/css"/> <!--end::Page Vendors Styles-->
@@ -24,6 +24,8 @@
 		<link
 		href="{{ asset('theme/assets/css/themes/layout/aside/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<!--end::Layout Themes-->
+		<link rel="stylesheet" href="{{ asset('plugins/tagsinput.css')}}"/>
+
 		<link rel="shortcut icon" href="{{ asset('files/site_setting/'~site_logo ) }}">
 {% block styles %} {% endblock %}
 	</head>
@@ -128,7 +130,7 @@
 							<br>	<div
 									id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
 									<!--begin::Header Nav-->
-									 {{acronym}}
+									 {{acronym|trans}}
 								 
 									<!--end::Header Nav-->
 								</div>
@@ -615,12 +617,14 @@
 							<!--end::Global Theme Bundle-->
 							<!--begin::Page Vendors(used by this page)-->
 							 <script src="{{ asset('theme/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js' ) }}"></script>
-							 <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
+							 {# <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script> #}
 							 <script src="{{ asset('theme/assets/plugins/custom/gmaps/gmaps.js' ) }}"></script>
 							<!--end::Page Vendors-->
 							<!--begin::Page Scripts(used by this page)-->
 							 <script src="{{ asset('theme/assets/js/pages/widgets.js' ) }}"></script>
 							<!--end::Page Scripts-->
+									<script src="{{ asset('plugins/jquery-jvectormap-2.0.2.min.js')}}"></script>
+									<script src="{{ asset('plugins/jquery-jvectormap-us-aea-en.js')}}"></script>
 							<script>
     $("body").LoadingOverlay("show");
 </script>

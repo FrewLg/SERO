@@ -12,12 +12,18 @@ Duration: Geeshsha
 day: barra
 days: Barrubba
 'no records found': 'woro di afantino'
-'Sign In': '__Sign In'
+'Sign In': 'Kulte Ei'
 'Enter your details to login to your account:': '__Enter your details to login to your account:'
-Home: __Home
-Logout: __Logout
-Trainings: __Trainings
-Courses: __Courses
-'Training Requests': '__Training Requests'
-'Training Schedules': '__Training Schedules'
-'My request': '__My request'
+Home: Kaima
+Logout: 'Cuffe Fuli'
+Trainings: Leenjubba
+Courses: Korsubba
+'Training Requests': "Leenjishshu xa'mubba"
+'Training Schedules': 'Leenjishate fijo'
+'My request': "Ane xa'mo"
+'SNTC -EPHI management': 'SNTC -EPHI Amadooshshe'
+Plan: __Plan
+'Need Assesment': '__Need Assesment'
+results: __results
+Plans: __Plans
+Assesment: __Assesment

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReviewStatus{% endblock %}
+
+{% block body %}
+    <h1>Create new ReviewStatus</h1>
+
+    {{ include('sero/review_status/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_review_status_index') }}">back to list</a>
+{% endblock %}

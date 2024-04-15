@@ -45,7 +45,7 @@ class Profile
     private ?string $signature = null;
 
     #[ORM\ManyToOne(inversedBy: 'profiles')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Directorate $dirctorate = null;
 
     #[ORM\Column(length: 255, nullable: true)]

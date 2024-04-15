@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReviewAssignment{% endblock %}
+
+{% block body %}
+    <h1>ReviewAssignment</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ review_assignment.id }}</td>
+            </tr>
+            <tr>
+                <th>Closed</th>
+                <td>{{ review_assignment.closed ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AllowToView</th>
+                <td>{{ review_assignment.allowToView ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_review_assignment_index') }}">back to list</a>
+
+    <a href="{{ path('app_s_e_r_o_review_assignment_edit', {'id': review_assignment.id}) }}">edit</a>
+
+    {{ include('sero/review_assignment/_delete_form.html.twig') }}
+{% endblock %}

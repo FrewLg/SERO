@@ -1,56 +1,56 @@
 {% extends 'loginbase.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Register
+{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
 
- {# <div class="login-signup"> #}
-							{# <div class="mb-20">
-								<h3>Sign Up</h3>
-								<div class="text-muted font-weight-bold">Enter your details to create your account</div>
-							</div> #}
+	{# <div class="login-signup"> #}
+	{# <div class="mb-20">
+											<h3>Sign Up</h3>
+											<div class="text-muted font-weight-bold">Enter your details to create your account</div>
+										</div> #}
 
-							
-						
-    {{ form_errors(registrationForm) }} 
-    {# <form class="form" name="registration_form"> #}
-     {{ form_start(registrationForm) }}
 
-								{# <div class="form-group mb-5">
-									<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Fullname" name="fullname" />
+	{{ form_errors(registrationForm) }}
+	{# <form class="form" name="registration_form"> #}
+	{{ form_start(registrationForm) }}
 
-								</div> #}
-								<div class="form-group mb-5">
-                             {{ form_row(registrationForm.email) }}
-								</div>
-							 
-								<div class="form-group mb-5">
-        {{ form_row(registrationForm.plainPassword, {         }) }}  
+	{# <div class="form-group mb-5">
+												<input class="form-control h-auto form-control-solid py-4 px-8" type="text" placeholder="Fullname" name="fullname" />
+			
+											</div> #}
+	<div class="form-group mb-5">
+		{{ form_row(registrationForm.email) }}
+	</div>
 
-								</div>
-								<div class="form-group mb-5 text-left">
-									{# <label class="checkbox m-0"> #}
-									{# <input type="checkbox" name="agree" /> #}
-         {{ form_row(registrationForm.agreeTerms) }}
-                                    
-                                    {# I Agree the #}
-									{# <a href="#" class="font-weight-bold"> I Agree the terms and conditions</a>. #}
-									<span></span>
-                                    {# </label> #}
-									<div class="form-text text-muted text-center"></div>
-								</div>
-                                	 
+	<div class="form-group mb-5">
+		{{ form_row(registrationForm.plainPassword, {         }) }}
 
-								<div class="form-group d-flex flex-wrap flex-center mt-10">
-									<button   class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2" type="submit">Sign Up</button>
-									{# <button   class="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-2">Cancel</button> #}
-								</div>
-						
+	</div>
+	<div class="form-group mb-5 text-left">{# <label class="checkbox m-0"> #}
+		{# <input type="checkbox" name="agree" /> #}{{ form_row(registrationForm.agreeTerms) }}
 
-     {{ form_end(registrationForm) }}
+		{# I Agree the #}
+		{# <a href="#" class="font-weight-bold"> I Agree the terms and conditions</a>. #}<span>
+		</span>
+		{# </label> #}<div class="form-text text-muted text-center"> </div>
+	</div>
 
-</div>
+	<div class="form-group d-flex flex-wrap flex-center mt-10">
+		<div class="g-recaptcha" data-sitekey="mypublicdata-sitekey-ofthe-google-panel"></div>
+
+	</div>
+
+	<div class="form-group d-flex flex-wrap flex-center mt-10">
+		<button class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2" type="submit">Sign Up</button>
+		{# <button   class="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-2">Cancel</button> #}
+	</div>
+
+
+	{{ form_end(registrationForm) }}
 {% endblock %}
+

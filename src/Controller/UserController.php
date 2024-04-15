@@ -48,39 +48,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/profile', name: 'my_profile', methods: ['GET','POST'])]
-    public function userprofile(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $this->denyAccessUnlessGranted("ROLE_USER");
-        $user = $this->getUser(); 
-       if($this->getUser()->getProfile()){
-    $user=$user->getProfile();
-       }
-       else{
-
-        $user = new Profile();
-    }
-
-        $form = $this->createForm(ProfileType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setUser($this->getUser());
-            $entityManager->persist($user);
-
-            $entityManager->flush();
-            $this->addFlash('success', "Profile picture  has been updated successfully!");
-
-            return $this->redirectToRoute('my_profile');
-        }
-        
-      return $this->render('user/profile.html.twig', [
-            'user' => $user,
-            'allform' => $form->createView(),
-            // 'form' => $profileform->createView(),
-        ]);
-    }
-
+   
     #[Route('/profiles', name: 'my_psrofile', methods: ['GET','POST'])]
     public function rofile(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -112,7 +80,7 @@ class UserController extends AbstractController
                 echo 'Image not uploaded';
                  $prifilepicture = '';
             } else {
-                 $fileName3 = 'PP-'.  md5(uniqid()) . '.' . $prifilepicture->guessExtension();
+                 $fileName3 = 'DP-'.  md5(uniqid()) . '.' . $prifilepicture->guessExtension();
                 $prifilepicture->move($this->getParameter('profile_pictures'), $fileName3);
                 $userInfo->setImage($fileName3);
                 $entityManager->persist($profilepictureform);

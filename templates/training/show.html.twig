@@ -4,50 +4,46 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Training on " {{ training.trainingRequest.trainingTopic }}"   topic</h1>
-	<tr>
-		<th>StartingDate</th>
-		<td>{{ training.startingDate ? training.startingDate|date('Y-m-d H:i:s') : '' }}</td>
-	</tr>
-	<tr>
-		<th>EndDate</th>
-		<td>{{ training.endDate ? training.endDate|date('Y-m-d H:i:s') : '' }}</td>
-	</tr>
-	<tr>
-		<th>Description</th>
-		<td>{{ training.description }}</td>
-	</tr>
+	<div class="card card-custom gutter-b">
+		<div class="card-header">
+			<div class="card-title">
+				<h3 class="card-label">Training Schedules</h3>
+			</div>
+		</div>
+		<div class="card-body">
+			<ul class="nav nav-pills" id="myTab1" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link" id="home-tab-1" data-toggle="tab" href="#home-1">
+						<span class="nav-icon">
+							<i class="flaticon2-chat-1"></i>
+						</span>
+						<span class="nav-text">Tabluated</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" id="profile-tab-1" data-toggle="tab" href="#profile-1" aria-controls="profile">
+						<span class="nav-icon">
+							<i class="flaticon2-layers-1"></i>
+						</span>
+						<span class="nav-text">Caledar</span>
+					</a>
+				</li>
 
-	
-	{{ training.venue.name }}
-	{{ training.trainingRequest.status }}
-	<ul>
-		{% for item in training.trainingRequest.Facility %}
-			<li>
-				{{item.name}}
-			</li>
-		{% endfor %}
-	</ul>
+				<li class="nav-item">
+					<a class="nav-link" id="contact-tab-1" data-toggle="tab" href="#contact-1" aria-controls="contact">
+						<span class="nav-icon">
+							<i class="flaticon2-rocket-1"></i>
+						</span>
+						<span class="nav-text">Contact</span>
+					</a>
+				</li>
+			</ul>
+			<div class="tab-content mt-5" id="myTabContent1">
+				<div class="tab-pane fade" id="home-1" role="tabpanel" aria-labelledby="home-tab-1">Tab content 1</div>
+				<div class="tab-pane fade active show" id="profile-1" role="tabpanel" aria-labelledby="profile-tab-1">Tab content 2</div>
+				<div class="tab-pane fade" id="contact-1" role="tabpanel" aria-labelledby="contact-tab-1">Tab content 3</div>
+			</div>
+		</div>
 
-	<ul>
-		{% for item in training.modality %}
-			<li>
-				{{item.name}}
-			</li>
-		{% endfor %}
-	</ul>
-	<ul>
-		{% for item in training.trainingRequest.Organizer %}
-			<li>
-				{{item.name}}
-			</li>
-		{% endfor %}
-	</ul>
-
-	<br>
-	<a href="{{ path('app_training_index') }}">back to list</a>
-
-	<a href="{{ path('app_training_edit', {'id': training.id}) }}">edit</a>
-
-	{{ include('training/_delete_form.html.twig') }}
+	</div>
 {% endblock %}

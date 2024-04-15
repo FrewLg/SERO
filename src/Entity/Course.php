@@ -16,8 +16,7 @@ class Course
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
-
-    #[ORM\ManyToOne(inversedBy: 'courses')]
+     #[ORM\ManyToOne(inversedBy: 'courses')]
     private ?TrainingTopic $topic = null;
 
     #[ORM\ManyToOne(inversedBy: 'preparedCourses')]

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReviewChecklist{% endblock %}
+
+{% block body %}
+    <h1>Create new ReviewChecklist</h1>
+
+    {{ include('sero/review_checklist/_form.html.twig') }}
+
+ {% endblock %}
+{% block javascripts  %}
+	<script>
+		$('.form-check-input').change(function () {
+var min = $(this).attr('data-min');
+var max = $(this).attr('data-max');
+$(this).closest('.parent').find('.score').attr({"max": max, "min": min});
+});
+	</script>
+{% endblock javascripts  %}

@@ -10,13 +10,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 #[Route('{_locale<%app.supported_locales%>}/training-topic')]
 class TrainingTopicController extends AbstractController
 {
-    #[Route('/', name: 'app_training_topic_index', methods: ['GET'])]
+    #[Route('/', name: 'app_training_topic_index', methods: ['GET','POST'])]
     public function index(TrainingTopicRepository $trainingTopicRepository): Response
     {
+
+        // $form = $this->createFormBuilder()
+
+        // // ->add('metier', EntityType::class, array('class' => 'AdminBundle:Metier', 'choice_label' => 'name','required' => false, 'expanded' => true,  'placeholder' => 'Tous', 'multiple' => true,)
+       
+        // // $form->handleRequest($request);
+
         return $this->render('training_topic/index.html.twig', [
             'training_topics' => $trainingTopicRepository->findAll(),
         ]);

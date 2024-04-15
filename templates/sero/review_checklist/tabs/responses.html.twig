@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Submission
+{% endblock %}
+{% block container_title %}Review Response 
+{% endblock %}
+{% block body %} 
+  <div class="card">
+  <div class="card-header">Review Response 
+  </div>
+  <div class="card-body"> 
+								{% if review_assignment.reviewerResponses|length >0   %}
+
+
+
+<form  >
+						<input hidden name="review-checklist" value="true"/>
+						<table class="table table-bordered table-hover">
+
+							<tbody>
+
+								{% for checklist_group in irb_review_checklist_group %}
+									<tr>
+										<th>{{toRoman(loop.index)}}.
+											{{checklist_group}}</th>
+
+										<th>Response</th>
+									</tr>
+									{% set parents = {} %}
+									{% for checklist in review_assignment.reviewerResponses|filter(  checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.checklistGroup ==  checklist_group) ) %}
+
+										{% if checklist.checklist.parent %}
+											{% set parents = parents|merge({("key" ~ checklist.checklist.parent.id):checklist.checklist.parent}) %}
+
+										{% else %}
+
+
+											<tr>
+												<td>
+													<p style="margin-left:10px">{{toAlpha(loop.index)}}.
+														{{checklist}}</p>
+												</td>
+												<td>{{ checklist.answer }}</td>
+											</tr>
+										{% endif %}
+
+									{% endfor %}
+									{% for checklist_parent in parents %}
+										<tr>
+											<th>
+												<b style="margin-left:10px">{{toRoman(loop.index)}}.
+													{{checklist_parent}}<b></th>
+
+													<th>Response</th>
+												</tr>
+												{% for checklist in review_assignment.reviewerResponses|filter(checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.parent ==  checklist_parent)) %}
+
+
+													<tr>
+														<td>
+															<p style="margin-left:20px">{{loop.index}}.
+																{{checklist}}</p>
+														</td>
+														<td>{{ checklist.answer }}</td>
+													</tr>
+
+												{% endfor %}
+											{% endfor %}
+
+
+										{% endfor %}
+									</tbody>
+								</table>
+
+								 
+						</tbody>
+					</form>
+										{% else %}
+                                      <p class="text-danger">  No review responses has been  given for this review assignment yet</p>
+										{% endif %}
+
+  </div>									 
+  </div>									 
+{% endblock %}

@@ -18,6 +18,7 @@ parameters:
     ldap_dc_value : '%env(resolve:LDAP_DC_VALUE)%'
 
     app_name  : 'EPHI-NTC'
+    google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     app.supported_locales: 'en|or|sd|am|fr|tg'
 services:
     # default configuration for services in *this* file

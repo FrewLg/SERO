@@ -14,13 +14,41 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('{_locale<%app.supported_locales%>}/profile')]
 class ProfileController extends AbstractController
 {
-    #[Route('/', name: 'app_profile_index', methods: ['GET'])]
-    public function index(ProfileRepository $profileRepository): Response
+  
+    #[Route('/', name: 'my_profile', methods: ['GET','POST'])]
+    public function userprofile(Request $request, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('profile/index.html.twig', [
-            'profiles' => $profileRepository->findAll(),
+        $this->denyAccessUnlessGranted("ROLE_USER");
+        $user = $this->getUser(); 
+       if($this->getUser()->getProfile()){
+    $user=$user->getProfile();
+       }
+       else{
+
+        $user = new Profile();
+    }
+
+        $form = $this->createForm(ProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setUser($this->getUser());
+            $entityManager->persist($user);
+
+            $entityManager->flush();
+            $this->addFlash('success', "Your personal information has been updated successfully!");
+
+            return $this->redirectToRoute('my_profile');
+        }
+        
+      return $this->render('user/profile.html.twig', [
+            'user' => $user,
+            'allform' => $form->createView(),
+            // 'form' => $profileform->createView(),
         ]);
     }
+
+
 
     #[Route('/new', name: 'app_profile_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

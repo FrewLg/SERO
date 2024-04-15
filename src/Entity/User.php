@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\SERO\ReviewAssignment;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -67,6 +68,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $locale = null;
 
+    /**
+     * @var Collection<int, ReviewAssignment>
+     */
+    #[ORM\OneToMany(targetEntity: ReviewAssignment::class, mappedBy: 'irbreviewer')]
+    private Collection $reviewAssignments;
+
   
     public function __construct()
     {
@@ -78,6 +85,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->permissions = new ArrayCollection();
         $this->regFunds = new ArrayCollection();
         $this->fundTransactions = new ArrayCollection();
+        $this->reviewAssignments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,7 +122,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = "ROLE_USER";
 
         return array_unique($roles);
     }
@@ -122,6 +130,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+        // $roles[] = "ROLE_USER";
 
         return $this;
     }
@@ -170,7 +179,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         
-   return $this->profile;
+   return  "".$this->profile;
     }
 
 
@@ -442,6 +451,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLocale(?string $locale): static
     {
         $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReviewAssignment>
+     */
+    public function getReviewAssignments(): Collection
+    {
+        return $this->reviewAssignments;
+    }
+
+    public function addReviewAssignment(ReviewAssignment $reviewAssignment): static
+    {
+        if (!$this->reviewAssignments->contains($reviewAssignment)) {
+            $this->reviewAssignments->add($reviewAssignment);
+            $reviewAssignment->setIrbreviewer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReviewAssignment(ReviewAssignment $reviewAssignment): static
+    {
+        if ($this->reviewAssignments->removeElement($reviewAssignment)) {
+            // set the owning side to null (unless already changed)
+            if ($reviewAssignment->getIrbreviewer() === $this) {
+                $reviewAssignment->setIrbreviewer(null);
+            }
+        }
 
         return $this;
     }

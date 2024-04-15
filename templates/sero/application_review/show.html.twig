@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ApplicationReview{% endblock %}
+
+{% block body %}
+    <h1>ApplicationReview</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ application_review.id }}</td>
+            </tr>
+            <tr>
+                <th>Checked</th>
+                <td>{{ application_review.checked ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_application_review_index') }}">back to list</a>
+
+    <a href="{{ path('app_s_e_r_o_application_review_edit', {'id': application_review.id}) }}">edit</a>
+
+    {{ include('sero/application_review/_delete_form.html.twig') }}
+{% endblock %}

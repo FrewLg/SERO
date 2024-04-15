@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReviewAssignment index{% endblock %}
+
+{% block body %}
+    <h1>ReviewAssignment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Closed</th>
+                <th>AllowToView</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for review_assignment in review_assignments %}
+            <tr>
+                <td>{{ review_assignment.id }}</td>
+                <td>{{ review_assignment.closed ? 'Yes' : 'No' }}</td>
+                <td>{{ review_assignment.allowToView ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_review_assignment_show', {'id': review_assignment.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_review_assignment_edit', {'id': review_assignment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_review_assignment_new') }}">Create new</a>
+{% endblock %}

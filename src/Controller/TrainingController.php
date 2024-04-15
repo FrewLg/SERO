@@ -34,20 +34,11 @@ class TrainingController extends AbstractController
     #[Route('/', name: 'app_training_index', methods: ['GET'])]
     public function index(TrainingRepository $trainingRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
-        // $entityManager = $this->getEntityManager();
-        // $now= new \DateTime();
-        // $query = $entityManager->createQuery(
-        //     'SELECT p
-        //     FROM App\Entity\Training p
-        //     WHERE p.startingDate > :today
-        //     ORDER BY p.today ASC'
-        // )->setParameter('today', $now);
-
-        // // returns an array of Product objects
-        // $dates= $query->getResult();
-        // dd($dates);
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        // if ($this->get('security.context')->isGranted('ROLE_SADMIN')) {
+        // }
+       
+        // $this->denyAccessUnlessGranted('ROLE_ADMINs', null, 'Unable to access this page :( you are not admin');
         return $this->render('training/index.html.twig', [
             'trainings' => $trainingRepository->findAll(),
         ]);
@@ -56,8 +47,10 @@ class TrainingController extends AbstractController
     #[Route('/{id}/r', name: 'details', methods: ['GET'])]
     public function details(TrainingRepository $trainingRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        if ($this->get('security.context')->isGranted('ROLE_SADMIN')) {
+            // Execute some php code here
+         }
         return $this->render('training/index.html.twig', [
             'trainings' => $trainingRepository->findAll(),
         ]);
@@ -71,7 +64,7 @@ class TrainingController extends AbstractController
     
     #[Route('/schedule', name: 'training_calendar', methods: ['GET'])]
     public function calendar(TrainingRepository $trainingRepository): Response
-    {
+    { 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         
         return $this->render('training/calendar.html.twig', [

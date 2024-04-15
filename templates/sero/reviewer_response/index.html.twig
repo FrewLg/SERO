@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReviewerResponse index{% endblock %}
+
+{% block body %}
+    <h1>ReviewerResponse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Answer</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reviewer_response in reviewer_responses %}
+            <tr>
+                <td>{{ reviewer_response.id }}</td>
+                <td>{{ reviewer_response.answer }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_reviewer_response_show', {'id': reviewer_response.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_reviewer_response_edit', {'id': reviewer_response.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_reviewer_response_new') }}">Create new</a>
+{% endblock %}

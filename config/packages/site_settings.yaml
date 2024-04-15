@@ -1,15 +1,16 @@
 twig:
-    globals: { 
-        app_name: 'SNTC -EPHI management  ', 
+    globals:  { 
+        app_name: 'SERO-EPHI', 
         app_description: 'SNTC -EPHI management', 
         organization: null, 
         app_url: ntc.ephi.gov.et, 
         site_logo: ephi.png, 
         copyright: 'SNTC -EPHI', 
         navbar_background: dark, 
-        acronym: 'SNTC', 
+        acronym: 'SERO', 
         corporate_color: '#54b4', 
         motto: 'Motto', 
         contact_us: 'SNTC -EPHI', 
         about: 'SNTC -EPHI',
-        privacy_statement: 'SNTC -EPHI' }
+        privacy_statement: 'SNTC -EPHI' 
+        }

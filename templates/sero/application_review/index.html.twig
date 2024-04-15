@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ApplicationReview index{% endblock %}
+
+{% block body %}
+    <h1>ApplicationReview index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Checked</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for application_review in application_reviews %}
+            <tr>
+                <td>{{ application_review.id }}</td>
+                <td>{{ application_review.checked ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_application_review_show', {'id': application_review.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_application_review_edit', {'id': application_review.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_application_review_new') }}">Create new</a>
+{% endblock %}
