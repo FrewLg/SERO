@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New BoardMember{% endblock %}
+
+{% block body %}
+    <h1>Create new BoardMember</h1>
+
+    {{ include('sero/board_member/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_board_member_index') }}">back to list</a>
+{% endblock %}

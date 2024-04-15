@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\ReviewAssignment;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -74,6 +75,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: ReviewAssignment::class, mappedBy: 'irbreviewer')]
     private Collection $reviewAssignments;
 
+    /**
+     * @var Collection<int, BoardMember>
+     */
+    #[ORM\OneToMany(targetEntity: BoardMember::class, mappedBy: 'assignedBy')]
+    private Collection $boardMembers;
+
   
     public function __construct()
     {
@@ -86,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->regFunds = new ArrayCollection();
         $this->fundTransactions = new ArrayCollection();
         $this->reviewAssignments = new ArrayCollection();
+        $this->boardMembers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,6 +123,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
+    public function addRole(string $role): self
+    {
+        $roles = $this->roles; 
+        $roles[] = $role; 
+
+       
+        $this->setRoles(array_unique($roles));
+        
+
+        return $this;
+    }
+    
     /**
      * @see UserInterface
      */
@@ -479,6 +499,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($reviewAssignment->getIrbreviewer() === $this) {
                 $reviewAssignment->setIrbreviewer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BoardMember>
+     */
+    public function getBoardMembers(): Collection
+    {
+        return $this->boardMembers;
+    }
+
+    public function addBoardMember(BoardMember $boardMember): static
+    {
+        if (!$this->boardMembers->contains($boardMember)) {
+            $this->boardMembers->add($boardMember);
+            $boardMember->setAssignedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBoardMember(BoardMember $boardMember): static
+    {
+        if ($this->boardMembers->removeElement($boardMember)) {
+            // set the owning side to null (unless already changed)
+            if ($boardMember->getAssignedBy() === $this) {
+                $boardMember->setAssignedBy(null);
             }
         }
 

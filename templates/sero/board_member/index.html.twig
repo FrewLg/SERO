@@ -1,0 +1,225 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Board Members
+{% endblock %}
+{% block maintitle %}Board Members
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="row align-items-center">
+						<div class="col">
+							<h4 class="card-title">
+								Board members
+							</h4>
+
+						</div>
+						<!--end col-->
+						<div
+							class="col-auto">{# <a href="{{ path(' ') }}" class='btn btn-primary btn-sm'>
+																																                Create   new
+																																                            </a> #}
+						</div>
+						<!--end col-->
+					</div>
+				</div>
+				<div class="card-body">
+
+					<div class="row">
+
+						<div class="col-12">
+
+
+							<div class="accordion  accordion-toggle-arrow" id="accordionExample4">
+								<div class="card">
+									<div class="card-header" id="headingOne4">
+										<div class="card-title" data-toggle="collapse" data-target="#collapseOne4">
+											<i class="flaticon2-layers-1"></i>
+											Register new Board Member
+										</div>
+									</div>
+									<div id="collapseOne4" class="collapse  " data-parent="#accordionExample4">
+										<div class="card-body">
+																						{{ include('sero/board_member/_form.html.twig') }}
+
+										</div>
+									</div>
+								</div>
+								 
+								 
+							</div>
+
+
+						 
+						</div>
+
+
+						<br>
+						<br>
+						<br>
+
+
+						<div
+							class="col-12">
+							{# <form action="" class="float form-horizontal flex-column form-inline ">
+															<h6 class=" d-inline">Board Members List(Total:-{{board_members|length}})
+															</h6>
+															<input type="search" name="search" value="{{app.request.query.get('search')}}" class=" d-inline form-control mb-3" placeholder="Search">
+							
+														</form> #}
+
+							<div class="row">
+								{% for board_member in board_members %}
+
+									<div class="col-lg-4">
+										<div class="card team-card">
+											<div class="card-body">
+												<div class="float-end">
+													<div class="dropdown d-inline-block">
+														<a class="dropdown-toggle arrow-none" id="dLabel1" data-bs-toggle="dropdown" href="apps#" role="button" aria-haspopup="false" aria-expanded="false">
+															<i class="las la-ellipsis-v font-24 text-muted"></i>
+														</a>
+														<div class="dropdown-menu dropdown-menu-end" aria-labelledby="dLabel1" style="">
+
+															<a
+																class="dropdown-item" href="apps#">
+																{# {% if  is_granted('ROLE_ADMIN') %} #}
+
+
+																{{ include('sero/board_member/_delete_form.html.twig') }}
+
+																{# {% endif %} #}
+															</a>
+
+
+														</div>
+													</div>
+												</div>
+												<div class="media align-items-center">
+
+													{% if board_member.user.profile and  board_member.user.profile.image %}
+
+
+														<img src="{{ asset('files/profile_pictures/'~ board_member.user.profile.image ) }}" alt="user" class="rounded-circle user-img">
+
+
+													{% else %}
+
+														<img src="{{ asset('/img/defaultuser.png') }}" alt="user" class="rounded-circle user-img">
+
+													{% endif %}
+
+													<div class="online-circle">
+														<i class="fa fa-circle text-success"></i>
+													</div>
+													<div class="media-body ms-3 align-self-center">
+														<h4
+															class="team-leader m-0">{# <a href='{{path('my_profile',{'id':board_member.user.id})}}'>
+																																
+																																																{{ board_member.user.profile }}
+																																															</a> #}
+
+														</h4>
+														<p class="text-muted font-12 mb-0">{{ board_member.role }}</p>
+													</div>
+												</div>
+												<h4 class="m-0 mt-4 font-12 font-weight-semibold">
+													College/Faculty:
+
+													{# {% if  board_member.college %}
+																																							{{ board_member.college }}
+																																							
+																																							{% else %}
+																																							Unknown
+																																							{% endif %} #}
+												</h4>
+												<h4 class="m-0   font-12 font-weight-semibold">
+													Department:
+													{# {% if  board_member.user.profile.dirctorate is not null %}
+														{{ board_member.user.profile.dirctorate }}
+
+													{% else %}
+														Unknown
+													{% endif %} #}
+
+												</h4>
+												{# {% if  board_member.user.profile.bio %}
+																								
+																																					<p class="text-muted font-12 mb-0">
+																																						{{ board_member.user.profile.bio }}</p>
+																								
+																																				{% else %}
+																																					<p class="text-muted font-12 mb-0">
+																																						Bio
+																																					</p>
+																								
+																																				{% endif %} #}
+
+
+												<hr class="hr-dashed my-3">
+												<div
+													class="media align-items-center">
+													{# <img src="assets/images/widgets/project2.jpg" alt="" class="rounded-circle thumb-sm"> #}
+													<div
+														class="media-body ms-3 align-self-center">
+
+														{# {% if  is_granted('ROLE_ADMIN') %} #}
+
+
+														<form action="" class="float form-horizontal flex-column form-inline " method="POST">
+															<input hidden name="change-role" value="true"/>
+															<input hidden name="board_member" value="{{board_member.id}}"/>
+															<select name="roles" class="form-control" onchange="if(confirm('Are you sure you want to save member role changes?')){this.form.submit()}">
+																<optgroup label="Role">
+																	<option value="Chair" {{board_member.role=='Chair'?"selected":""}}>Chair</option>
+																	<option value="Vice Chair" {{board_member.role=='Vice Chair'?"selected":""}}>Vice Chair</option>
+																	<option value="Secretary" {{board_member.role=='Secretary'?"selected":""}}>
+																		Secretary</option>
+
+																	<option value="Coordinator" {{board_member.role=='Coordinator'?"selected":""}}>Coordinator</option>
+																	<option value="Member" {{board_member.role=='Member'?"selected":""}}>Member</option>
+
+																</optgroup>
+
+															</select>
+														</form>
+														{# {% endif %} #}
+
+													</div>
+												</div>
+											</div>
+											<!--end card-body-->
+										</div>
+										<!--end card-->
+									</div>
+								{% else %}
+									No records found
+
+								{% endfor %}
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function () {
+$(".board_member_role").select2();
+
+})
+	</script>
+
+
+	<script type="text/javascript">
+
+		$('#board_member_role').select2();
+	</script>
+
+{% endblock %}
