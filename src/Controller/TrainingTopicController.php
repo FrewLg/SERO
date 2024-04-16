@@ -15,14 +15,29 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 class TrainingTopicController extends AbstractController
 {
     #[Route('/', name: 'app_training_topic_index', methods: ['GET','POST'])]
-    public function index(TrainingTopicRepository $trainingTopicRepository): Response
+    public function index(Request $request, TrainingTopicRepository $trainingTopicRepository,EntityManagerInterface $entityManager ): Response
     {
 
-        // $form = $this->createFormBuilder()
 
-        // // ->add('metier', EntityType::class, array('class' => 'AdminBundle:Metier', 'choice_label' => 'name','required' => false, 'expanded' => true,  'placeholder' => 'Tous', 'multiple' => true,)
-       
-        // // $form->handleRequest($request);
+        // dd($request->request->get('topics'));
+        if ($request->request->get('topics') ) {
+            // dd($request->request->get('checklist'));
+                        
+                        foreach ($request->get('check') as $key => $value) {
+                            if (!$value) {
+                                continue;
+                            } 
+
+                            $topics= $entityManager->getRepository(TrainingTopic::class)->findBy(['id'=>$key]);
+dd($topics);
+                            $topics->setUpdatedAt(new \DateTime());
+             
+                            $entityManager->persist($topics);
+                        }
+                        $entityManager->flush();
+                        $this->addFlash("success", "topics updated.");
+                        return $this->redirectToRoute('app_training_topic_index');
+                    }
 
         return $this->render('training_topic/index.html.twig', [
             'training_topics' => $trainingTopicRepository->findAll(),

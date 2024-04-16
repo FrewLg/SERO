@@ -3,6 +3,7 @@
 namespace App\Entity\SERO;
 
 use App\Repository\SERO\ReviewerResponseRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReviewerResponseRepository::class)]
@@ -22,6 +23,9 @@ class ReviewerResponse
 
     #[ORM\ManyToOne(inversedBy: 'reviewerResponses')]
     private ?ReviewAssignment $reviewAssignment = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $comment = null;
 
     public function getId(): ?int
     {
@@ -65,6 +69,18 @@ class ReviewerResponse
     public function setReviewAssignment(?ReviewAssignment $reviewAssignment): static
     {
         $this->reviewAssignment = $reviewAssignment;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): static
+    {
+        $this->comment = $comment;
 
         return $this;
     }

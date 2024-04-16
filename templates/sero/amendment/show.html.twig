@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Amendment{% endblock %}
+
+{% block body %}
+    <h1>Amendment</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ amendment.id }}</td>
+            </tr>
+            <tr>
+                <th>Purpose</th>
+                <td>{{ amendment.purpose }}</td>
+            </tr>
+            <tr>
+                <th>Changes</th>
+                <td>{{ amendment.changes }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_amendment_index') }}">back to list</a>
+
+    <a href="{{ path('app_s_e_r_o_amendment_edit', {'id': amendment.id}) }}">edit</a>
+
+    {{ include('sero/amendment/_delete_form.html.twig') }}
+{% endblock %}

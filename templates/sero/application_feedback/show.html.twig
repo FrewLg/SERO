@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ApplicationFeedback{% endblock %}
+
+{% block body %}
+    <h1>ApplicationFeedback</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ application_feedback.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ application_feedback.description }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ application_feedback.createdAt ? application_feedback.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>SendMail</th>
+                <td>{{ application_feedback.sendMail ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>AllowWrite</th>
+                <td>{{ application_feedback.allowWrite ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Attachment</th>
+                <td>{{ application_feedback.attachment }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_application_feedback_index') }}">back to list</a>
+
+    <a href="{{ path('app_s_e_r_o_application_feedback_edit', {'id': application_feedback.id}) }}">edit</a>
+
+    {{ include('sero/application_feedback/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Amendment index{% endblock %}
+
+{% block body %}
+    <h1>Amendment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Purpose</th>
+                <th>Changes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for amendment in amendments %}
+            <tr>
+                <td>{{ amendment.id }}</td>
+                <td>{{ amendment.purpose }}</td>
+                <td>{{ amendment.changes }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_amendment_show', {'id': amendment.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_amendment_edit', {'id': amendment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_amendment_new') }}">Create new</a>
+{% endblock %}

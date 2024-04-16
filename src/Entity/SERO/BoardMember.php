@@ -4,6 +4,8 @@ namespace App\Entity\SERO;
 
 use App\Entity\User;
 use App\Repository\SERO\BoardMemberRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -41,6 +43,17 @@ class BoardMember
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $role = null;
+
+    /**
+     * @var Collection<int, Meeting>
+     */
+    #[ORM\ManyToMany(targetEntity: Meeting::class, mappedBy: 'attendee')]
+    private Collection $meetings;
+
+    public function __construct()
+    {
+        $this->meetings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +116,33 @@ class BoardMember
     public function setRole(?string $role): static
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Meeting>
+     */
+    public function getMeetings(): Collection
+    {
+        return $this->meetings;
+    }
+
+    public function addMeeting(Meeting $meeting): static
+    {
+        if (!$this->meetings->contains($meeting)) {
+            $this->meetings->add($meeting);
+            $meeting->addAttendee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeeting(Meeting $meeting): static
+    {
+        if ($this->meetings->removeElement($meeting)) {
+            $meeting->removeAttendee($this);
+        }
 
         return $this;
     }

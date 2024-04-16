@@ -56,11 +56,28 @@ class Application
     #[ORM\OneToMany(targetEntity: IrbCertificate::class, mappedBy: 'irbApplication')]
     private Collection $irbCertificates;
 
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    private ?Meeting $meeting = null;
+
+    /**
+     * @var Collection<int, ApplicationFeedback>
+     */
+    #[ORM\OneToMany(targetEntity: ApplicationFeedback::class, mappedBy: 'application')]
+    private Collection $applicationFeedback;
+
+    /**
+     * @var Collection<int, Amendment>
+     */
+    #[ORM\OneToMany(targetEntity: Amendment::class, mappedBy: 'application')]
+    private Collection $amendments;
+
     public function __construct()
     {
         $this->applicationReviews = new ArrayCollection();
         $this->reviewAssignments = new ArrayCollection();
         $this->irbCertificates = new ArrayCollection();
+        $this->applicationFeedback = new ArrayCollection();
+        $this->amendments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -236,6 +253,78 @@ class Application
             // set the owning side to null (unless already changed)
             if ($irbCertificate->getIrbApplication() === $this) {
                 $irbCertificate->setIrbApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getMeeting(): ?Meeting
+    {
+        return $this->meeting;
+    }
+
+    public function setMeeting(?Meeting $meeting): static
+    {
+        $this->meeting = $meeting;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ApplicationFeedback>
+     */
+    public function getApplicationFeedback(): Collection
+    {
+        return $this->applicationFeedback;
+    }
+
+    public function addApplicationFeedback(ApplicationFeedback $applicationFeedback): static
+    {
+        if (!$this->applicationFeedback->contains($applicationFeedback)) {
+            $this->applicationFeedback->add($applicationFeedback);
+            $applicationFeedback->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplicationFeedback(ApplicationFeedback $applicationFeedback): static
+    {
+        if ($this->applicationFeedback->removeElement($applicationFeedback)) {
+            // set the owning side to null (unless already changed)
+            if ($applicationFeedback->getApplication() === $this) {
+                $applicationFeedback->setApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Amendment>
+     */
+    public function getAmendments(): Collection
+    {
+        return $this->amendments;
+    }
+
+    public function addAmendment(Amendment $amendment): static
+    {
+        if (!$this->amendments->contains($amendment)) {
+            $this->amendments->add($amendment);
+            $amendment->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmendment(Amendment $amendment): static
+    {
+        if ($this->amendments->removeElement($amendment)) {
+            // set the owning side to null (unless already changed)
+            if ($amendment->getApplication() === $this) {
+                $amendment->setApplication(null);
             }
         }
 

@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\SERO\ApplicationFeedback;
 use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\IrbCertificate;
+use App\Entity\SERO\Meeting;
 use App\Entity\SERO\ReviewAssignment;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -88,6 +90,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: IrbCertificate::class, mappedBy: 'approvedBy')]
     private Collection $irbCertificates;
 
+    /**
+     * @var Collection<int, Meeting>
+     */
+    #[ORM\OneToMany(targetEntity: Meeting::class, mappedBy: 'createdBy')]
+    private Collection $meetings;
+
+    /**
+     * @var Collection<int, ApplicationFeedback>
+     */
+    #[ORM\OneToMany(targetEntity: ApplicationFeedback::class, mappedBy: 'feedbackFrom')]
+    private Collection $applicationFeedback;
+
   
     public function __construct()
     {
@@ -102,6 +116,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->reviewAssignments = new ArrayCollection();
         $this->boardMembers = new ArrayCollection();
         $this->irbCertificates = new ArrayCollection();
+        $this->meetings = new ArrayCollection();
+        $this->applicationFeedback = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -567,6 +583,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($irbCertificate->getApprovedBy() === $this) {
                 $irbCertificate->setApprovedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Meeting>
+     */
+    public function getMeetings(): Collection
+    {
+        return $this->meetings;
+    }
+
+    public function addMeeting(Meeting $meeting): static
+    {
+        if (!$this->meetings->contains($meeting)) {
+            $this->meetings->add($meeting);
+            $meeting->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeeting(Meeting $meeting): static
+    {
+        if ($this->meetings->removeElement($meeting)) {
+            // set the owning side to null (unless already changed)
+            if ($meeting->getCreatedBy() === $this) {
+                $meeting->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ApplicationFeedback>
+     */
+    public function getApplicationFeedback(): Collection
+    {
+        return $this->applicationFeedback;
+    }
+
+    public function addApplicationFeedback(ApplicationFeedback $applicationFeedback): static
+    {
+        if (!$this->applicationFeedback->contains($applicationFeedback)) {
+            $this->applicationFeedback->add($applicationFeedback);
+            $applicationFeedback->setFeedbackFrom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplicationFeedback(ApplicationFeedback $applicationFeedback): static
+    {
+        if ($this->applicationFeedback->removeElement($applicationFeedback)) {
+            // set the owning side to null (unless already changed)
+            if ($applicationFeedback->getFeedbackFrom() === $this) {
+                $applicationFeedback->setFeedbackFrom(null);
             }
         }
 

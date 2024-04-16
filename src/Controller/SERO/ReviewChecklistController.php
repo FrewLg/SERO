@@ -31,30 +31,52 @@ class ReviewChecklistController extends AbstractController
     #[Route('/{id}/revise', name: 'review_application', methods: ['GET', 'POST'])]
     
     public function revise(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager ): Response {
-        ////Ultimate reviewers page
-// dd($request->request->get('review-checklist'));
-
+        
          if ($request->request->get('review-checklist') ) {
-// dd($request->request->get('checklist'));
             
-            foreach ($request->get('checklist') as $key => $value) {
+            
+            foreach ($request->get('checklist') as $key => $value  ) {
+
+                   
                 if (!$value) {
                     continue;
                 }
-
                 $reviewerResponse = new ReviewerResponse();
+
                 $reviewerResponse->setReviewAssignment($reviewAssignment);
+                     
                 $reviewerResponse->setAnswer($value);
                 $reviewerResponse->setChecklist($entityManager->getRepository(ReviewChecklist::class)->find($key));
+                $commentArray= $request->get('comment') ;
+
+                // $reviewerResponse->setComment($request->get('comment')[$key] );
+
+                 #####
+                 foreach ($commentArray as $newkey => $newvalue  ) {
+                        $reviewerResponse->setComment($newvalue );
+
+                 }
+
+                //     if($entityManager->getRepository(ReviewerResponse::class)->findBy(['checklist'=>$key , 'reviewAssignment'=>$reviewAssignment->getId()])
+                //     //  && $entityManager->getRepository(ReviewerResponse::class)->findBy(['checklist'=>$key , 'reviewAssignment'=>$reviewAssignment->getId(), 'comment'=>NULL ])
+
+                //     ){
+                //         continue;
+                //     }
+                //     else{
+                //         $commentval=$newvalue;
+                //         $reviewerResponse->setComment($commentval );
+                //     }
+                // }
+                 
 
                 $entityManager->persist($reviewerResponse);
-            }
-            // $reviewAssignment->setClosed(true);
-            // $reviewAssignment->getApplication()->setStatus($entityManager->getRepository(IRBStatus::class)->find(3));
-            // $reviewAssignment->setWaiver($request->request->get('waivers'));
-            // $reviewAssignment->setRiskLevel($request->request->get('risk_level'));
-            // $reviewAssignment->setRecommendation($request->request->get('recommendation'));
-            // $reviewAssignment->setReviewedAt(new \DateTime());
+
+             
+            // $entityManager->flush();
+
+              }
+             #####
             $entityManager->flush();
 
             $this->addFlash("success", "Review sent.");

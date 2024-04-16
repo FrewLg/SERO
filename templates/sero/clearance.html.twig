@@ -7,13 +7,126 @@
 {% endblock %}
 
 {% block body %}
-	{# % include 'page_includes/header_report.html.twig'% #}
-
-	<meta property="og:url" content="http://127.0.0.1:8000/call-for-proposals/45c6511210cb942387708990398a8bf9/details"/>
-	<meta property="og:type" content="JU"/>
-	<meta property="og:title" content="RMS Announcemen ts"/>
-	<meta property="og:description" content="Your description"/>
-	<meta property="og:image" content="http://127.0.0.1:8000/call-for-proposals/45c6511210cb942387708990398a8bf9/details"/>
+	
+	<div class="card card-custom overflow-hidden">
+									<div class="card-body p-0">
+										<!-- begin: IRB-Clearance certificate-->
+										<!-- begin: IRB-Clearance certificate header-->
+										<div class="row justify-content-center py-8 px-8 py-md-27 px-md-0">
+											<div class="col-md-9">
+												<div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row">
+													<h1 class="display-5 font-weight-boldest mb-10"> 
+				<img width="50" alt="Logo" src="{{ asset('files/site_setting/'~site_logo ) }}"/>
+													{{app_name}} </h1><br>
+													<h3 class="display-6   ">IRB-Clearance</h3>
+													<div class="d-flex flex-column align-items-md-end px-0">
+														<!--begin::Logo-->
+														<a href="#" class="mb-5">
+															<img src="assets/media/logos/logo-dark.png" alt="">
+														</a>
+														<!--end::Logo-->
+														<span class="d-flex flex-column align-items-md-end opacity-70">
+															<span>Cecilia Chapman, 711-2880 Nulla St, Mankato</span>
+															<span>Mississippi 96522</span>
+														</span>
+													</div>
+												</div>
+												<div class="border-bottom w-100"></div>
+												<div class="d-flex justify-content-between pt-6">
+													<div class="d-flex flex-column flex-root">
+														<span class="font-weight-bolder mb-2">DATA</span>
+														<span class="opacity-70">Dec 12, 2017</span>
+													</div>
+													<div class="d-flex flex-column flex-root">
+														<span class="font-weight-bolder mb-2">IRB-Clearance certificate NO.</span>
+														<span class="opacity-70">GS 000014</span>
+													</div>
+													<div class="d-flex flex-column flex-root">
+														<span class="font-weight-bolder mb-2">IRB-Clearance certificate TO.</span>
+														<span class="opacity-70">Iris Watson, P.O. Box 283 8562 Fusce RD.
+														<br>Fredrick Nebraska 20620</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- end: IRB-Clearance certificate header-->
+										<!-- begin: IRB-Clearance certificate body-->
+										<div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
+											<div class="col-md-9">
+												<div class="table-responsive">
+													<table class="table">
+														<thead>
+															<tr>
+																<th class="pl-0 font-weight-bold text-muted text-uppercase">Description</th>
+																<th class="text-right font-weight-bold text-muted text-uppercase">Hours</th>
+																<th class="text-right font-weight-bold text-muted text-uppercase">Rate</th>
+																<th class="text-right pr-0 font-weight-bold text-muted text-uppercase">Amount</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr class="font-weight-boldest">
+																<td class="pl-0 pt-7">Creative Design</td>
+																<td class="text-right pt-7">80</td>
+																<td class="text-right pt-7">$40.00</td>
+																<td class="text-danger pr-0 pt-7 text-right">$3200.00</td>
+															</tr>
+															<tr class="font-weight-boldest border-bottom-0">
+																<td class="border-top-0 pl-0 py-4">Front-End Development</td>
+																<td class="border-top-0 text-right py-4">120</td>
+																<td class="border-top-0 text-right py-4">$40.00</td>
+																<td class="text-danger border-top-0 pr-0 py-4 text-right">$4800.00</td>
+															</tr>
+															<tr class="font-weight-boldest border-bottom-0">
+																<td class="border-top-0 pl-0 py-4">Back-End Development</td>
+																<td class="border-top-0 text-right py-4">210</td>
+																<td class="border-top-0 text-right py-4">$60.00</td>
+																<td class="text-danger border-top-0 pr-0 py-4 text-right">$12600.00</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<!-- end: IRB-Clearance certificate body-->
+										<!-- begin: IRB-Clearance certificate footer-->
+										<div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0">
+											<div class="col-md-9">
+												<div class="table-responsive">
+													<table class="table">
+														<thead>
+															<tr>
+																<th class="font-weight-bold text-muted text-uppercase">BANK</th>
+																<th class="font-weight-bold text-muted text-uppercase">ACC.NO.</th>
+																<th class="font-weight-bold text-muted text-uppercase">DUE DATE</th>
+																<th class="font-weight-bold text-muted text-uppercase">TOTAL AMOUNT</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr class="font-weight-bolder">
+																<td>BARCLAYS UK</td>
+																<td>12345678909</td>
+																<td>Jan 07, 2018</td>
+																<td class="text-danger font-size-h3 font-weight-boldest">20,600.00</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<!-- end: IRB-Clearance certificate footer-->
+										<!-- begin: IRB-Clearance certificate action-->
+										<div class="row justify-content-center py-8 px-8 py-md-10 px-md-0">
+											<div class="col-md-9">
+												<div class="d-flex justify-content-between">
+													<button type="button" class="btn btn-light-primary font-weight-bold" onclick="window.print();">Download IRB-Clearance certificate</button>
+													<button type="button" class="btn btn-primary font-weight-bold" onclick="window.print();">Print IRB-Clearance certificate</button>
+												</div>
+											</div>
+										</div>
+										<!-- end: IRB-Clearance certificate action-->
+										<!-- end: IRB-Clearance certificate-->
+									</div>
+								</div>
 
 	{% if  not irb is defined %}
 		<div class="container aos-init aos-animate" data-aos="fade-up">
@@ -60,6 +173,7 @@
 					{{ barcode({code:  irb.certificateCode , type: 'datamatrix', format: 'png', width: 10, height: 10, color: [127, 127, 127]}) }}
 					"/>
 				<br>
+				<span   style="background-image: url({{ barcode({code:  irb.certificateCode , type: 'datamatrix', format: 'png', width: 10, height: 10, color: [127, 127, 127]}) }});"></span>
 				<br>
 				<p>
 					The IRB of  Institute of Health   has reviewed research project
@@ -74,14 +188,14 @@
 				</p>
 
 				<br>
-				{# Hence, we are pleased to inform you that your research protocol is ethically cleared under the following strict conditions:
-																																	<ol>
-																																		<li>Any significant deviation from the methodological details indicated in the approved protocol must be communicated to the IRB before it has been implemented.</li>
-																																		<li>Approval shall be only for a period of twelve months. The principal investigator is required to submit an application for the renewal of the ethical approval.</li>
-																																		<li>The Committee must be notified, in writing, of any alteration to the project including unforeseen events/circumstances that might affect the acceptability of the approved protocol.</li>
-																																		<li>The Principal researcher is required to immediately notify the committee in the event of any adverse effects on participants or of any unforeseen events that might affect continued ethical acceptability or amendment to the original consent form.</li>
-																																		<li>The inability of the Principal Researcher to continue in that role, or any other change in research personnel involved in the project; should be communicated.</li>
-																																	</ol> #}
+				Hence, we are pleased to inform you that your research protocol is ethically cleared under the following strict conditions:
+				<ol>
+					<li>Any significant deviation from the methodological details indicated in the approved protocol must be communicated to the IRB before it has been implemented.</li>
+					<li>Approval shall be only for a period of twelve months. The principal investigator is required to submit an application for the renewal of the ethical approval.</li>
+					<li>The Committee must be notified, in writing, of any alteration to the project including unforeseen events/circumstances that might affect the acceptability of the approved protocol.</li>
+					<li>The Principal researcher is required to immediately notify the committee in the event of any adverse effects on participants or of any unforeseen events that might affect continued ethical acceptability or amendment to the original consent form.</li>
+					<li>The inability of the Principal Researcher to continue in that role, or any other change in research personnel involved in the project; should be communicated.</li>
+				</ol>
 				<div class="row content">
 					<div class="col-lg-6">
 
@@ -125,7 +239,12 @@
 
 				</div>
 
+<span class="separator"></span>
+										<li class="navi-separator mb-3 opacity-70"></li>
+
+		<b>Verify here:</b> <a href="http://127.0.0.1:8008/verify-here/dd">{{app_url}}/verify-here/{{irb.certificateCode}}</a>
+		
 			{% endif %}
-		</div>
+			</div>
 	</div>
 {% endblock %}

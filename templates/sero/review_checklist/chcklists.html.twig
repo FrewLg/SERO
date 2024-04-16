@@ -44,6 +44,8 @@
 									<th>YES</th>
 									<th>NO</th>
 									<th>NA</th>
+											<th>Comment</th>
+
 								</tr>
 								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and not checklist.parent)) %}  
 
@@ -56,6 +58,7 @@
 											<th>YES</th>
 											<th>NO</th>
 											<th>NA</th>
+											<th>Comment</th>
 										</tr>
 										{% for child in checklist.reviewChecklists %}
 											<tr>
@@ -65,7 +68,12 @@
 												<td><input type="radio" required name="checklist[{{child.id}}]" value="yes"></td>
 												<td><input type="radio" required name="checklist[{{child.id}}]" value="no"></td>
 												<td><input type="radio" required name="checklist[{{child.id}}]" value="na"></td>
-											</tr>
+											<td> 
+											{# <textarea name="comment[{{checklist.id}}]"  class=" form-control"></textarea> #}
+                                        <input type="text" required name="comment[{{checklist.id}}]"  >
+                                        
+                                        </td>
+                                            </tr>
 										{% endfor %}
 									{% else %}
 
@@ -76,7 +84,13 @@
 											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="yes"></td>
 											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="no"></td>
 											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="na"></td>
-										</tr>
+										<td> 
+                                        <input type="text" required name="comment[{{checklist.id}}]"  >
+											{# <textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea> #}
+                                        
+                                        </td>
+										
+                                        </tr>
 									{% endif %}
 
 								{% endfor %}

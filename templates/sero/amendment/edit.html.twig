@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Amendment{% endblock %}
+
+{% block body %}
+    <h1>Edit Amendment</h1>
+
+    {{ include('sero/amendment/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_s_e_r_o_amendment_index') }}">back to list</a>
+
+    {{ include('sero/amendment/_delete_form.html.twig') }}
+{% endblock %}
