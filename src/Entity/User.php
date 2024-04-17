@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\SERO\Application;
 use App\Entity\SERO\ApplicationFeedback;
 use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\IrbCertificate;
@@ -102,6 +103,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: ApplicationFeedback::class, mappedBy: 'feedbackFrom')]
     private Collection $applicationFeedback;
 
+    /**
+     * @var Collection<int, Application>
+     */
+    #[ORM\OneToMany(targetEntity: Application::class, mappedBy: 'submittedBy', orphanRemoval: true)]
+    private Collection $applications;
+
   
     public function __construct()
     {
@@ -118,6 +125,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->irbCertificates = new ArrayCollection();
         $this->meetings = new ArrayCollection();
         $this->applicationFeedback = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -643,6 +651,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($applicationFeedback->getFeedbackFrom() === $this) {
                 $applicationFeedback->setFeedbackFrom(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): static
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setSubmittedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): static
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getSubmittedBy() === $this) {
+                $application->setSubmittedBy(null);
             }
         }
 

@@ -41,6 +41,9 @@ class ReviewAssignment
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dueDate = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $status = null;
+
     public function __construct()
     {
         $this->reviewerResponses = new ArrayCollection();
@@ -149,6 +152,18 @@ class ReviewAssignment
     public function setDueDate(?\DateTimeInterface $dueDate): static
     {
         $this->dueDate = $dueDate;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?int $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -32,6 +32,7 @@
 			<div>
 				<form method="POST" onSubmit="return confirm('Save changes')">
                 <input hidden name="review-checklist" value="true"/>
+                <input hidden name="review-comments" value="true"/>
 					<table class="table table-bordered table-hover">
 
 						<tbody>
@@ -97,9 +98,9 @@
 								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2) %}
 
 									<tr>
-										<td colspan="4">{{checklist}}
+										{# <td colspan="4">{{checklist}}
 											<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
-										</td>
+										</td> #}
 
 
 									</tr>

@@ -51,7 +51,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">{% trans %}My applications{% endtrans %}</span>
+								<span class="menu-text">{% trans %}All applications{% endtrans %}</span>
 							</a>
 
 						</li>
@@ -120,11 +120,11 @@
 					<ul class="menu-subnav">
 						 
 						<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-							<a href="javascript:;" class="menu-link menu-toggle">
+							<a href="{{ path('board_member_index')}}" class="menu-link menu-toggle">
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">{% trans %}Meetings{% endtrans %}</span>
+								<span class="menu-text">{% trans %}Board members{% endtrans %}</span>
 								{# <i class="menu-arrow"></i> #}
 							</a>
 

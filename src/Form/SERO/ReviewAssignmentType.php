@@ -17,10 +17,10 @@ class ReviewAssignmentType extends AbstractType
         $builder
             ->add('closed')
             ->add('allowToView')
-            ->add('application', EntityType::class, [
-                'class' => Application::class,
-                'choice_label' => 'id',
-            ])
+            // ->add('application', EntityType::class, [
+            //     'class' => Application::class,
+            //     'choice_label' => 'id',
+            // ])
             ->add('irbreviewer', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',

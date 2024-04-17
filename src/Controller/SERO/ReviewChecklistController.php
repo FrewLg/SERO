@@ -32,51 +32,41 @@ class ReviewChecklistController extends AbstractController
     
     public function revise(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager ): Response {
         
-         if ($request->request->get('review-checklist') ) {
-            
-            
-            foreach ($request->get('checklist') as $key => $value  ) {
+         if ($request->request->get('review-checklist') && $request->request->get('review-comments')) {
+            $commentArray= $request->get('comment') ;
+            $checks= $request->get('checklist');
+                
 
-                   
-                if (!$value) {
-                    continue;
-                }
-                $reviewerResponse = new ReviewerResponse();
+            foreach ($checks as $key=>$value) {
+                $theChecklists[]=   $value; 
+                $theKeys[]=   $key; 
+                }   
+               
+                foreach ($commentArray as $key2=>$value2 ) {
+                    $comments[]=   $value2 ; 
+                    }   
+                         
+                // dd( $comments);
+                ////////////
+                          $length = count($checks);
+                          for ($i = 0; $i < $length; $i++) {
+                              /////////////// 
+                               $theComment = $comments[$i];
+                              $theEmail = $theChecklists[$i];
+                              $theKey = $theKeys[$i];
+                              $reviewerResponse = new ReviewerResponse();
 
                 $reviewerResponse->setReviewAssignment($reviewAssignment);
                      
-                $reviewerResponse->setAnswer($value);
-                $reviewerResponse->setChecklist($entityManager->getRepository(ReviewChecklist::class)->find($key));
-                $commentArray= $request->get('comment') ;
-
-                // $reviewerResponse->setComment($request->get('comment')[$key] );
-
-                 #####
-                 foreach ($commentArray as $newkey => $newvalue  ) {
-                        $reviewerResponse->setComment($newvalue );
-
-                 }
-
-                //     if($entityManager->getRepository(ReviewerResponse::class)->findBy(['checklist'=>$key , 'reviewAssignment'=>$reviewAssignment->getId()])
-                //     //  && $entityManager->getRepository(ReviewerResponse::class)->findBy(['checklist'=>$key , 'reviewAssignment'=>$reviewAssignment->getId(), 'comment'=>NULL ])
-
-                //     ){
-                //         continue;
-                //     }
-                //     else{
-                //         $commentval=$newvalue;
-                //         $reviewerResponse->setComment($commentval );
-                //     }
-                // }
+                $reviewerResponse->setAnswer($theEmail);
+                $reviewerResponse->setChecklist($entityManager->getRepository(ReviewChecklist::class)->find($theKey));
                  
+                $reviewerResponse->setComment($theComment );
+                 $entityManager->persist($reviewerResponse);
 
-                $entityManager->persist($reviewerResponse);
-
-             
-            // $entityManager->flush();
-
-              }
-             #####
+                          }
+               
+                
             $entityManager->flush();
 
             $this->addFlash("success", "Review sent.");

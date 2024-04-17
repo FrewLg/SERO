@@ -3,6 +3,7 @@
 namespace App\Entity\SERO;
 
 use App\Entity\SERO\ApplicationReview;
+use App\Entity\User;
 use App\Repository\ApplicationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -70,6 +71,10 @@ class Application
      */
     #[ORM\OneToMany(targetEntity: Amendment::class, mappedBy: 'application')]
     private Collection $amendments;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $submittedBy = null;
 
     public function __construct()
     {
@@ -327,6 +332,18 @@ class Application
                 $amendment->setApplication(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubmittedBy(): ?User
+    {
+        return $this->submittedBy;
+    }
+
+    public function setSubmittedBy(?User $submittedBy): static
+    {
+        $this->submittedBy = $submittedBy;
 
         return $this;
     }

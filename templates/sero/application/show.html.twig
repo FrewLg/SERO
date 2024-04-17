@@ -39,7 +39,7 @@
 										</a>
 
 										{% if   is_granted("ROLE_CHAIR") or  is_granted("ROLE_VICE_CHAIR") %}
-											{# <a href="{{ path('irb_review_assignment_new', {'id': application.id}) }}" class='font-16 m-0   btn btn-sm btn-soft-primary btn-xs mb-1 align-right'> #}
+											<a href="{{ path('assign_reviewer', {'id': application.id}) }}" class='font-16 m-0   btn btn-sm btn-soft-primary btn-xs mb-1 align-right'>
 											{% trans %}Add  Reviewer{% endtrans %}</a>
 									{% endif %}
 
