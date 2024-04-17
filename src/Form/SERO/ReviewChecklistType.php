@@ -22,7 +22,7 @@ class ReviewChecklistType extends AbstractType
             ])
             
             ->add('checklistGroup' )
-            ->add('parent' )
+            // ->add('parent' )
 
         ;
     }

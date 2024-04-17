@@ -70,8 +70,8 @@
 												<td><input type="radio" required name="checklist[{{child.id}}]" value="no"></td>
 												<td><input type="radio" required name="checklist[{{child.id}}]" value="na"></td>
 											<td> 
-											{# <textarea name="comment[{{checklist.id}}]"  class=" form-control"></textarea> #}
-                                        <input type="text" required name="comment[{{checklist.id}}]"  >
+											<textarea name="comment[{{checklist.id}}]"  class=" form-control"></textarea>
+                                        {# <input type="text" required name="comment[{{checklist.id}}]"  > #}
                                         
                                         </td>
                                             </tr>
@@ -86,8 +86,8 @@
 											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="no"></td>
 											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="na"></td>
 										<td> 
-                                        <input type="text" required name="comment[{{checklist.id}}]"  >
-											{# <textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea> #}
+                                        {# <input type="text" required name="comment[{{checklist.id}}]"  > #}
+											<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
                                         
                                         </td>
 										
@@ -98,9 +98,11 @@
 								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2) %}
 
 									<tr>
-										{# <td colspan="4">{{checklist}}
+										<td colspan="4">{{checklist}}
 											<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
-										</td> #}
+                                        <input type="hidden"   name="comment[{{checklist.id}}]"  >
+
+										</td>
 
 
 									</tr>

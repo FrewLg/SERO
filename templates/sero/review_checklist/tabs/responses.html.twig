@@ -2,84 +2,77 @@
 
 {% block title %}Submission
 {% endblock %}
-{% block container_title %}Review Response 
+{% block container_title %}Review Response
 {% endblock %}
-{% block body %} 
-  <div class="card">
-  <div class="card-header">Review Response 
-  </div>
-  <div class="card-body"> 
-								{% if review_assignment.reviewerResponses|length >0   %}
+{% block body %}
+	<div class="card card-custom gutter-b">
+		<div class="card-header flex-wrap border-0 pt-3 pb-0">
 
+			<div class="card-title">
+				<h3 class="card-label">Review Response
+					<span class="d-block text-muted pt-2 font-size-sm">{{ review_assignment.application.title}}</span>
+				</h3>
+			</div>
+		</div>
+		<div class="card-body">
+			{% if review_assignment.reviewerResponses|length >0   %}
+				<table class="table table-bordered ">
 
+					<tbody>
 
-<form  >
-						<input hidden name="review-checklist" value="true"/>
-						<table class="table table-bordered table-hover">
+						{% for checklist_group in irb_review_checklist_group %}
+							<tr>
+								<th>{{toRoman(loop.index)}}.
+									{{checklist_group}}</th>
+								<th>Response</th>
+								<th>Comment</th>
+							</tr>
+							{% set parents = {} %}
+							{% for checklist in review_assignment.reviewerResponses|filter(  checklist =>  (checklist.checklist.checklistGroup ==  checklist_group) ) %}
 
-							<tbody>
+								{% if checklist.checklist.parent %}
+									{% set parents = parents|merge({("key" ~ checklist.checklist.parent.id):checklist.checklist.parent}) %}
 
-								{% for checklist_group in irb_review_checklist_group %}
-									<tr>
-										<th>{{toRoman(loop.index)}}.
-											{{checklist_group}}</th>
-
-										<th>Response</th>
+								{% else %}
+								<tr>
+										<td>
+											<p style="margin-left:10px">{{toAlpha(loop.index)}}.
+												{{checklist}}</p>
+										</td>
+										<td>{{ checklist.answer }}</td>
+										<td>{{ checklist.comment }}</td>
 									</tr>
-									{% set parents = {} %}
-									{% for checklist in review_assignment.reviewerResponses|filter(  checklist =>  (checklist.checklist.checklistGroup ==  checklist_group) ) %}
-  
-										{% if checklist.checklist.parent %}
-											{% set parents = parents|merge({("key" ~ checklist.checklist.parent.id):checklist.checklist.parent}) %}
+								{% endif %}
 
-										{% else %}
-
-
+							{% endfor %}
+							{% for checklist_parent in parents %}
+								<tr>
+									<th>
+										<b style="margin-left:10px">{{toRoman(loop.index)}}.
+											{{checklist_parent}}</b></th>
+											<th>Response</th>
+										</tr>
+										{% for checklist in review_assignment.reviewerResponses|filter(checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.parent ==  checklist_parent)) %}
 											<tr>
 												<td>
-													<p style="margin-left:10px">{{toAlpha(loop.index)}}.
+													<p style="margin-left:20px">{{loop.index}}.
 														{{checklist}}</p>
 												</td>
 												<td>{{ checklist.answer }}</td>
-												<td>{{ checklist.comment }}</td>
 											</tr>
-										{% endif %}
-
-									{% endfor %}
-									{% for checklist_parent in parents %}
-										<tr>
-											<th>
-												<b style="margin-left:10px">{{toRoman(loop.index)}}.
-													{{checklist_parent}}<b></th>
-
-													<th>Response</th>
-												</tr>
-												{% for checklist in review_assignment.reviewerResponses|filter(checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.parent ==  checklist_parent)) %}
-
-
-													<tr>
-														<td>
-															<p style="margin-left:20px">{{loop.index}}.
-																{{checklist}}</p>
-														</td>
-														<td>{{ checklist.answer }}</td>
-													</tr>
-
-												{% endfor %}
-											{% endfor %}
-
 
 										{% endfor %}
-									</tbody>
-								</table>
+									{% endfor %}
 
-								 
-						</tbody>
-					</form>
-										{% else %}
-                                      <p class="text-danger">  No review responses has been  given for this review assignment yet</p>
-										{% endif %}
+								{% endfor %}
+							</tbody>
+						</table>
+					</tbody>
+				{% else %}
+					<p class="text-danger">
+						No review responses has been  given for this protocol yet!</p>
+				{% endif %}
 
-  </div>									 
-  </div>									 
-{% endblock %}
+			</div>
+		</div>
+	{% endblock %}

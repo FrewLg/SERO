@@ -15,8 +15,7 @@
 					</span>
 				</a>
 			</li>
-			<li class="menu-section">
-				<h4 class="menu-text"></h4>
+			<li class="menu-section"><h4 class="menu-text"></h4>
 				<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 			</li>
 
@@ -39,7 +38,7 @@
 					</span>
 					<i class="ki-duotone ki-calendar-8 fs-2"></i>
 
-					<span class="menu-text">{% trans %}Protocol applications{% endtrans %}</span>
+					<span class="menu-text">{% trans %}Protocol submissions{% endtrans %}</span>
 					<i class="menu-arrow"></i>
 				</a>
 				<div class="menu-submenu">
@@ -56,7 +55,7 @@
 
 						</li>
 						<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-							<a href="{{ path('app_course_index') }}" class="menu-link menu-toggle">
+							<a href="{{ path('my_assignment') }}" class="menu-link menu-toggle">
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
@@ -168,7 +167,7 @@
 						</svg>
 						<!--end::Svg app_training_request_index -->
 					</span>
-					<span class="menu-text">Email  Management</span>
+					<span class="menu-text">{% trans %}Email Management{% endtrans %}</span>
 					<i class="menu-arrow"></i>
 				</a>
 				<div class="menu-submenu">
@@ -180,20 +179,13 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Funds
+								<span class="menu-text">{% trans %}Messages{% endtrans %}
 								</span>
 							</a>
 
 						</li>
 
-						<li class="menu-item" aria-haspopup="true">
-							<a href="{{ path('app_fund_transaction_index') }}" class="menu-link">
-								<i class="menu-bullet menu-bullet-dot">
-									<span></span>
-								</i>
-								<span class="menu-text">All Transactions</span>
-							</a>
-						</li>
+						 
 						 
 					</ul>
 
@@ -212,7 +204,7 @@
 						</svg>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-text">User Management</span>
+					<span class="menu-text">{% trans %}User Management{% endtrans %}</span>
 					<i class="menu-arrow"></i>
 				</a>
 				<div class="menu-submenu">
@@ -224,7 +216,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Users</span>
+								<span class="menu-text">{% trans %}Users{% endtrans %}</span>
 							</a>
 
 						</li>
@@ -234,7 +226,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Permissions</span>
+								<span class="menu-text">{% trans %}Permissions{% endtrans %}</span>
 							</a>
 						</li>
 						<li class="menu-item" aria-haspopup="true">
@@ -242,7 +234,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Groups</span>
+								<span class="menu-text">{% trans %}Groups{% endtrans %}</span>
 							</a>
 						</li>
 
@@ -251,7 +243,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Directorates</span>
+								<span class="menu-text">{% trans %}Directorates{% endtrans %}</span>
 							</a>
 						</li>
 					</ul>
@@ -272,7 +264,7 @@
 						</svg>
 						<!--end::Svg app_training_request_index -->
 					</span>
-					<span class="menu-text">Settings</span>
+					<span class="menu-text">{% trans %}Settings{% endtrans %}</span>
 					<i class="menu-arrow"></i>
 				</a>
 				<div class="menu-submenu">
@@ -284,26 +276,26 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Workflow setting</span>
+								<span class="menu-text">{% trans %}Workflow setting{% endtrans %}</span>
 								<i class="menu-arrow"></i>
 							</a>
 							<div class="menu-submenu">
 								<i class="menu-arrow"></i>
 								<ul class="menu-subnav">
 									<li class="menu-item" aria-haspopup="true">
-										<a href="{{ path('app_modality_index') }}" class="menu-link">
+										<a href="{{ path('review_checklist_index') }}" class="menu-link">
 											<i class="menu-bullet menu-bullet-dot">
 												<span></span>
 											</i>
-											<span class="menu-text">Modlaity</span>
+											<span class="menu-text">{% trans %}Review checklist{% endtrans %}</span>
 										</a>
 									</li>
 									<li class="menu-item" aria-haspopup="true">
-										<a href="{{ path('app_facility_index') }}" class="menu-link">
+										<a href="{{ path('review_checklist_group_index') }}" class="menu-link">
 											<i class="menu-bullet menu-bullet-dot">
 												<span></span>
 											</i>
-											<span class="menu-text">Facilities</span>
+											<span class="menu-text">{% trans %}Review checklist group{% endtrans %}</span>
 										</a>
 									</li>
 									<li class="menu-item" aria-haspopup="true">
@@ -311,7 +303,7 @@
 											<i class="menu-bullet menu-bullet-dot">
 												<span></span>
 											</i>
-											<span class="menu-text">Training venues</span>
+											<span class="menu-text">{% trans %}Training venues{% endtrans %}</span>
 										</a>
 									</li>
 									<li class="menu-item" aria-haspopup="true">
@@ -322,39 +314,14 @@
 											<span class="menu-text">Partner organizations</span>
 										</a>
 									</li>
-									<li class="menu-item" aria-haspopup="true">
-										<a href="{{ path('app_training_topic_index') }}" class="menu-link">
-											<i class="menu-bullet menu-bullet-dot">
-												<span></span>
-											</i>
-											<span class="menu-text">Training Topics</span>
-										</a>
-									</li>
-								</li>
-								<li class="menu-item" aria-haspopup="true">
-									<a href="{{ path('app_training_request_status_index') }}" class="menu-link">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">Request Status
-										</span>
-									</a>
-								</li>
-								<li class="menu-item" aria-haspopup="true">
-									<a href="{{ path('app_currency_index') }}" class="menu-link">
-										<i class="menu-bullet menu-bullet-dot">
-											<span></span>
-										</i>
-										<span class="menu-text">Currency
-										</span>
-									</a>
-								</li>
+									 
+								 
 								<li class="menu-item" aria-haspopup="true">
 									<a href="{{ path('app_email_message_index') }}" class="menu-link">
 										<i class="menu-bullet menu-bullet-dot">
 											<span></span>
 										</i>
-										<span class="menu-text">Email Messages
+										<span class="menu-text">{% trans %}Email Messages{% endtrans %}
 										</span>
 									</a>
 								</li>
@@ -365,7 +332,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Site Setting</span>
+								<span class="menu-text">{% trans %}Site Setting{% endtrans %}</span>
 							</a>
 						</li>
 					</ul>
@@ -385,7 +352,7 @@
 						</svg>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-text">Statistics and archive</span>
+					<span class="menu-text">{% trans %}Statistics and archive{% endtrans %}</span>
 					<i class="menu-arrow"></i>
 				</a>
 				<div class="menu-submenu">
@@ -397,7 +364,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Feedbacks</span>
+								<span class="menu-text">{% trans %}Feedbacks{% endtrans %}</span>
 							</a>
 
 						</li>
@@ -408,7 +375,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Archives</span>
+								<span class="menu-text">{% trans %}Archives{% endtrans %}</span>
 							</a>
 
 						</li>
@@ -442,23 +409,19 @@
 						</svg>
 						<!--end::Svg Icon-->
 					</span>
-					<span class="menu-text">Reports</span>
+					<span class="menu-text">{% trans %}Reports{% endtrans %}</span>
 					<i class="menu-arrow"></i>
 				</a>
 				<div class="menu-submenu">
 					<i class="menu-arrow"></i>
 					<ul class="menu-subnav">
-						<li class="menu-item menu-item-parent" aria-haspopup="true">
-							<span class="menu-link">
-								<span class="menu-text">Dashboard</span>
-							</span>
-						</li>
+						 
 						<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 							<a href="{{ path('app_training_request_index') }}" class="menu-link menu-toggle">
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Dashboard</span>
+								<span class="menu-text">{% trans %}Dashboard{% endtrans %}</span>
 							</a>
 
 						</li>
@@ -467,7 +430,7 @@
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
 								</i>
-								<span class="menu-text">Trainings</span>
+								<span class="menu-text">{% trans %}Protocol Applications{% endtrans %}</span>
 							</a>
 
 						</li>

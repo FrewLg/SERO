@@ -8,6 +8,8 @@ use App\Entity\SERO\ApplicationFeedback;
 use App\Entity\SERO\ReviewChecklistGroup;
 use App\Form\SERO\ReviewChecklistGroupType;
 use App\Entity\SERO\ReviewAssignment;
+use App\Entity\SERO\ReviewerResponse;
+use App\Entity\SERO\ReviewChecklist;
 
 use App\Form\SERO\ApplicationFeedbackType;
 use App\Form\SERO\ApplicationType;
@@ -23,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('{_locale<%app.supported_locales%>}/application')]
+#[Route('{_locale<%app.supported_locales%>}/protocol')]
 class ApplicationController extends AbstractController
 {
     #[Route('/', name: 'application_index', methods: ['GET'])]
@@ -73,10 +75,74 @@ class ApplicationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_s_e_r_o_application_show', methods: ['GET'])]
-    public function show(Application $application, Request $request, EntityManagerInterface $entityManager, ApplicationFeedbackRepository $appferepo, MailerInterface $mailer): Response
+    #[Route('/{id}/history', name: 'app_history', methods: ['GET'])]
+    public function history(Application $application, Request $request, EntityManagerInterface $entityManager, ApplicationFeedbackRepository $appferepo, MailerInterface $mailer): Response
     {
 
+        return $this->render('sero/application/application-history.html.twig', [
+            'application' => $application,
+
+        ]);
+
+    }
+  
+
+    #[Route('/{id}/revise', name: 'make_a_review', methods: ['GET', 'POST'])]
+    public function revise(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
+    {
+
+        if ($request->request->get('review-checklist') && $request->request->get('review-comments')) {
+            $commentArray = $request->get('comment');
+            $checks = $request->get('checklist');
+            foreach ($checks as $key => $value) {
+                $theChecklists[] =   $value;
+                $theKeys[] =   $key;
+                if ($value == null) {
+                    continue;
+                }
+            }
+            foreach ($commentArray as $key2 => $value2) {
+                $comments[] =   $value2;
+            }
+            $length = count($checks);
+
+
+            for ($i = 0; $i < $length; $i++) {
+
+                $theComment = $comments[$i];
+
+                $theEmail = $theChecklists[$i];
+                $theKey = $theKeys[$i];
+                $reviewerResponse = new ReviewerResponse();
+
+                $reviewerResponse->setReviewAssignment($reviewAssignment);
+                $reviewerResponse->setReviewedBy($this->getUser());
+                $reviewerResponse->setAnswer($theEmail);
+                $reviewerResponse->setChecklist($entityManager->getRepository(ReviewChecklist::class)->find($theKey));
+
+                $reviewerResponse->setComment($theComment);
+                $entityManager->persist($reviewerResponse);
+            }
+
+
+            $entityManager->flush();
+
+            $this->addFlash("success", "Review results saved successfully!.");
+            return $this->redirectToRoute('review_result', ['id' => $reviewAssignment->getId()]);
+        }
+
+        $irb_review_checklist_group = $entityManager->getRepository(ReviewChecklistGroup::class)->findAll();
+
+        return $this->render('sero/review_checklist/chcklists.html.twig', [
+            'review_assignment' => $reviewAssignment,
+            'irb_review_checklist_group' => $irb_review_checklist_group,
+        ]);
+    }
+
+
+        #[Route('/{id}', name: 'app_s_e_r_o_application_show', methods: ['GET'])]
+        public function show(Application $application, Request $request, EntityManagerInterface $entityManager, ApplicationFeedbackRepository $appferepo, MailerInterface $mailer): Response
+        {
         if ($request->request->get('renewal')) {
             if (true) {
                 $renewal = new RenewalRequest();

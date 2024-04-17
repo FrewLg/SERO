@@ -16,7 +16,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Attribute\Route;
 use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('{_locale<%app.supported_locales%>}/review-assignment')]
+#[Route('{_locale<%app.supported_locales%>}/assignment')]
 class ReviewAssignmentController extends AbstractController
 {
     #[Route('/', name: 'app_s_e_r_o_review_assignment_index', methods: ['GET'])]
@@ -27,14 +27,15 @@ class ReviewAssignmentController extends AbstractController
         ]);
     }
 
-     
-    #[Route('/{id}/assign', name: 'assign_reviewer', methods: ['GET','POST'])]
 
-    public function assignreviewer(Request $request, EntityManagerInterface $entityManager,  Application $submission,   MailerInterface $mailer, ReviewAssignmentRepository $reviewAssignmentRepository): Response {
+    #[Route('/{id}/assign', name: 'assign_reviewer', methods: ['GET', 'POST'])]
+
+    public function assignreviewer(Request $request, EntityManagerInterface $entityManager,  Application $submission,   MailerInterface $mailer, ReviewAssignmentRepository $reviewAssignmentRepository): Response
+    {
 
         // $this->denyAccessUnlessGranted('assn_clg_cntr');
 
- 
+
         // if ($submission->getSubmittedBy() == $this->getUser()) {
         //     $this->addFlash('danger', 'Sorry! You can not assign by yourself a reviewer to the submission you made!');
         //     return $this->redirectToRoute('application_index');
@@ -44,7 +45,7 @@ class ReviewAssignmentController extends AbstractController
         $reviewAssignment->setStatus(1);
         $reviewAssignment->setApplication($submission);
 
-         
+
         // $messages = $entityManager->getRepository('App:EmailMessage')->findOneBy(['email_key' => 'REVIEW_INVITATION']);
         // $subject = $messages->getSubject();
         // $body = $messages->getBody();
@@ -139,17 +140,14 @@ class ReviewAssignmentController extends AbstractController
         ]);
     }
 
-    #[Route('/myassigned', name: 'irb_my_assigned', methods: ['GET','POST'])]
-   
-    public function myassigned(Request $request,ReviewAssignmentRepository $reviewAssignmentRepository, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response {
+    #[Route('/myassigned', name: 'my_assignment', methods: ['GET', 'POST'])]
 
-      
+    public function myassigned(Request $request, ReviewAssignmentRepository $reviewAssignmentRepository, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
+    {
+///Use ROLE_CHAIR instead
+
         $this->denyAccessUnlessGranted('ROLE_USER');
-
-        $me = $this->getUser();
         $this_is_me = $this->getUser();
-       
-
         $myassigned = $reviewAssignmentRepository->findBy(['irbreviewer' => $this_is_me, 'closed' => NULL], ["id" => "DESC"]);
         $all = $entityManager->getRepository(ReviewAssignment::class)->findBy(['irbreviewer' => $this_is_me, 'closed' => 1], ["id" => "DESC"]);
         // }
@@ -162,9 +160,9 @@ class ReviewAssignmentController extends AbstractController
             // Items per page
             10
         );
-  
+
         #######################
-       
+
         #################################################
 
         return $this->render('sero/review_assignment/myassigned.html.twig', [
@@ -233,12 +231,12 @@ class ReviewAssignmentController extends AbstractController
     }
 
 
-    
+
 
     #[Route('/{id}', name: 'app_s_e_r_o_review_assignment_delete', methods: ['POST'])]
     public function delete(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$reviewAssignment->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $reviewAssignment->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($reviewAssignment);
             $entityManager->flush();
         }

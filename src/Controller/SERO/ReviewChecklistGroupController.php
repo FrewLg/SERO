@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('{_locale<%app.supported_locales%>}/checklist-group')]
 class ReviewChecklistGroupController extends AbstractController
 {
-    #[Route('/', name: 'app_s_e_r_o_review_checklist_group_index', methods: ['GET'])]
+    #[Route('/', name: 'review_checklist_group_index', methods: ['GET'])]
     public function index(ReviewChecklistGroupRepository $reviewChecklistGroupRepository): Response
     {
         return $this->render('sero/review_checklist_group/index.html.twig', [

@@ -44,6 +44,12 @@ class ReviewAssignment
     #[ORM\Column(nullable: true)]
     private ?int $status = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $recommendation = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $reviewedAt = null;
+
     public function __construct()
     {
         $this->reviewerResponses = new ArrayCollection();
@@ -164,6 +170,30 @@ class ReviewAssignment
     public function setStatus(?int $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getRecommendation(): ?string
+    {
+        return $this->recommendation;
+    }
+
+    public function setRecommendation(?string $recommendation): static
+    {
+        $this->recommendation = $recommendation;
+
+        return $this;
+    }
+
+    public function getReviewedAt(): ?\DateTimeInterface
+    {
+        return $this->reviewedAt;
+    }
+
+    public function setReviewedAt(?\DateTimeInterface $reviewedAt): static
+    {
+        $this->reviewedAt = $reviewedAt;
 
         return $this;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity\SERO;
 
+use App\Entity\User;
 use App\Repository\SERO\ReviewerResponseRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,6 +27,12 @@ class ReviewerResponse
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $comment = null;
+
+    #[ORM\ManyToOne(inversedBy: 'reviewerResponses')]
+    private ?User $reviewedBy = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $reviewedAt = null;
 
     public function getId(): ?int
     {
@@ -81,6 +88,30 @@ class ReviewerResponse
     public function setComment(?string $comment): static
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getReviewedBy(): ?User
+    {
+        return $this->reviewedBy;
+    }
+
+    public function setReviewedBy(?User $reviewedBy): static
+    {
+        $this->reviewedBy = $reviewedBy;
+
+        return $this;
+    }
+
+    public function getReviewedAt(): ?\DateTimeInterface
+    {
+        return $this->reviewedAt;
+    }
+
+    public function setReviewedAt(?\DateTimeInterface $reviewedAt): static
+    {
+        $this->reviewedAt = $reviewedAt;
 
         return $this;
     }

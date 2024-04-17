@@ -8,6 +8,7 @@ use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\IrbCertificate;
 use App\Entity\SERO\Meeting;
 use App\Entity\SERO\ReviewAssignment;
+use App\Entity\SERO\ReviewerResponse;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -109,6 +110,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Application::class, mappedBy: 'submittedBy', orphanRemoval: true)]
     private Collection $applications;
 
+    /**
+     * @var Collection<int, ReviewerResponse>
+     */
+    #[ORM\OneToMany(targetEntity: ReviewerResponse::class, mappedBy: 'reviewedBy')]
+    private Collection $reviewerResponses;
+
   
     public function __construct()
     {
@@ -126,6 +133,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->meetings = new ArrayCollection();
         $this->applicationFeedback = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->reviewerResponses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -681,6 +689,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($application->getSubmittedBy() === $this) {
                 $application->setSubmittedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReviewerResponse>
+     */
+    public function getReviewerResponses(): Collection
+    {
+        return $this->reviewerResponses;
+    }
+
+    public function addReviewerResponse(ReviewerResponse $reviewerResponse): static
+    {
+        if (!$this->reviewerResponses->contains($reviewerResponse)) {
+            $this->reviewerResponses->add($reviewerResponse);
+            $reviewerResponse->setReviewedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReviewerResponse(ReviewerResponse $reviewerResponse): static
+    {
+        if ($this->reviewerResponses->removeElement($reviewerResponse)) {
+            // set the owning side to null (unless already changed)
+            if ($reviewerResponse->getReviewedBy() === $this) {
+                $reviewerResponse->setReviewedBy(null);
             }
         }
 

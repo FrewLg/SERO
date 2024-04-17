@@ -27,3 +27,57 @@ Plan: __Plan
 results: __results
 Plans: __Plans
 Assesment: __Assesment
+Application: __Application
+Title: __Title
+Reviewers: __Reviewers
+'Add  Reviewer': '__Add  Reviewer'
+'Submited by': '__Submited by'
+Role: __Role
+'Sumitted At': '__Sumitted At'
+Status: __Status
+'Application Type': '__Application Type'
+'Project Type': '__Project Type'
+'Poject Start Date': '__Poject Start Date'
+'Poject End Date': '__Poject End Date'
+Location: __Location
+Members: __Members
+'Research subject': '__Research subject'
+'Covid-19 mitigation': '__Covid-19 mitigation'
+Attachments: __Attachments
+Amendment: __Amendment
+Revisions: __Revisions
+'Research team': '__Research team'
+Amendments: __Amendments
+Purpose: __Purpose
+'Requested At': '__Requested At'
+Action: __Action
+'No record': '__No record'
+'Protocol applications': '__Protocol applications'
+'All applications': '__All applications'
+'My assigned': '__My assigned'
+'My application': '__My application'
+'Board Members': '__Board Members'
+'Board members': '__Board members'
+Minutes: __Minutes
+'Meeting Schedules': '__Meeting Schedules'
+'Protocol submissions': '__Protocol submissions'
+'Email Management': '__Email Management'
+Messages: __Messages
+'User Management': '__User Management'
+Users: __Users
+Permissions: __Permissions
+Groups: __Groups
+Directorates: __Directorates
+Settings: __Settings
+'Workflow setting': '__Workflow setting'
+'Review checklist': '__Review checklist'
+'Review checklist group': '__Review checklist group'
+'Training venues': '__Training venues'
+'Email Messages': '__Email Messages'
+'Site Setting': '__Site Setting'
+'Statistics and archive': '__Statistics and archive'
+Feedbacks: __Feedbacks
+Archives: __Archives
+Reports: __Reports
+Dashboard: __Dashboard
+'Protocol Applications': '__Protocol Applications'

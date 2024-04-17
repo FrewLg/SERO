@@ -94,4 +94,13 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('{_locale<%app.supported_locales%>}/developers', name: 'developers' , methods:['GET'])]
+    public function developers(   ): Response
+    {
+          
+           return $this->render('sero/developers.html.twig', [
+           
+        ]);
+    }
+
 }
