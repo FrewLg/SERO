@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Submission
+{% block title %}{% trans %}Make Revision{% endtrans %}
 {% endblock %}
-{% block container_title %}Submission review
+{% block container_title %}{% trans %}Make Revision{% endtrans %}
 {% endblock %}
 {% block body %}
 <div class="tab-pane p-3  active" id="review-checklist" role="tabpanel">
 	<div class="card">
 		<div class="card-header">
 
-			<h5>IRB application review checklist
+			<h5>{% trans %}Protocol assesment form {% endtrans %}
+ 
 			</h5>
 		</div>
 		<div class="card-body">
@@ -48,7 +49,7 @@
 											<th>Comment</th>
 
 								</tr>
-								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and not checklist.parent)) %}  
+								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and not checklist.reviewForm== review_assignment.reviewForm)) %}  
 
 									{% if checklist.reviewChecklists|length >0 %}
 										<tr>

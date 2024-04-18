@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
-{% block title %}Review Assignments
-{% endblock %}
-{% block container_title %}Review Assignments
-{% endblock %}
+{% block title %}
+
+	{% trans %}My Review Assignments{% endtrans %}
+{% endblock  %}
+
 {% block body %}
 
 	<div class="card card-custom gutter-b my-0">
 		<div class="card-header">
 			<div class="card-title">
-				<h3 class="card-label">Review Assignments</h3>
+				<h3 class="card-label">{% trans %}My Review Assignments{% endtrans %}
+				</h3>
 			</div>
 		</div>
 		<div class="card-body">
@@ -19,7 +21,9 @@
 							<span class="nav-icon">
 								<i class="fa fa-calendar"></i>
 							</span>
-							<span class="nav-text">All Active  Assignment
+							<span class="nav-text">
+								{% trans %}All Active{% endtrans %}
+
 								{% if myreviews|length>0%}
 
 									<span class="label label-sm label-primary mr-2">{{myreviews|length}}</span>
@@ -65,12 +69,12 @@
 										<tr>
 											<td>{{ loop.index }}</td>
 											<td>
-												 {{ myreview.application.title }}
-												 
+												{{ myreview.application.title }}
+
 											</td>
 											<td>
 												{{ myreview.irbreviewer }}
-												{{ myreview.status }} 
+												{{ myreview.status }}
 											</td>
 
 											<td>
@@ -89,7 +93,7 @@
 												<a href="{{ path('make_a_review', {'id': myreview.id}) }} " class='btn btn-light-success btn-sm'>
 													Review
 												</a>
-																						{# <a href="{{ path('make_a_review', {'id': application.id}) }}">make_a_review</a> #}
+												{# <a href="{{ path('make_a_review', {'id': application.id}) }}">make_a_review</a> #}
 
 											</td>
 										</tr>
@@ -121,8 +125,8 @@
 										<tr>
 											<td>{{ loop.index }}</td>
 											<td>
-												 	{{ myreview.application.title }}
-												 
+												{{ myreview.application.title }}
+
 											</td>
 											<td>
 												{{ myreview.irbreviewer }}

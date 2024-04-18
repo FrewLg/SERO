@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Application index
+{% block title %}Application  
 {% endblock %}
 
 {% block body %}
@@ -172,7 +172,15 @@
 						<thead>
 							<tr>
 
-								<th nowrap='nowrap'><input type="checkbox" name="topics" id="select_all"/>All</th>
+								<th nowrap='nowrap'>
+								{# <input type="checkbox" name="topics" id="select_all"/> #}
+								{# <label class="checkbox  checkbox-info flex-shrink-0 mr-3"> #}
+																					
+								<input type="checkbox" class="checkbox-info flex-shrink-0 mr-3" name="topics" id="select_all"/>
+																					{# <span></span>
+																				</label>  #}
+								</th>
+								
 								<th>Title</th>
 								<th>Status</th>
 								<th>Duration</th>
@@ -197,12 +205,12 @@
 									<td>{{ application.meeting|length }}</td>
 									<td>{{ application.createdAt ? application.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 									{# <td>{{ application.updatedAt ? application.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-									<td>
+									<td nowrap=nowrap >
 									
-										<a href="{{ path('app_history', {'id': application.id}) }}">app_history</a> 
-										<a href="{{ path('make_a_review', {'id': application.id}) }}">Assign</a>
-										<a href="{{ path('app_s_e_r_o_application_show', {'id': application.id}) }}">show</a>
-										<a href="{{ path('app_s_e_r_o_application_edit', {'id': application.id}) }}">edit</a>
+										<a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a> 
+										{# <a href="{{ path('make_a_review', {'id': application.id}) }}">Assign</a> #}
+										<a href="{{ path('app_s_e_r_o_application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
+										<a href="{{ path('app_s_e_r_o_application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
 									</td>
 								</tr>
 							{% else %}

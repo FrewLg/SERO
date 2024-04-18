@@ -88,12 +88,12 @@ class ApplicationController extends AbstractController
   
 
     #[Route('/{id}/revise', name: 'make_a_review', methods: ['GET', 'POST'])]
-    public function revise(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
+    public function makerevise(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
     {
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        if(!$reviewAssignment->getIrbreviewer() === $this->getUser() & $reviewAssignment->getReviewedAt()===null){
+        if(!$reviewAssignment->getIrbreviewer()->getId() === $this->getUser()->getId() & $reviewAssignment->getReviewedAt()===null){
             $this->addFlash("success", "Review results saved successfully!.");
 
         // return $this->redirectToRoute('review_result', ['id'=>$reviewAssignment->getId()], Response::HTTP_SEE_OTHER);
