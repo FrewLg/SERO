@@ -63,7 +63,7 @@ class ReviewAssignmentController extends AbstractController
             $duedate = $reviewAssignment->getDuedate();
             $reviewAssignment->setInvitationSentAt(new \DateTime());
             // dd($submission->getId());
-            $reviewAssignment->getApplication()->setStatus($entityManager->getRepository(IRBStatus::class)->find(2));
+            // $reviewAssignment->getApplication()->setStatus($entityManager->getRepository(IRBStatus::class)->find(2));
 
             $entityManager->persist($reviewAssignment);
             $entityManager->flush();
@@ -95,7 +95,7 @@ class ReviewAssignmentController extends AbstractController
             //     ]);
             // $mailer->send($email);
 
-            return $this->redirectToRoute('irb_review_assignment_new', array('id' => $submission->getId()));
+            return $this->redirectToRoute('assign_reviewer', array('id' => $submission->getId()));
         }
 
         $external_reviewAssignment = new ReviewAssignment();
@@ -134,6 +134,8 @@ class ReviewAssignmentController extends AbstractController
         ////////////////External reviewer
         return $this->render('sero/review_assignment/new.html.twig', [
             'irb_review_assignment' => $reviewAssignments,
+            'review_assignments' => $reviewAssignmentRepository->findBy(['irbreviewer'=>$this->getUser()]),
+
             // 'external_reviewer_form' => $external_reviewer_form->createView(),
             'form' => $form->createView(),
 
@@ -148,7 +150,7 @@ class ReviewAssignmentController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_USER');
         $this_is_me = $this->getUser();
-        $myassigned = $reviewAssignmentRepository->findBy(['irbreviewer' => $this_is_me, 'closed' => NULL], ["id" => "DESC"]);
+        $myassigned = $reviewAssignmentRepository->findBy(['irbreviewer' => $this_is_me, 'closed' => 0], ["id" => "DESC"]);
         $all = $entityManager->getRepository(ReviewAssignment::class)->findBy(['irbreviewer' => $this_is_me, 'closed' => 1], ["id" => "DESC"]);
         // }
         ////// if no throw exception

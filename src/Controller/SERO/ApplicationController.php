@@ -66,7 +66,7 @@ class ApplicationController extends AbstractController
             $entityManager->persist($application);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_application_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('application_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/application/new.html.twig', [
@@ -91,6 +91,14 @@ class ApplicationController extends AbstractController
     public function revise(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
     {
 
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        if(!$reviewAssignment->getIrbreviewer() === $this->getUser() & $reviewAssignment->getReviewedAt()===null){
+            $this->addFlash("success", "Review results saved successfully!.");
+
+        // return $this->redirectToRoute('review_result', ['id'=>$reviewAssignment->getId()], Response::HTTP_SEE_OTHER);
+
+        }
         if ($request->request->get('review-checklist') && $request->request->get('review-comments')) {
             $commentArray = $request->get('comment');
             $checks = $request->get('checklist');
@@ -119,11 +127,14 @@ class ApplicationController extends AbstractController
                 $reviewerResponse->setReviewedBy($this->getUser());
                 $reviewerResponse->setAnswer($theEmail);
                 $reviewerResponse->setChecklist($entityManager->getRepository(ReviewChecklist::class)->find($theKey));
-
                 $reviewerResponse->setComment($theComment);
                 $entityManager->persist($reviewerResponse);
             }
 
+            $reviewAssignment->setReviewedAt(new \DateTime());
+            $reviewAssignment->setStatus(1);
+
+            $entityManager->persist($reviewAssignment);
 
             $entityManager->flush();
 

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Review Form{% endblock %}
+
+{% block body %}
+    <h1>Review Form</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                {# <th>Description</th> #}
+                <th>Created At</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for review_form in review_forms %}
+            <tr>
+                <td>{{ review_form.id }}</td>
+                <td>{{ review_form.name }}</td>
+                {# <td>{{ review_form.description }}</td> #}
+                <td>{{ review_form.createdAt ? review_form.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ review_form.active  ? 'Active' : 'Inactive'}}</td>
+                <td>
+                    <a href="{{ path('add_checklists', {'id': review_form.id}) }}" class="btn btn-light-primary btn-sm">Build Review Form Fields</a>
+                    <a href="{{ path('review_form_show', {'id': review_form.id}) }}" class="btn btn-light-success btn-sm">Show Form checklists</a>
+                    <a href="{{ path('app_s_e_r_o_review_form_edit', {'id': review_form.id}) }}" class="btn btn-light-danger btn-sm">Edit form</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_review_form_new') }}">Create new</a>
+{% endblock %}

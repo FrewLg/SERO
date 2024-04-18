@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReviewForm{% endblock %}
+
+{% block body %}
+    <h1>Create new ReviewForm</h1>
+
+    {{ include('sero/review_form/_form.html.twig') }}
+
+    <a href="{{ path('review_form_index') }}">back to list</a>
+{% endblock %}

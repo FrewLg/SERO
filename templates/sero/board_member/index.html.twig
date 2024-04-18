@@ -9,29 +9,29 @@
 
 	<div class="row">
 
-	<div class="col-12 py-4">
+		<div class="col-12 py-4">
 
-		<div class="accordion  accordion-toggle-arrow" id="accordionExample4">
-			<div class="card">
-				<div class="card-header" id="headingOne4">
-					<div class="card-title" data-toggle="collapse" data-target="#collapseOne4">
-						<i class="flaticon2-layers-1"></i>
-						Register new Board Member
+			<div class="accordion  accordion-toggle-arrow" id="accordionExample4">
+				<div class="card">
+					<div class="card-header" id="headingOne4">
+						<div class="card-title" data-toggle="collapse" data-target="#collapseOne4">
+							<i class="flaticon2-layers-1"></i>
+							Register new Board Member
+						</div>
+					</div>
+					<div id="collapseOne4" class="collapse  " data-parent="#accordionExample4">
+						<div class="card-body">
+							{{ include('sero/board_member/_form.html.twig') }}
+
+						</div>
 					</div>
 				</div>
-				<div id="collapseOne4" class="collapse  " data-parent="#accordionExample4">
-					<div class="card-body">
-						{{ include('sero/board_member/_form.html.twig') }}
 
-					</div>
-				</div>
+
 			</div>
 
 
 		</div>
-
-
-	</div>
 	</div>
 	<div class="row">
 
@@ -168,9 +168,9 @@
 
 {% endblock %}
 {% block javascripts %}
-<script type="text/javascript">
-     $(document).ready(function() {
+	<script type="text/javascript">
+		$(document).ready(function () {
 $(".board_role").select2();
 });
-</script>
+	</script>
 {% endblock %}

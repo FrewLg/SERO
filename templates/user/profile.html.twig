@@ -24,7 +24,14 @@
 					<!--begin::Pic-->
 					<div class="flex-shrink-0 mr-7">
 						<div class="symbol symbol-50 symbol-lg-120">
-							<img alt="Pic" src="assets/media//users/300_1.jpg">
+ 							{% if app.user  and app.user.profile %}
+												<img src="{{ asset('files/profile_pictures/'~app.user.profile.image ) }}" alt="{{user}}"   />
+											{% else %}
+												<img src="{{ asset('defaultuser.png') }}" alt="{{user}}"  />
+											{% endif %}
+
+											 
+
 						</div>
 					</div>
 					<!--end::Pic-->
@@ -345,7 +352,7 @@
 									<div class="col-lg-9 col-xl-6 offset-xl-3">
 										{{ form_start(allform ) }}
 					 
-										{{ form_label(allform ) }}
+										{# {{ form_label(allform ) }} #}
 										{{ form_widget(allform ) }}
 									 
 										<button class="btn btn-light-success btn-sm">{{ button_label|default('Save') }}</button>

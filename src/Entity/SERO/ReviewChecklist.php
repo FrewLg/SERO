@@ -42,6 +42,9 @@ class ReviewChecklist
     #[ORM\JoinColumn(nullable: false)]
     private ?ReviewChecklistGroup $checklistGroup = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reviewChecklists')]
+    private ?ReviewForm $reviewForm = null;
+
     public function __construct()
     {
         $this->reviewChecklists = new ArrayCollection();
@@ -164,6 +167,18 @@ class ReviewChecklist
     public function setChecklistGroup(?ReviewChecklistGroup $checklistGroup): static
     {
         $this->checklistGroup = $checklistGroup;
+
+        return $this;
+    }
+
+    public function getReviewForm(): ?ReviewForm
+    {
+        return $this->reviewForm;
+    }
+
+    public function setReviewForm(?ReviewForm $reviewForm): static
+    {
+        $this->reviewForm = $reviewForm;
 
         return $this;
     }

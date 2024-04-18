@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Review Checklist
-{% endblock %}
+{% block title %}ReviewForm{% endblock %}
 
 {% block body %}
-	<h1>Review Checklist
-	</h1>
+    <h1>ReviewForm</h1>
 
 	<div class="card">
 		<div class="card-header ">
 
-			<a href="{{ path('app_s_e_r_o_review_checklist_new') }}" class="btn btn-light-success btn-sm">Create new</a>
+			{# <a href="{{ path('app_s_e_r_o_review_checklist_new') }}" class="btn btn-light-success btn-sm">Create new</a> #}
 		</div>
 		<div class="card-body">
 			<h3 class="text-muted">
@@ -23,7 +21,7 @@
 					{{checklist}}</b>
 				<br>
 				<ol style="list-style: none;">
-					{% for review_checklist in checklist.reviewChecklists %}
+					{% for review_checklist in checklist.reviewChecklists  |filter(review_checklist =>  (review_checklist.reviewForm== reviewForm)) %} 
 
 						<li>
 							<b style="margin-right:5">{{ loop.index}}.
