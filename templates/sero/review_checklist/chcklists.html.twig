@@ -27,7 +27,7 @@
 								
 									 
 								<tr>
-									<th>{{toRoman(loop.index)}}. {{checklist_group}}</th>
+									<th>{{toAlpha(loop.index)}}. {{checklist_group}}</th>
  									<th>YES</th>
 									<th>NO</th>
 									<th>NA</th>
@@ -67,7 +67,7 @@
 
 										<tr>
 											<td>
-												<p style="margin-left:10px">{{toAlpha(loop.index)}}. {{checklist}}</p>
+												<p style="margin-left:10px"> {{loop.index}}. {{checklist}}</p>
 											</td>
 											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="yes"></td>
 											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="no"></td>
