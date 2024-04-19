@@ -3,9 +3,12 @@
 {% block title %}New ReviewForm{% endblock %}
 
 {% block body %}
-    <h1>Create new ReviewForm</h1>
+    <h1>Create new Review Form</h1>
 
-    {{ include('sero/review_form/_form.html.twig') }}
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
 
     <a href="{{ path('review_form_index') }}">back to list</a>
 {% endblock %}

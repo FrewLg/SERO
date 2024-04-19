@@ -25,7 +25,7 @@
                 <td>{{ review_form.createdAt ? review_form.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ review_form.active  ? 'Active' : 'Inactive'}}</td>
                 <td>
-                    <a href="{{ path('add_checklists', {'id': review_form.id}) }}" class="btn btn-light-primary btn-sm">Build Review Form Fields</a>
+                    {# <a href="{{ path('add_checklists', {'id': review_form.id}) }}" class="btn btn-light-primary btn-sm">Build Review Form Fields</a> #}
                     <a href="{{ path('review_form_show', {'id': review_form.id}) }}" class="btn btn-light-success btn-sm">Show Form checklists</a>
                     <a href="{{ path('app_s_e_r_o_review_form_edit', {'id': review_form.id}) }}" class="btn btn-light-danger btn-sm">Edit form</a>
                 </td>

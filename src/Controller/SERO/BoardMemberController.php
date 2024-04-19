@@ -91,7 +91,7 @@ class BoardMemberController extends AbstractController
             $entityManager->persist($boardMember);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_board_member_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/board_member/new.html.twig', [
@@ -117,7 +117,7 @@ class BoardMemberController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_board_member_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/board_member/edit.html.twig', [
@@ -134,6 +134,6 @@ class BoardMemberController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_s_e_r_o_board_member_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
     }
 }

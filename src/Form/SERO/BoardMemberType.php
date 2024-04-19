@@ -37,7 +37,9 @@ class BoardMemberType extends AbstractType
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'profile',
-                'attr'=>['class'=>'board_member_user form-control col-6', 'id'=>'']
+                'attr'=>['class'=>'board_member_user form-control col-6', 
+                'id'=>''
+                ]
             ])
             
             ->add('role', ChoiceType::class, [

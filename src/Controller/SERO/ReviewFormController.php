@@ -46,12 +46,25 @@ class ReviewFormController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/show', name: 'review_form_show', methods: ['GET'])]
-    public function show(ReviewForm $reviewForm,  ReviewChecklistGroupRepository $reviewChecklistGroupRepository, ReviewChecklistRepository $reviewChecklistRepository): Response
+    #[Route('/{id}/show', name: 'review_form_show', methods: ['GET','POST'])]
+    public function show(Request $request, ReviewForm $reviewForm,  EntityManagerInterface $entityManager,  ReviewChecklistGroupRepository $reviewChecklistGroupRepository, ReviewChecklistRepository $reviewChecklistRepository): Response
     {
+
+        $reviewChecklist = new ReviewChecklist();
+        $form = $this->createForm(ReviewChecklistType::class, $reviewChecklist);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $reviewChecklist->setReviewForm($reviewForm);
+            $entityManager->persist($reviewChecklist);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('review_form_show', ['id'=>$reviewForm->getId()], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('sero/review_form/show.html.twig', [
             'reviewForm' => $reviewForm,
             'review_checklists' => $reviewChecklistRepository->findBy(['reviewForm'=>$reviewForm->getId()]),
+            'form' => $form,
 
             'checklist_group' => $reviewChecklistGroupRepository->findAll(),
 
@@ -67,7 +80,7 @@ class ReviewFormController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('review_form_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_form_show', ['id'=>$reviewForm->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/review_form/edit.html.twig', [
@@ -76,26 +89,26 @@ class ReviewFormController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/new/checklist', name: 'add_checklists', methods: ['GET', 'POST'])]
-    public function newchecklist(Request $request, ReviewForm $reviewForm,  EntityManagerInterface $entityManager): Response
-    {
-        $reviewChecklist = new ReviewChecklist();
-        $form = $this->createForm(ReviewChecklistType::class, $reviewChecklist);
-        $form->handleRequest($request);
+    // #[Route('/{id}/new/checklist', name: 'add_checklists', methods: ['GET', 'POST'])]
+    // public function newchecklist(Request $request, ReviewForm $reviewForm,  EntityManagerInterface $entityManager): Response
+    // {
+    //     $reviewChecklist = new ReviewChecklist();
+    //     $form = $this->createForm(ReviewChecklistType::class, $reviewChecklist);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $reviewChecklist->setReviewForm($reviewForm);
-            $entityManager->persist($reviewChecklist);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $reviewChecklist->setReviewForm($reviewForm);
+    //         $entityManager->persist($reviewChecklist);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('review_form_show', ['id'=>$reviewForm->getId()], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('review_form_show', ['id'=>$reviewForm->getId()], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->render('sero/review_checklist/new.html.twig', [
-            'review_checklist' => $reviewChecklist,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->render('sero/review_checklist/new.html.twig', [
+    //         'review_checklist' => $reviewChecklist,
+    //         'form' => $form,
+    //     ]);
+    // }
     #[Route('/{id}/edit/checklist', name: 'app_s_e_r_o_review_checklist_edit', methods: ['GET', 'POST'])]
     public function editchecklist(Request $request, ReviewChecklist $reviewChecklist, EntityManagerInterface $entityManager): Response
     {

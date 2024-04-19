@@ -14,22 +14,7 @@
 			</h5>
 		</div>
 		<div class="card-body">
-			<p>
-				<b>INFORMATION FOR THE REVIEWER:</b> <br>Some information
-				{# This is a word document, so you may download it to your computer to complete. Each of the components below must be adequately addressed within the application in order to be approved by the IRB. Please indicate whether the PI has given adequate consideration and safeguards to the following areas of concern.
-				<span class="bg-warning">
-					Note any concerns, recommendations or questions in the reviewer’s comment section for each component.
-				</span>
-			</p>
-			<p>
-				For expedited reviews save completed reviews as a WORD document and return to the committee chair. For a full committee review, email a copy to the chair and bring a copy to the committee meeting. The chair will summarize and compile the reviews. Copies of the reviewer checklist will be made available to applications, institutional officials, or federal officials upon request.
-			</p>
-			<p>
-
-				Concerns and questions noted by reviewer(s) must be satisfactorily addressed by the applicant prior to final project approval.
-			</p> #}
-
-
+			 {{review_assignment.reviewForm.instructionForReviewer|raw}}
 			<div>
 				<form method="POST" onSubmit="return confirm('Save changes')">
                 <input hidden name="review-checklist" value="true"/>
@@ -38,23 +23,24 @@
 
 						<tbody>
 
-							{% for checklist_group in irb_review_checklist_group %}
+							{% for checklist_group in irb_review_checklist_group  %}  
+								
+									 
 								<tr>
-									<th>{{toRoman(loop.index)}}.
-										{{checklist_group}}</th>
-
-									<th>YES</th>
+									<th>{{toRoman(loop.index)}}. {{checklist_group}}</th>
+ 									<th>YES</th>
 									<th>NO</th>
 									<th>NA</th>
-											<th>Comment</th>
+									<th>Comment</th>
 
 								</tr>
-								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and not checklist.reviewForm== review_assignment.reviewForm)) %}  
+								
+								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and   checklist.reviewForm == review_assignment.reviewForm)) %}  
 
 									{% if checklist.reviewChecklists|length >0 %}
 										<tr>
 											<th>
-												<b style="margin-left:10px">{{toAlpha(loop.index)}}.
+												<b style="margin-left:10px">{{ loop.index}}.
 													{{checklist}}</b>
 											</th>
 											<th>YES</th>
@@ -96,7 +82,7 @@
 									{% endif %}
 
 								{% endfor %}
-								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2) %}
+								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2 and   checklist.reviewForm == review_assignment.reviewForm) %}
 
 									<tr>
 										<td colspan="4">{{checklist}}
@@ -108,7 +94,7 @@
 
 									</tr>
 								{% endfor %}
-
+								
 							{% endfor %}
 						</tbody>
 					</table>

@@ -1,4 +1,50 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="my-2">
+
+
+	{{ form_start(form) }}
+	<div class="form-group  row">
+		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.checklistGroup) }}
+		</label>
+
+		<div class="col-8">
+
+			{{ form_widget(form.checklistGroup) }}
+
+		</div>
+	</div>
+    <div class="form-group  row">
+		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.name) }}
+		</label>
+
+		<div class="col-8">
+
+			{{ form_widget(form.name) }}
+
+		</div>
+	</div>
+	<div class="form-group  row">
+		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.answerType) }}
+		</label>
+
+		<div class="col-8">
+
+			{{ form_widget(form.answerType) }}
+
+		</div>
+	</div>
+	
+
+	<div class="row">
+
+		<label class="col-form-label col-3 text-lg-right text-left"></label>
+
+		<div class="col-8">
+
+			<button type="submit" class="btn btn-light-primary  float-end">
+				Save
+			</button>
+		</div>
+	</div>
+	{{ form_end(form) }}
+
+</div>

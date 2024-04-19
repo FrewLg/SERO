@@ -36,6 +36,9 @@ services:
             - '../src/Kernel.php'
 
     # App\EventSubscriber\CalendarSubscriber:
+    App\EventListener\ExceptionListener:
+        # tags: [kernel.event_listener]
+        - { name: kernel.event_listener, event: kernel.exception }
     App\EventSubscriber\CalendarSubscriber:
     App\EventSubscriber\LocaleSubscriber:
         arguments: ['%kernel.default_locale%']

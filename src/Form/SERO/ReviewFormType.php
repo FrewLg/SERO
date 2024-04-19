@@ -14,6 +14,8 @@ class ReviewFormType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('instructionForReviewer')
+
             ->add('active')
             // ->add('createdAt', null, [
             //     'widget' => 'single_text',

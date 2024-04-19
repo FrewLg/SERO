@@ -41,7 +41,7 @@
 								<i class="fa fa-table"></i>
 							</span>
 							<span class="nav-text">Closed  assigned
-								<span class="label label-sm label-danger mr-2">{{ myreviews|length + closeds|length}}</span>
+								<span class="label label-sm label-danger mr-2">{{  closeds|length}}</span>
 							</span>
 						</a>
 					</li>
@@ -50,9 +50,10 @@
 				<div class="tab-content mt-5" id="myTabContent">
 					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
 						<div class="table-responsive">
-							<table class="table table-bordered  table-vertical-center">
-								<thead>
-									{% if myreviews|length>0%}
+							{% if myreviews|length>0%}
+
+								<table class="table table-borderless table-striped   table-vertical-center">
+									<thead>
 										<tr>
 
 											<th>#</th>
@@ -60,97 +61,99 @@
 											<th>Reviewer</th>
 											<th>Review due date</th>
 											<th>Status</th>
+											<th>Last Updated </th>
 											<th>Action</th>
 										</tr>
-									{% endif %}
-								</thead>
-								<tbody>
-									{% for myreview in myreviews %}
-										<tr>
-											<td>{{ loop.index }}</td>
-											<td>
-												{{ myreview.application.title }}
+									</thead>
+									<tbody>
+										{% for myreview in myreviews %}
+											<tr>
+												<td>{{ loop.index }}</td>
+												<td>
+													{{ myreview.application.title }}
 
-											</td>
-											<td>
-												{{ myreview.irbreviewer }}
-												{{ myreview.status }}
-											</td>
+												</td>
+												<td>
+													{{ myreview.irbreviewer }}
+													{{ myreview.status }}
+												</td>
 
-											<td>
-												{% if myreview.dueDate %}
-													{{ myreview.dueDate|date('d, M Y h:i a') }}
+												<td>
+													{% if myreview.dueDate %}
+														{{ myreview.dueDate|date('d, M Y h:i a') }}
+													{% endif %}
+												</td>
+												<td>
+												{% if myreview.status==1%}
+												<span class="label label-lg label-light-primary label-inline">Review sent</span>
 												{% endif %}
-											</td>
-											<td>
+ 												</td>
+												<td> {{ myreview.reviewedAt|date('h:m sa d/m/y')}}
+												</td>
+												<td>
+													<a href="{{ path('make_a_review', {'id': myreview.id}) }} " class='btn btn-light-success btn-sm'>
+														Review
+													</a>
+													{# <a href="{{ path('make_a_review', {'id': application.id}) }}">make_a_review</a> #}
 
-
-												<span class='badge badge-soft-{{ myreview.application.title }}'>
-													{{  myreview.application.title }}
-												</span>
-											</td>
-											<td>
-												<a href="{{ path('make_a_review', {'id': myreview.id}) }} " class='btn btn-light-success btn-sm'>
-													Review
-												</a>
-												{# <a href="{{ path('make_a_review', {'id': application.id}) }}">make_a_review</a> #}
-
-											</td>
-										</tr>
-									{% else %}
-										No records found  under this section
-									{% endfor %}
-								</tbody>
-							</table>
+												</td>
+											</tr>
+										{% else %}
+											No records found  under this section
+										{% endfor %}
+									</tbody>
+								</table>
+							{% endif %}
 
 						</div>
 					</div>
 					<div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
 						<div class="table-responsive">
-							<table class="table table-bordered  table-vertical-center">
-								<thead>
-									{% if myreviews|length>0%}
-										<tr>
+							{% if closeds|length>0%}
 
+								<table class="table table-bordered  table-vertical-center">
+									<thead>
+										<tr>
 											<th>#</th>
 											<th>Title</th>
 											<th>Reviewer</th>
 											<th>Review due date</th>
 											<th>Status</th>
 										</tr>
-									{% endif %}
-								</thead>
-								<tbody>
-									{% for myreview in myreviews %}
-										<tr>
-											<td>{{ loop.index }}</td>
-											<td>
-												{{ myreview.application.title }}
+									</thead>
+									<tbody>
+										{% for myreview in closeds %}
+											<tr>
+												<td>{{ loop.index }}</td>
+												<td>
+													{{ myreview.application.title }}
 
-											</td>
-											<td>
-												{{ myreview.irbreviewer }}
-											</td>
+												</td>
+												<td>
+													{{ myreview.irbreviewer }}
+												</td>
 
-											<td>
-												{% if myreview.dueDate %}
-													{{ myreview.dueDate|date('d, M Y h:i a') }}
-												{% endif %}
-											</td>
-											<td>
+												<td>
+													{% if myreview.dueDate %}
+														{{ myreview.dueDate|date('d, M Y h:i a') }}
+													{% endif %}
+												</td>
+												<td>
 
 
-												<span class='badge badge-soft-{{ myreview.application.title }}'>
-													{{  myreview.application.title }}
-												</span>
-											</td>
-										</tr>
-									{% else %}
-										No records found  under this section
-									{% endfor %}
-								</tbody>
-							</table>
-
+													<span class='badge badge-soft-{{ myreview.application.title }}'>
+														{{  myreview.application.title }}
+													</span>
+												</td>
+											</tr>
+										{% else %}
+											No records found  under this section
+										{% endfor %}
+									</tbody>
+								</table>
+							{% else %}
+								No records found  under this section
+							{% endif %}
 						</div>
 					</div>
 					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab content 3</div>

@@ -50,6 +50,10 @@ class ReviewAssignment
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $reviewedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reviewAssignments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ReviewForm $reviewForm = null;
+
     public function __construct()
     {
         $this->reviewerResponses = new ArrayCollection();
@@ -194,6 +198,18 @@ class ReviewAssignment
     public function setReviewedAt(?\DateTimeInterface $reviewedAt): static
     {
         $this->reviewedAt = $reviewedAt;
+
+        return $this;
+    }
+
+    public function getReviewForm(): ?ReviewForm
+    {
+        return $this->reviewForm;
+    }
+
+    public function setReviewForm(?ReviewForm $reviewForm): static
+    {
+        $this->reviewForm = $reviewForm;
 
         return $this;
     }

@@ -37,9 +37,19 @@ class ReviewForm
     #[ORM\Column(nullable: true)]
     private ?bool $active = null;
 
+    /**
+     * @var Collection<int, ReviewAssignment>
+     */
+    #[ORM\OneToMany(targetEntity: ReviewAssignment::class, mappedBy: 'reviewForm', orphanRemoval: true)]
+    private Collection $reviewAssignments;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $instructionForReviewer = null;
+
     public function __construct()
     {
         $this->reviewChecklists = new ArrayCollection();
+        $this->reviewAssignments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -52,6 +62,10 @@ class ReviewForm
         return $this->name;
     }
 
+    public function __toString()
+    {
+       return $this->name;
+    }
     public function setName(?string $name): static
     {
         $this->name = $name;
@@ -133,6 +147,48 @@ class ReviewForm
     public function setActive(?bool $active): static
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReviewAssignment>
+     */
+    public function getReviewAssignments(): Collection
+    {
+        return $this->reviewAssignments;
+    }
+
+    public function addReviewAssignment(ReviewAssignment $reviewAssignment): static
+    {
+        if (!$this->reviewAssignments->contains($reviewAssignment)) {
+            $this->reviewAssignments->add($reviewAssignment);
+            $reviewAssignment->setReviewForm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReviewAssignment(ReviewAssignment $reviewAssignment): static
+    {
+        if ($this->reviewAssignments->removeElement($reviewAssignment)) {
+            // set the owning side to null (unless already changed)
+            if ($reviewAssignment->getReviewForm() === $this) {
+                $reviewAssignment->setReviewForm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getInstructionForReviewer(): ?string
+    {
+        return $this->instructionForReviewer;
+    }
+
+    public function setInstructionForReviewer(?string $instructionForReviewer): static
+    {
+        $this->instructionForReviewer = $instructionForReviewer;
 
         return $this;
     }

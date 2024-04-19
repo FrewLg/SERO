@@ -41,7 +41,6 @@ class CalendarSubscriber implements EventSubscriberInterface
                 $training->getStartingDate(),
                 $training->getEndDate()
             );
- 
             $trainingEvent->setOptions([
                 'backgroundColor' => "#6993FF",
                 'borderColor' => "#6993FF",
@@ -50,7 +49,6 @@ class CalendarSubscriber implements EventSubscriberInterface
                 'url',
                 $this->router->generate('app_training_show',['id'=>$training->getId()])
             );
-
             $calendar->addEvent($trainingEvent);
         }
          

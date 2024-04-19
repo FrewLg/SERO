@@ -34,4 +34,19 @@ class ExceptionListener
         // sends the modified response object to the event
         $event->setResponse($response);
     }
+
+
+    #[Route('/error', name: 'app_error')]
+    public function show(\Throwable $exception, Request $request ): Response
+    {
+ 
+        //$exception = $this->errorRenderer->render($exception);
+        //$string=  $exception->getAsString();
+        //$code= $exception->getStatusCode();
+        return $this->render('error/index.html.twig', [
+            'controller_name' => 'ErrorController',
+            'exception' => new HttpException($exception->getStatusCode(), $string),
+
+        ]);
+    }
 }

@@ -93,10 +93,10 @@ class ApplicationController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        if(!$reviewAssignment->getIrbreviewer()->getId() === $this->getUser()->getId() & $reviewAssignment->getReviewedAt()===null){
+        if($reviewAssignment->getIrbreviewer()->getId() == $this->getUser()->getId() && $reviewAssignment->getReviewedAt()!==NULL){
             $this->addFlash("success", "Review results saved successfully!.");
 
-        // return $this->redirectToRoute('review_result', ['id'=>$reviewAssignment->getId()], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('review_result', ['id'=>$reviewAssignment->getId()], Response::HTTP_SEE_OTHER);
 
         }
         if ($request->request->get('review-checklist') && $request->request->get('review-comments')) {

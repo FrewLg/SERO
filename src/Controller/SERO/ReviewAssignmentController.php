@@ -56,7 +56,7 @@ class ReviewAssignmentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             if (!$reviewAssignment->getIrbreviewer()) {
-                return $this->redirectToRoute('irb_review_assignment_new', array('id' => $submission->getId()));
+                return $this->redirectToRoute('assign_reviewer', array('id' => $submission->getId()));
             }
 
             $reviewAssignment->setApplication($submission);
@@ -126,7 +126,7 @@ class ReviewAssignmentController extends AbstractController
         //     //     'Authoremail' => $external_reviewAssignment->getExternalirbrevieweremail(),
         //     // ]);
         //     $this->addFlash("success", "External assigned successfully!!");
-        //     return $this->redirectToRoute('irb_review_assignment_new', array('id' => $submission->getId()));
+        //     return $this->redirectToRoute('assign_reviewer', array('id' => $submission->getId()));
         // }
 
         $reviewAssignments = $entityManager->getRepository('App\Entity\SERO\ReviewAssignment')->findBy(['application' => $submission]);
@@ -150,7 +150,7 @@ class ReviewAssignmentController extends AbstractController
 
         $this->denyAccessUnlessGranted('ROLE_USER');
         $this_is_me = $this->getUser();
-        $myassigned = $reviewAssignmentRepository->findBy(['irbreviewer' => $this_is_me, 'closed' => 0], ["id" => "DESC"]);
+        $myassigned = $reviewAssignmentRepository->findBy(['irbreviewer' => $this_is_me, 'closed' => null], ["id" => "DESC"]);
         $all = $entityManager->getRepository(ReviewAssignment::class)->findBy(['irbreviewer' => $this_is_me, 'closed' => 1], ["id" => "DESC"]);
         // }
         ////// if no throw exception

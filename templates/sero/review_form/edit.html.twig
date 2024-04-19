@@ -5,9 +5,9 @@
 {% block body %}
     <h1>Edit ReviewForm</h1>
 
-    {{ include('sero/review_form/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('sero/review_form/newform.html.twig', {'button_label': 'Update'}) }}
 
     {# <a href="{{ path('app_s_e_r_o_review_form_index') }}">back to list</a> #}
 
-    {{ include('sero/review_form/_delete_form.html.twig') }}
+    {# {{ include('sero/review_form/_delete_form.html.twig') }} #}
 {% endblock %}

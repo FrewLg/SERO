@@ -1,7 +1,7 @@
 twig:
     globals:  { 
         app_name: 'SERO-EPHI', 
-        app_description: 'SNTC -EPHI management', 
+        app_description: 'Scientific and Ethical Review Online', 
         organization: null, 
         app_url: ntc.ephi.gov.et, 
         site_logo: ephi.png, 
