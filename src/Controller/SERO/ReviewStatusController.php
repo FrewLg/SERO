@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/sero/review-status')]
+#[Route('{_locale<%app.supported_locales%>}/review-status')]
 class ReviewStatusController extends AbstractController
 {
     #[Route('/', name: 'app_s_e_r_o_review_status_index', methods: ['GET'])]

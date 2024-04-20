@@ -36,7 +36,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+        $profile = new Profile();
+        $profile->setUser($user);
+        $profile->setFirstName($form->get('email')->getData());
+        $profile->setLastName($form->get('email')->getData());
             $entityManager->persist($user);
+            $entityManager->persist($profile);
             $entityManager->flush();
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);

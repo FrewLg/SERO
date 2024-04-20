@@ -15,46 +15,48 @@ class BoardMemberType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('assignedAt', null, [
-            //     'widget' => 'single_text',
-            // ])
-            ->add('status'
-            , ChoiceType::class, [
-                // "placeholder" => "Select Status",
-              'expanded'=>true,
-                "required" => true,
-                // "choices" => [
-                //     "Chair" => BoardMember::ROLE_CHAIR,
-                //     "Vice Chair" => BoardMember::ROLE_VICE_CHAIR,
-                //     "Secretary" => BoardMember::ROLE_SECRETARY,
-                //     "Coordinator" => BoardMember::ROLE_COORDINATOR, 
-                //     "Member" => BoardMember::ROLE_MEMBER,
-                // ],
-                "attr" => [
-                    "class" => " "
+
+            ->add(
+                'status',
+                ChoiceType::class,
+                [
+                    'expanded' => true,
+                        'disabled'=>true,
+                        "required" => true,
+                        'choice_value'=>"Active",
+                    "choices" => [
+                        // "d" => '2',
+                        // "InActive" => '1',
+                        "Active" => '0',
+                    ],
+                    "attr" => [
+                        "class" => "form-codntrol ",
+                        // 'disabled'=>true,
+                    ]
                 ]
-            ])
+            )
             ->add('user', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'profile',
-                'attr'=>['class'=>'board_member_user form-control col-6', 
-                'id'=>''
+                'attr' => [
+                    'class' => 'select2 form-control  ',
+                    'id' => ''
                 ]
             ])
-            
+
             ->add('role', ChoiceType::class, [
                 "placeholder" => "Select Role",
-              
+
                 "required" => true,
                 "choices" => [
                     "Chair" => BoardMember::ROLE_CHAIR,
                     "Vice Chair" => BoardMember::ROLE_VICE_CHAIR,
                     "Secretary" => BoardMember::ROLE_SECRETARY,
-                    "Coordinator" => BoardMember::ROLE_COORDINATOR, 
+                    "Coordinator" => BoardMember::ROLE_COORDINATOR,
                     "Member" => BoardMember::ROLE_MEMBER,
                 ],
                 "attr" => [
-                    "class" => "board_role form-control col-4"
+                    "class" => "select2 form-control  "
                 ]
             ]);
     }

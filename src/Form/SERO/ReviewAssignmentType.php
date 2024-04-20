@@ -20,32 +20,35 @@ use DateTime;
 class ReviewAssignmentType extends AbstractType
 {
     private $reviewAssignmentRepository;
-    public function __construct(ReviewAssignmentRepository $reviewAssignmentRepository) {
+    public function __construct(ReviewAssignmentRepository $reviewAssignmentRepository)
+    {
         $this->reviewAssignmentRepository = $reviewAssignmentRepository;
     }
 
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $reviewAssignment = $options['data'];
         if (!$reviewAssignment instanceof ReviewAssignment) {
             return;
         }
-        
-        $already_assigned = (new ArrayCollection($this->reviewAssignmentRepository->findBy(['application' => $options['application'] ])))->map(function ($element) {
+        $already_assigned = (new ArrayCollection($this->reviewAssignmentRepository->findBy(['application' => $options['application']])))->map(function ($element) 
+        {
             return $element->getIrbreviewer();
         });
 
         $builder
-            // ->add('closed')
-            // ->add('allowToView')
+             
             ->add('reviewForm', EntityType::class, [
                 'class' => ReviewForm::class,
                 'choice_label' => 'name',
-                'attr'=> ['class'=>'form-control form-control-lg form-control-solid  select2 mb-4 p-4'],
+                'attr' => ['class' => 'form-control form-control-lg form-control-solid  select2 mb-4 p-4'],
             ])
 
-            ->add('irbreviewer', EntityType::class, [
+            ->add(
+                'irbreviewer',
+                EntityType::class,
+                [
                     "required" => false,
                     'class' => User::class,
 
@@ -66,7 +69,7 @@ class ReviewAssignmentType extends AbstractType
                         "class" => "select2 form-control form-control-lg form-control-solid",
                     ],
                     'choice_label' => function (User $user) {
-                        return $user . "--"."("  . count($user->getReviewAssignments()) .  ")";
+                        return $user . "--" . "("  . count($user->getReviewAssignments()) .  ")";
                     },
 
                 ]
@@ -85,8 +88,7 @@ class ReviewAssignmentType extends AbstractType
                     'required' => true,
                     'class' => 'form-control',
                 ),
-            ))
-        ;
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver): void

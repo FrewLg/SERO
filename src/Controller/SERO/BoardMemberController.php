@@ -45,7 +45,13 @@ class BoardMemberController extends AbstractController
     
     
             if ($form->isSubmitted() && $form->isValid()) {
-    
+    if ($boardMemberRepository->findOneBy(['user'=>$form->get('user')->getData()])  ) {
+        # code...
+        $this->addFlash("danger", "The user is already board memeber. Please might have wanted to change hes/her roles");
+        return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
+
+    }
+
                 if ($this->getUser()->getProfile()) {
                     $boardMember->setAssignedBy($this->getUser());
                     $boardMember->getUser()->addRole(Constants::ROLE_BOARD_MEMBER);

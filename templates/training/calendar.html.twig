@@ -30,28 +30,28 @@
 						</a>
 					</li>
 					{# <li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-							<span class="nav-icon">
-								<i class="flaticon2-rocket-1"></i>
-							</span>
-							<span class="nav-text">Dropdown</span>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right" style="">
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<a class="dropdown-item" href="#">Something else here</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Separated link</a>
-						</div>
-					</li> #}
+											<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+												<span class="nav-icon">
+													<i class="flaticon2-rocket-1"></i>
+												</span>
+												<span class="nav-text">Dropdown</span>
+											</a>
+											<div class="dropdown-menu dropdown-menu-right" style="">
+												<a class="dropdown-item" href="#">Action</a>
+												<a class="dropdown-item" href="#">Another action</a>
+												<a class="dropdown-item" href="#">Something else here</a>
+												<div class="dropdown-divider"></div>
+												<a class="dropdown-item" href="#">Separated link</a>
+											</div>
+										</li> #}
 					{# <li class="nav-item">
-						<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" aria-controls="contact">
-							<span class="nav-icon">
-								<i class="flaticon2-rocket-1"></i>
-							</span>
-							<span class="nav-text">Contact</span>
-						</a>
-					</li> #}
+											<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" aria-controls="contact">
+												<span class="nav-icon">
+													<i class="flaticon2-rocket-1"></i>
+												</span>
+												<span class="nav-text">Contact</span>
+											</a>
+										</li> #}
 				</ul>
 				<div class="tab-content mt-5" id="myTabContent">
 					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -107,8 +107,8 @@
 													{{ training.trainingRequest.numberOfParticipants}}
 												</span>
 												{# =
-																																										{{ training.coupons|length }}
-																																										available coupons #}
+																																																						{{ training.coupons|length }}
+																																																						available coupons #}
 
 												{# {% if training.trainingRequest.numberOfParticipants >= training.trainingRequest.trainingParticipants %}  #}
 												<span class="label label-lg label-light-info label-inline">
@@ -219,7 +219,7 @@ defaultView: 'dayGridMonth',
 editable: true,
 eventSources: [
 {
-url: "{{ path('fc_load_events') }}",
+url: "{{ path('homepage') }}",
 method: "POST",
 extraParams: {
 filters: JSON.stringify({})

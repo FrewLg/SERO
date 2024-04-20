@@ -254,11 +254,8 @@
 											</span>
 										</div>
 									</div>
-									<!--end::Quick panel-->
-									<!--begin::Chat-->
-
-									<!--begin::Languages-->
-										<div
+									
+									<div
 										class="dropdown"> <!--begin::Toggle-->
 										<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
 											<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
@@ -267,15 +264,15 @@
 												<span class="text-capitalize text-dark-50 font-weight-bolder font-size-base">
 													{{ app.request.getLocale() }}
 												</span>
-												{# <img class="h-20px w-20px rounded-sm" src="{{ asset('theme/assets/media/svg/flags/226-united-states.svg' ) }}" alt=""/> #}
-											</div>
+ 											</div>
 										</div>
 										<!--end::Toggle-->
 										<!--begin::Dropdown-->
 										<div
 											class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
-											<!--begin::Nav-->
-											<locale class="html twig"></locale>
+											<!--begin::Nav--> 
+											{% include "locale.html.twig" %}
+
 											<!--end::Nav-->
 										</div>
 										<!--end::Dropdown-->
@@ -286,13 +283,7 @@
 											<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"></span>
 											<span
 												class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-
-												{# {% if app.user  and app.user.profile %}
-																								<img src="{{ asset('files/profile_pictures/'~app.user.profile.image ) }}" alt="{{user}}"   />
-																							{% else %}
-																								<img src="{{ asset('defaultuser.png') }}" alt="{{user}}"  />
-																							{% endif %} #}
-
+  
 												{% if app.user  and app.user.profile %}
 													<img src="{{ asset('files/profile_pictures/'~app.user.profile.image ) }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
 												{% elseif app.user  %}
@@ -384,9 +375,9 @@
 										<!--end::Copyright-->
 										<!--begin::Nav-->
 										<div class="nav nav-dark">
-											<a href="http://ntc.ephi.gov.et" target="_blank" class="nav-link pl-0 pr-5">About NTC</a>
-											<a href="http://ephi.gov.et" target="_blank" class="nav-link pl-0 pr-5">EPHI</a>
-											<a href="http://ntc.ephi.gov.et" target="_blank" class="nav-link pl-0 pr-0">Contact</a>
+											<a href="http://sero.ephi.gov.et" target="_blank" class="nav-link pl-0 pr-5">{% trans %}About{% endtrans %} {{ acronym }}</a>
+											<a href="http://ephi.gov.et" target="_blank" class="nav-link pl-0 pr-5">{% trans %}EPHI{% endtrans %}</a>
+											<a href="http://ntc.ephi.gov.et" target="_blank" class="nav-link pl-0 pr-0">{% trans %}Contact{% endtrans %}</a>
 										</div>
 										<!--end::Nav-->
 									</div>

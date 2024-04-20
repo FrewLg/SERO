@@ -151,7 +151,7 @@ class ApplicationController extends AbstractController
     }
 
 
-        #[Route('/{id}', name: 'app_s_e_r_o_application_show', methods: ['GET'])]
+        #[Route('/{id}/details', name: 'app_s_e_r_o_application_show', methods: ['GET'])]
         public function show(Application $application, Request $request, EntityManagerInterface $entityManager, ApplicationFeedbackRepository $appferepo, MailerInterface $mailer): Response
         {
         if ($request->request->get('renewal')) {
@@ -288,7 +288,7 @@ class ApplicationController extends AbstractController
 
         // $reviews = $entityManager->getRepository(IRBReview::class)->findBy(['application' => $application, 'reviewed_by' => $this->getUser()]);
 
-        return $this->render('sero/application/show.html.twig', [
+        return $this->render('sero/application/details.html.twig', [
             'appfeedbfrom' => $feedbackForm->createView(),
             'irb_review_checklist_group' => $irb_review_checklist_group,
             'review_assignment' => $reviewAssignment,
