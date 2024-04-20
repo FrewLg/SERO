@@ -13,6 +13,8 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Utils\Constants;
 
+use Endroid\Pdf\Builder\PdfBuilder;
+use Endroid\Pdf\Response\InlinePdfResponse;
 
 #[Route('{_locale<%app.supported_locales%>}/board-member')]
 class BoardMemberController extends AbstractController
@@ -85,6 +87,36 @@ class BoardMemberController extends AbstractController
             ]);
         }
 
+
+        
+    //     #[Route('/pdf')]
+    // public function __invoke(PdfBuilder $builder): Response
+    // {
+    //     $builder
+    //         ->setCover([
+    //             'controller' => CoverController::class,
+    //             'cache_key' => 'cover',
+    //         ])
+    //         ->setTableOfContents([
+    //             'file' => 'table_of_contents.xml',
+    //             'cache_key' => 'toc',
+    //         ])
+    //         ->setHeader([
+    //             'template' => 'pdf/header.html.twig',
+    //             'cache_key' => 'header',
+    //         ])
+    //         ->setFooter([
+    //             'template' => 'pdf/footer.html.twig',
+    //             'cache_key' => 'footer',
+    //         ])
+    //         ->setContent([
+    //             'controller' => ContentController::class,
+    //             'cache_key' => 'content',
+    //         ])
+    //     ;
+
+    //     return new InlinePdfResponse($builder->getPdf());
+    // }
 
     #[Route('/new', name: 'app_s_e_r_o_board_member_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response

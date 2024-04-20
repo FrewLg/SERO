@@ -1,11 +1,11 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
-    csrf_protection: true
+    # csrf_protection: true
     # error_controller: App\Controller\ErrorController::show
 #    error_controller: App\EventListener\ExceptionListener
     # Note that the session will be started ONLY if you read or write from it.
-    session: true
+    # session: true
         # handler_id: App\Session\CustomSessionHandler
     #esi: true
     #fragments: true
