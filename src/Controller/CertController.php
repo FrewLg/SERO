@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 #[Route('{_locale<%app.supported_locales%>}/certificate')]

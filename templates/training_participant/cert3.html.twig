@@ -1,221 +1,122 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTDXHTML1.1plusMathML2.0//EN" "http://www.w3.org/Math/DTD/mathml2/xhtml-math11-f.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
+<style>
+  {# @page {
+    size: a4 portrait;
+  } #}
+ 
+  </style>
 
+<table style="background-color: rgba(2, 175, 240, 0.1);   padding:40px; margin-right:100; width:100%;">
+	<tr>
 
-		<title>ddd
-		</title>
+		<td colspan="4" style="width: 250px;">
 
-		<style type="text/css">
-			@page {}
-			table {
-				border-collapse: collapse;
-				border-spacing: 0;
-				empty-cells: show
-			}
-			body {
-				margin: 5;
-				background-image: url("{{ twiglogo }}");
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center center;
-			}
-			td,
-			th {
-				vertical-align: top;
-				font-size: 12pt;
-			}
-			h1,
-			h2,
-			h3,
-			h4,
-			h5,
-			h6 {
-				clear: both;
-			}
-			ol,
-			ul {
-				margin: 0;
-				padding: 0;
-			}
-			li {
-				list-style: none;
-				margin: 0;
-				padding: 0;
-			}
-			/* "li span.odfLiEnd" - IE 7 issue*/
-			li span. {
-				clear: both;
-				line-height: 0;
-				width: 0;
-				height: 0;
-				margin: 0;
-				padding: 0;
-			}
-			span.footnodeNumber {
-				padding-right: 1em;
-			}
-			span.annotation_style_by_filter {
-				font-size: 95%;
-				font-family: Arial;
-				background-color: #fff000;
-				margin: 0;
-				border: 0;
-				padding: 0;
-			}
-			span.heading_numbering {
-				margin-right: 0.8rem;
-			}
-			* {
-				margin: 0;
-			}
-			.fr1 {
-				font-size: 12pt;
-				font-family: Calibri;
-				vertical-align: top;
-				writing-mode: horizontal-tb;
-				direction: ltr;
-				margin: 0;
-				background-color: transparent;
-				padding: 0;
-				border-style: none;
-			}
-			.fr2 {
-				font-size: 12pt;
-				font-family: Calibri;
-				text-align: center;
-				vertical-align: top;
-				writing-mode: horizontal-tb;
-				direction: ltr;
-				margin: 0;
-				background-color: transparent;
-				padding: 0;
-				border-style: none;
-			}
-			.Header {
-				color: #333333;
-				font-size: 12pt;
-				line-height: 100%;
-				margin-bottom: 0;
-				margin-top: 0;
-				text-align: center ! important;
-				font-family: Cambria;
-				writing-mode: horizontal-tb;
-				direction: ltr;
-			}
-			.Heading_20_2 {
-				color: #b90504;
-				font-size: 36pt;
-				line-height: 100%;
-				margin-bottom: 0;
-				margin-top: 0;
-				text-align: center ! important;
-				font-family: Old English Text MT;
-				writing-mode: horizontal-tb;
-				direction: ltr;
-			}
-			.Heading_20_3 {
-				color: #333333;
-				font-size: 18pt;
-				line-height: 100%;
-				margin-bottom: 0;
-				margin-top: 0;
-				text-align: center ! important;
-				font-family: Cambria;
-				writing-mode: horizontal-tb;
-				direction: ltr;
-				font-weight: bold;
-			}
-			.P1 {
-				color: #52abde;
-				font-size: 48pt;
-				letter-spacing: 0.0138in;
-				line-height: 100%;
-				margin-bottom: 0;
-				margin-top: 0;
-				text-align: center ! important;
-				font-family: Old English Text MT;
-				writing-mode: horizontal-tb;
-				direction: ltr;
-			}
-			.P5 {
-				color: #333333;
-				font-size: 12pt;
-				line-height: 100%;
-				margin-bottom: 0.1665in;
-				margin-top: 0.1665in;
-				text-align: center ! important;
-				font-family: Cambria;
-				writing-mode: horizontal-tb;
-				direction: ltr;
-			}
-			.Standard {
-				font-size: 12pt;
-				font-family: Cambria;
-				writing-mode: horizontal-tb;
-				direction: ltr;
-				margin-top: 0;
-				margin-bottom: 0;
-				line-height: 100%;
-				text-align: center ! important;
-				color: #333333;
-			}
-			.T1 {
-				font-size: 55pt;
-			}
-			.T2 {
-				font-size: 16pt;
-			}
-			.T3 {
-				color: #e61070;
-			}
-			/* ODF styles with no properties representable as CSS */
-			{}
-		</style>
-	</head>
-	<body style="background-image: url("{{ twiglogo }}");">
-		<div style="max-width:15in; margin:1.5in;">
-			<h1 class="P1">
-             {% if orglogos %}
+			<div
+				class="d-flex flex-column align-items-md-end px-0">
+				<!--begin::Logo-->
+				<a href="#" class="mb-5">
 
-					<img src="{{ orglogos }}" width="60" height="60" alt="Logo"/>
-				{% endif %}
-				<a id="a__Certification_of_Donation"><span/></a><a id="_GoBack"/><span class="T1"><br/>
+					{% if orglogos %}
 
-					Certification of
-					dsda
-				</span>
-			</h1>
-			<p class="Standard"></p>
-			<p class="Standard"></p>
-			<h3 class="Heading_20_3">
-				<br>
-					<a id="a__The_Hloom_Berg"><span/></a>
-					dsd
-				</h3>
-				<div class="P5">
-ddd
-				</span>
+						{# <img src="{{ orglogos }}" width="60" height="60" /> #}
+					{% endif %}
+
+				</a>
+				 <h1 class="display-4 font-weight-boldest mb-10">{{app_name}}</h1>
+Ethiopian Public Health Institute
+Institutional Review Board (EPHI-IRB)
+            </div>
+		</td>
+		<td colspan="4" style="width: 120px;">
+			 
+		</td>
+        
+		<td colspan="4" style="width: 150px;">
+			<span class="d-flex flex-column align-items-md-end opacity-70">
+				
+                <span>sero@ephi.gov.et<br></span>
+                <span>+2511111111110 <br></span>
+                <span>Addis Ababa, Ethiopia<br></span>
+				<span>Sr. Paul Street, <br>Luis Partor Avenu</span>
+			</span>
+		</td>
+	</tr>
+    <tr style="background-color: red; margin:0;  height:3px;  margin-right:10; width:100%;">
+    <td></td>
+    </tr>
+</table>
+<table style="background-color:rgba(105, 147, 255, 0.24); margin:0; height:3px;  padding:6px; margin-right:10; width:100%;">
+</table>
+<div
+	class="d-flex flex-column-fluid">
+	<!--begin::Container-->
+	<div class="container">
+					<div class="font-weight-boldest mb-10 my-4"> <center> IRB Certificate</center></div>
+
+		<div class="card-body p-0">
+			<!-- begin: Invoice-->
+			<!-- begin: Invoice header-->
+				<div class="row justify-content-center py-8 px-8 py-md-27 px-md-0"> 
+                <div class="col-md-9">
+					 
+					<div class="d-flex justify-content-between pt-6">
+						<div class="d-flex flex-column flex-root">
+							<span class="font-weight-bolder mb-2">DATA</span>
+							<span class="opacity-70">Dec 12, 2017</span>
+						</div>
+						<div class="d-flex flex-column flex-root">
+							<span class="font-weight-bolder mb-2">INVOICE NO.</span>
+							<span class="opacity-70">GS 000014</span>
+						</div>
+						<div class="d-flex flex-column flex-root">
+							<span class="font-weight-bolder mb-2">INVOICE TO.</span>
+							<span class="opacity-70">Iris Watson, P.O. Box 283 8562 Fusce RD.
+								<br>Fredrick Nebraska 20620</span>
+						</div>
+					</div>
+				</div>
 			</div>
-			<p class="ard">
-				<span class="T2">This certificate is awarded to
-				ddda
-					for attending a
-					sas
-					training held on
-					da
-				</span>
-			</p>
-			<p class="Standard"></p>
-			<h2 class="Heading_20_2">
-				<a id="a___Name_of_the__"><span/></a>
-				<span class="T3">ddd</span>
-			</h2>
-			<p class="Standard"><span class="T2"/></p>
-			<p class="Standard">ddd</p>
+			<!-- end: Invoice header-->
+			<!-- begin: Invoice body-->
+			<div class="container">
 
+				<div class="row justify-content-center py-8 px-8 py-md-8 px-md-0">
+					<div class="col-md-6">
+						<div class="table-responsive">
+							{{title}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end: Invoice body-->
+			<!-- begin: Invoice footer-->
+			<div class="row justify-content-center bg-gray-100 py-8 px-8 py-md-10 px-md-0">
+				<div class="col-md-9">
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="font-weight-bold text-muted text-uppercase">Ethical</th>
+									<th class="font-weight-bold text-muted text-uppercase">Scintifically</th>
+									<th class="font-weight-bold text-muted text-uppercase">DUE DATE</th>
+									<th class="font-weight-bold text-muted text-uppercase">Overall</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="font-weight-bolder">
+									<td>BARCLAYS UK</td>
+									<td>12345678909</td>
+									<td>Jan 07, 2018</td>
+									<td class="text-danger font-size-h3 font-weight-boldest">Approved</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+            
+             
 		</div>
-
-	</body>
-</html>
+	</div>
+</div>
+    <table style="background-color:rgba(105, 147, 255, 0.24);   position: absolute;  margin-top:285px;  padding:40px;   width:100%;">
+</table>
