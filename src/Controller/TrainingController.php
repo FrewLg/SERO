@@ -62,16 +62,7 @@ class TrainingController extends AbstractController
     )
     {}
     
-    #[Route('/schedule', name: 'training_calendar', methods: ['GET'])]
-    public function calendar(TrainingRepository $trainingRepository): Response
-    { 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        
-        return $this->render('training/calendar.html.twig', [
-            'trainings' => $trainingRepository->findAll(),
-        ]);
-    }
-
+  
 
     #[Route('/{id}/add', name: 'app_training_add_details', methods: ['GET', 'POST'])]
     public function adddata(Request $request, TrainingRequest $trainingrequest, EntityManagerInterface $entityManager): Response

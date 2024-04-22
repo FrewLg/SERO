@@ -1,13 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Training Schedules
+{% block title %}
+	{% trans %}Meeting Schedules{% endtrans %}
 {% endblock %}
 
 {% block body %}
 	<div class="card card-custom gutter-b">
 		<div class="card-header">
 			<div class="card-title">
-				<h3 class="card-label">Meeting Schedules</h3>
+				<h3 class="card-label">{% trans %}Meeting Schedules{% endtrans %}</h3>
 			</div>
 		</div>
 		<div class="card-body">
@@ -18,7 +19,7 @@
 							<span class="nav-icon">
 								<i class="fa fa-calendar"></i>
 							</span>
-							<span class="nav-text">Calendar view</span>
+							<span class="nav-text">{% trans %}Calendar view{% endtrans %}</span>
 						</a>
 					</li>
 					<li class="nav-item">
@@ -26,10 +27,10 @@
 							<span class="nav-icon">
 								<i class="fa fa-table"></i>
 							</span>
-							<span class="nav-text">Table view</span>
+							<span class="nav-text">{% trans %}Table view{% endtrans %}</span>
 						</a>
 					</li>
-					 
+
 				</ul>
 				<div class="tab-content mt-5" id="myTabContent">
 					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -38,34 +39,34 @@
 					<div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
 						<div class="table-responsive">
 							<table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>StartingDate</th>
-                <th>EndDate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for meeting_schedule in trainings %}
-            <tr>
-                <td>{{ meeting_schedule.id }}</td>
-                <td>{{ meeting_schedule.name }}</td>
-                <td>{{ meeting_schedule.startingDate ? meeting_schedule.startingDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ meeting_schedule.endDate ? meeting_schedule.endDate|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('meeting_schedule_show', {'id': meeting_schedule.id}) }}">show</a>
-                    <a href="{{ path('app_s_e_r_o_meeting_schedule_edit', {'id': meeting_schedule.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Name</th>
+										<th>Starting Date</th>
+										<th>End Date</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for meeting_schedule in meeting_schedules %}
+										<tr>
+											<td>{{ loop.index }}</td>
+											<td>{{ meeting_schedule.name }}</td>
+											<td>{{ meeting_schedule.startingDate ? meeting_schedule.startingDate|date('Y-m-d  ') : '' }}</td>
+											<td>{{ meeting_schedule.endDate ? meeting_schedule.endDate|date('Y-m-d  ') : '' }}</td>
+											<td>
+												<a href="{{ path('app_s_e_r_o_meeting_schedule_edit', {'id': meeting_schedule.id}) }}" class='btn btn-light-success btn-sm'>Protocols</a>
+												<a href="{{ path('app_s_e_r_o_meeting_schedule_edit', {'id': meeting_schedule.id}) }}" class='btn btn-light-info btn-sm'>Minutes</a>
+											</td>
+										</tr>
+									{% else %}
+										<tr>
+											<td colspan="5">no records found</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+							</table>
 
 						</div>
 					</div>
@@ -89,7 +90,7 @@ defaultView: 'dayGridMonth',
 editable: true,
 eventSources: [
 {
-url: "{{ path('homepage') }}",
+url: "{{ path('fc_load_events') }}",
 method: "POST",
 extraParams: {
 filters: JSON.stringify({})

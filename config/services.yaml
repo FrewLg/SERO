@@ -1,7 +1,3 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     site_settingsfile: '%kernel.project_dir%/config/packages/site_settings.yaml'
@@ -13,13 +9,11 @@ parameters:
     profile_pictures: '%kernel.project_dir%/public/files/profile_pictures'
     site_setting: '%kernel.project_dir%/public/files/site_setting'
     env(DATABASE_URL): "mysql://root:r00tme@127.0.0.1:3306/sss?serverVersion=5.7"
-    # env(MAILER_DSN): "gmail://firewlegese74@gmail.com:PassMaDick1212@localhost?encryption=tls&auth_mode=oauth"
-    # env(MAILER_URL): "gmail://firewlegese74@gmail.com:PassMaDick1212@localhost?encryption=tls&auth_mode=oauth"
     ldap_dc_value : '%env(resolve:LDAP_DC_VALUE)%'
 
     app_name  : 'EPHI-NTC'
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
-    app.supported_locales: 'en|or|sd|am|fr|tg'
+    app.supported_locales: 'en|am|fr|or|sd|af|tg|so'
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -40,13 +34,15 @@ services:
         # tags: [kernel.event_listener]
         - { name: kernel.event_listener, event: kernel.exception }
     App\EventSubscriber\CalendarSubscriber:
-    App\EventSubscriber\LocaleSubscriber:
-        arguments: ['%kernel.default_locale%']
-    App\EventSubscriber\EntityLoggingSubscriber:
-        arguments:
-            $logger: '@logger'
-        tags:
-            - { name: doctrine.event_subscriber }
+        # tags:
+        # - { name: doctrine.event_subscriber }
+    # App\EventSubscriber\LocaleSubscriber:
+    #     arguments: ['%kernel.default_locale%']
+    # App\EventSubscriber\EntityLoggingSubscriber:
+    #     arguments:
+    #         $logger: '@logger'
+    #     tags:
+    #         - { name: doctrine.event_subscriber }
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 knp_paginator:

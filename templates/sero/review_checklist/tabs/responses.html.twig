@@ -2,172 +2,51 @@
 
 {% block title %}Submission
 {% endblock %}
-{% block container_title %}Reviewer Response{% endblock %}
+{% block container_title %}Reviewer Response
+{% endblock %}
 {% block body %}
 	<div class="card card-custom gutter-b">
 		<div class="card-header flex-wrap border-0 pt-3 pb-0">
- <div class="card-title">
+			<div class="card-title">
 				<h3 class="card-label">Review Response
 					<span class="d-block text-muted pt-2 font-size-sm">{{ review_assignment.application.title}}</span>
 				</h3>
 
 			</div>
 		</div>
-		
+
 		<div class="card-body">
-			 
-<div class="card card-custom gutter-b">
-									<div class="card-body">
-										<!--begin::Details-->
-										<div class="d-flex mb-9">
-											<!--begin: Pic-->
-											<div class="flex-shrink-0 mr-7 mt-lg-0 mt-3">
-												<div class="symbol symbol-50 symbol-lg-120">
-													<img src="assets/media/users/300_1.jpg" alt="image">
-												</div>
-												<div class="symbol symbol-50 symbol-lg-120 symbol-primary d-none">
-													<span class="font-size-h3 symbol-label font-weight-boldest">JM</span>
-												</div>
-											</div>
-											<!--end::Pic-->
-											<!--begin::Info-->
-											<div class="flex-grow-1">
-												<!--begin::Title-->
-												<div class="d-flex justify-content-between flex-wrap mt-1">
-													<div class="d-flex mr-3">
-														<a href="#" class="text-dark-75 text-hover-primary font-size-h5 font-weight-bold mr-3">{{ review_assignment.irbreviewer}} </a>
-														<a href="#">
-															<i class="flaticon2-correct text-success font-size-h5"></i>
-														</a>
-													</div>
-													<div class="my-lg-0 my-3">
-														<a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">ask</a>
-														<a href="#" class="btn btn-sm btn-info font-weight-bolder text-uppercase">hire</a>
-													</div>
-												</div>
-												<!--end::Title-->
-												<!--begin::Content-->
-												<div class="d-flex flex-wrap justify-content-between mt-1">
-													<div class="d-flex flex-column flex-grow-1 pr-8">
-														<div class="d-flex flex-wrap mb-4">
-															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-															<i class="flaticon2-new-email mr-2 font-size-lg"></i>{{ review_assignment.irbreviewer.email}}</a>
-															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-															<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>{{ review_assignment.irbreviewer}}</a>
-															<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
-															<i class="flaticon2-placeholder mr-2 font-size-lg"></i>{{ review_assignment.irbreviewer.profile.dirctorate}}</a>
-														</div>
-														<span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
-														<span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
-													<span class=" text-hover-warning font-size-h5 font-weight-bold mr-3">
-													 Reviewed at:	{{ review_assignment.reviewedAt|date('h:m sa d/m/y')}}
-													</span>
-													</div>
-													<div class="d-flex align-items-center w-25 flex-fill float-right mt-lg-12 mt-8">
-														<span class="font-weight-bold text-dark-75">Progress</span>
-														<div class="progress progress-xs mx-3 w-100">
-															<div class="progress-bar bg-success" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-														</div>
-														<span class="font-weight-bolder text-dark">78%</span>
-													</div>
-												</div>
-												<!--end::Content-->
-											</div>
-											<!--end::Info-->
-										</div>
-										<!--end::Details-->
-										<div class="separator separator-solid"></div>
-										<!--begin::Items-->
-										<div class="d-flex align-items-center flex-wrap mt-8">
-											<!--begin::Item-->
-											<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-												<span class="mr-4">
-													<i class="flaticon-piggy-bank display-4 text-muted font-weight-bold"></i>
-												</span>
-												<div class="d-flex flex-column text-dark-75">
-													<span class="font-weight-bolder font-size-sm">Earnings</span>
-													<span class="font-weight-bolder font-size-h5">
-													<span class="text-dark-50 font-weight-bold">$</span>249,500</span>
-												</div>
-											</div>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-												<span class="mr-4">
-													<i class="flaticon-confetti display-4 text-muted font-weight-bold"></i>
-												</span>
-												<div class="d-flex flex-column text-dark-75">
-													<span class="font-weight-bolder font-size-sm">Expenses</span>
-													<span class="font-weight-bolder font-size-h5">
-													<span class="text-dark-50 font-weight-bold">$</span>164,700</span>
-												</div>
-											</div>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-												<span class="mr-4">
-													<i class="flaticon-pie-chart display-4 text-muted font-weight-bold"></i>
-												</span>
-												<div class="d-flex flex-column text-dark-75">
-													<span class="font-weight-bolder font-size-sm">Net</span>
-													<span class="font-weight-bolder font-size-h5">
-													<span class="text-dark-50 font-weight-bold">$</span>782,300</span>
-												</div>
-											</div>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-												<span class="mr-4">
-													<i class="flaticon-file-2 display-4 text-muted font-weight-bold"></i>
-												</span>
-												<div class="d-flex flex-column flex-lg-fill">
-													<span class="text-dark-75 font-weight-bolder font-size-sm">73 Tasks</span>
-													<a href="#" class="text-primary font-weight-bolder">View</a>
-												</div>
-											</div>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<div class="d-flex align-items-center flex-lg-fill mr-5 mb-2">
-												<span class="mr-4">
-													<i class="flaticon-chat-1 display-4 text-muted font-weight-bold"></i>
-												</span>
-												<div class="d-flex flex-column">
-													<span class="text-dark-75 font-weight-bolder font-size-sm">648 Comments</span>
-													<a href="#" class="text-primary font-weight-bolder">View</a>
-												</div>
-											</div>
-											<!--end::Item-->
-											<!--begin::Item-->
-											<div class="d-flex align-items-center flex-lg-fill mb-2 float-left">
-												<span class="mr-4">
-													<i class="flaticon-network display-4 text-muted font-weight-bold"></i>
-												</span>
-												<div class="symbol-group symbol-hover">
-													<div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Mark Stone">
-														<img alt="Pic" src="assets/media/users/300_25.jpg">
-													</div>
-													<div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Charlie Stone">
-														<img alt="Pic" src="assets/media/users/300_19.jpg">
-													</div>
-													<div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Luca Doncic">
-														<img alt="Pic" src="assets/media/users/300_22.jpg">
-													</div>
-													<div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Nick Mana">
-														<img alt="Pic" src="assets/media/users/300_23.jpg">
-													</div>
-													<div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Teresa Fox">
-														<img alt="Pic" src="assets/media/users/300_18.jpg">
-													</div>
-													<div class="symbol symbol-30 symbol-circle symbol-light">
-														<span class="symbol-label font-weight-bold">5+</span>
-													</div>
-												</div>
-											</div>
-											<!--end::Item-->
-										</div>
-										<!--begin::Items-->
+
+			 <div class="d-flex flex-wrap justify-content-between mt-1">
+								<div class="d-flex flex-column flex-grow-1 pr-8">
+									<div class="d-flex flex-wrap mb-4">
+										<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+											<i class="flaticon2-new-email mr-2 font-size-lg"></i>
+											{{ review_assignment.irbreviewer.email}}</a>
+										<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+											<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>
+											{{ review_assignment.irbreviewer}}</a>
+										<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
+											<i class="flaticon2-placeholder mr-2 font-size-lg"></i>
+											{{ review_assignment.irbreviewer.profile.dirctorate}}</a>
 									</div>
+									<span class="font-weight-bold text-dark-50">I distinguish three main text objectives could be merely to inform people.</span>
+									<span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
+									<span class=" text-hover-warning font-size-h5 font-weight-bold mr-3">
+										Reviewed at:
+										{{ review_assignment.reviewedAt|date('h:m sa d/m/y')}}
+									</span>
 								</div>
+								<div class="d-flex align-items-center w-25 flex-fill float-right mt-lg-12 mt-8">
+									<span class="font-weight-bold text-dark-75">Progress</span>
+									<div class="progress progress-xs mx-3 w-100">
+										<div class="progress-bar bg-success" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									<span class="font-weight-bolder text-dark">78%</span>
+								</div>
+							</div>
+							<br>
+							<hr>
 
 			{% if review_assignment.reviewerResponses|length >0   %}
 				<table class="table table-bordered ">
@@ -188,20 +67,24 @@
 									{% set parents = parents|merge({("key" ~ checklist.checklist.parent.id):checklist.checklist.parent}) %}
 
 								{% else %}
-								<tr>
+									<tr>
 										<td>
 											<p style="margin-left:10px">{{ loop.index}}.
 												{{checklist}}</p>
 										</td>
-										<td> 
-										{% if checklist.checklist.answerType ==1 and checklist.answer == 'yes' %}
-												<span class="label label-lg label-light-success label-inline"> <i class="fa fa-check text-success m-1 font-size-sm"> </i> Yes</span>
-										
-										{% else %}
-												<span class="label label-lg label-light-danger label-inline"> <i class="fa fa-times text-danger m-1 font-size-sm"> </i> No</span>
+										<td>
+											{% if checklist.checklist.answerType ==1 and checklist.answer == 'yes' %}
+												<span class="label label-lg label-light-success label-inline">
+													<i class="fa fa-check text-success m-1 font-size-sm"></i>
+													Yes</span>
 
-										{% endif %}
-										
+											{% else %}
+												<span class="label label-lg label-light-danger label-inline">
+													<i class="fa fa-times text-danger m-1 font-size-sm"></i>
+													No</span>
+
+											{% endif %}
+
 										</td>
 										<td>{{ checklist.comment }}</td>
 									</tr>
@@ -212,30 +95,30 @@
 								<tr>
 									<th>
 										<b style="margin-left:10px">{{toRoman(loop.index)}}.
-											{{checklist_parent}}</b></th>
-											<th>Response</th>
-										</tr>
-										{% for checklist in review_assignment.reviewerResponses|filter(checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.parent ==  checklist_parent)) %}
-											<tr>
-												<td>
-													<p style="margin-left:20px">{{loop.index}}.
-														{{checklist}}</p>
-												</td>
-												<td>{{ checklist.answer }}</td>
-											</tr>
-
-										{% endfor %}
-									{% endfor %}
+											{{checklist_parent}}</b>
+									</th>
+									<th>Response</th>
+								</tr>
+								{% for checklist in review_assignment.reviewerResponses|filter(checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.parent ==  checklist_parent)) %}
+									<tr>
+										<td>
+											<p style="margin-left:20px">{{loop.index}}.
+												{{checklist}}</p>
+										</td>
+										<td>{{ checklist.answer }}</td>
+									</tr>
 
 								{% endfor %}
-							</tbody>
-						</table>
-					</tbody>
-				{% else %}
-					<p class="text-danger">
-						No review responses has been  given for this protocol yet!</p>
-				{% endif %}
+							{% endfor %}
 
-			</div>
-		</div>
-	{% endblock %}
+						{% endfor %}
+					</tbody>
+				</table>
+			</tbody>
+		{% else %}
+			<p class="text-danger">
+				No review responses has been  given for this protocol yet!</p>
+		{% endif %}
+
+	</div>
+</div>{% endblock %}

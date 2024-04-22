@@ -3,12 +3,12 @@ framework:
     secret: '%env(APP_SECRET)%'
     # csrf_protection: true
     # error_controller: App\Controller\ErrorController::show
-#    error_controller: App\EventListener\ExceptionListener
+    # error_controller: App\EventListener\ExceptionListener
     # Note that the session will be started ONLY if you read or write from it.
-    # session: true
+    session: 
         # handler_id: App\Session\CustomSessionHandler
-    #esi: true
-    #fragments: true
+    # esi: true
+    fragments: true
 
 when@test:
     framework:

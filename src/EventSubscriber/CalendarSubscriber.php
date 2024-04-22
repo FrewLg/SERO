@@ -2,8 +2,9 @@
 
 namespace App\EventSubscriber;
 
-use App\Repository\TrainingRepository;
+// use App\Repository\TrainingRepository;
 use CalendarBundle\CalendarEvents;
+use App\Repository\SERO\MeetingScheduleRepository;
 use CalendarBundle\Entity\Event;
 use CalendarBundle\Event\CalendarEvent;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +15,7 @@ class CalendarSubscriber implements EventSubscriberInterface
 {
 
     public function __construct(
-        private TrainingRepository $trainingRepository,
+        private MeetingScheduleRepository $meetingScheduleRepository,
         private EntityManagerInterface $em,
         private UrlGeneratorInterface $router
     )
@@ -33,22 +34,24 @@ class CalendarSubscriber implements EventSubscriberInterface
    
     {
          
-        $dates=$this->trainingRepository->findAll();
+        $dates=$this->meetingScheduleRepository->findAll();
         foreach ($dates as $training) {
 
             $trainingEvent = new Event(
-                $training->getTrainingRequest()->getTrainingTopic()->getName()." at ".$training->getVenue()->getName(),
+                $training->getName()." at ",
                 $training->getStartingDate(),
                 $training->getEndDate()
             );
+ 
             $trainingEvent->setOptions([
                 'backgroundColor' => "#6993FF",
                 'borderColor' => "#6993FF",
             ]);
             $trainingEvent->addOption(
                 'url',
-                $this->router->generate('app_training_show',['id'=>$training->getId()])
+                $this->router->generate('meeting_schedule_show',['id'=>$training->getId()])
             );
+
             $calendar->addEvent($trainingEvent);
         }
          

@@ -7,6 +7,7 @@ use App\Entity\SERO\ApplicationFeedback;
 use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\IrbCertificate;
 use App\Entity\SERO\Meeting;
+use App\Entity\SERO\MeetingSchedule;
 use App\Entity\SERO\ReviewAssignment;
 use App\Entity\SERO\ReviewerResponse;
 use App\Repository\UserRepository;
@@ -116,6 +117,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: ReviewerResponse::class, mappedBy: 'reviewedBy')]
     private Collection $reviewerResponses;
 
+    /**
+     * @var Collection<int, MeetingSchedule>
+     */
+    #[ORM\OneToMany(targetEntity: MeetingSchedule::class, mappedBy: 'createdBy')]
+    private Collection $meetingSchedules;
+
   
     public function __construct()
     {
@@ -134,6 +141,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->applicationFeedback = new ArrayCollection();
         $this->applications = new ArrayCollection();
         $this->reviewerResponses = new ArrayCollection();
+        $this->meetingSchedules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -719,6 +727,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($reviewerResponse->getReviewedBy() === $this) {
                 $reviewerResponse->setReviewedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MeetingSchedule>
+     */
+    public function getMeetingSchedules(): Collection
+    {
+        return $this->meetingSchedules;
+    }
+
+    public function addMeetingSchedule(MeetingSchedule $meetingSchedule): static
+    {
+        if (!$this->meetingSchedules->contains($meetingSchedule)) {
+            $this->meetingSchedules->add($meetingSchedule);
+            $meetingSchedule->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeetingSchedule(MeetingSchedule $meetingSchedule): static
+    {
+        if ($this->meetingSchedules->removeElement($meetingSchedule)) {
+            // set the owning side to null (unless already changed)
+            if ($meetingSchedule->getCreatedBy() === $this) {
+                $meetingSchedule->setCreatedBy(null);
             }
         }
 

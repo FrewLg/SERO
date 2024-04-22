@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Application  
+{% block title %}Application
 {% endblock %}
 
 {% block body %}
@@ -162,80 +162,74 @@
 					</div>
 				</div>
 			</div>
-			<!--end::Search Form-->
-			<!--end: Search Form-->
-			<!--begin: Datatable-->
+			<form name="" id="user_list_form" method="post">
+				<table class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline collapsed" id="kt_datatable_2" role="grid" aria-describedby="kt_datatable_2_info">
+					<thead>
+						<tr>
+							<th nowrap='nowrap'>
+								<label class="checkbox checkbox-single">
+									<input type="checkbox" id="select_all" class="group-checkable">
+									<span></span>
+								</label>
+							</th>
 
-				<form name="" id="user_list_form" method="post"> <table class="table table-striped table-bordered" id="selectable_users">
-
-					<table class="table">
-						<thead>
+							<th>Title</th>
+							<th>Status</th>
+							<th>Duration</th>
+							<th>Meetings</th>
+							<th>Submitted at</th>
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for application in applications %}
 							<tr>
+								<td nowrap='nowrap'>
+									<label class="checkbox checkbox-single">
+										<input type="checkbox" name="check[]" class="checkbox">
+										<span></span>
+									</label>
+								</td>
+								<td>{{ application.title }}</td>
+								<td>
+									{% if application.meeting %}
+										{{application.meeting.status }}
+									{% endif %}
+								</td>
 
-								<th nowrap='nowrap'>
-								{# <input type="checkbox" name="topics" id="select_all"/> #}
-								{# <label class="checkbox  checkbox-info flex-shrink-0 mr-3"> #}
-																					
-								<input type="checkbox" class="checkbox-info flex-shrink-0 mr-3" name="topics" id="select_all"/>
-																					{# <span></span>
-																				</label>  #}
-								</th>
-								
-								<th>Title</th>
-								<th>Status</th>
-								<th>Duration</th>
-								<th>Meetings</th>
-								<th>Submitted at</th>
-								<th>actions</th>
+								<td>{{ application.startDate ? application.startDate|date('d/m/y ') : '' }}-{{ application.endDate ? application.endDate|date('d/m/y ') : '' }}</td>
+								<td>{{ application.meeting|length }}</td>
+								<td>{{ application.createdAt ? application.createdAt|date('h:i d/m/y ') : '' }}</td>
+								<td nowrap="nowrap">
+
+									<a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a>
+									<a href="{{ path('app_s_e_r_o_application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
+									<a href="{{ path('app_s_e_r_o_application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							{% for application in applications %}
-								<tr>
-									<td nowrap='nowrap'><input class="checkbox" type="checkbox" name="check[]">{{ application.id }}
-									</td>
-									<td>{{ application.title }}</td>
-									<td>
-										{% if application.meeting %}
-											{{application.meeting.status }}
-										{% endif %}
-									</td>
+						{% else %}
+							<tr>
+								<td colspan="9">no records found</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
 
-									<td>{{ application.startDate ? application.startDate|date('Y-m-d') : '' }}-{{ application.endDate ? application.endDate|date('Y-m-d') : '' }}</td>
-									<td>{{ application.meeting|length }}</td>
-									<td>{{ application.createdAt ? application.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-									{# <td>{{ application.updatedAt ? application.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
-									<td nowrap=nowrap >
-									
-										<a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a> 
-										{# <a href="{{ path('make_a_review', {'id': application.id}) }}">Assign</a> #}
-										<a href="{{ path('app_s_e_r_o_application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
-										<a href="{{ path('app_s_e_r_o_application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
-									</td>
-								</tr>
-							{% else %}
-								<tr>
-									<td colspan="9">no records found</td>
-								</tr>
-							{% endfor %}
-						</tbody>
-					</table>
+				<button id="submit-btn" type="submit" class="btn btn-primary btn-sm">Delete selected</button>
+			</form>
 
-					<button id="submit-btn" type="submit" class="btn btn-primary btn-sm">Delete selected</button>
-				</form>
-
-			</div>
 		</div>
+	</div>
 
 
-	{% endblock %}
+{% endblock %}
 
 
-	{% block javascripts %}
-		<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+{% block javascripts %}
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
-		<script type="text/javascript">
-			// select all checkboxes
+	<script type="text/javascript">
+		// select all checkboxes
 $("#select_all").change(function () { // "select all" change
 $(".checkbox").prop('checked', $(this).prop("checked")); // change all ".checkbox" checked status
 });
@@ -250,5 +244,5 @@ if ($('.checkbox:checked').length == $('.checkbox').length) {
 $("#select_all").prop('checked', true);
 }
 });
-		</script>
-	{% endblock %}
+	</script>
+{% endblock %}

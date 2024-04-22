@@ -15,7 +15,8 @@
 # https://symfony.com/doc/current/best_practices.html#use-environment-variables-for-infrastructure-configuration
 
 ###> symfony/framework-bundle ###
-APP_ENV=dev
+APP_ENV=dd
+APP_DEBUG=1
 APP_SECRET=1285d4d969efd2f90a9c43d9f451dc03
 ###< symfony/framework-bundle ###
 # MAILER_DSN=gmail://journals@ephi.gov.et:welcome@ephi@localhost?encryption=tls&auth_mode=oauth
@@ -59,5 +60,5 @@ MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
 # SEAL_DSN="redisearch://127.0.0.1:6379"
 # SEAL_DSN="solr://127.0.0.1:8983"
 # SEAL_DSN="typesense://S3CR3T@127.0.0.1:8108"
-SEAL_DSN=loupe://var/indexes
+#SEAL_DSN=loupe://var/indexes
 ###< schranz-search/symfony-bundle ###

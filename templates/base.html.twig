@@ -32,7 +32,9 @@
 		<link rel="shortcut icon" href="{{ asset('files/site_setting/'~site_logo ) }}">{% block styles %}{% endblock %} </head>
 		<!--end::Head-->
 		<!--begin::Body-->
-		<body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+		{# <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed  page-loading"> #}
+
+		   <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 			<!--begin::Main-->
 			<!--begin::Header Mobile-->
 				<div
@@ -131,8 +133,12 @@
 									<br>
 									<div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
 										<!--begin::Header Nav-->
-										{# <h5> {{app_description|trans}}</h5> #}
-											<span class="menu-text"> <h5>
+ 											<span class="menu-text"> 
+											
+											<h5 class="text-default mt-2">
+											{# <a href="#" class="brand-logo">
+								<img alt="Logo" class="pull-right" src="{{ asset('files/site_setting/'~site_logo ) }}" width="50" height='50'/>
+							</a> #}
 												<b>{{ app_description |trans }}</b>
 											</h5>
 										</span>
@@ -254,12 +260,12 @@
 											</span>
 										</div>
 									</div>
+<a href="{{path('app_pdf_generator')}}">Cert</a>
 									
 									<div
 										class="dropdown"> <!--begin::Toggle-->
 										<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
 											<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
-
 
 												<span class="text-capitalize text-dark-50 font-weight-bolder font-size-base">
 													{{ app.request.getLocale() }}
@@ -398,9 +404,9 @@
 									<!--begin::Header-->
 									<div class="d-flex align-items-center mt-5">
 										<div class="symbol symbol-100 mr-5">
-											<div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+											<div class="symbol-label" style="background-image:url({{ asset('files/profile_pictures/defaultuser.png') }})"></div>
 											<i class="symbol-badge bg-success"></i>
-										</div>
+										</div> 
 										<div class="d-flex flex-column">
 											<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
 												{% if app.user %}

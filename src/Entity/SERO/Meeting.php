@@ -59,6 +59,9 @@ class Meeting
     #[ORM\OneToMany(targetEntity: Application::class, mappedBy: 'meeting')]
     private Collection $applications;
 
+    #[ORM\ManyToOne(inversedBy: 'meetings')]
+    private ?MeetingSchedule $meetingSchedule = null;
+
     public function __construct()
     {
         $this->attendee = new ArrayCollection();
@@ -204,6 +207,18 @@ class Meeting
                 $application->setMeeting(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMeetingSchedule(): ?MeetingSchedule
+    {
+        return $this->meetingSchedule;
+    }
+
+    public function setMeetingSchedule(?MeetingSchedule $meetingSchedule): static
+    {
+        $this->meetingSchedule = $meetingSchedule;
 
         return $this;
     }

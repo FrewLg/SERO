@@ -29,9 +29,9 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
-                enable_csrf: true
+                # enable_csrf: true
                 # default_target_path: app_training_index
-                use_referer: true
+                # use_referer: true
 
             # login_throttling: null
             login_throttling:

@@ -8,14 +8,19 @@ use Symfony\Component\Routing\Attribute\Route;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
+// #[Route('/cert', name: 'app_pdf_generator')]
+#[Route('{_locale<%app.supported_locales%>}/cert')]
+
 class PdfGeneratorController extends AbstractController
 {
-    #[Route('/pdf/generator', name: 'app_pdf_generator')]
-    public function index(): Response
+    #[Route('/', name: 'app_pdf_generator')]
+    public function index()
     {
 
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         $data = [
-            'imageSrc'  => $this->imageToBase64($this->getParameter('kernel.project_dir') . '/public/cert_templates/21.jpg'),
+            // 'imageSrc'  => $this->imageToBase64($this->getParameter('kernel.project_dir') . '/public/cert_templates/21.jpg'),
             'name'         => 'John Doe',
             'address'      => 'USA',
             'mobileNumber' => '000000000',
@@ -33,20 +38,21 @@ class PdfGeneratorController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
         $dompdf->loadHtml($html);
         $dompdf->render();
-        ob_end_clean();
-         
+        // ob_end_clean();
+        //  dd();
+ 
         return new Response (
-            $dompdf->stream('resume', ["Attachment" => false]),
+            $dompdf->stream('resume', ["Attachment" => true]),
             Response::HTTP_OK,
             ['Content-Type' => 'application/pdf']
         );
  
     }
-    private function imageToBase64($path) {
-        $path = $path;
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data = file_get_contents($path);
-        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-        return $base64;
-    }
+    // private function imageToBase64($path) {
+    //     $path = $path;
+    //     $type = pathinfo($path, PATHINFO_EXTENSION);
+    //     $data = file_get_contents($path);
+    //     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    //     return $base64;
+    // }
 }

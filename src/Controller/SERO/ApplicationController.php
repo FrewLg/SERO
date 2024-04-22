@@ -20,6 +20,7 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use App\Repository\SERO\ApplicationFeedbackRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,10 +38,10 @@ class ApplicationController extends AbstractController
     }
 
     #[Route('/my-applications', name: 'myapplication', methods: ['GET', 'POST'])]
-    public function myapplications(Request $request, EntityManagerInterface $entityManager, PaginatorInterface $paginatorInterface): Response
+    public function myapplications(Request $request, EntityManagerInterface $em, PaginatorInterface $paginatorInterface): Response
     {
         $me = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
+        // $em = $this->getDoctrine()->getManager();
 
         $allappsbyme =  array_reverse($em->getRepository(Application::class)->findBy(array('submittedBy' => $me)));
 
@@ -49,7 +50,7 @@ class ApplicationController extends AbstractController
             $request->query->getInt('page', 1),
             10
         );
-        return $this->render('application/my_application.html.twig', [
+        return $this->render('sero/application/my_application.html.twig', [
             'applications' => $data,
         ]);
     }
@@ -94,7 +95,7 @@ class ApplicationController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         if($reviewAssignment->getIrbreviewer()->getId() == $this->getUser()->getId() && $reviewAssignment->getReviewedAt()!==NULL){
-            $this->addFlash("success", "Review results saved successfully!.");
+            $this->addFlash("warning", "Review response hase been already sent!.");
 
         return $this->redirectToRoute('review_result', ['id'=>$reviewAssignment->getId()], Response::HTTP_SEE_OTHER);
 

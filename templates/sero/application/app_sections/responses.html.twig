@@ -61,8 +61,10 @@
 								</div>
 							</div>
 							{% if reviewResponse.reviewerResponses|length >0   %}
-								<table class="table table-bordered   px-8  m-0 p-0  ">
-
+							{# <div class="datatable datatable-bordered datatable-head-custom datatable-default datatable-primary datatable-loaded" id="kt_datatable" style=""> #}
+							
+							<table class="table table-separate table-head-custom table-checkable dataTable no-footer dtr-inline collapsed" id="kt_datatable_2" role="grid" aria-describedby="kt_datatable_2_info" 	>
+							{# <table class="datatable-table" style="display: block;"> #}
 									<tbody>
 
 										{% for checklist_group in irb_review_checklist_group %}
@@ -126,6 +128,7 @@
 										{% endfor %}
 									</tbody>
 								</table>
+							{# </div> #}
 
 							{% else %}
 								<p class="text-danger">
