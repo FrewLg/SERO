@@ -14,16 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('{_locale<%app.supported_locales%>}/checklist-group')]
 class ReviewChecklistGroupController extends AbstractController
 {
-    #[Route('/', name: 'review_checklist_group_index', methods: ['GET'])]
-    public function index(ReviewChecklistGroupRepository $reviewChecklistGroupRepository): Response
-    {
-        return $this->render('sero/review_checklist_group/index.html.twig', [
-            'review_checklist_groups' => $reviewChecklistGroupRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_s_e_r_o_review_checklist_group_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/', name: 'review_checklist_group_index', methods: ['GET', 'POST'])]
+    public function index(ReviewChecklistGroupRepository $reviewChecklistGroupRepository,Request $request, EntityManagerInterface $entityManager): Response
     {
         $reviewChecklistGroup = new ReviewChecklistGroup();
         $form = $this->createForm(ReviewChecklistGroupType::class, $reviewChecklistGroup);
@@ -33,24 +25,18 @@ class ReviewChecklistGroupController extends AbstractController
             $entityManager->persist($reviewChecklistGroup);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_review_checklist_group_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_checklist_group_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('sero/review_checklist_group/new.html.twig', [
+        return $this->render('sero/review_checklist_group/index.html.twig', [
+            'review_checklist_groups' => $reviewChecklistGroupRepository->findAll(),
             'review_checklist_group' => $reviewChecklistGroup,
             'form' => $form,
         ]);
     }
+ 
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_checklist_group_show', methods: ['GET'])]
-    public function show(ReviewChecklistGroup $reviewChecklistGroup): Response
-    {
-        return $this->render('sero/review_checklist_group/show.html.twig', [
-            'review_checklist_group' => $reviewChecklistGroup,
-        ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_s_e_r_o_review_checklist_group_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'review_checklist_group_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ReviewChecklistGroup $reviewChecklistGroup, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ReviewChecklistGroupType::class, $reviewChecklistGroup);
@@ -59,7 +45,7 @@ class ReviewChecklistGroupController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_review_checklist_group_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_checklist_group_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/review_checklist_group/edit.html.twig', [
@@ -68,7 +54,7 @@ class ReviewChecklistGroupController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_checklist_group_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'review_checklist_group_delete', methods: ['POST'])]
     public function delete(Request $request, ReviewChecklistGroup $reviewChecklistGroup, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$reviewChecklistGroup->getId(), $request->getPayload()->get('_token'))) {
@@ -76,6 +62,6 @@ class ReviewChecklistGroupController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_s_e_r_o_review_checklist_group_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('review_checklist_group_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudyType index{% endblock %}
+
+{% block body %}
+  
+  	<div class="row">
+
+		<div class="col-12 py-4">
+
+			<div class="accordion  accordion-toggle-arrow" id="accordionExample4">
+				<div class="card">
+					<div class="card-header" id="headingOne4">
+						<div class="card-title" data-toggle="collapse" data-target="#collapseOne4">
+							<i class="flaticon2-layers-1"></i>
+							Add Review Type
+						</div>
+					</div>
+					<div id="collapseOne4" class="collapse  " data-parent="#accordionExample4">
+						<div class="card-body">
+
+
+							{{ include('sero/common_files/_form.html.twig') }}
+
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div class="card card-custom gutter-b my-0">
+
+		<div class="card-body">
+			<div class="example-preview">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">
+							<span class="nav-icon">
+								<i class="fa fa-cog"></i>
+							</span>
+							<span class="nav-text">Review Types
+
+							</span>
+
+
+						</a>
+					</li>
+
+
+				</ul>
+				<div class="tab-content mt-5" id="myTabContent">
+					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="table-responsive">
+
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Name</th>
+										<th>Description</th>
+										<th>actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for study_type in study_types %}
+            <tr>
+                <td>{{ study_type.id }}</td>
+                <td>{{ study_type.name }}</td>
+                <td>{{ study_type.description }}</td>
+                <td>
+                     <a href="{{ path('study_type_edit', {'id': study_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab content 3</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+     
+
+ {% endblock %}

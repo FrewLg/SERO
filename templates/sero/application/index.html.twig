@@ -94,72 +94,23 @@
 				<div class="mb-7"> <div class="row align-items-center">
 					<div class="col-lg-9 col-xl-8">
 						<div class="row align-items-center">
-							<div class="col-md-4 my-2 my-md-0">
+							<div class="col-md-9 my-2 my-md-0">
 								<div class="input-icon">
-									<input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query">
+									<input type="text" class="form-control" placeholder="Search..." id="live_search" autocomplete="off">
 									<span>
 										<i class="flaticon2-search-1 text-muted"></i>
 									</span>
 								</div>
 							</div>
-							<div class="col-md-4 my-2 my-md-0">
-								<div class="d-flex align-items-center">
-									<label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-									<div class="dropdown bootstrap-select form-control">
-										<select class="form-control" id="kt_datatable_search_status" tabindex="-98">
-											<option value="">All</option>
-											<option value="1">Pending</option>
-											<option value="2">Delivered</option>
-											<option value="3">Canceled</option>
-											<option value="4">Success</option>
-											<option value="5">Info</option>
-											<option value="6">Danger</option>
-										</select>
-										<button type="button" class="btn dropdown-toggle btn-light bs-placeholder" data-toggle="dropdown" role="combobox" aria-owns="bs-select-1" aria-haspopup="listbox" aria-expanded="false" data-id="kt_datatable_search_status" title="All">
-											<div class="filter-option">
-												<div class="filter-option-inner">
-													<div class="filter-option-inner-inner">All</div>
-												</div>
-											</div>
-										</button>
-										<div class="dropdown-menu ">
-											<div class="inner show" role="listbox" id="bs-select-1" tabindex="-1">
-												<ul class="dropdown-menu inner show" role="presentation"></ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 my-2 my-md-0">
-								<div class="d-flex align-items-center">
-									<label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-									<div class="dropdown bootstrap-select form-control">
-										<select class="form-control" id="kt_datatable_search_type" tabindex="-98">
-											<option value="">All</option>
-											<option value="1">Online</option>
-											<option value="2">Retail</option>
-											<option value="3">Direct</option>
-										</select>
-										<button type="button" class="btn dropdown-toggle btn-light bs-placeholder" data-toggle="dropdown" role="combobox" aria-owns="bs-select-2" aria-haspopup="listbox" aria-expanded="false" data-id="kt_datatable_search_type" title="All">
-											<div class="filter-option">
-												<div class="filter-option-inner">
-													<div class="filter-option-inner-inner">All</div>
-												</div>
-											</div>
-										</button>
-										<div class="dropdown-menu ">
-											<div class="inner show" role="listbox" id="bs-select-2" tabindex="-1">
-												<ul class="dropdown-menu inner show" role="presentation"></ul>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+
+
 						</div>
 					</div>
-					<div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-						<a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
-					</div>
+					{# <div id="div" class="col-lg-3 col-xl-3 col-md-9 mt-5 mt-lg-0">
+											<a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+										</div> #}
+
+
 				</div>
 			</div>
 			<form name="" id="user_list_form" method="post">
@@ -182,37 +133,40 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for application in applications %}
-							<tr>
-								<td nowrap='nowrap'>
-									<label class="checkbox checkbox-single">
-										<input type="checkbox" name="check[]" class="checkbox">
-										<span></span>
-									</label>
-								</td>
-								<td>{{ application.title }}</td>
-								<td>
-									{% if application.meeting %}
-										{{application.meeting.status }}
-									{% endif %}
-								</td>
+						<div  id="searchResult">
+							{% for application in applications %}
+								<tr>
+									<td nowrap='nowrap'>
+										<label class="checkbox checkbox-single">
+											<input type="checkbox" name="check[]" class="checkbox">
+											<span></span>
+										</label>
+									</td>
+									<td>{{ application.title }}</td>
+									<td>
+										{% if application.meeting %}
+											{{application.meeting.status }}
+										{% endif %}
+									</td>
 
-								<td>{{ application.startDate ? application.startDate|date('d/m/y ') : '' }}-{{ application.endDate ? application.endDate|date('d/m/y ') : '' }}</td>
-								<td>{{ application.meeting|length }}</td>
-								<td>{{ application.createdAt ? application.createdAt|date('h:i d/m/y ') : '' }}</td>
-								<td nowrap="nowrap">
+									<td>{{ application.startDate ? application.startDate|date('d/m/y ') : '' }}-{{ application.endDate ? application.endDate|date('d/m/y ') : '' }}</td>
+									<td>{{ application.meeting|length }}</td>
+									<td>{{ application.createdAt ? application.createdAt|date('h:i d/m/y ') : '' }}</td>
+									<td nowrap="nowrap">
 
-									<a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a>
-									<a href="{{ path('app_s_e_r_o_application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
-									<a href="{{ path('app_s_e_r_o_application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
-									<a href="{{ path('ethical_clearance_cert', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
-								</td>
-							</tr>
-						{% else %}
-							<tr>
-								<td colspan="9">no records found</td>
-							</tr>
-						{% endfor %}
+										<a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a>
+										<a href="{{ path('app_s_e_r_o_application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
+										<a href="{{ path('app_s_e_r_o_application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
+										<a href="{{ path('ethical_clearance_cert', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
+										<a href="{{ path('statement', {'id': application.id}) }}" class='btn btn-light-warning btn-sm'>statement</a>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="9">no records found</td>
+								</tr>
+							{% endfor %}
+						</div>
 					</tbody>
 				</table>
 
@@ -222,14 +176,35 @@
 		</div>
 	</div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$("#live_search").keyup(function () {
+var input = $($this).val();
+alert(input);
+if (input != "") {
+$.ajax({
+url: "{{ path('application_index') }}",
+data: {
+input: input
+},
+success: function (data) {
+$("#searchResult").html(data);
+}
+});
+} else {
+$("#searchResult").css("display" : none);
 
+}
+
+});
+	</script>
 {% endblock %}
 
 
 {% block javascripts %}
-	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	{# <script src="https://code.jquery.com/jquery-3.7.0.js"></script> #}
 
-	<script type="text/javascript">
+	{# <script type="text/javascript">
 		// select all checkboxes
 $("#select_all").change(function () { // "select all" change
 $(".checkbox").prop('checked', $(this).prop("checked")); // change all ".checkbox" checked status
@@ -245,5 +220,29 @@ if ($('.checkbox:checked').length == $('.checkbox').length) {
 $("#select_all").prop('checked', true);
 }
 });
+	</script> #}
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$("#live_search").keyup(function () {
+var input = $($this).val();
+alert(input);
+if (input != "") {
+$.ajax({
+url: "{{ path('application_index') }}",
+data: {
+input: input
+},
+success: function (data) {
+$("#searchResult").html(data);
+}
+});
+} else {
+$("#searchResult").css("display" : none);
+
+}
+
+});
 	</script>
+
 {% endblock %}

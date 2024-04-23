@@ -1,4 +1,3 @@
- 
 {% block body %}
 
 	<div
@@ -10,23 +9,19 @@
 			<div class="card-header border-0 pt-5">
 				<h3 class="card-title align-items-start flex-column">
 					<span class="card-label font-weight-bolder text-dark">
-					 {% if orglogos %}
+						{# {% if orglogos %}
 
-					<img src="{{ orglogos }}" width="60" height="60" alt="Logo"/>
-				{% endif %}
-				</span>
+							<img src="{{ orglogos }}" width="60" height="60" alt="Logo"/>
+						{% endif %} #}
+					</span>
 					<span class="text-muted mt-3 font-weight-bold font-size-sm">
- 					<u>Statement
-					{% if  fundName  %}
-					Details of fund transaction   of {{ fundName.name }}
-					{% else %}
-					All
-					{% endif %}
-</u>
+						<u>Statement
+							{% if  fundName  %} Details of fund transaction {% else %} All {% endif %}
+						</u>
 					</span>
 				</h3>
-				 
-				 </div> 
+
+			</div>
 
 			<div
 				class="card-body pt-3 pb-0">
@@ -37,7 +32,6 @@
 							<tr>
 								<th>#</th>
 								<th>Ref. Nubmer</th>
-
 								<th>Budget</th>
 								<th>Deduction</th>
 								<th>Balance History</th>
@@ -46,36 +40,12 @@
 								<th>actions</th>
 							</tr>
 						</thead>
-						<tbody>
-							{% for fund_transaction in fund_transactions %}
-								<tr>
-									<td>{{ loop.index }}</td>
-									<td>{{ fund_transaction.referenceNubmer }}
-									
-							
-</td>
-									<td>{{ fund_transaction.fundName.budget |number_format(2, '.', ',') }} {{ fund_transaction.fundName.currency.name}}</td>
-
-									<td>{{ fund_transaction.deducted |number_format(2, '.', ',') }} {{ fund_transaction.fundName.currency.name}}</td>
-									<td>{{ fund_transaction.currentBalance |number_format(2, '.', ',') }} {{ fund_transaction.fundName.currency.name}}</td>
-									<td>{{ fund_transaction.deductedAt ? fund_transaction.deductedAt|date('Y-m-d H:i:s') : '' }}</td>
-									<td>{{ fund_transaction.name }}</td>
-									<td>
-										<a href="{{ path('app_fund_transaction_show', {'id': fund_transaction.id}) }}"><i class="fa fa-eye"></i> </a>
-									</td>
-								</tr>
-							{% else %}
-								<tr>
-									<td colspan="8">no records found</td>
-								</tr>
-							{% endfor %}
-						</tbody>
+						<tbody></tbody>
 					</table>
 
 				</div>
-			
+
 			</div>
-			<!--end::Body-->
 		</div>
 	</div>
 {% endblock %}

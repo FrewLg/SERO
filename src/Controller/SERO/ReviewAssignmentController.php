@@ -19,7 +19,7 @@ use Knp\Component\Pager\PaginatorInterface;
 #[Route('{_locale<%app.supported_locales%>}/assignment')]
 class ReviewAssignmentController extends AbstractController
 {
-    #[Route('/', name: 'app_s_e_r_o_review_assignment_index', methods: ['GET'])]
+    #[Route('/', name: 'review_assignment_index', methods: ['GET'])]
     public function index(ReviewAssignmentRepository $reviewAssignmentRepository): Response
     {
         return $this->render('sero/review_assignment/index.html.twig', [
@@ -173,7 +173,7 @@ class ReviewAssignmentController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_s_e_r_o_review_assignment_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'review_assignment_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $reviewAssignment = new ReviewAssignment();
@@ -184,7 +184,7 @@ class ReviewAssignmentController extends AbstractController
             $entityManager->persist($reviewAssignment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_review_assignment_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_assignment_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/review_assignment/new.html.twig', [
@@ -193,7 +193,7 @@ class ReviewAssignmentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_assignment_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'review_assignment_show', methods: ['GET'])]
     public function show(ReviewAssignment $reviewAssignment): Response
     {
         return $this->render('sero/review_assignment/show.html.twig', [
@@ -214,7 +214,7 @@ class ReviewAssignmentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_s_e_r_o_review_assignment_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'review_assignment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ReviewAssignmentType::class, $reviewAssignment);
@@ -223,7 +223,7 @@ class ReviewAssignmentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_review_assignment_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_assignment_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/review_assignment/edit.html.twig', [
@@ -235,7 +235,7 @@ class ReviewAssignmentController extends AbstractController
 
 
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_assignment_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'review_assignment_delete', methods: ['POST'])]
     public function delete(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $reviewAssignment->getId(), $request->getPayload()->get('_token'))) {
@@ -243,6 +243,6 @@ class ReviewAssignmentController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_s_e_r_o_review_assignment_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('review_assignment_index', [], Response::HTTP_SEE_OTHER);
     }
 }

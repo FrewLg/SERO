@@ -82233,14 +82233,11 @@
 			<div
 				class="d-flex flex-column align-items-md-end px-0">
 				<!--begin::Logo-->
-				<a href="#" class="mb-5">
+				<a href="#" class="mb-5"> {% if orglogos %} <img src="https://ephi.gov.et/wp-content/uploads/2021/03/ephi-logo-name-new-3.png" width="60"   alt="Logo" class=""/>
+					{% endif %} </a>
+				{# <img width="60" height="60" src="data:image/png;base64, {{ barcode({code:  application.title , type: 'datamatrix', format: 'png', width: 10, height: 10, color: [127, 127, 127]}) }}
+				 "/> #}
 
-					{% if orglogos %}
-
-						{# <img src="{{ orglogos }}" width="60" height="60" alt="Logo" class="thumbnail"/> #}
-					{% endif %}
-
-				</a>
 				 <h1 class="display-4 font-weight-boldest mb-10">{{app_name}}</h1>
 Ethiopian Public Health Institute
 Institutional Review Board (EPHI-IRB)

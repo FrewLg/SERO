@@ -71,11 +71,12 @@
 					</div>
 					<div class="my-lg-0 my-1">
                     {% if   is_granted("ROLE_CHAIR") or  is_granted("ROLE_VICE_CHAIR") %}
-											<a href="{{ path('assign_reviewer', {'id': application.id}) }}" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase mr-3">
+											<a href="{{ path('assign_reviewer', {'id': application.id}) }}" class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-3">
 											{% trans %}Add  Reviewer{% endtrans %}</a>
-									{% endif %}
+					{% endif %}
 
  						<a href="#" class="btn btn-sm btn-light-info font-weight-bolder text-uppercase">{{ application.reviewAssignments|length}} Reviewers assigned</a>
+ 						<a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase">{{ application.versions|length}}Versions</a>
 					</div>
 				</div>
 				<!--end: Title-->

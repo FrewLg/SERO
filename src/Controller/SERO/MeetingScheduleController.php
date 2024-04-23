@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MeetingScheduleController extends AbstractController
 {
-    #[Route('/d', name: 'app_s_e_r_o_meeting_schedule_index', methods: ['GET'])]
+    #[Route('/d', name: 'meeting_schedule_index', methods: ['GET'])]
     public function index(MeetingScheduleRepository $meetingScheduleRepository): Response
     {
         return $this->render('sero/meeting_schedule/index.html.twig', [
@@ -36,7 +36,7 @@ class MeetingScheduleController extends AbstractController
     }
 
 
-    #[Route('/new', name: 'app_s_e_r_o_meeting_schedule_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'meeting_schedule_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $meetingSchedule = new MeetingSchedule();
@@ -47,7 +47,7 @@ class MeetingScheduleController extends AbstractController
             $entityManager->persist($meetingSchedule);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_meeting_schedule_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('meeting_schedule_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/meeting_schedule/new.html.twig', [
@@ -64,7 +64,7 @@ class MeetingScheduleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_s_e_r_o_meeting_schedule_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'meeting_schedule_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, MeetingSchedule $meetingSchedule, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(MeetingScheduleType::class, $meetingSchedule);
@@ -73,7 +73,7 @@ class MeetingScheduleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_meeting_schedule_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('meeting_schedule_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/meeting_schedule/edit.html.twig', [
@@ -82,7 +82,7 @@ class MeetingScheduleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_s_e_r_o_meeting_schedule_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'meeting_schedule_delete', methods: ['POST'])]
     public function delete(Request $request, MeetingSchedule $meetingSchedule, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$meetingSchedule->getId(), $request->getPayload()->get('_token'))) {
@@ -90,6 +90,6 @@ class MeetingScheduleController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_s_e_r_o_meeting_schedule_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('meeting_schedule_index', [], Response::HTTP_SEE_OTHER);
     }
 }

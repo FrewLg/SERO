@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DecisionType index{% endblock %}
+
+{% block body %}
+    <h1>DecisionType index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for decision_type in decision_types %}
+            <tr>
+                <td>{{ decision_type.id }}</td>
+                <td>{{ decision_type.name }}</td>
+                <td>{{ decision_type.description }}</td>
+                <td>{{ decision_type.createdAt ? decision_type.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_decision_type_show', {'id': decision_type.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_decision_type_edit', {'id': decision_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_decision_type_new') }}">Create new</a>
+{% endblock %}

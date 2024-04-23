@@ -13,20 +13,20 @@ class ApplicationType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('startDate', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('endDate', null, [
-                'widget' => 'single_text',
-            ])
+            // ->add('startDate', null, [
+            //     'widget' => 'single_text',
+            // ])
+            // ->add('endDate', null, [
+            //     'widget' => 'single_text',
+            // ])
             ->add('location')
             ->add('description')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            // ->add('createdAt', null, [
+            //     'widget' => 'single_text',
+            // ])
+            // ->add('updatedAt', null, [
+            //     'widget' => 'single_text',
+            // ])
         ;
     }
 

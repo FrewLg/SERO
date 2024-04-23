@@ -55,6 +55,16 @@
 
 						</li>
 						<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+							<a href="{{ path('protocol_application_new') }}" class="menu-link menu-toggle">
+								<i class="menu-bullet menu-bullet-dot">
+									<span></span>
+								</i>
+								<span class="menu-text">{% trans %}New application{% endtrans %}</span>
+							</a>
+
+						</li>
+						
+						<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 							<a href="{{ path('my_assignment') }}" class="menu-link menu-toggle">
 								<i class="menu-bullet menu-bullet-dot">
 									<span></span>
@@ -337,19 +347,19 @@
 										</a>
 									</li>
 									<li class="menu-item" aria-haspopup="true">
-										<a href="{{ path('homepage') }}" class="menu-link">
+										<a href="{{ path('study_type_index') }}" class="menu-link">
 											<i class="menu-bullet menu-bullet-dot">
 												<span></span>
 											</i>
-											<span class="menu-text">{% trans %}Training venues{% endtrans %}</span>
+											<span class="menu-text">{% trans %}Study Type{% endtrans %}</span>
 										</a>
 									</li>
 									<li class="menu-item" aria-haspopup="true">
-										<a href="{{ path('homepage') }}" class="menu-link">
+										<a href="{{ path('review_type_index') }}" class="menu-link">
 											<i class="menu-bullet menu-bullet-dot">
 												<span></span>
 											</i>
-											<span class="menu-text">Partner organizations</span>
+											<span class="menu-text">{% trans %}Review Type{% endtrans %} </span>
 										</a>
 									</li>
 									 

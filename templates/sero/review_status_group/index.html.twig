@@ -1,11 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ReviewStatusGroup index{% endblock %}
+{% block title %}{% trans %}Add Review Status Group{% endtrans %}{% endblock %}
 
 {% block body %}
-    <h1>ReviewStatusGroup index</h1>
+  
+  <div class="row">
 
-    <table class="table">
+		<div class="col-12 py-4">
+
+			<div class="accordion  accordion-toggle-arrow" id="accordionExample4">
+				<div class="card">
+					<div class="card-header" id="headingOne4">
+						<div class="card-title" data-toggle="collapse" data-target="#collapseOne4">
+							<i class="flaticon2-layers-1"></i>
+							{% trans %}Add Review Status Group{% endtrans %}
+						</div>
+					</div>
+					<div id="collapseOne4" class="collapse  " data-parent="#accordionExample4">
+						<div class="card-body">
+
+
+							{{ include('sero/review_status_group/_form.html.twig') }}
+
+						</div>
+
+					</div>
+				</div>
+
+
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div class="card card-custom gutter-b my-0">
+
+		<div class="card-body">
+			<div class="example-preview">
+				<ul class="nav nav-tabs" id="myTab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">
+							<span class="nav-icon">
+								<i class="fa fa-cog"></i>
+							</span>
+							<span class="nav-text">{% trans %}Review Status Group{% endtrans %} 
+
+							</span>
+
+
+						</a>
+					</li>
+
+
+				</ul>
+				<div class="tab-content mt-5" id="myTabContent">
+					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="table-responsive">
+
+							<table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -19,8 +73,8 @@
                 <td>{{ review_status_group.id }}</td>
                 <td>{{ review_status_group.name }}</td>
                 <td>
-                    <a href="{{ path('app_s_e_r_o_review_status_group_show', {'id': review_status_group.id}) }}">show</a>
-                    <a href="{{ path('app_s_e_r_o_review_status_group_edit', {'id': review_status_group.id}) }}">edit</a>
+                    {# <a href="{{ path('review_status_group_show', {'id': review_status_group.id}) }}">show</a> #}
+                    <a href="{{ path('review_status_group_edit', {'id': review_status_group.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -28,8 +82,16 @@
                 <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+								</tbody>
+							</table>
+						</div>
+					</div>
 
-    <a href="{{ path('app_s_e_r_o_review_status_group_new') }}">Create new</a>
+					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab content 3</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+     
 {% endblock %}

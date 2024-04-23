@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('{_locale<%app.supported_locales%>}/review-status')]
 class ReviewStatusController extends AbstractController
 {
-    #[Route('/', name: 'app_s_e_r_o_review_status_index', methods: ['GET'])]
+    #[Route('/', name: 'review_status_index', methods: ['GET'])]
     public function index(ReviewStatusRepository $reviewStatusRepository): Response
     {
         return $this->render('sero/review_status/index.html.twig', [
@@ -22,7 +22,7 @@ class ReviewStatusController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_s_e_r_o_review_status_new', methods: ['GET', 'POST'])]
+    #[Route('/create-new', name: 'review_status_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $reviewStatus = new ReviewStatus();
@@ -33,7 +33,7 @@ class ReviewStatusController extends AbstractController
             $entityManager->persist($reviewStatus);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_review_status_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_status_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/review_status/new.html.twig', [
@@ -42,7 +42,7 @@ class ReviewStatusController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_status_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'review_status_show', methods: ['GET'])]
     public function show(ReviewStatus $reviewStatus): Response
     {
         return $this->render('sero/review_status/show.html.twig', [
@@ -50,7 +50,7 @@ class ReviewStatusController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_s_e_r_o_review_status_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'review_status_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ReviewStatus $reviewStatus, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ReviewStatusType::class, $reviewStatus);
@@ -59,7 +59,7 @@ class ReviewStatusController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_review_status_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_status_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/review_status/edit.html.twig', [
@@ -68,7 +68,7 @@ class ReviewStatusController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_status_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'review_status_delete', methods: ['POST'])]
     public function delete(Request $request, ReviewStatus $reviewStatus, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$reviewStatus->getId(), $request->getPayload()->get('_token'))) {
@@ -76,6 +76,6 @@ class ReviewStatusController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_s_e_r_o_review_status_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('review_status_index', [], Response::HTTP_SEE_OTHER);
     }
 }

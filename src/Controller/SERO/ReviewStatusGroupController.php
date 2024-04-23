@@ -14,17 +14,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('{_locale<%app.supported_locales%>}/review-status-group')]
 class ReviewStatusGroupController extends AbstractController
 {
-    #[Route('/', name: 'app_s_e_r_o_review_status_group_index', methods: ['GET'])]
-    public function index(ReviewStatusGroupRepository $reviewStatusGroupRepository): Response
+    #[Route('/', name: 'review_status_group_index', methods: ['GET', 'POST'])]
+    public function index(Request $request, EntityManagerInterface $entityManager,ReviewStatusGroupRepository $reviewStatusGroupRepository): Response
     {
-        return $this->render('sero/review_status_group/index.html.twig', [
-            'review_status_groups' => $reviewStatusGroupRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_s_e_r_o_review_status_group_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+        
+      
         $reviewStatusGroup = new ReviewStatusGroup();
         $form = $this->createForm(ReviewStatusGroupType::class, $reviewStatusGroup);
         $form->handleRequest($request);
@@ -33,24 +27,18 @@ class ReviewStatusGroupController extends AbstractController
             $entityManager->persist($reviewStatusGroup);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_review_status_group_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_status_group_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->render('sero/review_status_group/new.html.twig', [
+        return $this->render('sero/review_status_group/index.html.twig', [
+            'review_status_groups' => $reviewStatusGroupRepository->findAll(),
             'review_status_group' => $reviewStatusGroup,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_status_group_show', methods: ['GET'])]
-    public function show(ReviewStatusGroup $reviewStatusGroup): Response
-    {
-        return $this->render('sero/review_status_group/show.html.twig', [
-            'review_status_group' => $reviewStatusGroup,
-        ]);
-    }
+ 
 
-    #[Route('/{id}/edit', name: 'app_s_e_r_o_review_status_group_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'review_status_group_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, ReviewStatusGroup $reviewStatusGroup, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ReviewStatusGroupType::class, $reviewStatusGroup);
@@ -59,7 +47,7 @@ class ReviewStatusGroupController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_s_e_r_o_review_status_group_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('review_status_group_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/review_status_group/edit.html.twig', [
@@ -68,7 +56,7 @@ class ReviewStatusGroupController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_status_group_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'review_status_group_delete', methods: ['POST'])]
     public function delete(Request $request, ReviewStatusGroup $reviewStatusGroup, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$reviewStatusGroup->getId(), $request->getPayload()->get('_token'))) {
@@ -76,6 +64,6 @@ class ReviewStatusGroupController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_s_e_r_o_review_status_group_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('review_status_group_index', [], Response::HTTP_SEE_OTHER);
     }
 }

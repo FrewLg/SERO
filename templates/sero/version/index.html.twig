@@ -1,0 +1,35 @@
+ 
+     <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>ChangesMade</th>
+                <th>VersionNumber</th>
+                <th>CreatedAt</th>
+                <th>Attachment</th>
+             </tr>
+        </thead>
+        <tbody>
+        {% for version in versions %}
+            <tr>
+                <td>{{ version.id }}</td>
+                <td>{{ version.date ? version.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ version.changesMade }}</td>
+                <td>{{ version.versionNumber }}</td>
+                <td>{{ version.createdAt ? version.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                <form class="m-0" action="{{ path('download', {'filename': version.attachment}) }}" method="post">
+                <button type="submit" name="submit" class="btn btn-light-primary btn-sm" ><i class="fa fa-download material-icons"></i>  {% trans %}Download Attachment{% endtrans %}</button>
+                </form>
+                </td>
+                
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+ 

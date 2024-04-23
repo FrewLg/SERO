@@ -86,7 +86,7 @@
 																<!--end::Svg Icon-->
 															</span>
 														</span>
-														<span class="nav-text font-weight-bold">{% trans %}History{% endtrans %}</span>
+														<span class="nav-text font-weight-bold">{% trans %}Protocol Versions{% endtrans %}</span>
 													</a>
 												</li>
 											</ul>
@@ -117,7 +117,10 @@
 											<!--end::Tab Content-->
 											<!--begin::Tab Content-->
 											<div class="tab-pane" id="kt_apps_projects_view_tab_1" role="tabpanel">
-												History
+								    {{ include('sero/application/version.html.twig') }}
+												
+    {{ include('sero/version/index.html.twig' ) }}
+												
 											</div>
 											<!--end::Tab Content-->
 										</div>

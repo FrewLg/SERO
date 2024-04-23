@@ -5,7 +5,8 @@ parameters:
     site_backup_file: '/home/ghost/Desktop/projects/harona/jubackup.sh'
     certtemplates: '%kernel.project_dir%/public/cert_templates'
     project_dir: '%kernel.project_dir%/'
-    uploads_folder: '%kernel.project_dir%/public/files/uploads'
+    # uploads_folder: '%kernel.project_dir%/public/files/uploads'
+    uploads_folder: '%kernel.project_dir%/uploads'
     profile_pictures: '%kernel.project_dir%/public/files/profile_pictures'
     site_setting: '%kernel.project_dir%/public/files/site_setting'
     env(DATABASE_URL): "mysql://root:r00tme@127.0.0.1:3306/sss?serverVersion=5.7"

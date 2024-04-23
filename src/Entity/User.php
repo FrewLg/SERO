@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Entity\SERO\Application;
 use App\Entity\SERO\ApplicationFeedback;
 use App\Entity\SERO\BoardMember;
+use App\Entity\SERO\Continuation;
 use App\Entity\SERO\IrbCertificate;
 use App\Entity\SERO\Meeting;
 use App\Entity\SERO\MeetingSchedule;
@@ -123,6 +124,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: MeetingSchedule::class, mappedBy: 'createdBy')]
     private Collection $meetingSchedules;
 
+    /**
+     * @var Collection<int, Continuation>
+     */
+    #[ORM\OneToMany(targetEntity: Continuation::class, mappedBy: 'requestedBy')]
+    private Collection $continuations;
+
+    /**
+     * @var Collection<int, Continuation>
+     */
+    #[ORM\OneToMany(targetEntity: Continuation::class, mappedBy: 'approvedBy')]
+    private Collection $continuationApprovals;
+
   
     public function __construct()
     {
@@ -142,6 +155,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->applications = new ArrayCollection();
         $this->reviewerResponses = new ArrayCollection();
         $this->meetingSchedules = new ArrayCollection();
+        $this->continuations = new ArrayCollection();
+        $this->continuationApprovals = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -757,6 +772,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($meetingSchedule->getCreatedBy() === $this) {
                 $meetingSchedule->setCreatedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Continuation>
+     */
+    public function getContinuations(): Collection
+    {
+        return $this->continuations;
+    }
+
+    public function addContinuation(Continuation $continuation): static
+    {
+        if (!$this->continuations->contains($continuation)) {
+            $this->continuations->add($continuation);
+            $continuation->setRequestedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContinuation(Continuation $continuation): static
+    {
+        if ($this->continuations->removeElement($continuation)) {
+            // set the owning side to null (unless already changed)
+            if ($continuation->getRequestedBy() === $this) {
+                $continuation->setRequestedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Continuation>
+     */
+    public function getContinuationApprovals(): Collection
+    {
+        return $this->continuationApprovals;
+    }
+
+    public function addContinuationApproval(Continuation $continuationApproval): static
+    {
+        if (!$this->continuationApprovals->contains($continuationApproval)) {
+            $this->continuationApprovals->add($continuationApproval);
+            $continuationApproval->setApprovedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContinuationApproval(Continuation $continuationApproval): static
+    {
+        if ($this->continuationApprovals->removeElement($continuationApproval)) {
+            // set the owning side to null (unless already changed)
+            if ($continuationApproval->getApprovedBy() === $this) {
+                $continuationApproval->setApprovedBy(null);
             }
         }
 

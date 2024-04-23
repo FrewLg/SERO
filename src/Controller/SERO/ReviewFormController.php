@@ -21,6 +21,8 @@ class ReviewFormController extends AbstractController
     #[Route('/', name: 'review_form_index', methods: ['GET'])]
     public function index(ReviewFormRepository $reviewFormRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         return $this->render('sero/review_form/index.html.twig', [
             'review_forms' => $reviewFormRepository->findAll(),
         ]);

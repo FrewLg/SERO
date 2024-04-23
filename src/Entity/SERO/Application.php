@@ -76,6 +76,18 @@ class Application
     #[ORM\JoinColumn(nullable: false)]
     private ?User $submittedBy = null;
 
+    /**
+     * @var Collection<int, Version>
+     */
+    #[ORM\OneToMany(targetEntity: Version::class, mappedBy: 'application', orphanRemoval: true)]
+    private Collection $versions;
+
+    /**
+     * @var Collection<int, Continuation>
+     */
+    #[ORM\OneToMany(targetEntity: Continuation::class, mappedBy: 'application', orphanRemoval: true)]
+    private Collection $continuations;
+ 
     public function __construct()
     {
         $this->applicationReviews = new ArrayCollection();
@@ -83,6 +95,8 @@ class Application
         $this->irbCertificates = new ArrayCollection();
         $this->applicationFeedback = new ArrayCollection();
         $this->amendments = new ArrayCollection();
+        $this->versions = new ArrayCollection();
+        $this->continuations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -347,4 +361,66 @@ class Application
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Version>
+     */
+    public function getVersions(): Collection
+    {
+        return $this->versions;
+    }
+
+    public function addVersion(Version $version): static
+    {
+        if (!$this->versions->contains($version)) {
+            $this->versions->add($version);
+            $version->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVersion(Version $version): static
+    {
+        if ($this->versions->removeElement($version)) {
+            // set the owning side to null (unless already changed)
+            if ($version->getApplication() === $this) {
+                $version->setApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Continuation>
+     */
+    public function getContinuations(): Collection
+    {
+        return $this->continuations;
+    }
+
+    public function addContinuation(Continuation $continuation): static
+    {
+        if (!$this->continuations->contains($continuation)) {
+            $this->continuations->add($continuation);
+            $continuation->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContinuation(Continuation $continuation): static
+    {
+        if ($this->continuations->removeElement($continuation)) {
+            // set the owning side to null (unless already changed)
+            if ($continuation->getApplication() === $this) {
+                $continuation->setApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+  
 }

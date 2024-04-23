@@ -45,4 +45,5 @@ class ApplicationRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+    
 }

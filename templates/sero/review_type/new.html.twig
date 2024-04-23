@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReviewType{% endblock %}
+
+{% block body %}
+    <h1>Create new ReviewType</h1>
+
+    {{ include('sero/review_type/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_review_type_index') }}">back to list</a>
+{% endblock %}
