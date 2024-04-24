@@ -40,19 +40,17 @@ class PdfGeneratorController extends AbstractController
     public function index(Application $app, EntityManagerInterface $entityManager)
     {
 
-
-
         $this->denyAccessUnlessGranted('ROLE_USER');
-        $file = $this->imageToBase64($this->getParameter('kernel.project_dir') . '/public/files/site_setting/ephi.png');
+        // $file = $this->imageToBase64($this->getParameter('kernel.project_dir') . "/uploads/files/site_setting/ephi.png");
         $reviewAssignment = $entityManager->getRepository(ReviewAssignment::class)->findBy(['application' => $app->getId()]);
         $irb_review_checklist_group = $entityManager->getRepository(ReviewChecklistGroup::class)->findAll();
-        $image = "https://ephi.gov.et/wp-content/uploads/2021/03/ephi-logo-name-new-3.png";
-        $fullLocalpath = "http://127.0.0.1:8008/files/site_setting/ephi.png";
+        // $image = "https://ephi.gov.et/wp-content/uploads/2021/03/ephi-logo-name-new-3.png";
+        // $fullLocalpath = $this->getParameter('kernel.project_dir')."/uploads/files/site_setting/ephi.png";
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
         $pdfOptions->set('isRemoteEnabled', true);
+        $pdfOptions->set('dpi','120');
         $pdfOptions->set("isPhpEnabled", true);
-        // $pdfOptions->set("defaultPaperOrientation", true);
         $pdfOptions->set('tempDir', '/tmp');
         $pdfOptions->set("isHtml5ParserEnabled", true);
         ob_get_clean();
@@ -72,26 +70,35 @@ class PdfGeneratorController extends AbstractController
         $generator = new QRGenerator();
         $barcode = $generator->generate($options);
 
-        //
+        $image = $this->getParameter('project_dir')."uploads/files/site_setting/ephi2.jpg";
+
+// Read image path, convert to base64 encoding
+$imageData = base64_encode(file_get_contents($image));
+
+// Format the image SRC:  data:{mime};base64,{data};
+$src = 'data:'.mime_content_type($image).';base64,'.$imageData;
+
+
         $data = [
-            'orglogos'  => $this->imageToBase64("https://ephi.gov.et/wp-content/uploads/2021/03/ephi-logo-name-new-3.png"),
+            // 'orglogos'  => $this->imageToBase64($image), //->imageToBase64("http://127.0.0.1:8008/files/site_setting/ephi.png"),
             'title'         => $app->getTitle(),
             'irb_review_checklist_group' => $irb_review_checklist_group,
             'review_assignment' => $reviewAssignment,
             'appdetail' => $app,
             'application' => $app,
-            'barcode' => $barcode,
-            'orglogos' => $fullLocalpath,
-            'orgdlogos' => $this->imageToBase64($this->getParameter('kernel.project_dir') . '/public/files/site_setting/ephi.png'),
+            'orglogos' => $src,
+            // 'orglogos' => base64_encode(file_get_contents($this->getParameter('site_setting'))),
+            // 'orglogos'=> $this->imageToBase64($this->getParameter('site_setting')),
+            // 'orglogos' =>  '<img src="data:image/png;base64, '.$this->imageToBase64($image).'">',
 
         ];
         $html =  $this->renderView('sero/application/cert2.html.twig', $data);
-        $dompdf = new Dompdf($pdfOptions);
+        // $html =  $this->renderView('sero/application/app_sections/certnew.html.twig', $data);
+        $dompdf = new Dompdf(array('enable_remote' => true));
         $dompdf->set_option("isPhpEnabled", true);
         $dompdf->loadHtml($html);
-        // $dompdf->setPaper("A4", "portrait");
+        $dompdf->setPaper("A4", "landscape");
         $dompdf->render();
-
         // Instantiate canvas instance
         $canvas = $dompdf->getCanvas();
         $fontMetrics = new FontMetrics($canvas, $pdfOptions);
@@ -118,8 +125,7 @@ class PdfGeneratorController extends AbstractController
         // $y = (($h-$imgHeight)/2);
         // $canvas->image($imageURL, $x, $y, $imgWidth, $imgHeight); 
 
-        return new Response(
-            $dompdf->stream('SERO-Ethical Clearance Certificate', ["Attachment" => true]),
+        return new Response($dompdf->stream('SERO-Ethical Clearance Certificate', ["Attachment" => 1]),
             Response::HTTP_OK,
             ['Content-Type' => 'application/pdf']
         );

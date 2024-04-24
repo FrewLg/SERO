@@ -1,5 +1,5 @@
 <!-- Button trigger modal-->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<button type="button" class="btn btn-primary m-4" data-toggle="modal" data-target="#exampleModal">
 	Submit a new Version
 </button>
 
@@ -14,22 +14,15 @@
 				</button>
 			</div>
 			<div class="modal-body">
-
 				{{ form_start(form) }}
-                Please describe the changes you have made on this version of document.
-				{{ form_widget(form.changesMade) }}
-				<div class="">
-                <br>Upload attachment
-					{{ form_widget(form.attachment) }}
-				</div>
-
-
+				{{ form_widget(form) }}
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary font-weight-bold">Save changes</button>
+				<button type="submit" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+				<button class="btn btn-primary font-weight-bold">{{ button_label|default('Save') }}</button>
 			</div>
 			{{ form_end(form) }}
+
 		</div>
 	</div>
 </div>

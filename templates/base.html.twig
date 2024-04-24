@@ -87,7 +87,7 @@
 						<!--begin::Brand-->
 						<div
 							class="brand flex-column-auto " id="kt_brand">
-							<!--begin::Logo-->
+							<!--begin::Logo--> 
 							<a href="#" class="brand-logo">
 								<img alt="Logo" class="pull-right" src="{{ asset('files/site_setting/'~site_logo ) }}" width="50" height='50'/>
 							</a>
@@ -290,7 +290,7 @@
 												class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
   
 												{% if app.user  and app.user.profile %}
-													<img src="{{ asset('files/profile_pictures/'~app.user.profile.image ) }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
+													<img src="{{ asset('../uploads/files/profile_pictures/'~app.user.profile.image ) }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
 												{% elseif app.user  %}
 													<img src="{{ asset('files/profile_pictures/defaultuser.png') }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
 												{% endif %}
@@ -354,7 +354,10 @@
 										<div class="container">
 											{% include "head.html.twig" %}
 
-											{% block body %}{% endblock  %}
+											{% block body %}
+											{# {{ file_url(item.content['#file'].getFileUri()) }} #}
+											{# {% set url = file_url(content.field_pdf_file|render|striptags|trim) %} #}
+											{% endblock  %}
 										</div>
 									</div>
 								</div>

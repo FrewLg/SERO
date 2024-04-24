@@ -29,7 +29,8 @@ class BoardMember
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist' ])]
+    // #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

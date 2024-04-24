@@ -33,21 +33,21 @@ class BoardMemberController extends AbstractController
         }
         if ($form->isSubmitted() && $form->isValid()) {
             if ($boardMemberRepository->findOneBy(['user' => $form->get('user')->getData()])) {
-                $this->addFlash("danger", "The user is already board memeber. Please might have wanted to change hes/her roles");
+                $this->addFlash("danger", "The user is already board memeber. You might have wanted to change hes/her roles");
                 return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
             }
 
             if ($this->getUser()->getProfile()) {
                 $boardMember->setAssignedBy($this->getUser());
                 $boardMember->getUser()->addRole(Constants::ROLE_BOARD_MEMBER);
-                $boardMember->getUser()->addRole(
-                $form->get('role')->getData()
-                );
+                $boardMember->getUser()->addRole($form->get('role')->getData());
                 $entityManager->persist($boardMember);
                 $entityManager->flush();
-                $this->addFlash("success", "Registered successfully");
+                $this->addFlash("success", "Board member has been registered successfully");
+                //send email notification
             } else {
-                $this->addFlash("danger", "Your college is not set");
+                $this->addFlash("danger", "Update your profile please!");
+                return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
             }
 
             return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
@@ -59,7 +59,6 @@ class BoardMemberController extends AbstractController
             $request->query->getInt('page', 1),
             10
         );
-
         return $this->render('sero/board_member/index.html.twig', [
             'board_members' => $board_members,
             'board_member' => $boardMember,
@@ -67,24 +66,7 @@ class BoardMemberController extends AbstractController
         ]);
     }
 
-   #[Route('/new', name: 'app_s_e_r_o_board_member_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $boardMember = new BoardMember();
-        $form = $this->createForm(BoardMemberType::class, $boardMember);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($boardMember);
-            $entityManager->flush();
-            return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('sero/board_member/new.html.twig', [
-            'board_member' => $boardMember,
-            'form' => $form,
-        ]);
-    }
+    
 
     #[Route('/{id}', name: 'app_s_e_r_o_board_member_show', methods: ['GET'])]
     public function show(BoardMember $boardMember): Response
@@ -93,24 +75,7 @@ class BoardMemberController extends AbstractController
             'board_member' => $boardMember,
         ]);
     }
-
-    #[Route('/{id}/edit', name: 'app_s_e_r_o_board_member_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, BoardMember $boardMember, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(BoardMemberType::class, $boardMember);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('board_member_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('sero/board_member/edit.html.twig', [
-            'board_member' => $boardMember,
-            'form' => $form,
-        ]);
-    }
+ 
 
     #[Route('/{id}', name: 'app_s_e_r_o_board_member_delete', methods: ['POST'])]
     public function delete(Request $request, BoardMember $boardMember, EntityManagerInterface $entityManager): Response

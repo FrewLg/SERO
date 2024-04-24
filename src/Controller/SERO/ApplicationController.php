@@ -99,7 +99,8 @@ class ApplicationController extends AbstractController
             // $version->setChangesMade("");
             // end add version
             $application->setSubmittedBy($this->getUser());
-
+            $application->setIbcode($this->versionate($application));
+            
             $entityManager->persist($version);
             $entityManager->persist($application);
             $entityManager->flush();
@@ -344,25 +345,20 @@ class ApplicationController extends AbstractController
 
         #################Feedback 
         $irb_review_checklist_group = $entityManager->getRepository(ReviewChecklistGroup::class)->findAll();
-        $reviewAssignment = $entityManager->getRepository(ReviewAssignment::class)->findBy(['application' => $application, 'closed' => 1]);
- 
+  
         return $this->render('sero/application/details.html.twig', [
             'appfeedbfrom' => $feedbackForm->createView(),
             'irb_review_checklist_group' => $irb_review_checklist_group,
-            'review_assignment' => $reviewAssignment,
-            'form' => $versionForm,
+             'form' => $versionForm,
             'application' => $application,
-            'versions' => $existingVersion,
-            // 'form' => $form->createView(),
-            // 'form2' => $form2->createView(),
-            // 'review' => $review,
-            // 'subject_category' => $entityManager->getRepository(ResearchSubjectCategory::class)->findAll(),
-            // 'review_status_group' => $entityManager->getRepository(ReviewStatusGroup::class)->findAll()
+            'versions' => array_reverse($existingVersion),
         ]);
     }
     #[Route('/{filename}/download',   name: 'download', methods: ['POST'])]
     public function download($filename)
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+
         if ($filename) {
 
             return $this->file($this->getParameter('uploads_folder') . '/' . $filename);
@@ -371,6 +367,15 @@ class ApplicationController extends AbstractController
         }
     }
 
+    public function versionate($application)
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $code="EPHI-SERO";
+        // $now= (new DateTime('now'));
+        $year=date("y");
+        $versionnumber=$code.'-'.$year ;
+            return $versionnumber;
+    }
     // private function addVersion(Request $request, $app )
     // {
     //     $version = new Version();

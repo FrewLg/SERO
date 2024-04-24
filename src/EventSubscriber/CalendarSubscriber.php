@@ -49,7 +49,7 @@ class CalendarSubscriber implements EventSubscriberInterface
             ]);
             $trainingEvent->addOption(
                 'url',
-                $this->router->generate('meeting_schedule_show',['id'=>$training->getId()])
+                $this->router->generate('meetings',['id'=>$training->getId()])
             );
 
             $calendar->addEvent($trainingEvent);

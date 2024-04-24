@@ -28,8 +28,8 @@
                 <td>{{ meeting.note }}</td>
                 <td>{{ meeting.minuteTakenAt ? meeting.minuteTakenAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_s_e_r_o_meeting_show', {'id': meeting.id}) }}">show</a>
-                    <a href="{{ path('app_s_e_r_o_meeting_edit', {'id': meeting.id}) }}">edit</a>
+                    {# <a href="{{ path('app_s_e_r_o_meeting_show', {'id': meeting.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_meeting_edit', {'id': meeting.id}) }}">edit</a> #}
                 </td>
             </tr>
         {% else %}

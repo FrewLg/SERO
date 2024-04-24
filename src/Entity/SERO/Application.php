@@ -87,6 +87,9 @@ class Application
      */
     #[ORM\OneToMany(targetEntity: Continuation::class, mappedBy: 'application', orphanRemoval: true)]
     private Collection $continuations;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $ibcode = null;
  
     public function __construct()
     {
@@ -418,6 +421,18 @@ class Application
                 $continuation->setApplication(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIbcode(): ?string
+    {
+        return $this->ibcode;
+    }
+
+    public function setIbcode(?string $ibcode): static
+    {
+        $this->ibcode = $ibcode;
 
         return $this;
     }

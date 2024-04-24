@@ -17,15 +17,13 @@
 				{{form_widget(form.user)}}
 			</div>
 		</div>
-
 		<div class="form-group row">
 
 			<label class="col-form-label col-3 text-lg-right text-left">Role</label>
 			<div class="col-9">
 
-				{{form_widget(form.role)}}
-				{#  #}
-			</div>
+				{{form_widget(form.role,{'attr':{'class':'select2'}})}}
+ 			</div>
 		</div>
 
 		<div class="form-group row">

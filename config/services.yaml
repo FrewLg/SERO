@@ -3,16 +3,13 @@ parameters:
     site_settingsfile: '%kernel.project_dir%/config/packages/site_settings.yaml'
     site_backup_settings_file: '/home/ghost/Desktop/projects/harona/ParameterVariables.sh'
     site_backup_file: '/home/ghost/Desktop/projects/harona/jubackup.sh'
-    certtemplates: '%kernel.project_dir%/public/cert_templates'
+    certtemplates: '%kernel.project_dir%/uploads/cert_templates'
     project_dir: '%kernel.project_dir%/'
-    # uploads_folder: '%kernel.project_dir%/public/files/uploads'
     uploads_folder: '%kernel.project_dir%/uploads'
-    profile_pictures: '%kernel.project_dir%/public/files/profile_pictures'
-    site_setting: '%kernel.project_dir%/public/files/site_setting'
-    env(DATABASE_URL): "mysql://root:r00tme@127.0.0.1:3306/sss?serverVersion=5.7"
+    profile_pictures: '%kernel.project_dir%/uploads/files/profile_pictures'
+    site_setting: '%kernel.project_dir%/uploads/files/site_setting/ephi2.jpg'
     ldap_dc_value : '%env(resolve:LDAP_DC_VALUE)%'
-
-    app_name  : 'EPHI-NTC'
+    # app_name  : 'EPHI-NTC'
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     app.supported_locales: 'en|am|fr|or|sd|af|tg|so'
 services:

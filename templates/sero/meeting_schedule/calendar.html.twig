@@ -56,8 +56,8 @@
 											<td>{{ meeting_schedule.startingDate ? meeting_schedule.startingDate|date('Y-m-d  ') : '' }}</td>
 											<td>{{ meeting_schedule.endDate ? meeting_schedule.endDate|date('Y-m-d  ') : '' }}</td>
 											<td>
-												<a href="{{ path('app_s_e_r_o_meeting_schedule_edit', {'id': meeting_schedule.id}) }}" class='btn btn-light-success btn-sm'>Protocols</a>
-												<a href="{{ path('app_s_e_r_o_meeting_schedule_edit', {'id': meeting_schedule.id}) }}" class='btn btn-light-info btn-sm'>Minutes</a>
+												 <a href="{{ path('meetings', {'id': meeting_schedule.id}) }}" class='btn btn-light-success btn-sm'>Meetings</a>  
+												{# <a href="{{ path('app_s_e_r_o_meeting_schedule_edit', {'id': meeting_schedule.id}) }}" class='btn btn-light-info btn-sm'>Minutes</a>   #}
 											</td>
 										</tr>
 									{% else %}

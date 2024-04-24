@@ -1,8 +1,10 @@
 <style>
-  {# @page {
-    size: a4 portrait;
-  }
-  #}
+	{
+		# @page {
+			size: a4 portrait;
+		}
+		#
+	}
 	@charset "UTF-8";
 	/*!
  * Bootstrap v4.4.1 (https://getbootstrap.com/)
@@ -79,8 +81,9 @@
 		color: #464E5F;
 		text-align: left;
 		margin: 5;
-		background-image: url("{{ asset('cert_templates/21.jpg')}}");
-		background-size: cover;
+		 
+		{# background-image: url("{{ orglogos }}");  #}
+ 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
 	}
@@ -2915,8 +2918,7 @@
 	.form-control.is-valid {
 		border-color: #1BC5BD;
 		padding-right: calc(1.5em + 1.3rem);
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231BC5BD' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
-		background-repeat: no-repeat;
+ 		background-repeat: no-repeat;
 		background-position: right calc(0.375em + 0.325rem) center;
 		background-size: calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
 	}
@@ -2937,8 +2939,7 @@
 	.custom-select.is-valid {
 		border-color: #1BC5BD;
 		padding-right: calc(0.75em + 2.975rem);
-		background: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%231B283F' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 1rem center/8px 10px, url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%231BC5BD' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") #ffffff no-repeat center right 2rem/calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
-	}
+ 	}
 	.was-validated .custom-select:valid:focus,
 	.custom-select.is-valid:focus {
 		border-color: #1BC5BD;
@@ -3030,8 +3031,7 @@
 	.form-control.is-invalid {
 		border-color: #F64E60;
 		padding-right: calc(1.5em + 1.3rem);
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23F64E60' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23F64E60' stroke='none'/%3e%3c/svg%3e");
-		background-repeat: no-repeat;
+ 		background-repeat: no-repeat;
 		background-position: right calc(0.375em + 0.325rem) center;
 		background-size: calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
 	}
@@ -3052,8 +3052,7 @@
 	.custom-select.is-invalid {
 		border-color: #F64E60;
 		padding-right: calc(0.75em + 2.975rem);
-		background: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%231B283F' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 1rem center/8px 10px, url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23F64E60' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23F64E60' stroke='none'/%3e%3c/svg%3e") #ffffff no-repeat center right 2rem/calc(0.75em + 0.65rem) calc(0.75em + 0.65rem);
-	}
+ 	}
 	.was-validated .custom-select:invalid:focus,
 	.custom-select.is-invalid:focus {
 		border-color: #F64E60;
@@ -4745,8 +4744,7 @@
 	}
 
 	.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%23ffffff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e");
-	}
+ 	}
 
 	.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
 		border-color: #6993FF;
@@ -4756,8 +4754,7 @@
 	}
 
 	.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3e%3cpath stroke='%23ffffff' d='M0 2h4'/%3e%3c/svg%3e");
-	}
+ 	}
 
 	.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
 		background-color: rgba(105, 147, 255, 0.5);
@@ -4772,8 +4769,7 @@
 	}
 
 	.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ffffff'/%3e%3c/svg%3e");
-	}
+ 	}
 
 	.custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
 		background-color: rgba(105, 147, 255, 0.5);
@@ -4825,8 +4821,7 @@
 		line-height: 1.5;
 		color: #464E5F;
 		vertical-align: middle;
-		background: #ffffff url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org / 2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%231B283F' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 1rem center/8px 10px;
-		border: 1px solid #E5EAEE;
+ 		border: 1px solid #E5EAEE;
 		border-radius: 0.42rem;
 		-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
 		box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
@@ -5687,8 +5682,7 @@
 	}
 
 	.navbar-light .navbar-toggler-icon {
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-	}
+ 	}
 
 	.navbar-light .navbar-text {
 		color: rgba(0, 0, 0, 0.5);
@@ -5733,8 +5727,7 @@
 	}
 
 	.navbar-dark .navbar-toggler-icon {
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-	}
+ 	}
 
 	.navbar-dark .navbar-text {
 		color: rgba(255, 255, 255, 0.5);
@@ -7694,12 +7687,10 @@
 	}
 
 	.carousel-control-prev-icon {
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5L4.25 4l2.5-2.5L5.25 0z'/%3e%3c/svg%3e");
-	}
+ 	}
 
 	.carousel-control-next-icon {
-		background-image: url("data:image/svg+xml, %3csvg xmlns='http://www.w3.org/2000/svg' fill='%23ffffff' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5L3.75 4l-2.5 2.5L2.75 8l4-4-4-4z'/%3e%3c/svg%3e");
-	}
+ 	}
 
 	.carousel-indicators {
 		position: absolute;
@@ -82210,88 +82201,101 @@
 			width: 90% !important;
 		}
 	}
-    .thumbnail {
-  display: inline-block;
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 250px;
-   display: block;
-  max-width: 100%;
-  height: auto;
-   transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-}
+	.thumbnail {
+		display: inline-block;
+		position: relative;
+		border: 1px solid #ccc;
+		border-radius: 250px;
+		display: block;
+		max-width: 100%;
+		height: auto;
+		transform: translateY(-3px);
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease-in-out;
+	}
 </style>
 
-<table style="background-color: rgba(2, 175, 240, 0.1);   padding:40px; margin-right:100; width:100%;">
+<table style="background-image:url({{ orglogos }});background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center center;    padding:40px; margin-right:100; width:100%;">
 	<tr>
-
-		<td colspan="4" style="width: 250px;">
-
+	<td colspan="4" style="width: 250px;">
 			<div
 				class="d-flex flex-column align-items-md-end px-0">
 				<!--begin::Logo-->
-				<a href="#" class="mb-5"> {% if orglogos %} <img src="https://ephi.gov.et/wp-content/uploads/2021/03/ephi-logo-name-new-3.png" width="60"   alt="Logo" class=""/>
-					{% endif %} </a>
+				<a href="#" class="mb-5">
+					{# {% if orglogos %}
+						<img src="{{ orglogos }}" width="60"   alt="Logo" class=""/>
+					{% endif %} #}
+ 						{# <img src="data:image/png;base64,{{ orglogos }}"    alt="Logo" /> #}
+ 						{# <img src="{{ orglogos }/}"    alt="Logo" /> #}
+{# <img src="{{ orglogos }}" > #}
+{# {{orglogos|raw}} #}
+</td>
+				</a>
 				{# <img width="60" height="60" src="data:image/png;base64, {{ barcode({code:  application.title , type: 'datamatrix', format: 'png', width: 10, height: 10, color: [127, 127, 127]}) }}
-				 "/> #}
+								 "/> #}
 
-				 <h1 class="display-4 font-weight-boldest mb-10">{{app_name}}</h1>
-Ethiopian Public Health Institute
-Institutional Review Board (EPHI-IRB)
-            </div>
+				<h1 class="display-4 font-weight-boldest mb-10">{{app_name}}</h1>
+				Ethiopian Public Health Institute
+				Institutional Review Board (EPHI-IRB)
+			</div>
 		</td>
-		<td colspan="4" style="width: 120px;">
-			 
-		</td>
-        
+		<td colspan="4" style="width: 120px;"></td>
+
 		<td colspan="4" style="width: 150px;">
 			<span class="d-flex flex-column align-items-md-end opacity-70">
-				
-                <span>sero@ephi.gov.et<br></span>
-                <span>+2511111111110 <br></span>
-                <span>Addis Ababa, Ethiopia<br></span>
-				<span>Sr. Paul Street, <br>Luis Partor Avenu</span>
+
+				<span>sero@ephi.gov.et<br></span>
+				<span>+2511111111110
+					<br></span>
+				<span>Addis Ababa, Ethiopia<br></span>
+				<span>Sr. Paul Street,
+					<br>Luis Partor Avenu</span>
 			</span>
 		</td>
 	</tr>
-    <tr style="background-color: red; margin:0;  height:3px;  margin-right:10; width:100%;">
-    <td></td>
-    </tr>
+	<tr style="background-color: red; margin:0;  height:3px;  margin-right:10; width:100%;">
+		<td></td>
+	</tr>
 </table>
-<table style="background-color:rgba(105, 147, 255, 0.24); margin:0; height:3px;  padding:6px; margin-right:10; width:100%;">
-</table>
+<table style="background-color:rgba(105, 147, 255, 0.24); margin:0; height:3px;  padding:6px; margin-right:10; width:100%;"></table>
 <div
 	class="d-flex flex-column-fluid">
 	<!--begin::Container-->
 	<div class="container">
-					<div class="font-weight-boldest mb-10 my-4"> <center> IRB Certificate</center></div>
+		<div class="font-weight-boldest mb-10 my-4">
+			<center>
+				IRB Certificate</center>
+		</div>
 
 		<div class="card-body p-0">
 			<!-- begin: Invoice-->
 			<!-- begin: Invoice header-->
-				<div class="row justify-content-center py-8 px-8 py-md-27 px-md-0"> 
-                <div class="col-md-9">
+				<div class="row justify-content-center py-8 px-8 py-md-27 px-md-0"> <div class="col-md-9">
 					{# <div class="d-flex justify-content-between pb-10 pb-md-20 flex-column flex-md-row"> #}
 
 
-						{# <h1 class="display-4 font-weight-boldest mb-10">IRB Certificate</h1> #}
+					{# <h1 class="display-4 font-weight-boldest mb-10">IRB Certificate</h1> #}
 
 					{# </div> #}
-					<div class="d-flex justify-content-between pt-6">
-						<div class="d-flex flex-column flex-root">
-							<span class="font-weight-bolder mb-2">Title {{application.title }}</span>
-							<span class="opacity-70">Approved: {{ application.location}}</span>
+						<div class="d-flex justify-content-between pt-6"> <div class="d-flex flex-column flex-root">
+							<span class="font-weight-bolder mb-2">Title
+								{{application.title }}</span>
+							<span class="opacity-70">Approved:
+								{{ application.location}}</span>
 						</div>
 						<div class="d-flex flex-column flex-root">
 							<span class="font-weight-bolder mb-2">Date .</span>
-							<span class="opacity-70">By: {{application.submittedBy }}</span><br> {{ application.submittedBy.email}}
+							<span class="opacity-70">By:
+								{{application.submittedBy }}</span><br>
+							{{ application.submittedBy.email}}
 						</div>
 						<div class="d-flex flex-column flex-root">
 							<span class="font-weight-bolder mb-2">Reviewed At</span>
-							<span class="opacity-70">Location: {{ application.location}}</span>
+							<span class="opacity-70">Location:
+								{{ application.location}}</span>
 						</div>
 					</div>
 				</div>
@@ -82302,8 +82306,8 @@ Institutional Review Board (EPHI-IRB)
 
 				<div class="row justify-content-center py-8 px-8 py-md-8 px-md-0">
 					<div class="col-md-6">
-						<div class="table-responsive">
-															    {# {{ include('sero/application/app_sections/responses.html.twig') }} #}
+						<div
+							class="table-responsive">{# {{ include('sero/application/app_sections/responses.html.twig') }} #}
 
 						</div>
 					</div>
@@ -82317,7 +82321,7 @@ Institutional Review Board (EPHI-IRB)
 						<table class="table">
 							<thead>
 								<tr>
-								<th class="font-weight-bold text-muted text-uppercase">Ethical</th>
+									<th class="font-weight-bold text-muted text-uppercase">Ethical</th>
 									<th class="font-weight-bold text-muted text-uppercase">Scintifically</th>
 									<th class="font-weight-bold text-muted text-uppercase">DUE DATE</th>
 									<th class="font-weight-bold text-muted text-uppercase">Overall</th>
@@ -82335,10 +82339,9 @@ Institutional Review Board (EPHI-IRB)
 					</div>
 				</div>
 			</div>
-            
-             
+
+
 		</div>
 	</div>
 </div>
-    <table class="footer" style="background-color:rgba(105, 147, 255, 0.24);   position: absolute;  margin-top:285px;  padding:40px;   width:100%;">
-</table>
+<table class="footer" style="background-color:rgba(105, 147, 255, 0.24);   position: absolute;  margin-top:285px;  padding:40px;   width:100%;"></table>

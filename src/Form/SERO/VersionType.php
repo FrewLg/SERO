@@ -21,13 +21,13 @@ class VersionType extends AbstractType
                 'label' => 'Changes made on a new version',
                 'mapped' => false, 'attr' => [
                     'class' => 'form-control  m-0   ',
-                    'required' => true, 
+                    'required' => true,
                 ],
                 'required' => true,
             ])
             ->add('attachment', FileType::class, [
                 'label' => 'Upload attachment',
-                'mapped' => false, 'attr' => [ 
+                'mapped' => false, 'attr' => [
                     'class' => 'form-control my-4' ,
                     'required' => true,
                 ],

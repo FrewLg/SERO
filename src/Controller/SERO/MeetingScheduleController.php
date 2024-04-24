@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MeetingScheduleController extends AbstractController
 {
-    #[Route('/d', name: 'meeting_schedule_index', methods: ['GET'])]
+    #[Route('/{id}/meetings', name: 'smeetings', methods: ['GET'])]
     public function index(MeetingScheduleRepository $meetingScheduleRepository): Response
     {
         return $this->render('sero/meeting_schedule/index.html.twig', [

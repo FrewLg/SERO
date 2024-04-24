@@ -38,6 +38,9 @@ class Version
     #[ORM\ManyToOne(inversedBy: 'version')]
     private ?DecisionType $decisionType = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $approved = null;
+
    
     public function __construct()
     {
@@ -133,6 +136,18 @@ class Version
     public function setDecisionType(?DecisionType $decisionType): static
     {
         $this->decisionType = $decisionType;
+
+        return $this;
+    }
+
+    public function isApproved(): ?bool
+    {
+        return $this->approved;
+    }
+
+    public function setApproved(?bool $approved): static
+    {
+        $this->approved = $approved;
 
         return $this;
     }

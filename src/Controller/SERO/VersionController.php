@@ -30,17 +30,13 @@ class VersionController extends AbstractController
         $versionForm->handleRequest($request);
 
         if ($versionForm->isSubmitted() && $versionForm->isValid()) {
-            
-            
 if ($versionForm->get('attachement')->getData()) {
             $versionAttachement = $versionForm->get('attachement')->getData();
 
             $versionfile_name = 'Version' . md5(uniqid()) . '.' . $versionAttachement->guessExtension();
             $versionAttachement->move($this->getParameter('uploads_folder'), $versionfile_name);
             $version->setAttachment($versionfile_name);
-        }
-
-    
+        }  
             $entityManager->persist($version);
             $entityManager->flush();
 

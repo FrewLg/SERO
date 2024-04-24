@@ -3,6 +3,7 @@
 namespace App\Controller\SERO;
 
 use App\Entity\SERO\Meeting;
+use App\Entity\SERO\MeetingSchedule;
 use App\Form\SERO\MeetingType;
 use App\Repository\SERO\MeetingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,28 +17,39 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MeetingController extends AbstractController
 {
-    #[Route('/', name: 'meeting_index', methods: ['GET'])]
-    public function index(MeetingRepository $meetingRepository): Response
+    #[Route('/{id}', name: 'meetings', methods: ['GET'])]
+    public function index(MeetingRepository $meetingRepository,
+     MeetingSchedule $meetingSchedule): Response
     {
         return $this->render('sero/meeting/index.html.twig', [
-            'meetings' => $meetingRepository->findAll(),
+            'meetings' => $meetingRepository->findBy(['meetingSchedule'=>$meetingSchedule]),
         ]);
     }
 
-    #[Route('/new', name: 'meeting_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/new', name: 'meeting_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, MeetingSchedule $meetingSchedule,
+    EntityManagerInterface $entityManager): Response
     {
         $meeting = new Meeting();
         $form = $this->createForm(MeetingType::class, $meeting);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $meeting->setMeetingSchedule($meetingSchedule);
+            $meeting->setMinuteTakenBy($this->getUser());
+            $meeting->setCreatedBy($this->getUser());
+            $meeting->setStatus(1);
+            foreach($meeting->getApplications() as $vals){
+                $meeting->addApplication($vals);
+
+            }
             
+            $meeting->setMinuteTakenAt(new \DateTime());
             $entityManager->persist($meeting);
             $entityManager->flush();
             $this->addFlash("success", "New meeting has been added succesfully!");
 
-            return $this->redirectToRoute('meeting_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('meetings', ['id'=>$meetingSchedule->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/meeting/new.html.twig', [
@@ -46,7 +58,7 @@ class MeetingController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'meeting_show', methods: ['GET'])]
+    #[Route('/{id}/details', name: 'meeting_show', methods: ['GET'])]
     public function show(Meeting $meeting): Response
     {
         return $this->render('sero/meeting/show.html.twig', [
