@@ -12,7 +12,7 @@ class Constants{
      const  ROLE_WORK_UNIT= "ROLE_WORKUNIT";
      const  ROLE_REVIEWER= "ROLE_REVIEWER";
      const  ROLE_BOARD_MEMBER= "ROLE_BOARD_MEMBER";
-     
+     const  CHAIR="ROLE_CHAIR";
      const  SUBMISSION_STATUS_DECLINED= 1;
      const  SUBMISSION_STATUS_ACCEPTED_WITH_MAJOR_REVISION= 2;
      const  SUBMISSION_STATUS_ACCEPTED_WITH_MINOR_REVISION= 3;
@@ -20,17 +20,7 @@ class Constants{
      const  SUBMISSION_STATUS_CLOSED= 5;
      const  SUBMISSION_STATUS_ABORTED= 6;
 
-
-    //  research types
-    const RESEARCH_TYPE_MEGA=1;
-    const RESEARCH_TYPE_COMMUNITY_SERVICE=2;
-    const RESEARCH_TYPE_TECHNOLOGY_TRANSFER=3;
-    const RESEARCH_TYPE_FEMALE_GRANT=4;
-    const RESEARCH_TYPE_YOUTH_GRANT=5;
-    const RESEARCH_TYPE_PG_STUDENT=6;
-         
-
-     //email keys
+   //email keys
      const EMAIL_KEY_SUBMISSION_ACKNOWLEDGEMENT="SUBMISSION_SUCCESS";
 
      //general setting types

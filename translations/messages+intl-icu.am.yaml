@@ -12,89 +12,88 @@ Duration: ቆይታ
 day: ቀን
 days: ቀናት
 'no records found': 'ምንም መዝገቦች አልተገኙም።'
-'Sign In': '__Sign In'
-'Enter your details to login to your account:': '__Enter your details to login to your account:'
+'Sign In': 'ግባ'
+'Enter your details to login to your account:': 'ወደ መለያዎ ለመግባት ዝርዝሮችዎን ያስገቡ:'
 Home: መነሻ
-Logout: __Logout
+Logout: ውጣ
 Trainings: ስልጠናዎች
 Courses: __Courses
 'Training Requests': '__Training Requests'
 'Training Schedules': '__Training Schedules'
-'My request': '__My request'
-Plan: __Plan
+'My request': 'የእኔ ማመልከቻዎች'
+Plan: እቅድ
 'Need Assesment': '__Need Assesment'
 results: __results
-Plans: __Plans
+Plans: እቅዶች
 Assesment: __Assesment
 'SNTC -EPHI management': dsada
 SERO-EPHI: dsadad
-Application: __Application
-Title: __Title
-Reviewers: __Reviewers
-'Add  Reviewer': '__Add  Reviewer'
+Application: ማመልከቻ
+Title: ርዕስ
+Reviewers: ገምጋሚዎች
+'Add  Reviewer': 'ገምጋሚ ያክሉ'
 'Submited by': '__Submited by'
 Role: __Role
 'Sumitted At': '__Sumitted At'
 Status: __Status
-'Application Type': '__Application Type'
+'Application Type': 'ማመልከቻዎች ዓይነት'
 'Project Type': '__Project Type'
 'Poject Start Date': '__Poject Start Date'
 'Poject End Date': '__Poject End Date'
 Location: __Location
-Members: __Members
-'Research subject': '__Research subject'
-'Covid-19 mitigation': '__Covid-19 mitigation'
+Members: __Members 
 Attachments: __Attachments
 Amendment: __Amendment
 Revisions: __Revisions
-'Research team': '__Research team'
-Amendments: __Amendments
+'Research team': 'የምርምር ቡድን'
+Amendments: ማሻሻያዎች
 Purpose: __Purpose
-'Requested At': '__Requested At'
+'Requested At': 'የተጠየቀው በ'
 Action: __Action
-'No record': '__No record'
-'Protocol applications': '__Protocol applications'
-'All applications': '__All applications'
-'My assigned': '__My assigned'
-'My application': '__My application'
-'Board Members': '__Board Members'
-'Board members': '__Board members'
+'No record': 'ምንም መዝገብ አልተገኘም።'
+'Protocol applications': 'የፕሮቶኮል ማመልከቻዎች'
+'All applications': 'ሁሉም ማመልከቻዎች'
+'My assigned': 'የተመደብኩበት'
+'My application': 'የእኔ ማመልከቻ'
+'Board members': 'የቦርድ አባላት'
+# 'Board members': 'የቦርድ አባላት'
+'Board Members': 'የቦርድ አባላት'
 Minutes: __Minutes
-'Meeting Schedules': '__Meeting Schedules'
-'Protocol submissions': '__Protocol submissions'
-'Email Management': '__Email Management'
-Messages: __Messages
-'User Management': '__User Management'
-Users: __Users
+'Meeting Schedules': 'የስብሰባ መርሃ ግብሮች'
+'Protocol submissions': 'የፕሮቶኮል ማቅረቢያዎች'
+'Email Management': 'የኢሜል አስተዳደር'
+Messages: መልዕክቶች
+'User Management': 'የተጠቃሚ አስተዳደር'
+Users: ተጠቃሚዎች
 Permissions: __Permissions
 Groups: __Groups
-Directorates: __Directorates
-Settings: __Settings
-'Workflow setting': '__Workflow setting'
-'Review checklist': '__Review checklist'
-'Review checklist group': '__Review checklist group'
+Directorates: ዳይሬክቶሬቶች
+Settings: ቅንብሮች
+'Workflow setting': 'የስራ ፍሰት ቅንብር'
+'Review checklist': 'የማረጋገጫ ዝርዝሮች'
+'Review checklist group': 'ግምገማዎች የፍተሻ ዝርዝር ምድብ'
 'Training venues': '__Training venues'
 'Email Messages': '__Email Messages'
-'Site Setting': '__Site Setting'
-'Statistics and archive': '__Statistics and archive'
+'Site Setting': 'የጣቢያ ቅንብር'
+'Statistics and archive': 'ስታቲስቲክስ እና ማህደር'
 Feedbacks: __Feedbacks
 Archives: __Archives
-Reports: __Reports
+Reports: ሪፖርቶች
 Dashboard: __Dashboard
 'Protocol Applications': '__Protocol Applications'
 'Make Revision': '__Make Revision'
 'Protocol assesment form': '__Protocol assesment form'
 'My Review Assignments': '__My Review Assignments'
 'All Active': '__All Active'
-'Review Form': '__Review Form'
-'Protocol Details': '__Protocol Details'
-'Progress Reports': '__Progress Reports'
+'Review Form': 'የግምገማ ቅጽ'
+'Protocol Details': 'የፕሮቶኮል ዝርዝሮች'
+'Progress Reports': 'የሂደት ሪፖርቶች'
 History: __History
 'My Protocol applications': '__My Protocol applications'
-'Calendar view': '__Calendar view'
-'Table view': '__Table view'
+'Calendar view': 'የቀን መቁጠሪያ እይታ'
+'Table view': 'የጠረጴዛ እይታ'
 About: __About
 EPHI: __EPHI
 Contact: __Contact
-'Users Feedbacks': '__Users Feedbacks'
+'Users Feedbacks': 'የተጠቃሚዎች ግብረመልሶች'
 Compliants: __Compliants

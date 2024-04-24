@@ -95,9 +95,7 @@
 
 									{% endif %} 
 								</div>
-								<div class="symbol symbol-lg-75 symbol-circle symbol-primary d-none">
-									<span class="font-size-h3 font-weight-boldest">JM</span>
-								</div>
+								 
 							</div>
 							<!--end::Pic-->
 							<!--begin::Title-->
@@ -138,11 +136,11 @@
 						<form action="" method="POST">
 							<input hidden name="change-role" value="true"/>
 							<input hidden name="board_member" value="{{board_member.id}}"/>
-							<select name="roles" class="form-control  " onchange="if(confirm('Are you sure you want to save member role changes?')){this.form.submit()}">
-								<optgroup label="Role">
+							<select name="roles" class="form-control select2" onchange="if(confirm('Are you sure you want to save member role changes?')){this.form.submit()}">
+								<optgroup label="Select Role">
 									<option class="" value="Chair" {{board_member.role=='Chair'?"selected":""}}>Chair</option>
 									<option value="Vice Chair" {{board_member.role=='Vice Chair'?"selected":""}}>Vice Chair</option>
-									<option value="Secretary" {{board_member.role=='Secretary'?"selected":""}}>
+									<option value="Secretary" {{board_member.role=='Secretary'?"selected":""}} class="form-control">
 										Secretary</option>
 
 									<option value="Coordinator" {{board_member.role=='Coordinator'?"selected":""}}>Coordinator</option>
