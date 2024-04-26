@@ -3,6 +3,7 @@
 namespace App\Form\SERO;
 
 use App\Entity\SERO\Application;
+use App\Entity\SERO\AttachmentType;
 use App\Entity\SERO\Version;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,7 +20,7 @@ class VersionType extends AbstractType
 
             ->add('changesMade', TextareaType::class, [
                 'label' => 'Changes made on a new version',
-                'mapped' => false, 'attr' => [
+                'mapped' => true, 'attr' => [
                     'class' => 'form-control  m-0   ',
                     'required' => true,
                 ],
@@ -29,10 +30,21 @@ class VersionType extends AbstractType
                 'label' => 'Upload attachment',
                 'mapped' => false, 'attr' => [
                     'class' => 'form-control my-4' ,
-                    'required' => true,
                 ],
                 'required' => true,
-            ]);
+            ])
+            ->add('attachmentType', EntityType::class, [
+                'label' => 'Attachment type',
+                'placeholder' => '-- Select Attachment type --',
+                'class' => AttachmentType::class,
+                'mapped' => true, 
+                'attr' => [
+                    'class' => 'form-control select2 my-4' ,
+                 ],
+                'required' => true,
+
+                'choice_label'=>'name',
+             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

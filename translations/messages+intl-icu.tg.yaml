@@ -96,3 +96,21 @@ EPHI: __EPHI
 Contact: __Contact
 'Users Feedbacks': '__Users Feedbacks'
 Compliants: __Compliants
+'Add Review Status Group': '__Add Review Status Group'
+'Review Status Group': '__Review Status Group'
+'Protocol Versions': '__Protocol Versions'
+'Review Checklist Group': '__Review Checklist Group'
+'Add Review Checklist Group': '__Add Review Checklist Group'
+'Download Attachment': '__Download Attachment'
+'Log in': '__Log in'
+'You are logged in as': '__You are logged in as'
+'Please sign in': '__Please sign in'
+'Remember me': '__Remember me'
+'Forget Password ?': '__Forget Password ?'
+"Don't have an account yet?": "__Don't have an account yet?"
+'Sign Up!': '__Sign Up!'
+'New application': '__New application'
+'Study Type': '__Study Type'
+'Review Type': '__Review Type'
+'Original version': '__Original version'
+Version: __Version

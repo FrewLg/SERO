@@ -12,7 +12,7 @@ Duration: ቆይታ
 day: ቀን
 days: ቀናት
 'no records found': 'ምንም መዝገቦች አልተገኙም።'
-'Sign In': 'ግባ'
+'Sign In': ግባ
 'Enter your details to login to your account:': 'ወደ መለያዎ ለመግባት ዝርዝሮችዎን ያስገቡ:'
 Home: መነሻ
 Logout: ውጣ
@@ -31,17 +31,21 @@ SERO-EPHI: dsadad
 Application: ማመልከቻ
 Title: ርዕስ
 Reviewers: ገምጋሚዎች
+Reviewer: ገምጋሚ
+Response: 'ምላሽ'
 'Add  Reviewer': 'ገምጋሚ ያክሉ'
 'Submited by': '__Submited by'
 Role: __Role
 'Sumitted At': '__Sumitted At'
 Status: __Status
 'Application Type': 'ማመልከቻዎች ዓይነት'
+'No': 'በፍጹም'
+'Yes': 'አዎን'
 'Project Type': '__Project Type'
 'Poject Start Date': '__Poject Start Date'
 'Poject End Date': '__Poject End Date'
 Location: __Location
-Members: __Members 
+Members: __Members
 Attachments: __Attachments
 Amendment: __Amendment
 Revisions: __Revisions
@@ -53,10 +57,9 @@ Action: __Action
 'No record': 'ምንም መዝገብ አልተገኘም።'
 'Protocol applications': 'የፕሮቶኮል ማመልከቻዎች'
 'All applications': 'ሁሉም ማመልከቻዎች'
-'My assigned': 'የተመደብኩበት'
+'My assigned': የተመደብኩበት
 'My application': 'የእኔ ማመልከቻ'
 'Board members': 'የቦርድ አባላት'
-# 'Board members': 'የቦርድ አባላት'
 'Board Members': 'የቦርድ አባላት'
 Minutes: __Minutes
 'Meeting Schedules': 'የስብሰባ መርሃ ግብሮች'
@@ -78,6 +81,7 @@ Settings: ቅንብሮች
 'Statistics and archive': 'ስታቲስቲክስ እና ማህደር'
 Feedbacks: __Feedbacks
 Archives: __Archives
+Comment: 'አስተያየት'
 Reports: ሪፖርቶች
 Dashboard: __Dashboard
 'Protocol Applications': '__Protocol Applications'
@@ -92,8 +96,28 @@ History: __History
 'My Protocol applications': '__My Protocol applications'
 'Calendar view': 'የቀን መቁጠሪያ እይታ'
 'Table view': 'የጠረጴዛ እይታ'
-About: __About
+About: ስለ
 EPHI: __EPHI
-Contact: __Contact
+Contact: ተገናኝ
 'Users Feedbacks': 'የተጠቃሚዎች ግብረመልሶች'
 Compliants: __Compliants
+'Add Review Status Group': '__Add Review Status Group'
+'Review Status Group': '__Review Status Group'
+'Protocol Versions': 'የፕሮቶኮል እትም ስሪቶች'
+'Research subject': '__Research subject'
+'Covid-19 mitigation': '__Covid-19 mitigation'
+'Review Checklist Group': '__Review Checklist Group'
+'Add Review Checklist Group': '__Add Review Checklist Group'
+'Download Attachment': 'አባሪ አውርድ'
+'Log in': ግባ
+'You are logged in as': 'ገብተሃል እንደ'
+'Please sign in': 'እባክዎ ይግቡ'
+'Remember me': አስታውሰኝ
+'Forget Password ?': 'የይለፍ ቃል ረስተዋል?'
+"Don't have an account yet?": 'እስካሁን መለያ የለህም?'
+'Sign Up!': ተመዝገብ
+'New application': 'አዲስ ማመልከቻ'
+'Study Type': 'የጥናት ዓይነት'
+'Review Type': 'የግምገማ አይነት'
+Version: 'እትም ስሪት'
+'Original version': 'የመጀመሪያ እትም ስሪት'

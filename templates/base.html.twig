@@ -2,15 +2,15 @@
 	lang="en">
 	<!--begin::Head-->
 	<head>
-		{# <base href="{{ asset('../../' ) }}"> #}
-		<meta charset="utf-8"/>
+ 		<meta charset="utf-8"/>
 		<title>
-			{% block title %}{% endblock %}|
-			{{app_name|trans}}</title>
+			{% block title %}
+			{% endblock %}| {{app_name|trans}}
+			</title>
 		<meta name="description" content="Aside light theme example"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 		<!--begin::Fonts-->
-		{# <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/> #}
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
 		<!--end::Fonts-->
 		<!--begin::Page Vendors Styles(used by this page)-->
 		<link href="{{ asset('theme/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' ) }}" rel="stylesheet" type="text/css"/> <!--end::Page Vendors Styles-->
@@ -20,14 +20,13 @@
 		<link href="{{ asset('theme/assets/css/style.bundle.css' ) }}" rel="stylesheet" type="text/css"/>
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
-		<link href="{{ asset('theme/assets/css/themes/layout/header/base/light.css' ) }}" rel="stylesheet" type="text/css"/> <link href="{{ asset('theme/assets/css/themes/layout/header/menu/light.css' ) }}" rel="stylesheet" type="text/css"/>
+		<link href="{{ asset('theme/assets/css/themes/layout/header/base/light.css' ) }}" rel="stylesheet" type="text/css"/> 
+		<link href="{{ asset('theme/assets/css/themes/layout/header/menu/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<link href="{{ asset('theme/assets/css/themes/layout/brand/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<link
 		href="{{ asset('theme/assets/css/themes/layout/aside/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<!--end::Layout Themes-->
-		<link rel="stylesheet" href="{{ asset('plugins/tagsinput.css')}}"/>
-		{# <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" /><div class="row"> #}
-		{# <link rel="stylesheet" href="{{ asset('plugins/select2/select2.min.css')}}"/> #}
+		<link rel="stylesheet" href="{{ asset('plugins/tagsinput.css')}}"/> 
 
 		<link rel="shortcut icon" href="{{ asset('files/site_setting/'~site_logo ) }}">{% block styles %}{% endblock %} </head>
 		<!--end::Head-->
@@ -36,8 +35,7 @@
 
 		   <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 			<!--begin::Main-->
-			<!--begin::Header Mobile-->
-				<div
+ 				<div
 				id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed"> <!--begin::Logo-->
 				<a href="#">
 					<img width="50" alt="Logo" src="{{ asset('files/site_setting/'~site_logo ) }}"/>

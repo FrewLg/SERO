@@ -41,6 +41,10 @@ class Version
     #[ORM\Column(nullable: true)]
     private ?bool $approved = null;
 
+    #[ORM\ManyToOne(inversedBy: 'versions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?AttachmentType $attachmentType = null;
+
    
     public function __construct()
     {
@@ -148,6 +152,18 @@ class Version
     public function setApproved(?bool $approved): static
     {
         $this->approved = $approved;
+
+        return $this;
+    }
+
+    public function getAttachmentType(): ?AttachmentType
+    {
+        return $this->attachmentType;
+    }
+
+    public function setAttachmentType(?AttachmentType $attachmentType): static
+    {
+        $this->attachmentType = $attachmentType;
 
         return $this;
     }

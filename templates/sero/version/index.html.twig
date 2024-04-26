@@ -1,43 +1,41 @@
- {{ application.ibcode }}
-     <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Date</th>
-                <th>ChangesMade</th>
-                <th>VersionNumber</th>
-                <th>Status</th>
-                <th>CreatedAt</th>
-                <th>Attachment</th>
-             </tr>
-        </thead>
-        <tbody>
-        {% for version in versions %}
-            <tr>
-                <td>{{ loop.index }}</td>
-                <td>{{ version.date ? version.date|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ version.changesMade }}</td>
-                <td>{{ version.versionNumber }}</td>
-                <td>{{ version.approved ? "Yes"    ? "NO" }}</td>
-                <td>{{ version.createdAt ? version.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-{% if  version.attachment %}
+<h5 class="  label label-lg label-light-success label-inline">
+	<b>Protocol ID:
+		{{ application.ibcode }}
+	</b>
+</h5>
+<h5 class="label label-lg label-light-danger label-inline">
+	<b>
+		{% trans %}Version{% endtrans %}:
+		{{version.versionNumber }}
+	</b>
+</h4>
 
-                <form class="m-0" action="{{ path('download', {'filename': version.attachment}) }}" method="post">
-                <button type="submit" name="submit" class="btn btn-light-primary btn-sm" ><i class="fa fa-download material-icons"></i>  {% trans %}Download Attachment{% endtrans %}</button>
-                </form>
-{% else %}
-app file
-{% endif %}
 
-                </td>
-                
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
- 
+<div class="card card-custom">
+	<div class="card-header ribbon ribbon-top">
+		<div class="ribbon-target bg-danger" style="top: -2px; right: 20px;">{% trans %}Version{% endtrans %}:{{version.versionNumber }}</div>
+		<h3 class="card-title">{{ application.ibcode }}- V -{{version.versionNumber }}
+		</h3>
+	</div>
+	<div class="card-body">
+		<span class="text-muted"> Created on: {{ version.createdAt ? version.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+<p class="title">Changes Made:</p>
+		<p>  {{ version.changesMade }}</p>
+		
+        <p> {{ version.approved ? "Yes"    ? "NO" }} {% if version.approved %}<span class="label label-light-success"> Approved</span> {% else %} <span class="label label-light-danger label-inline"> Declined</span>{% endif %}
+         </p>
+		<span class="text-primary">{{ version.date ? version.date|date('Y-m-d H:i:s') : '' }}</span>
+		<td>
+			{% if  version.attachment %}
+
+				<form class="m-0" action="{{ path('download', {'filename': version.attachment}) }}" method="post">
+					<button type="submit" name="submit" class="btn btn-light-primary btn-sm">
+						<i class="fa fa-download material-icons"></i>
+						{% trans %}Download Attachment{% endtrans %}</button>
+				</form>
+			{% else %}
+				app file
+			{% endif %}
+		</td>
+	</div>
+</div>

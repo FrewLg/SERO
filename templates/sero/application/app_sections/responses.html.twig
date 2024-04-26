@@ -27,7 +27,7 @@
 					<div class="card-header" id="headingOne4">
 						<div class="card-title" data-toggle="collapse" data-target="#accordionCOllapse{{reviewResponse.id}}">
 							<i class="flaticon2-layers-1"></i>
-							Reviewer
+							{% trans %}Reviewer{% endtrans %}
 							{{ loop.index}}.
 							{{   reviewResponse.irbreviewer}}
 						</div>
@@ -44,14 +44,12 @@
 												<tr>
 													<th class="font-weight-bold text-muted text-uppercase">BANK</th>
 													<th class="font-weight-bold text-muted text-uppercase">ACC.NO.</th>
-													<th class="font-weight-bold text-muted text-uppercase">DUE DATE</th>
-													<th class="font-weight-bold text-muted text-uppercase">TOTAL AMOUNT</th>
+ 													<th class="font-weight-bold text-muted text-uppercase">TOTAL AMOUNT</th>
 												</tr>
 											</thead>
 											<tbody>
 												<tr class="font-weight-bolder">
-													<td>BARCLAYS UK</td>
-													<td>12345678909</td>
+													 
 													<td>Jan 07, 2018</td>
 													<td class="text-danger font-size-h3 font-weight-boldest">20,600.00</td>
 												</tr>
@@ -71,8 +69,8 @@
 											<tr>
 												<th>{{toAlpha(loop.index)}}.
 													{{checklist_group}}</th>
-												<th>Response</th>
-												<th>Comment</th>
+												<th>{% trans %}Response{% endtrans %}</th>
+												<th>{% trans %}Comment{% endtrans %}</th>
 											</tr>
 											{% set parents = {} %}
 											{% for checklist in reviewResponse.reviewerResponses|filter(  checklist =>  (checklist.checklist.checklistGroup ==  checklist_group) ) %}
@@ -90,12 +88,12 @@
 															{% if checklist.checklist.answerType ==1 and checklist.answer == 'yes' %}
 																<span class="label label-lg label-light-success label-inline">
 																	<i class="fa fa-check text-success m-1 font-size-sm"></i>
-																	Yes</span>
+																	{% trans %}Yes{% endtrans %}</span>
 
 															{% else %}
 																<span class="label label-lg label-light-danger label-inline">
 																	<i class="fa fa-times text-danger m-1 font-size-sm"></i>
-																	No</span>
+																	{% trans %}No{% endtrans %}</span>
 
 															{% endif %}
 
@@ -111,7 +109,7 @@
 														<b style="margin-left:10px">{{toRoman(loop.index)}}.
 															{{checklist_parent}}</b>
 													</th>
-													<th>Response</th>
+													<th>{% trans %}Response{% endtrans %}</th>
 												</tr>
 												{% for checklist in reviewResponse.reviewerResponses|filter(checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.parent ==  checklist_parent)) %}
 													<tr>

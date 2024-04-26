@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
-
+use App\Helper\SEROHelper;
 #[Route('{_locale<%app.supported_locales%>}/protocol')]
 
 class ApplicationController extends AbstractController
@@ -57,9 +57,9 @@ class ApplicationController extends AbstractController
     }
 
     #[Route('/my-applications', name: 'myapplication', methods: ['GET', 'POST'])]
-    public function myapplications(Request $request, EntityManagerInterface $em, PaginatorInterface $paginatorInterface): Response
+    public function myapplications(Request $request, EntityManagerInterface $em,
+    PaginatorInterface $paginatorInterface): Response
     {
-
         $this->denyAccessUnlessGranted('ROLE_USER');
         $me = $this->getUser();
         $allappsbyme =  array_reverse($em->getRepository(Application::class)->findBy(array('submittedBy' => $me)));
@@ -73,12 +73,11 @@ class ApplicationController extends AbstractController
         ]);
     }
 
-
     #[Route('/new', name: 'protocol_application_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,
+    SEROHelper $seroHelper): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-
         $application = new Application();
         $form = $this->createForm(ApplicationType::class, $application);
         $form->handleRequest($request);
@@ -86,21 +85,18 @@ class ApplicationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             //Add version//
-            // if($entityManager->getRepository(AttachmentType::class)->findAll() as $key => $value) {
             $protocolversion = $entityManager->getRepository(Version::class)->findBy(['application' => $application]);
             $protocolversions = count($protocolversion) + 1;
-
             $version = new Version();
             $version->setDate(new \DateTime());
             $version->setCreatedAt(new \DateTime());
-            // $version->setVersionNumber($application->getId()."-".$version->getId());
             $version->setVersionNumber($protocolversions);
             $version->setApplication($application);
-            // $version->setChangesMade("");
             // end add version
             $application->setSubmittedBy($this->getUser());
-            $application->setIbcode($this->versionate($application));
-            
+            $appId=$form->getData();
+            $application->setIbcode($seroHelper->versionate($application).$appId->getId());
+            // dd($appId->getId());
             $entityManager->persist($version);
             $entityManager->persist($application);
             $entityManager->flush();
@@ -189,7 +185,7 @@ class ApplicationController extends AbstractController
 
 
     #[Route('/{id}/details', name: 'app_s_e_r_o_application_show', methods: ['GET', 'POST'])]
-    public function show(Application $application, Request $request, EntityManagerInterface $entityManager, ApplicationFeedbackRepository $appferepo, MailerInterface $mailer): Response
+    public function show(Application $application, Request $request, EntityManagerInterface $entityManager, SEROHelper $seroHelper): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
 
@@ -217,17 +213,20 @@ class ApplicationController extends AbstractController
         $existingVersion = $entityManager->getRepository(Version::class)->findBy(['application' => $application]);
 
         if ($versionForm->isSubmitted() && $versionForm->isValid()) {
-            if ($versionForm->get('attachment')->getData()) {
-                $versionAttachement = $versionForm->get('attachment')->getData();
-                $versionFileName = 'Version' . md5(uniqid()) . '.' . $versionAttachement->guessExtension();
-                $versionAttachement->move($this->getParameter('uploads_folder'), $versionFileName);
-                $version->setAttachment($versionFileName);
-            }
+            
             $newVersion = count($existingVersion) + 1;
             $version->setDate(new \DateTime());
             $version->setCreatedAt(new \DateTime());
             $version->setVersionNumber($newVersion);
             $version->setApplication($application);
+            if ($versionForm->get('attachment')->getData()) {
+                $ver=$versionForm->getData();
+                $versionAttachement = $versionForm->get('attachment')->getData();
+                $versionFileName = $seroHelper->fileNamer($ver). $versionAttachement->guessExtension();
+
+                $versionAttachement->move($this->getParameter('uploads_folder'), $versionFileName);
+                $version->setAttachment($versionFileName);
+            }
             $entityManager->persist($version);
             $entityManager->flush();
             return $this->redirectToRoute('app_s_e_r_o_application_show', ["id" => $application->getId()], Response::HTTP_SEE_OTHER);
@@ -367,15 +366,7 @@ class ApplicationController extends AbstractController
         }
     }
 
-    public function versionate($application)
-    {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        $code="EPHI-SERO";
-        // $now= (new DateTime('now'));
-        $year=date("y");
-        $versionnumber=$code.'-'.$year ;
-            return $versionnumber;
-    }
+ 
     // private function addVersion(Request $request, $app )
     // {
     //     $version = new Version();
