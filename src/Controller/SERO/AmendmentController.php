@@ -3,6 +3,7 @@
 namespace App\Controller\SERO;
 
 use App\Entity\SERO\Amendment;
+use App\Entity\SERO\Application;
 use App\Form\SERO\AmendmentType;
 use App\Repository\SERO\AmendmentRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,18 +23,18 @@ class AmendmentController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_s_e_r_o_amendment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/new', name: 'new_ammendment', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, Application $application): Response
     {
         $amendment = new Amendment();
         $form = $this->createForm(AmendmentType::class, $amendment);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $amendment->setApplication($application);
             $entityManager->persist($amendment);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_s_e_r_o_amendment_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash("sucess", "The request sent successfully!");
+            return $this->redirectToRoute('application_show', ["id" => $application->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/amendment/new.html.twig', [

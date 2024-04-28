@@ -25,24 +25,23 @@
 
 
 					{# <a href="{{ path('researcher', {'id': review_assignment.irbreviewer.id}) }}" class='font-16 m-0     mb-1 align-right'>
-																																					{{ review_assignment.irbreviewer }}
-																																				</a> #}
-
-					<a href="#" class="avatar-box thumb-xxs align-self-center">
-						<span class="avatar-title bg-soft-info rounded-circle font-13 font-weight-normal">
+																																										{{ review_assignment.irbreviewer }}
+																																									</a> #}
+					{{ review_assignment.irbreviewer.profile}}
+					<sup>
+						<span class="label label-light-primary ">
 							+{{ review_assignment.irbreviewer.reviewAssignments|length   }}
 						</span>
-					</a>
-
+					</sup>
 
 					{# {% if review_assignment.reassigned %}
-																													
-																																					<a href="#" class="avatar-box thumb-xxs align-self-center">
-																																						<span class="avatar-title bg-soft-danger rounded-circle font-13 font-weight-normal">
-																																							Re
-																																						</span>
-																																					</a>
-																																				{% endif %} #}
+																																		
+																																										<a href="#" class="avatar-box thumb-xxs align-self-center">
+																																											<span class="avatar-title bg-soft-danger rounded-circle font-13 font-weight-normal">
+																																												Re
+																																											</span>
+																																										</a>
+																																									{% endif %} #}
 
 				</td>
 				<td>{{ review_assignment.irbreviewer.profile}}</td>
@@ -50,36 +49,36 @@
 				<td>{{ review_assignment.duedate ? review_assignment.duedate|date('Y-m-d') : '' }}</td>
 
 				{# 
-																										<td>
-																												{% if review_assignment.acceptedAt %}
-																													<span class="badge bg-success">
-																														Accepted
-																													</span>
-																													at:
-																													{{ review_assignment.acceptedAt|date('d-m-y i:sa') }}
-																										
-																												{% elseif review_assignment.rejectedAt %}
-																										
-																													<span class="badge bg-danger">Rejected at:
-																													</span>
-																													{{ review_assignment.rejectedAt|date('d-m-y i:sa') }}
-																																																																																																																																							
-																																																																																																								
-																																	{% elseif  review_assignment.Closed == 1 %}
-																																		<span class="badge bg-warning">Review sent</span>
-																																	{% elseif  review_assignment.InactiveAssignment == 1 %}
-																																		<span class="badge bg-danger">Inactive
-																																		</span>
-																																	{% elseif  review_assignment.Declined == 1 %}
-																																		<span class="badge bg-danger">Declined</span>
-																																	{% else %}
-																																		<span class="badge bg-warning">Pending</span>
-																										
-																										
-																																	{% endif %} 
-																																	
-																										</td>
-																																	#}
+																														<td>
+																																{% if review_assignment.acceptedAt %}
+																																	<span class="badge bg-success">
+																																		Accepted
+																																	</span>
+																																	at:
+																																	{{ review_assignment.acceptedAt|date('d-m-y i:sa') }}
+																														
+																																{% elseif review_assignment.rejectedAt %}
+																														
+																																	<span class="badge bg-danger">Rejected at:
+																																	</span>
+																																	{{ review_assignment.rejectedAt|date('d-m-y i:sa') }}
+																																																																																																																																											
+																																																																																																												
+																																					{% elseif  review_assignment.Closed == 1 %}
+																																						<span class="badge bg-warning">Review sent</span>
+																																					{% elseif  review_assignment.InactiveAssignment == 1 %}
+																																						<span class="badge bg-danger">Inactive
+																																						</span>
+																																					{% elseif  review_assignment.Declined == 1 %}
+																																						<span class="badge bg-danger">Declined</span>
+																																					{% else %}
+																																						<span class="badge bg-warning">Pending</span>
+																														
+																														
+																																					{% endif %} 
+																																					
+																														</td>
+																																					#}
 
 				<td nowrap="nowrap">
 
@@ -109,39 +108,39 @@
 													<h5 class="fw-bold mt-3 mb-1">
 														<span
 															class="text-muted mb-0">{# {{review_assignment.irbreviewer.profile.firstName}}
-																																																														{{review_assignment.irbreviewer.profile.lastName}} #}
+																																																																														{{review_assignment.irbreviewer.profile.lastName}} #}
 														</span>
 													</h5>
 													<p class="text-muted mb-0">
 														Number of Assignment:
 														{# <a href="{{path('his_assignment',{'id':review_assignment.irbreviewer.id})}}" class="avatar-box thumb-xxs align-self-center">
-																																																								<span class="avatar-title bg-soft-info rounded-circle font-13 font-weight-normal">
-																																																								+
-																																																								{{review_assignment.irbreviewer.reviewAssignments|length}}
-																																																								</span>
-																																																								</a> #}
+																																																																						<span class="avatar-title bg-soft-info rounded-circle font-13 font-weight-normal">
+																																																																						+
+																																																																						{{review_assignment.irbreviewer.reviewAssignments|length}}
+																																																																						</span>
+																																																																						</a> #}
 													</p>
 													<div class="mb-3">{# {% if review_assignment.irbreviewer.isreviewer %}
-																																																								<a href="#" class="me-3 text-warning">External reviewer</a>
-																																																								{% else %}
-																																																								<a href="#" class="me-3 text-success">Internal IRB reviewer</a>
-																																																								
-																																																								{% endif %} #}
+																																																																						<a href="#" class="me-3 text-warning">External reviewer</a>
+																																																																						{% else %}
+																																																																						<a href="#" class="me-3 text-success">Internal IRB reviewer</a>
+																																																																						
+																																																																						{% endif %} #}
 
 														{# {% if review_assignment.reassigned %}
-																																																								
-																																																								<a href="#" class="avatar-box thumb-xxs align-self-center">
-																																																									<span class="avatar-title bg-soft-danger rounded-circle font-13 font-weight-normal">
-																																																										Re
-																																																									</span>
-																																																								</a>
-																																																								{% endif %} #}
+																																																																						
+																																																																						<a href="#" class="avatar-box thumb-xxs align-self-center">
+																																																																							<span class="avatar-title bg-soft-danger rounded-circle font-13 font-weight-normal">
+																																																																								Re
+																																																																							</span>
+																																																																						</a>
+																																																																						{% endif %} #}
 
 													</div>
 													<br>
 
 													{# <a href='{{path('researcher',{'id':review_assignment.irbreviewer.id})}}' class="btn btn-sm btn-soft-primary">About IRB reviewer</a>
-																																																					<a href='{{path('his_assignment',{'id':review_assignment.irbreviewer.id})}}' class="btn btn-sm btn-soft-info">Invitations</a> #}
+																																																																		<a href='{{path('his_assignment',{'id':review_assignment.irbreviewer.id})}}' class="btn btn-sm btn-soft-info">Invitations</a> #}
 
 
 													{% if review_assignment.status == 1 %}
@@ -163,27 +162,27 @@
 													<br>
 													<br>
 													{# <a class="badge bg-primary" href="{{ asset('/files/proposals/review_files/'~ review_assignment.FileTobeReviewedeclined ) }}">
-																																																																																																																																																																																																															File To be Reviewed    PDF
-																																																																																																																																																																																																															<i class="fa fa-download"></i>
-																																																																																																																																																																																																														</a> #}
+																																																																																																																																																																																																																												File To be Reviewed    PDF
+																																																																																																																																																																																																																												<i class="fa fa-download"></i>
+																																																																																																																																																																																																																											</a> #}
 
 													<br>
 													<br>
 
 													{# 
-									{% if review_assignment.IsRejected == 1 %}
-									<span class="badge bg-info" title="Invitation not sent">Rejected</span>
-									{% elseif  review_assignment.Closed == 1 %}
-									<span class="badge bg-warning">Closed</span>
-									<br>
-									{% elseif  review_assignment.InactiveAssignment == 1 %}
-									<span class="badge bg-danger">Inactive Assignment</span>
-									<br>
-									{% elseif  review_assignment.Declined == 1 %}
-									<span class="badge bg-primary">Declined</span>
-									
-									
-									{% endif %} #}
+																						{% if review_assignment.IsRejected == 1 %}
+																						<span class="badge bg-info" title="Invitation not sent">Rejected</span>
+																						{% elseif  review_assignment.Closed == 1 %}
+																						<span class="badge bg-warning">Closed</span>
+																						<br>
+																						{% elseif  review_assignment.InactiveAssignment == 1 %}
+																						<span class="badge bg-danger">Inactive Assignment</span>
+																						<br>
+																						{% elseif  review_assignment.Declined == 1 %}
+																						<span class="badge bg-primary">Declined</span>
+																						
+																						
+																						{% endif %} #}
 
 
 													<br>
@@ -192,23 +191,23 @@
 
 
 															{# {% if   review.remark==1 %}
-																																																																													<span class="text-danger">
-																																																																														Declined</span>
-																																																											
-																																																																												{% elseif   review.remark==2 %}
-																																																																													<span class="text-warning">
-																																																																														Accepted with major revision</span>
-																																																																												{% elseif   review.remark==3 %}
-																																																																													<span class="text-warning">
-																																																																														Accepted with minor revision
-																																																																													</span>
-																																																																												{% elseif   review.remark==4 %}
-																																																											
-																																																																													<span class="text-success">
-																																																																														Accepted
-																																																																													</span>
-																																																											
-																																																											{% endif   %} #}
+																																																																																												<span class="text-danger">
+																																																																																													Declined</span>
+																																																																										
+																																																																																											{% elseif   review.remark==2 %}
+																																																																																												<span class="text-warning">
+																																																																																													Accepted with major revision</span>
+																																																																																											{% elseif   review.remark==3 %}
+																																																																																												<span class="text-warning">
+																																																																																													Accepted with minor revision
+																																																																																												</span>
+																																																																																											{% elseif   review.remark==4 %}
+																																																																										
+																																																																																												<span class="text-success">
+																																																																																													Accepted
+																																																																																												</span>
+																																																																										
+																																																																										{% endif   %} #}
 														</h4>
 														{{review.AllowToView}}
 													{% endfor %}

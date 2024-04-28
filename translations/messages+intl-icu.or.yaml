@@ -115,3 +115,16 @@ Compliants: __Compliants
 'Review Type': '__Review Type'
 'Original version': '__Original version'
 Version: __Version
+'Instruction for Reviewer': '__Instruction for Reviewer'
+'Yes': __Yes
+'No': __No
+NA: __NA
+Comment: __Comment
+'YES': __YES
+'NO': __NO
+Protocol: __Protocol
+Reviewer: __Reviewer
+Response: __Response
+'Add Schedule': '__Add Schedule'
+'New Schedule': '__New Schedule'
+Close: __Close

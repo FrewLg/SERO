@@ -1,30 +1,112 @@
-{% extends 'base.html.twig' %}
+<div class="card card-custom gutter-b">
+	<div class="card-header flex-wrap border-0 pt-3 pb-0">
+		<div class="card-title">
+			<h3 class="card-label">Review Response
+				<span class="d-block text-muted pt-2 font-size-sm">{{ review_assignment.application.title}}</span>
+			</h3>
+		</div>
+	</div>
+	<div class="card-body">
+		<div class="d-flex flex-wrap justify-content-between mt-1">
+			<div class="d-flex flex-column flex-grow-1 pr-8">
+				<div class="d-flex flex-wrap mb-4">
+					<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+						<i class="flaticon2-new-email mr-2 font-size-lg"></i>
+						{{ review_assignment.irbreviewer.email}}</a>
+					<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
+						<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>
+						{{ review_assignment.irbreviewer}}</a>
+					<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
+						<i class="flaticon2-placeholder mr-2 font-size-lg"></i>
+						{{ review_assignment.irbreviewer.profile.dirctorate}}</a>
+				</div>
+				<span class="font-weight-bold text-dark-50">A second could be persuade people.You want people to bay objective</span>
+				<span class=" text-hover-warning font-size-h5 font-weight-bold mr-3">
+					Reviewed at:
+					{{ review_assignment.reviewedAt|date('h:m sa d/m/y')}}
+				</span>
+			</div>
+			<div class="d-flex align-items-center w-25 flex-fill float-right mt-lg-12 mt-8">
+				<span class="font-weight-bold text-dark-75">Recommendation</span>
+				<div class="progress progress-xs mx-3 w-100">
+					<div class="progress-bar bg-success" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+				<span class="font-weight-bolder text-dark">78%</span>
+			</div>
+		</div>
+		<br>
+		<hr>
 
-{% block title %}ReviewChecklist{% endblock %}
+		{% if review_assignment.reviewerResponses|length >0   %}
+			<table class="table table-bordered ">
 
-{% block body %}
-    <h1>ReviewChecklist</h1>
+				<tbody>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ review_checklist.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ review_checklist.name }}</td>
-            </tr>
-            <tr>
-                <th>AnswerType</th>
-                <td>{{ review_checklist.answerType }}</td>
-            </tr>
-        </tbody>
-    </table>
+					{% for checklist_group in irb_review_checklist_group %}
+						<tr>
+							<th>{{toAlpha(loop.index)}}.
+								{{checklist_group}}</th>
+							<th>Response</th>
+							<th>Comment</th>
+						</tr>
+						{% set parents = {} %}
+						{% for checklist in review_assignment.reviewerResponses|filter(  checklist =>  (checklist.checklist.checklistGroup ==  checklist_group) ) %}
 
-    <a href="{{ path('app_s_e_r_o_review_checklist_index') }}">back to list</a>
+							{% if checklist.checklist.parent %}
+								{% set parents = parents|merge({("key" ~ checklist.checklist.parent.id):checklist.checklist.parent}) %}
 
-    <a href="{{ path('app_s_e_r_o_review_checklist_edit', {'id': review_checklist.id}) }}">edit</a>
+							{% else %}
+								<tr>
+									<td>
+										<p style="margin-left:10px">{{ loop.index}}.
+											{{checklist}}</p>
+									</td>
+									<td>
+										{% if checklist.checklist.answerType ==1 and checklist.answer == 'yes' %}
+											<span class="label label-lg label-light-success label-inline">
+												<i class="fa fa-check text-success m-1 font-size-sm"></i>
+												Yes</span>
 
-    {{ include('sero/review_checklist/_delete_form.html.twig') }}
-{% endblock %}
+										{% else %}
+											<span class="label label-lg label-light-danger label-inline">
+												<i class="fa fa-times text-danger m-1 font-size-sm"></i>
+												No</span>
+
+										{% endif %}
+
+									</td>
+									<td>{{ checklist.comment }}</td>
+								</tr>
+							{% endif %}
+
+						{% endfor %}
+						{% for checklist_parent in parents %}
+							<tr>
+								<th>
+									<b style="margin-left:10px">{{toRoman(loop.index)}}.
+										{{checklist_parent}}</b>
+								</th>
+								<th>Response</th>
+							</tr>
+							{% for checklist in review_assignment.reviewerResponses|filter(checklist =>  (checklist.checklist.answerType==1 and  checklist.checklist.parent ==  checklist_parent)) %}
+								<tr>
+									<td>
+										<p style="margin-left:20px">{{loop.index}}.
+											{{checklist}}</p>
+									</td>
+									<td>{{ checklist.answer }}</td>
+								</tr>
+
+							{% endfor %}
+						{% endfor %}
+
+					{% endfor %}
+				</tbody>
+			</table>
+		{% else %}
+			<p class="text-danger">
+				No review responses has been  given for this protocol yet!</p>
+		{% endif %}
+
+	</div>
+</div>

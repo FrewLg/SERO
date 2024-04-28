@@ -16,10 +16,7 @@ class AmendmentType extends AbstractType
         $builder
             ->add('purpose')
             ->add('changes')
-            ->add('application', EntityType::class, [
-                'class' => Application::class,
-                'choice_label' => 'id',
-            ])
+            // 
         ;
     }
 

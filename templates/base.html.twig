@@ -2,13 +2,14 @@
 	lang="en">
 	<!--begin::Head-->
 	<head>
- 		<meta charset="utf-8"/>
+		<meta charset="utf-8"/>
 		<title>
-			{% block title %}
-			{% endblock %}| {{app_name|trans}}
-			</title>
+			{% block title %}{% endblock %}|
+			{{app_name|trans}}
+		</title>
 		<meta name="description" content="Aside light theme example"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
 		<!--end::Fonts-->
@@ -20,23 +21,24 @@
 		<link href="{{ asset('theme/assets/css/style.bundle.css' ) }}" rel="stylesheet" type="text/css"/>
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
-		<link href="{{ asset('theme/assets/css/themes/layout/header/base/light.css' ) }}" rel="stylesheet" type="text/css"/> 
-		<link href="{{ asset('theme/assets/css/themes/layout/header/menu/light.css' ) }}" rel="stylesheet" type="text/css"/>
+		<link href="{{ asset('theme/assets/css/themes/layout/header/base/light.css' ) }}" rel="stylesheet" type="text/css"/> <link href="{{ asset('theme/assets/css/themes/layout/header/menu/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<link href="{{ asset('theme/assets/css/themes/layout/brand/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<link
 		href="{{ asset('theme/assets/css/themes/layout/aside/light.css' ) }}" rel="stylesheet" type="text/css"/>
 		<!--end::Layout Themes-->
-		<link rel="stylesheet" href="{{ asset('plugins/tagsinput.css')}}"/> 
+		<link rel="stylesheet" href="{{ asset('plugins/tagsinput.css')}}"/>
 
-		<link rel="shortcut icon" href="{{ asset('files/site_setting/'~site_logo ) }}">{% block styles %}{% endblock %} </head>
+		<link rel="shortcut icon" href="{{ asset('files/site_setting/'~site_logo ) }}"> {% block styles %}{% endblock %}
+		</head>
 		<!--end::Head-->
 		<!--begin::Body-->
 		{# <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed  page-loading"> #}
 
-		   <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
-			<!--begin::Main-->
- 				<div
-				id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed"> <!--begin::Logo-->
+			<body
+			id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading"> <!--begin::Main-->
+			<div
+				id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
+				<!--begin::Logo-->
 				<a href="#">
 					<img width="50" alt="Logo" src="{{ asset('files/site_setting/'~site_logo ) }}"/>
 				</a>
@@ -85,7 +87,7 @@
 						<!--begin::Brand-->
 						<div
 							class="brand flex-column-auto " id="kt_brand">
-							<!--begin::Logo--> 
+							<!--begin::Logo-->
 							<a href="#" class="brand-logo">
 								<img alt="Logo" class="pull-right" src="{{ asset('files/site_setting/'~site_logo ) }}" width="50" height='50'/>
 							</a>
@@ -129,14 +131,16 @@
 									<!--begin::Header Menu-->
 
 									<br>
-									<div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
+									<div
+										id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
 										<!--begin::Header Nav-->
- 											<span class="menu-text"> 
-											
-											<h5 class="text-default mt-2">
-											{# <a href="#" class="brand-logo">
-								<img alt="Logo" class="pull-right" src="{{ asset('files/site_setting/'~site_logo ) }}" width="50" height='50'/>
-							</a> #}
+										<span class="menu-text">
+
+											<h5
+												class="text-default mt-2">
+												{# <a href="#" class="brand-logo">
+																																																																																<img alt="Logo" class="pull-right" src="{{ asset('files/site_setting/'~site_logo ) }}" width="50" height='50'/>
+																																																																															</a> #}
 												<b>{{ app_description |trans }}</b>
 											</h5>
 										</span>
@@ -258,22 +262,23 @@
 											</span>
 										</div>
 									</div>
- 									
+
 									<div
-										class="dropdown"> <!--begin::Toggle-->
+										class="dropdown">
+										<!--begin::Toggle-->
 										<div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
 											<div class="btn btn-icon btn-clean btn-dropdown btn-lg mr-1">
 
 												<span class="text-capitalize text-dark-50 font-weight-bolder font-size-base">
 													{{ app.request.getLocale() }}
 												</span>
- 											</div>
+											</div>
 										</div>
 										<!--end::Toggle-->
 										<!--begin::Dropdown-->
 										<div
 											class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right ">
-											<!--begin::Nav--> 
+											<!--begin::Nav-->
 											{% include "locale.html.twig" %}
 
 											<!--end::Nav-->
@@ -284,9 +289,8 @@
 									<div class="topbar-item">
 										<div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 											<span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"></span>
-											<span
-												class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
-  
+											<span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">
+
 												{% if app.user  and app.user.profile %}
 													<img src="{{ asset('../uploads/files/profile_pictures/'~app.user.profile.image ) }}" alt="profile-user" class="rounded-circle thumb-xs" style="width:30px;height: 30px;"/>
 												{% elseif app.user  %}
@@ -352,9 +356,8 @@
 										<div class="container">
 											{% include "head.html.twig" %}
 
-											{% block body %}
-											{# {{ file_url(item.content['#file'].getFileUri()) }} #}
-											{# {% set url = file_url(content.field_pdf_file|render|striptags|trim) %} #}
+											{% block body %}{# {{ file_url(item.content['#file'].getFileUri()) }} #}
+												{# {% set url = file_url(content.field_pdf_file|render|striptags|trim) %} #}
 											{% endblock  %}
 										</div>
 									</div>
@@ -381,7 +384,8 @@
 										<!--end::Copyright-->
 										<!--begin::Nav-->
 										<div class="nav nav-dark">
-											<a href="http://sero.ephi.gov.et" target="_blank" class="nav-link pl-0 pr-5">{% trans %}About{% endtrans %} {{ acronym }}</a>
+											<a href="http://sero.ephi.gov.et" target="_blank" class="nav-link pl-0 pr-5">{% trans %}About{% endtrans %}
+												{{ acronym }}</a>
 											<a href="http://ephi.gov.et" target="_blank" class="nav-link pl-0 pr-5">{% trans %}EPHI{% endtrans %}</a>
 											<a href="http://ntc.ephi.gov.et" target="_blank" class="nav-link pl-0 pr-0">{% trans %}Contact{% endtrans %}</a>
 										</div>
@@ -406,7 +410,7 @@
 										<div class="symbol symbol-100 mr-5">
 											<div class="symbol-label" style="background-image:url({{ asset('files/profile_pictures/defaultuser.png') }})"></div>
 											<i class="symbol-badge bg-success"></i>
-										</div> 
+										</div>
 										<div class="d-flex flex-column">
 											<a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
 												{% if app.user %}
@@ -596,19 +600,16 @@
 								<script src="{{ asset('theme/assets/js/pages/crud/forms/widgets/select2.js')}}"></script>
 								{# <script src="{{ asset('plugins/jquery-jvectormap-2.0.2.min.js')}}"></script> #}
 								{# <script src="{{ asset('plugins/jquery-jvectormap-us-aea-en.js')}}"></script> #}
-								{# <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> #}
+								{# <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> #}<script src="{{ asset('theme/assets/js/pages/custom/chat/chat.js')}}"> </script>
 
-									<script>
-
-$("body").LoadingOverlay("show");
+								<script type="text/javascript">
+									$("body").LoadingOverlay("show");
 								</script>
-
-									<script type="text/javascript"> $(document).ready(function () {
+								<script type="text/javascript">
+									$(document).ready(function () {
 $(".select2").select2();
 });
 								</script>
-
-
 								{% block javascripts %}{% endblock %}
 							</body>
 						</html>

@@ -37,7 +37,7 @@ class VersionType extends AbstractType
                 'label' => 'Attachment type',
                 'placeholder' => '-- Select Attachment type --',
                 'class' => AttachmentType::class,
-                'mapped' => true, 
+                'mapped' => true,
                 'attr' => [
                     'class' => 'form-control select2 my-4' ,
                  ],

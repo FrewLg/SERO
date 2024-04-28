@@ -26,13 +26,11 @@
 
 								{% if myreviews|length>0%}
 
-									<span class="label label-sm label-primary mr-2">{{myreviews|length}}</span>
+									<span class="label label-sm label-success mr-2">{{myreviews|length}}</span>
 									{% else %}
 
 								{% endif %}
 							</span>
-
-
 						</a>
 					</li>
 					<li class="nav-item">
@@ -41,7 +39,7 @@
 								<i class="fa fa-table"></i>
 							</span>
 							<span class="nav-text">Closed  assigned
-								<span class="label label-sm label-danger mr-2">{{  closeds|length}}</span>
+								<span class="label label-sm label-warning  mr-2">{{  closeds|length}}</span>
 							</span>
 						</a>
 					</li>
@@ -52,16 +50,17 @@
 						<div class="table-responsive">
 							{% if myreviews|length>0%}
 
-								<table class="table table-borderless table-striped   table-vertical-center">
+								<table class="table     table-vertical-center">
 									<thead>
 										<tr>
 
 											<th>#</th>
 											<th>Title</th>
-											<th>Reviewer</th>
+											<th>Code</th>
 											<th>Review due date</th>
 											<th>Status</th>
-											<th>Last Updated </th>
+											<th>Last Updated
+											</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -73,22 +72,24 @@
 													{{ myreview.application.title }}
 
 												</td>
-												<td>
-													{{ myreview.irbreviewer }}
-													{{ myreview.status }}
-												</td>
+												<td nowrap=nowrap>
+													{{  myreview.application.ibcode }}
+ 												</td>
 
 												<td>
 													{% if myreview.dueDate %}
-														{{ myreview.dueDate|date('d, M Y h:i a') }}
+														{{ myreview.dueDate|date('h:i M d, Y ') }}
 													{% endif %}
 												</td>
 												<td>
-												{% if myreview.status==1%}
-												<span class="label label-lg label-light-primary label-inline">Review sent</span>
-												{% endif %}
- 												</td>
-												<td> {{ myreview.reviewedAt|date('h:m sa d/m/y')}}
+													{% if myreview.closed%}
+														<span class="label label-lg label-light-primary label-inline">Review sent</span>
+													{% else %}
+														<span class="label label-lg label-light-danger label-inline">Under review</span>
+													{% endif %}
+												</td>
+												<td>
+													{{ myreview.reviewedAt|date('h:i M d, Y')}}
 												</td>
 												<td>
 													<a href="{{ path('make_a_review', {'id': myreview.id}) }} " class='btn btn-light-success btn-sm'>
@@ -111,13 +112,13 @@
 						<div class="table-responsive">
 							{% if closeds|length>0%}
 
-								<table class="table table-bordered  table-vertical-center">
+								<table class="table table-   table-vertical-center">
 									<thead>
 										<tr>
 											<th>#</th>
 											<th>Title</th>
-											<th>Reviewer</th>
-											<th>Review due date</th>
+											<th>Decision</th>
+											<th>Reviewed date</th>
 											<th>Status</th>
 										</tr>
 									</thead>
@@ -130,19 +131,19 @@
 
 												</td>
 												<td>
-													{{ myreview.irbreviewer }}
+													{{ myreview.recommendation }}
 												</td>
 
 												<td>
-													{% if myreview.dueDate %}
-														{{ myreview.dueDate|date('d, M Y h:i a') }}
+													{% if myreview.reviewedAt %}
+														{{ myreview.reviewedAt|date('d, M Y h:i a') }}
 													{% endif %}
 												</td>
 												<td>
 
 
 													<span class='badge badge-soft-{{ myreview.application.title }}'>
-														{{  myreview.application.title }}
+														{{  myreview.application.ibcode }}
 													</span>
 												</td>
 											</tr>

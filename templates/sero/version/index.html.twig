@@ -18,12 +18,23 @@
 		</h3>
 	</div>
 	<div class="card-body">
-		<span class="text-muted"> Created on: {{ version.createdAt ? version.createdAt|date('Y-m-d H:i:s') : '' }}</span>
-<p class="title">Changes Made:</p>
-		<p>  {{ version.changesMade }}</p>
-		
-        <p> {{ version.approved ? "Yes"    ? "NO" }} {% if version.approved %}<span class="label label-light-success"> Approved</span> {% else %} <span class="label label-light-danger label-inline"> Declined</span>{% endif %}
-         </p>
+		<span class="text   -muted">
+			Created on:
+			{{ version.createdAt ? version.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+		<p class="title">Changes Made:</p>
+		<p>
+			{{ version.changesMade }}</p>
+
+		<p>
+			{{ version.approved ? "Yes"    ? "NO" }}
+			{% if version.approved %}
+				<span class="label label-light-success">
+					Approved</span>
+			{% else %}
+				<span class="label label-light-danger label-inline">
+					Declined</span>
+			{% endif %}
+		</p>
 		<span class="text-primary">{{ version.date ? version.date|date('Y-m-d H:i:s') : '' }}</span>
 		<td>
 			{% if  version.attachment %}
@@ -38,4 +49,12 @@
 			{% endif %}
 		</td>
 	</div>
+	<div class="card-footer d-flex justify-content-between">
+		<a href="#" class="btn btn-secondary font-weight-bold">Ammendment Request</a>
+		<a href="#" class="btn btn-primary font-weight-bold">Continuation Request</a>
+		<a href="#" class="btn btn-light-secondary font-weight-bold">Continuation  </a>
+		<a href="#" class="btn btn-outline-secondary mr-1">Continuation  </a>
+								{{ include('sero/application/app_sections/continueModal.html.twig') }}
+
+ 	</div>
 </div>

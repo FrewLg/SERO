@@ -1,4 +1,4 @@
-Training: ስልጠና
+'Scientific and Ethical Review Online': 'ሳይንሳዊ እና  የስነምግባር ግምገማ ስርዓት'
 'Approved Training': 'የተፈቀደ ስልጠና'
 Details: ዝርዝሮች
 Name: ስም
@@ -26,21 +26,21 @@ Plan: እቅድ
 results: __results
 Plans: እቅዶች
 Assesment: __Assesment
-'SNTC -EPHI management': dsada
-SERO-EPHI: dsadad
+'SNTC -EPHI management': 'ሳይንሳዊ እና የስነምግባር ግምገማ ስርዓት'
+SERO-EPHI: 'ሳይንሳዊ እና የስነምግባር ግምገማ ስርዓት'
 Application: ማመልከቻ
 Title: ርዕስ
 Reviewers: ገምጋሚዎች
 Reviewer: ገምጋሚ
-Response: 'ምላሽ'
+Response: ምላሽ
 'Add  Reviewer': 'ገምጋሚ ያክሉ'
 'Submited by': '__Submited by'
 Role: __Role
 'Sumitted At': '__Sumitted At'
 Status: __Status
 'Application Type': 'ማመልከቻዎች ዓይነት'
-'No': 'በፍጹም'
-'Yes': 'አዎን'
+'No': በፍጹም
+'Yes': አዎን
 'Project Type': '__Project Type'
 'Poject Start Date': '__Poject Start Date'
 'Poject End Date': '__Poject End Date'
@@ -80,20 +80,21 @@ Settings: ቅንብሮች
 'Site Setting': 'የጣቢያ ቅንብር'
 'Statistics and archive': 'ስታቲስቲክስ እና ማህደር'
 Feedbacks: __Feedbacks
-Archives: __Archives
-Comment: 'አስተያየት'
+Archives: በማህደር
+'Archived applications': 'በማህደር የተቀመጡ የስራ ማመልከቻዎች'
+Comment: አስተያየት
 Reports: ሪፖርቶች
 Dashboard: __Dashboard
 'Protocol Applications': '__Protocol Applications'
 'Make Revision': '__Make Revision'
 'Protocol assesment form': '__Protocol assesment form'
-'My Review Assignments': '__My Review Assignments'
-'All Active': '__All Active'
+'My Review Assignments': 'የተመደብኩበት '
+'All Active': 'ሁሉም ተጠባባቂ'
 'Review Form': 'የግምገማ ቅጽ'
 'Protocol Details': 'የፕሮቶኮል ዝርዝሮች'
 'Progress Reports': 'የሂደት ሪፖርቶች'
 History: __History
-'My Protocol applications': '__My Protocol applications'
+'My Protocol applications': 'የእኔ ፕሮቶኮል ማመልከቻዎች'
 'Calendar view': 'የቀን መቁጠሪያ እይታ'
 'Table view': 'የጠረጴዛ እይታ'
 About: ስለ
@@ -119,5 +120,14 @@ Compliants: __Compliants
 'New application': 'አዲስ ማመልከቻ'
 'Study Type': 'የጥናት ዓይነት'
 'Review Type': 'የግምገማ አይነት'
-Version: 'እትም ስሪት'
-'Original version': 'የመጀመሪያ እትም ስሪት'
+Version: እትም
+'Original version': 'የመጀመሪያ እትም '
+'Instruction for Reviewer': 'መመሪያ ለገምጋሚ'
+NA: መልስ የለም
+'YES': __YES
+'NO': __NO
+Protocol: __Protocol
+'Add Schedule': 'የስብሰባ መርሃ ግብሮች ያክሉ'
+'New Schedule': 'አዲስ የስብሰባ መርሃ ግብሮች'
+Close: __Close
+Training: __Training

@@ -38,7 +38,8 @@
 										</g>
 									</svg>
 									<!--end::Svg Icon-->
-								</span>{{ application.submittedBy.email}}</a>
+								</span>
+								{{ application.submittedBy.email}}</a>
 							<a href="#" class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
 								<span
 									class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
@@ -65,25 +66,27 @@
 										</g>
 									</svg>
 									<!--end::Svg Icon-->
-								</span>{{ application.location}}</a>
+								</span>
+								{{ application.location}}</a>
 						</div>
 						<!--end::Contacts-->
 					</div>
 					<div class="my-lg-0 my-1">
-                    {% if   is_granted("ROLE_CHAIR") or  is_granted("ROLE_VICE_CHAIR") %}
-											<a href="{{ path('assign_reviewer', {'id': application.id}) }}" class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-3">
-											{% trans %}Add  Reviewer{% endtrans %}</a>
-					{% endif %}
+						{% if   is_granted("ROLE_CHAIR") or  is_granted("ROLE_VICE_CHAIR") %}
+							<a href="{{ path('assign_reviewer', {'id': application.id}) }}" class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-3">
+								{% trans %}Add  Reviewer{% endtrans %}</a>
+						{% endif %}
 
- 						<a href="#" class="btn btn-sm btn-light-info font-weight-bolder text-uppercase">{{ application.reviewAssignments|length}} Reviewers assigned</a>
- 						<a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase">{{ application.versions|length}}Versions</a>
+						<a href="#" class="btn btn-sm btn-light-info font-weight-bolder text-uppercase">{{ application.reviewAssignments|length}}
+							Reviewers assigned</a>
+						<a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase">{{ application.versions|length}}Versions</a>
 					</div>
 				</div>
 				<!--end: Title-->
 				<!--begin: Content-->
 				<div class="d-flex align-items-center flex-wrap justify-content-between">
 					<div class="flex-grow-1 font-weight-bold text-dark-50 py-5 py-lg-2 mr-5">{{ application.description|raw }}
-						 </div>
+					</div>
 					<div class="d-flex flex-wrap align-items-center py-2">
 						<div class="d-flex align-items-center mr-10">
 							<div class="mr-6">
@@ -118,9 +121,9 @@
 					<i class="flaticon-piggy-bank icon-2x text-muted font-weight-bold"></i>
 				</span>
 				<div class="d-flex flex-column text-dark-75">
-					<span class="font-weight-bolder font-size-sm">Earnings</span>
+					<span class="font-weight-bolder font-size-sm">Versions</span>
 					<span class="font-weight-bolder font-size-h5">
-						<span class="text-dark-50 font-weight-bold">$</span>249,500</span>
+						<span class="text-dark-50 font-weight-bold">$</span>200</span>
 				</div>
 			</div>
 			<!--end: Item-->
@@ -130,9 +133,9 @@
 					<i class="flaticon-confetti icon-2x text-muted font-weight-bold"></i>
 				</span>
 				<div class="d-flex flex-column text-dark-75">
-					<span class="font-weight-bolder font-size-sm">Expenses</span>
+					<span class="font-weight-bolder font-size-sm">Discussions</span>
 					<span class="font-weight-bolder font-size-h5">
-						<span class="text-dark-50 font-weight-bold">$</span>164,700</span>
+						<span class="text-dark-50 font-weight-bold">$</span>20</span>
 				</div>
 			</div>
 			<!--end: Item-->
@@ -142,9 +145,9 @@
 					<i class="flaticon-pie-chart icon-2x text-muted font-weight-bold"></i>
 				</span>
 				<div class="d-flex flex-column text-dark-75">
-					<span class="font-weight-bolder font-size-sm">Net</span>
+					<span class="font-weight-bolder font-size-sm">All</span>
 					<span class="font-weight-bolder font-size-h5">
-						<span class="text-dark-50 font-weight-bold">$</span>782,300</span>
+						<span class="text-dark-50 font-weight-bold">2</span>Feedbacks</span>
 				</div>
 			</div>
 			<!--end: Item-->
@@ -154,7 +157,7 @@
 					<i class="flaticon-file-2 icon-2x text-muted font-weight-bold"></i>
 				</span>
 				<div class="d-flex flex-column flex-lg-fill">
-					<span class="text-dark-75 font-weight-bolder font-size-sm">73 Tasks</span>
+					<span class="text-dark-75 font-weight-bolder font-size-sm">73 Ammendments</span>
 					<a href="#" class="text-primary font-weight-bolder">View</a>
 				</div>
 			</div>

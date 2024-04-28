@@ -6,6 +6,7 @@ use App\Entity\SERO\MeetingSchedule;
 use App\Form\SERO\MeetingScheduleType;
 use App\Repository\SERO\MeetingScheduleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Intervention\Image\Colors\Rgb\Channels\Red;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,21 +25,11 @@ class MeetingScheduleController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'meeting_schedule', methods: ['GET'])]
-    public function schedule(MeetingScheduleRepository $meetingScheduleRepository): Response
-    { 
+    #[Route('/', name: 'meeting_schedule', methods: ['GET','POST'])]
+    public function schedule(Request $request ,MeetingScheduleRepository $meetingScheduleRepository , EntityManagerInterface $entityManager): Response
+    {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
         
-        return $this->render('sero/meeting_schedule/calendar.html.twig', [
-            'meeting_schedules' => $meetingScheduleRepository->findAll(),
-            // 'trainings' => $meetingScheduleRepository->findAll(),
-        ]);
-    }
-
-
-    #[Route('/new', name: 'meeting_schedule_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
         $meetingSchedule = new MeetingSchedule();
         $form = $this->createForm(MeetingScheduleType::class, $meetingSchedule);
         $form->handleRequest($request);
@@ -47,14 +38,18 @@ class MeetingScheduleController extends AbstractController
             $entityManager->persist($meetingSchedule);
             $entityManager->flush();
 
-            return $this->redirectToRoute('meeting_schedule_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('meeting_schedule', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('sero/meeting_schedule/new.html.twig', [
-            'meeting_schedule' => $meetingSchedule,
+        return $this->render('sero/meeting_schedule/calendar.html.twig', [
+            'meeting_schedules' => $meetingScheduleRepository->findAll(),
             'form' => $form,
+            // 'trainings' => $meetingScheduleRepository->findAll(),
         ]);
     }
+
+
+ 
 
     #[Route('/{id}', name: 'meeting_schedule_show', methods: ['GET'])]
     public function show(MeetingSchedule $meetingSchedule): Response

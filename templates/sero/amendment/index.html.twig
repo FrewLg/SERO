@@ -1,28 +1,25 @@
-{% extends 'base.html.twig' %}
 
-{% block title %}Amendment index{% endblock %}
-
-{% block body %}
-    <h1>Amendment index</h1>
+   <div class="m-6">
+    <h1>Amendments</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th>Purpose</th>
                 <th>Changes</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for amendment in amendments %}
+        {% for amendment in application.amendments %}
             <tr>
-                <td>{{ amendment.id }}</td>
+                <td>{{ loop.index }}</td>
                 <td>{{ amendment.purpose }}</td>
                 <td>{{ amendment.changes }}</td>
                 <td>
-                    <a href="{{ path('app_s_e_r_o_amendment_show', {'id': amendment.id}) }}">show</a>
-                    <a href="{{ path('app_s_e_r_o_amendment_edit', {'id': amendment.id}) }}">edit</a>
+                    {# <a href="{{ path('app_s_e_r_o_amendment_show', {'id': amendment.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_amendment_edit', {'id': amendment.id}) }}">edit</a> #}
                 </td>
             </tr>
         {% else %}
@@ -32,6 +29,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_s_e_r_o_amendment_new') }}">Create new</a>
-{% endblock %}
+   </div>

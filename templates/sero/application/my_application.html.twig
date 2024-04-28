@@ -40,7 +40,7 @@
 							<span class="nav-icon">
 								<i class="fa fa-table"></i>
 							</span>
-							<span class="nav-text">Archived applications
+							<span class="nav-text" > {% trans %}Archived applications{% endtrans %}
 								{# <span class="label label-sm label-danger mr-2">{{  closeds|length}}</span> #}
 							</span>
 						</a>
@@ -92,8 +92,8 @@
 								<td nowrap="nowrap">
 
 									<a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a>
-									<a href="{{ path('app_s_e_r_o_application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
-									<a href="{{ path('app_s_e_r_o_application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
+									<a href="{{ path('application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
+									<a href="{{ path('application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
 								</td>
 							</tr>
 						{% else %}

@@ -1,10 +1,28 @@
-{% extends 'base.html.twig' %}
+<!-- Button trigger modal-->
+<button type="button" class="btn btn-light-primary font-weight-bold" data-toggle="modal" data-target="#contuoationModal">
+	<i class="ki ki-plus icon-md mr-2"></i>
+	{% trans %}Add Schedule{% endtrans %}
+</button>
 
-{% block title %}New MeetingSchedule{% endblock %}
 
-{% block body %}
-    <h1>Create new MeetingSchedule</h1>
-
-    {{ include('sero/meeting_schedule/_form.html.twig') }}
-
- {% endblock %}
+<div class="modal fade" id="contuoationModal" tabindex="-1" role="dialog" aria-labelledby="NewSchedule" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="NewSchedule">{% trans %}New Schedule{% endtrans %}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<i aria-hidden="true" class="ki ki-close"></i>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="post" action="{{ path('meeting_schedule') }}">
+					{{form_widget(form)}}
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+						<button class="btn btn-primary font-weight-bold">{{ button_label|default('Save') }}</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

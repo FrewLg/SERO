@@ -1,121 +1,105 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}{% trans %}Make Revision{% endtrans %}
+{% block title %}
+	{% trans %}Make Revision{% endtrans %}
 {% endblock %}
-{% block container_title %}{% trans %}Make Revision{% endtrans %}
+{% block container_title %}
+	{% trans %}Make Revision{% endtrans %}
 {% endblock %}
 {% block body %}
-<div class="tab-pane p-3  active" id="review-checklist" role="tabpanel">
-	<div class="card">
-		<div class="card-header">
+	<div class="tab-pane p-3  active" id="review-checklist" role="tabpanel">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="font-weight-bold  text-uppercase">{{ review_assignment.reviewForm}}
+				</h5>
+			</div>
+			<div class="card-body">
+				<h5 class="text-title">{% trans %}Instruction for Reviewer{% endtrans %}</h5>
+				<p>
+					{{review_assignment.reviewForm.instructionForReviewer|raw}}
+				</p>
+				<p class="font-weight-bold text-muted text-uppercase">
+					{{review_assignment.application.title}}</p>
+				<div>
+					<form method="POST" onsubmit="return confirm('Save changes')">
+						<input hidden name="review-checklist" value="true"/>
+						<input hidden name="review-comments" value="true"/>
+						<table class="table table-bordered table-hover">
+							<tbody>
+								{% for checklist_group in irb_review_checklist_group  %}
+									<tr>
+										<th>{{toAlpha(loop.index)}}.
+											{{checklist_group}}</th>
+										<th>{% trans %}Yes{% endtrans %}</th>
+										<th>{% trans %}No{% endtrans %}</th>
+										<th>{% trans %}NA{% endtrans %}</th>
+										<th>{% trans %}Comment{% endtrans %}</th>
+									</tr>
+									{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and   checklist.reviewForm == review_assignment.reviewForm)) %}
 
-			<h5>{% trans %}Protocol assesment form {% endtrans %}
- 
-			</h5>
-		</div>
-		<div class="card-body">
-			 {{review_assignment.reviewForm.instructionForReviewer|raw}}
-			<div>
-				<form method="POST" onSubmit="return confirm('Save changes')">
-                <input hidden name="review-checklist" value="true"/>
-                <input hidden name="review-comments" value="true"/>
-					<table class="table table-bordered table-hover">
-
-						<tbody>
-
-							{% for checklist_group in irb_review_checklist_group  %}  
-								
-									 
-								<tr>
-									<th>{{toAlpha(loop.index)}}. {{checklist_group}}</th>
- 									<th>YES</th>
-									<th>NO</th>
-									<th>NA</th>
-									<th>Comment</th>
-
-								</tr>
-								
-								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and   checklist.reviewForm == review_assignment.reviewForm)) %}  
-
-									{% if checklist.reviewChecklists|length >0 %}
-										<tr>
-											<th>
-												<b style="margin-left:10px">{{ loop.index}}.
-													{{checklist}}</b>
-											</th>
-											<th>YES</th>
-											<th>NO</th>
-											<th>NA</th>
-											<th>Comment</th>
-										</tr>
-										{% for child in checklist.reviewChecklists %}
+										{% if checklist.reviewChecklists|length >0 %}
 											<tr>
 												<th>
-													<p style="margin-left:20px">{{loop.index}}. {{child}}</p>
-												</th> 
-												<td><input type="radio" required name="checklist[{{child.id}}]" value="yes"></td>
-												<td><input type="radio" required name="checklist[{{child.id}}]" value="no"></td>
-												<td><input type="radio" required name="checklist[{{child.id}}]" value="na"></td>
-											<td> 
-											<textarea name="comment[{{checklist.id}}]"  class=" form-control"></textarea>
-                                        {# <input type="text" required name="comment[{{checklist.id}}]"  > #}
-                                        
-                                        </td>
-                                            </tr>
-										{% endfor %}
-									{% else %}
+													<b style="margin-left:10px">{{ loop.index}}.
+														{{checklist}}</b>
+												</th>
+												<th>{% trans %}YES{% endtrans %}</th>
+												<th>{% trans %}NO{% endtrans %}</th>
+												<th>{% trans %}NA{% endtrans %}</th>
+												<th>{% trans %}Comment{% endtrans %}</th>
+											</tr>
+											{% for child in checklist.reviewChecklists %}
+												<tr>
+													<th>
+														<p style="margin-left:20px">{{loop.index}}.
+															{{child}}</p>
+													</th>
+													<td><input type="radio" required name="checklist[{{child.id}}]" value="yes"></td>
+													<td><input type="radio" required name="checklist[{{child.id}}]" value="no"></td>
+													<td><input type="radio" required name="checklist[{{child.id}}]" value="na"></td>
+													<td>
+														<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
+
+													</td>
+												</tr>
+											{% endfor %}
+										{% else %}
+
+											<tr>
+												<td>
+													<p style="margin-left:10px">
+														{{loop.index}}.
+														{{checklist}}</p>
+												</td>
+												<td><input type="radio" required name="checklist[{{checklist.id}}]" value="yes"></td>
+												<td><input type="radio" required name="checklist[{{checklist.id}}]" value="no"></td>
+												<td><input type="radio" required name="checklist[{{checklist.id}}]" value="na"></td>
+												<td>
+													{# <input type="text" required name="comment[{{checklist.id}}]"  > #}
+													<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
+
+												</td>
+
+											</tr>
+										{% endif %}
+
+									{% endfor %}
+									{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2 and   checklist.reviewForm == review_assignment.reviewForm) %}
 
 										<tr>
-											<td>
-												<p style="margin-left:10px"> {{loop.index}}. {{checklist}}</p>
+											<td colspan="4">{{checklist}}
+												<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
+												<input type="hidden" name="comment[{{checklist.id}}]">
 											</td>
-											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="yes"></td>
-											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="no"></td>
-											<td><input type="radio" required name="checklist[{{checklist.id}}]" value="na"></td>
-										<td> 
-                                        {# <input type="text" required name="comment[{{checklist.id}}]"  > #}
-											<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
-                                        
-                                        </td>
-										
-                                        </tr>
-									{% endif %}
+										</tr>
+									{% endfor %}
 
 								{% endfor %}
-								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2 and   checklist.reviewForm == review_assignment.reviewForm) %}
-
-									<tr>
-										<td colspan="4">{{checklist}}
-											<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
-                                        <input type="hidden"   name="comment[{{checklist.id}}]"  >
-
-										</td>
-
-
-									</tr>
-								{% endfor %}
-								
-							{% endfor %}
-						</tbody>
-					</table>
-
-					
-					<button class="btn btn-primary btn-lg">{{ button_label|default('Submit Review Response') }}</button>
-
-				</form>
+							</tbody>
+						</table>
+						<button class="btn btn-primary btn-lg">{{ button_label|default('Submit Review Response') }}</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-
 {% endblock %}
-{% block javascripts  %}
-	{# <script>
-		$('.form-check-input').change(function () {
-var min = $(this).attr('data-min');
-var max = $(this).attr('data-max');
-$(this).closest('.parent').find('.score').attr({"max": max, "min": min});
-});
-	</script> #}
-{% endblock javascripts  %}

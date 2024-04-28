@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Continuation index{% endblock %}
+
+{% block body %}
+    <h1>Continuation index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>RequestedAt</th>
+                <th>Description</th>
+                <th>Approved</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for continuation in continuations %}
+            <tr>
+                <td>{{ continuation.id }}</td>
+                <td>{{ continuation.requestedAt ? continuation.requestedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ continuation.description }}</td>
+                <td>{{ continuation.approved ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_continuation_show', {'id': continuation.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_continuation_edit', {'id': continuation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_continuation_new') }}">Create new</a>
+{% endblock %}
