@@ -66,12 +66,7 @@ class Application
     #[ORM\OneToMany(targetEntity: ApplicationFeedback::class, mappedBy: 'application')]
     private Collection $applicationFeedback;
 
-    /**
-     * @var Collection<int, Amendment>
-     */
-    #[ORM\OneToMany(targetEntity: Amendment::class, mappedBy: 'application')]
-    private Collection $amendments;
-
+ 
     #[ORM\ManyToOne(inversedBy: 'applications')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $submittedBy = null;
@@ -97,7 +92,6 @@ class Application
         $this->reviewAssignments = new ArrayCollection();
         $this->irbCertificates = new ArrayCollection();
         $this->applicationFeedback = new ArrayCollection();
-        $this->amendments = new ArrayCollection();
         $this->versions = new ArrayCollection();
         $this->continuations = new ArrayCollection();
     }
@@ -323,36 +317,7 @@ class Application
         return $this;
     }
 
-    /**
-     * @return Collection<int, Amendment>
-     */
-    public function getAmendments(): Collection
-    {
-        return $this->amendments;
-    }
-
-    public function addAmendment(Amendment $amendment): static
-    {
-        if (!$this->amendments->contains($amendment)) {
-            $this->amendments->add($amendment);
-            $amendment->setApplication($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAmendment(Amendment $amendment): static
-    {
-        if ($this->amendments->removeElement($amendment)) {
-            // set the owning side to null (unless already changed)
-            if ($amendment->getApplication() === $this) {
-                $amendment->setApplication(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getSubmittedBy(): ?User
     {
         return $this->submittedBy;

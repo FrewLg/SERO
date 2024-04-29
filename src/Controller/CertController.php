@@ -96,14 +96,14 @@ class CertController extends AbstractController
                 ]);
             }
         }
-        if($request->query->get('export')){
-            if($irbCertificate->getIrbApplication()->getSubmittedBy() != $this->getUser()){
-               return new AccessDeniedHttpException();
-            }
-           return  new Response($domPrint->print("irb/print.html.twig",[
-            "certificate"=>$irbCertificate],
-            "PRINT",DomPrint::ORIENTATION_PORTRAIT,DomPrint::PAPER_A4,true));
-        }
+        // if($request->query->get('export')){
+        //     if($irbCertificate->getIrbApplication()->getSubmittedBy() != $this->getUser()){
+        //        return new AccessDeniedHttpException();
+        //     }
+        //    return  new Response($domPrint->print("irb/print.html.twig",[
+        //     "certificate"=>$irbCertificate],
+        //     "PRINT",DomPrint::ORIENTATION_PORTRAIT,DomPrint::PAPER_A4,true));
+        // }
 
         return $this->render('irb/clearance.html.twig', [
            
@@ -117,5 +117,4 @@ class CertController extends AbstractController
             'training_participant' => $trainingParticipant,
         ]);
     }
-   
 }

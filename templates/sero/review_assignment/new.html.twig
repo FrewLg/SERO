@@ -20,57 +20,58 @@
 						</div>
 					</div>
 					<div id="collapseOne4" class="collapse  " data-parent="#accordionExample4">
-						<div class="card-body">
-							
+						<div
+							class="card-body">
 
-			{# //// tabs #}
+
+							{# //// tabs #}
 
 							<div class="example-preview">
-				<ul class="nav nav-tabs" id="myTab" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">
-							<span class="nav-icon">
-								<i class="fa fa-calendar"></i>
-							</span>
-							<span class="nav-text">Board memebrs
-								{% if irb_review_assignment|length>0%}
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item">
+										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">
+											<span class="nav-icon">
+												<i class="fa fa-calendar"></i>
+											</span>
+											<span class="nav-text">Board memebrs
+												{% if irb_review_assignment|length>0%}
 
-									<span class="label label-sm label-primary mr-2">{{irb_review_assignment|length}}</span>
-									{% else %}
+													<span class="label label-sm label-primary mr-2">{{irb_review_assignment|length}}</span>
+													{% else %}
 
-								{% endif %}
-							</span>
+												{% endif %}
+											</span>
 
 
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile">
-							<span class="nav-icon">
-								<i class="fa fa-table"></i>
-							</span>
-							<span class="nav-text">External reviewers
-								{# <span class="label label-sm label-danger mr-2">{{ myreviews|length + closeds|length}}</span> #}
-							</span>
-						</a>
-					</li>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile">
+											<span class="nav-icon">
+												<i class="fa fa-table"></i>
+											</span>
+											<span class="nav-text">External reviewers
+												{# <span class="label label-sm label-danger mr-2">{{ myreviews|length + closeds|length}}</span> #}
+											</span>
+										</a>
+									</li>
 
-				</ul>
-				<div class="tab-content mt-5" id="myTabContent">
-					<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
- 							{{ include('sero/review_assignment/_form.html.twig') }}
+								</ul>
+								<div class="tab-content mt-5" id="myTabContent">
+									<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+										{{ include('sero/review_assignment/_form.html.twig') }}
 
- 					</div>
-					<div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
-						<div class="table-responsive">
-							closed
+									</div>
+									<div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+										<div class="table-responsive">
+											closed
 
-						</div>
-					</div>
-					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab content 3</div>
-				</div>
-			</div>
-			{# ////end tabs #}
+										</div>
+									</div>
+									<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab content 3</div>
+								</div>
+							</div>
+							{# ////end tabs #}
 						</div>
 
 					</div>
@@ -82,10 +83,17 @@
 
 		</div>
 	</div>
+	<div class="row">
 
-
+		<div class="col-12 ">
+			<div class="card bg-gray-100 my-1">
+				<div class="card-body ">
+					{{application.ibcode}}: <span class="text-muted">{{application.title}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="card card-custom gutter-b my-0">
-		 
 		<div class="card-body">
 			<div class="example-preview">
 				<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -94,7 +102,7 @@
 							<span class="nav-icon">
 								<i class="fa fa-calendar"></i>
 							</span>
-							<span class="nav-text">Assigned reviewers
+							<span class="nav-text">{% trans %}Assigned reviewers{% endtrans %}
 								{% if irb_review_assignment|length>0%}
 
 									<span class="label label-sm label-primary mr-2">{{irb_review_assignment|length}}</span>
@@ -106,7 +114,7 @@
 
 						</a>
 					</li>
-					 
+
 
 				</ul>
 				<div class="tab-content mt-5" id="myTabContent">
@@ -116,7 +124,7 @@
 
 						</div>
 					</div>
-					 
+
 					<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab content 3</div>
 				</div>
 			</div>

@@ -38,7 +38,7 @@ class PdfGeneratorController extends AbstractController
 
     #[Route('/{id}/', name: 'ethical_clearance_cert')]
     public function index(Application $app, EntityManagerInterface $entityManager)
-    {
+    { 
 
         $this->denyAccessUnlessGranted('ROLE_USER');
         // $file = $this->imageToBase64($this->getParameter('kernel.project_dir') . "/uploads/files/site_setting/ephi.png");
@@ -72,11 +72,11 @@ class PdfGeneratorController extends AbstractController
 
         $image = $this->getParameter('project_dir')."uploads/files/site_setting/ephi2.jpg";
 
-// Read image path, convert to base64 encoding
-$imageData = base64_encode(file_get_contents($image));
+        // Read image path, convert to base64 encoding
+        $imageData = base64_encode(file_get_contents($image));
 
-// Format the image SRC:  data:{mime};base64,{data};
-$src = 'data:'.mime_content_type($image).';base64,'.$imageData;
+        // Format the image SRC:  data:{mime};base64,{data};
+        $src = 'data:'.mime_content_type($image).';base64,'.$imageData;
 
 
         $data = [
@@ -130,6 +130,7 @@ $src = 'data:'.mime_content_type($image).';base64,'.$imageData;
             ['Content-Type' => 'application/pdf']
         );
     }
+    
     private function imageToBase64($path)
     {
         $path = $path;

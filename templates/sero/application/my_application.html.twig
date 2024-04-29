@@ -57,43 +57,37 @@
 										<tr>
 
 											<th>#</th>
-											<th>Title</th>
-											<th>Sent at</th>
-											{# <th>Review due date</th> #}
-											<th>Status</th>
-											<th>Last Updated </th>
-											<th>Meeting </th>
-											<th>Action</th>
+											<th>{% trans %}Title{% endtrans %}</th>
+											<th>{% trans %}Sent at{% endtrans %}</th>
+											<th>{% trans %}IRB CODE{% endtrans %}</th>
+											{# <th>{% trans %}Updated {% endtrans %}</th> #}
+											<th>{% trans %}Status{% endtrans %} </th>
+											<th>{% trans %}Action{% endtrans %}</th>
 										</tr>
 									</thead>
 									<tbody>
 										{% for application in applications %}
 							<tr>
-								<td nowrap='nowrap'>
-									{# <label class="checkbox checkbox-single">
-										<input type="checkbox" name="check[]" class="checkbox">
-										<span></span>
-									</label> #}
+								<td nowrap='nowrap'> 
 									{{loop.index}}
 								</td>
 								<td>{{ application.title }}</td>
 								
-								<td>{{ application.createdAt ? application.createdAt|date('h:i d/m/y ') : '' }}</td>
-								{# <td>{{ application.startDate ? application.startDate|date('d/m/y ') : '' }}-{{ application.endDate ? application.endDate|date('d/m/y ') : '' }}</td> #}
-								
-								<td>
-									{% if application.meeting %}
-										{{application.meeting.status }}
+								<td nowrap='nowrap'> {{ application.createdAt ? application.createdAt|date('h:i M d, y ') : '' }}</td>								
+								<td nowrap='nowrap'>
+									{% if application.ibcode %}
+										{{application.ibcode }}
 									{% endif %}
 								</td>
-								<td>{{ application.updatedAt ? application.updatedAt|date('h:i d/m/y ') : '' }}</td>
+								<td><label class="label label-light-success label-inline"> Reviewing</td>
 
-								<td>{{ application.meeting|length }}</td>
+								{# <td>{{ application.meeting|length }}</td> #}
 								<td nowrap="nowrap">
 
 									<a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a>
 									<a href="{{ path('application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
-									<a href="{{ path('application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
+									{# <a href="{{ path('application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a> #}
+									<a href="{{ path('application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'  onclick="return confirm('Are you sure you want to withdraw this application?');">{% trans %}Withdraw{% endtrans %}</a>
 								</td>
 							</tr>
 						{% else %}
@@ -104,6 +98,7 @@
 									</tbody>
 								</table>
 							{% endif %}
+			<div class="navigation">{{ knp_pagination_render(applications ) }}</div>
 
 						{# </div> #}
 					</div>

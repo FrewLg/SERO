@@ -30,13 +30,13 @@ class VersionController extends AbstractController
         $versionForm->handleRequest($request);
 
         if ($versionForm->isSubmitted() && $versionForm->isValid()) {
-if ($versionForm->get('attachement')->getData()) {
-            $versionAttachement = $versionForm->get('attachement')->getData();
+            if ($versionForm->get('attachement')->getData()) {
+                $versionAttachement = $versionForm->get('attachement')->getData();
 
-            $versionfile_name = 'Version' . md5(uniqid()) . '.' . $versionAttachement->guessExtension();
-            $versionAttachement->move($this->getParameter('uploads_folder'), $versionfile_name);
-            $version->setAttachment($versionfile_name);
-        }  
+                $versionfile_name = 'Version' . md5(uniqid()) . '.' . $versionAttachement->guessExtension();
+                $versionAttachement->move($this->getParameter('uploads_folder'), $versionfile_name);
+                $version->setAttachment($versionfile_name);
+            }
             $entityManager->persist($version);
             $entityManager->flush();
 
@@ -78,7 +78,7 @@ if ($versionForm->get('attachement')->getData()) {
     #[Route('/{id}', name: 'version_delete', methods: ['POST'])]
     public function delete(Request $request, Version $version, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$version->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $version->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($version);
             $entityManager->flush();
         }

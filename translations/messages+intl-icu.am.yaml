@@ -37,7 +37,7 @@ Response: ምላሽ
 'Submited by': '__Submited by'
 Role: __Role
 'Sumitted At': '__Sumitted At'
-Status: __Status
+Status: ሁኔታ
 'Application Type': 'ማመልከቻዎች ዓይነት'
 'No': በፍጹም
 'Yes': አዎን
@@ -56,6 +56,7 @@ Purpose: __Purpose
 Action: __Action
 'No record': 'ምንም መዝገብ አልተገኘም።'
 'Protocol applications': 'የፕሮቶኮል ማመልከቻዎች'
+'Applications': 'ማመልከቻዎች'
 'All applications': 'ሁሉም ማመልከቻዎች'
 'My assigned': የተመደብኩበት
 'My application': 'የእኔ ማመልከቻ'
@@ -75,6 +76,7 @@ Settings: ቅንብሮች
 'Workflow setting': 'የስራ ፍሰት ቅንብር'
 'Review checklist': 'የማረጋገጫ ዝርዝሮች'
 'Review checklist group': 'ግምገማዎች የፍተሻ ዝርዝር ምድብ'
+Review: ገምግም
 'Training venues': '__Training venues'
 'Email Messages': '__Email Messages'
 'Site Setting': 'የጣቢያ ቅንብር'
@@ -123,11 +125,28 @@ Compliants: __Compliants
 Version: እትም
 'Original version': 'የመጀመሪያ እትም '
 'Instruction for Reviewer': 'መመሪያ ለገምጋሚ'
-NA: መልስ የለም
+NA: 'መልስ የለም'
 'YES': __YES
 'NO': __NO
 Protocol: __Protocol
 'Add Schedule': 'የስብሰባ መርሃ ግብሮች ያክሉ'
 'New Schedule': 'አዲስ የስብሰባ መርሃ ግብሮች'
-Close: __Close
+Close: ዝጋ
 Training: __Training
+'Submit a new Ammendment request': '__Submit a new Ammendment request'
+'Ammendment request': '__Ammendment request'
+'Sent at': '__Sent at'
+'IRB CODE': '__IRB CODE'
+Withdraw: __Withdraw
+'Assigned reviewers': '__Assigned reviewers'
+Directorate: __Directorate
+'Academic Rank': '__Academic Rank'
+'Date Assigned': 'የተመደበበት ቀን'
+'Due date': '__Due date'
+Actions: __Actions
+'Review due-date': 'ግምገማ የሚያበቃበት ቀን'
+'Reviewed at': 'የተገመገመበት ቀን'
+'No records found  under this section': 'በዚህ ክፍል ስር ምንም መዝገቦች አልተገኙም።'
+Decision: ውሳኔ
+'Reviewed date': 'የተገመገመበት ቀን'
+'Ammendment Request': '__Ammendment Request'

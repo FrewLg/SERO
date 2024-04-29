@@ -34,12 +34,12 @@ class VersionType extends AbstractType
                 'required' => true,
             ])
             ->add('attachmentType', EntityType::class, [
-                'label' => 'Attachment type',
+                'label' => 'Attachment type ',
                 'placeholder' => '-- Select Attachment type --',
                 'class' => AttachmentType::class,
                 'mapped' => true,
                 'attr' => [
-                    'class' => 'form-control select2 my-4' ,
+                    'class' => 'form-control col-12 select2 my-4' ,
                  ],
                 'required' => true,
 

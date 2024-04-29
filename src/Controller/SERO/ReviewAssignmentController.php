@@ -33,7 +33,7 @@ class ReviewAssignmentController extends AbstractController
     public function assignreviewer(Request $request, EntityManagerInterface $entityManager,  Application $submission,   MailerInterface $mailer, ReviewAssignmentRepository $reviewAssignmentRepository): Response
     {
 
-        // $this->denyAccessUnlessGranted('assn_clg_cntr');
+        $this->denyAccessUnlessGranted('ROLE_VICE_CHAIR');
 
 
         // if ($submission->getSubmittedBy() == $this->getUser()) {
@@ -135,7 +135,7 @@ class ReviewAssignmentController extends AbstractController
         return $this->render('sero/review_assignment/new.html.twig', [
             'irb_review_assignment' => $reviewAssignments,
             'review_assignments' => $reviewAssignmentRepository->findBy(['irbreviewer'=>$this->getUser()]),
-
+            'application'=>$submission,
             // 'external_reviewer_form' => $external_reviewer_form->createView(),
             'form' => $form->createView(),
 

@@ -29,6 +29,20 @@ class SEROHelper
 
         return $fileName;
     }
+    public function ammendmentFileNamer($ammendment)
+    {
+
+        $app = $ammendment->getVersion()->getApplication()->getIbcode();
+        $versionName = $ammendment->getVersion()->getVersionNumber();
+        $attachmentType = 'Original protocol';
+        $time = date("h-m-");
+        $user = $ammendment->getVersion()->getApplication()->getSubmittedBy();
+
+        $fileName = $app . "-" . $versionName . "-" . $attachmentType . "-" . $time . "-" . $user.".";
+
+        return $fileName;
+    }
+
 
     public function versionate($application)
     {

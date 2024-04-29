@@ -127,3 +127,22 @@ Response: __Response
 'Add Schedule': '__Add Schedule'
 'New Schedule': '__New Schedule'
 Close: __Close
+'Submit a new Ammendment request': '__Submit a new Ammendment request'
+'Ammendment request': '__Ammendment request'
+'Archived applications': '__Archived applications'
+'Sent at': '__Sent at'
+'IRB CODE': '__IRB CODE'
+Withdraw: __Withdraw
+'Assigned reviewers': '__Assigned reviewers'
+Directorate: __Directorate
+'Academic Rank': '__Academic Rank'
+'Date Assigned': '__Date Assigned'
+'Due date': '__Due date'
+Actions: __Actions
+'Review due-date': '__Review due-date'
+'Reviewed at': '__Reviewed at'
+Review: __Review
+'No records found  under this section': '__No records found  under this section'
+Decision: __Decision
+'Reviewed date': '__Reviewed date'
+'Ammendment Request': '__Ammendment Request'

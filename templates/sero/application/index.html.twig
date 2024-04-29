@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Application
+{% block title %}{% trans  %}Application{% endtrans  %}
 {% endblock %}
 
 {% block body %}
@@ -8,9 +8,9 @@
 	<div class="card card-custom gutter-b">
 		<div class="card-header flex-wrap border-0 pt-6 pb-0">
 			<div class="card-title">
-				<h3 class="card-label">Applications
+				<h3 class="card-label">{% trans  %}Applications{% endtrans  %}
 
-					<span class="d-block text-muted pt-2 font-size-sm">All protocols</span>
+					<span class="d-block text-muted pt-2 font-size-sm">{% trans  %}Protocol applications{% endtrans  %}</span>
 				</h3>
 			</div>
 			<div
@@ -107,8 +107,8 @@
 						</div>
 					</div>
 					{# <div id="div" class="col-lg-3 col-xl-3 col-md-9 mt-5 mt-lg-0">
-																<a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
-															</div> #}
+																					<a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+																				</div> #}
 
 
 				</div>
@@ -124,13 +124,13 @@
 								</label>
 							</th>
 
-							<th>Title</th>
-							<th>Status</th>
-							<th>Code</th>
-							<th>Assgined</th>
-							<th>versions</th>
-							<th>Submitted at</th>
-							<th>actions</th>
+							<th>{% trans  %}Title{% endtrans  %}</th>
+							<th>{% trans  %}Status{% endtrans  %}</th>
+							{# <th>{% trans  %}Code{% endtrans  %}</th> #}
+							<th>{% trans  %}Assgined{% endtrans  %}</th>
+							<th>{% trans  %}versions{% endtrans  %}</th>
+							<th>{% trans  %}Submitted at{% endtrans  %}</th>
+							<th>{% trans  %}actions{% endtrans  %}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -143,19 +143,21 @@
 											<span></span>
 										</label>
 									</td>
-									<td>{{ application.title }}</td>
+											<td><b class="text-muted"> {{  application.ibcode }} :<br></b>  
+													{{ application.title }}
+
+												</td> 
 									<td>
 										{% if application.meeting %}
 											{{application.meeting.status }}
 										{% endif %}
 									</td>
 
-									<td>{{ application.ibcode }}</td>
-									<td>
+ 									<td>
 										{# {{ application.reviewAssignments|length }} #}
 										{% if application.reviewAssignments|length>=0 %}
 											{% set count = 0 %}
- 
+
 											{% for  confirmation in application.reviewAssignments('closed') %}
 												{% set count = count + 1 %}
 
@@ -176,9 +178,9 @@
 																<sup>th</sup>
 														{% endif %}
 													</span>
- 
+
 												{% elseif confirmation.closed()   %}
-<span class='label label-light-success'>
+													<span class='label label-light-success'>
 														{{count}}
 														{% if count==0 %}
 
@@ -194,31 +196,32 @@
 													</span>
 
 													{# <span class='label label-light-success label-inline'>ddd
-													</span> #}
+																										</span> #}
 												{% endif %}
 											{% else %}
 
 												<span class='label label-light-danger label-inline'>unassigned
 												</span>
 											{% endfor %}
-										{# {% elseif confirmation.status()  %}
-											<span class='label label-light-success label-inline'>responded
-											</span> #}
+											{# {% elseif confirmation.status()  %}
+																						<span class='label label-light-success label-inline'>responded
+																						</span> #}
 										{% endif %}
- 
+
 									</td>
 									<td>
-									<span class='label label-light-info label-inline'>{{ application.versions|length }} Version
-											</span> 
+										<span class='label label-light-info label-inline'>{{ application.versions|length }}
+											{% trans %}Version{% endtrans  %}
+										</span>
 									</td>
 									<td>{{ application.createdAt ? application.createdAt|date('h:i D-m-y ') : '' }}</td>
 									<td nowrap="nowrap">
 
 										<a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a>
 										<a href="{{ path('application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
-										<a href="{{ path('application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a>
+										{# <a href="{{ path('application_edit', {'id': application.id}) }}" class='btn btn-light-danger btn-sm'>edit</a> #}
 										<a href="{{ path('ethical_clearance_cert', {'id': application.id}) }}" class='btn btn-secondary btn-sm'>Certify</a>
-										<a href="{{ path('statement', {'id': application.id}) }}" class='btn btn-light-warning btn-sm'>statement</a>
+										{# <a href="{{ path('statement', {'id': application.id}) }}" class='btn btn-light-warning btn-sm'>statement</a> #}
 									</td>
 								</tr>
 							{% else %}
@@ -232,7 +235,8 @@
 
 				<button id="submit-btn" type="submit" class="btn btn-primary btn-sm">Delete selected</button>
 			</form>
-<div class="border-bottom w-100 opacity-20"></div> <div class="navigation">{{ knp_pagination_render(applications ) }}</div>
+			<div class="border-bottom w-100 opacity-20"></div>
+			<div class="navigation">{{ knp_pagination_render(applications ) }}</div>
 
 		</div>
 	</div>
@@ -266,22 +270,22 @@ $("#searchResult").css("display" : none);
 	{# <script src="https://code.jquery.com/jquery-3.7.0.js"></script> #}
 
 	{# <script type="text/javascript">
-			// select all checkboxes
-	$("#select_all").change(function () { // "select all" change
-	$(".checkbox").prop('checked', $(this).prop("checked")); // change all ".checkbox" checked status
-	});
-	
-	// ".checkbox" change
-	$('.checkbox').change(function () { // uncheck "select all", if one of the listed checkbox item is unchecked
-	if (false == $(this).prop("checked")) { // if this item is unchecked
-	$("#select_all").prop('checked', false); // change "select all" checked status to false
-	}
-	// check "select all" if all checkbox items are checked
-	if ($('.checkbox:checked').length == $('.checkbox').length) {
-	$("#select_all").prop('checked', true);
-	}
-	});
-		</script> #}<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"> </script>
+				// select all checkboxes
+		$("#select_all").change(function () { // "select all" change
+		$(".checkbox").prop('checked', $(this).prop("checked")); // change all ".checkbox" checked status
+		});
+		
+		// ".checkbox" change
+		$('.checkbox').change(function () { // uncheck "select all", if one of the listed checkbox item is unchecked
+		if (false == $(this).prop("checked")) { // if this item is unchecked
+		$("#select_all").prop('checked', false); // change "select all" checked status to false
+		}
+		// check "select all" if all checkbox items are checked
+		if ($('.checkbox:checked').length == $('.checkbox').length) {
+		$("#select_all").prop('checked', true);
+		}
+		});
+			</script> #}<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"> </script>
 	<script type="text/javascript">
 		$("#live_search").keyup(function () {
 var input = $($this).val();

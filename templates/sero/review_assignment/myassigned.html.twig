@@ -19,7 +19,7 @@
 					<li class="nav-item">
 						<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">
 							<span class="nav-icon">
-								<i class="fa fa-calendar"></i>
+								<i class="fa fa-book"></i>
 							</span>
 							<span class="nav-text">
 								{% trans %}All Active{% endtrans %}
@@ -36,7 +36,7 @@
 					<li class="nav-item">
 						<a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile">
 							<span class="nav-icon">
-								<i class="fa fa-table"></i>
+								<i class="fa fa-lock"></i>
 							</span>
 							<span class="nav-text">Closed  assigned
 								<span class="label label-sm label-warning  mr-2">{{  closeds|length}}</span>
@@ -55,33 +55,29 @@
 										<tr>
 
 											<th>#</th>
-											<th>Title</th>
-											<th>Code</th>
-											<th>Review due date</th>
-											<th>Status</th>
-											<th>Last Updated
+											<th>{% trans %}Title{% endtrans %}</th>
+ 											<th>{% trans %}Review due-date{% endtrans %}</th>
+											<th>{% trans %}Status{% endtrans %}</th>
+											<th>{% trans %}Reviewed at{% endtrans %}
 											</th>
-											<th>Action</th>
+											<th><i class="fa fa-cog"></i></th>
 										</tr>
 									</thead>
 									<tbody>
 										{% for myreview in myreviews %}
 											<tr>
-												<td>{{ loop.index }}</td>
-												<td>
+												<td> {{ loop.index }}</td>
+												<td><b class="text-muted"> {{  myreview.application.ibcode }} :<br></b>  
 													{{ myreview.application.title }}
 
-												</td>
-												<td nowrap=nowrap>
-													{{  myreview.application.ibcode }}
- 												</td>
+												</td> 
 
-												<td>
+												<td nowrap=nowrap>
 													{% if myreview.dueDate %}
-														{{ myreview.dueDate|date('h:i M d, Y ') }}
+														{{ myreview.dueDate|date('h:i M d, Y ')|trans }}
 													{% endif %}
 												</td>
-												<td>
+												<td nowrap=nowrap>
 													{% if myreview.closed%}
 														<span class="label label-lg label-light-primary label-inline">Review sent</span>
 													{% else %}
@@ -89,18 +85,18 @@
 													{% endif %}
 												</td>
 												<td>
-													{{ myreview.reviewedAt|date('h:i M d, Y')}}
+													{{ myreview.reviewedAt|date('h:i M d, Y')|trans}}
 												</td>
 												<td>
 													<a href="{{ path('make_a_review', {'id': myreview.id}) }} " class='btn btn-light-success btn-sm'>
-														Review
+														{% trans %}Review{% endtrans %}
 													</a>
 													{# <a href="{{ path('make_a_review', {'id': application.id}) }}">make_a_review</a> #}
 
 												</td>
 											</tr>
 										{% else %}
-											No records found  under this section
+											{% trans %}No records found  under this section{% endtrans %}
 										{% endfor %}
 									</tbody>
 								</table>
@@ -116,20 +112,20 @@
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Title</th>
-											<th>Decision</th>
-											<th>Reviewed date</th>
-											<th>Status</th>
+											<th>{% trans %}Title{% endtrans %}</th>
+											<th>{% trans %}Decision{% endtrans %}</th>
+											<th>{% trans %}Reviewed date{% endtrans %}</th>
+											{# <th>Status</th> #}
 										</tr>
 									</thead>
 									<tbody>
 										{% for myreview in closeds %}
 											<tr>
-												<td>{{ loop.index }}</td>
-												<td>
+											<td> {{ loop.index }}</td>
+												<td><b class="text-muted"> {{  myreview.application.ibcode }} :<br></b>  
 													{{ myreview.application.title }}
 
-												</td>
+												</td> 
 												<td>
 													{{ myreview.recommendation }}
 												</td>
@@ -139,13 +135,7 @@
 														{{ myreview.reviewedAt|date('d, M Y h:i a') }}
 													{% endif %}
 												</td>
-												<td>
-
-
-													<span class='badge badge-soft-{{ myreview.application.title }}'>
-														{{  myreview.application.ibcode }}
-													</span>
-												</td>
+							 
 											</tr>
 										{% else %}
 											No records found  under this section

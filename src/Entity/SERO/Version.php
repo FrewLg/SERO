@@ -45,10 +45,23 @@ class Version
     #[ORM\JoinColumn(nullable: false)]
     private ?AttachmentType $attachmentType = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isActive = null;
+
+    #[ORM\ManyToOne(inversedBy: 'versions')]
+    private ?ReviewType $reviewType = null;
+
+    /**
+     * @var Collection<int, Amendment>
+     */
+    #[ORM\OneToMany(targetEntity: Amendment::class, mappedBy: 'version')]
+    private Collection $amendments;
+
    
     public function __construct()
     {
         // $this->application = new ArrayCollection();
+        $this->amendments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,6 +177,60 @@ class Version
     public function setAttachmentType(?AttachmentType $attachmentType): static
     {
         $this->attachmentType = $attachmentType;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setActive(?bool $isActive): static
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    public function getReviewType(): ?ReviewType
+    {
+        return $this->reviewType;
+    }
+
+    public function setReviewType(?ReviewType $reviewType): static
+    {
+        $this->reviewType = $reviewType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Amendment>
+     */
+    public function getAmendments(): Collection
+    {
+        return $this->amendments;
+    }
+
+    public function addAmendment(Amendment $amendment): static
+    {
+        if (!$this->amendments->contains($amendment)) {
+            $this->amendments->add($amendment);
+            $amendment->setVersion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmendment(Amendment $amendment): static
+    {
+        if ($this->amendments->removeElement($amendment)) {
+            // set the owning side to null (unless already changed)
+            if ($amendment->getVersion() === $this) {
+                $amendment->setVersion(null);
+            }
+        }
 
         return $this;
     }

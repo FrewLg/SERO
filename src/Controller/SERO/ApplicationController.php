@@ -31,6 +31,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
 use App\Helper\SEROHelper;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Mapping\Entity;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 #[Route('{_locale<%app.supported_locales%>}/protocol')]
 
@@ -41,7 +45,7 @@ class ApplicationController extends AbstractController
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $allApps =  $em->getRepository(Application::class)->findAll();
+        $allApps =  array_reverse( $em->getRepository(Application::class)->findAll());
         $app = new Application();
         $form = $this->createForm(ApplicationType::class, $app);
         $form->handleRequest($request);
@@ -110,7 +114,7 @@ class ApplicationController extends AbstractController
             $application->setSubmittedBy($this->getUser());
             $entityManager->persist($application);
 
-            $appId = $form->getData();
+            $appId = $form->getData(); 
             $application->setIbcode($seroHelper->versionate($application) . $appId->getId());
             // dd($appId->getId());
             //attach
@@ -272,6 +276,44 @@ class ApplicationController extends AbstractController
             'versions' => array_reverse($existingVersion),
         ]);
     }
+    
+    #[Route('/{id}/export',   name: 'export', methods: ['GET','POST'])]
+
+    public function exportnow(EntityManagerInterface $em, Application $uid) {
+
+     
+        $submission = $em->getRepository(Application::class)->findOneBy(['id' => $uid->getId()]);
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isRemoteEnabled', true);
+        $data = file_get_contents('files/site_setting/ephi2.jpg');
+        $type = 'png';
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        $pdfOptions->set('tempDir', '/home/cornerstone/tmp');
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $dompdf->set_option("isPhpEnabled", true);
+        $html = $this->renderView('sero/application/cert2.html.twig', [
+            'user' => $this->getUser(),
+            'orglogos' => $base64,
+            // 'application' => $app,
+            'base64' => $base64,
+            'application' => $submission,
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $font = $dompdf->getFontMetrics()->get_font("helvetica", "bold");
+        $font = null;
+        $dompdf->getCanvas()->page_text(72, 18, "Page: {PAGE_NUM} of {PAGE_COUNT}", $font, 10, array(0, 0, 0));
+        ob_end_clean();
+        $filename = $submission->getTitle();
+        $dompdf->stream($filename . "file.pdf", [
+            "Attachment" => false,
+        ]);
+    }
+/////
     #[Route('/{filename}/download',   name: 'download', methods: ['POST'])]
     public function download(Request $request, $filename)
     {

@@ -24,9 +24,16 @@ class AttachmentType
     #[ORM\OneToMany(targetEntity: Version::class, mappedBy: 'attachmentType', orphanRemoval: true)]
     private Collection $versions;
 
+    /**
+     * @var Collection<int, Amendment>
+     */
+    #[ORM\OneToMany(targetEntity: Amendment::class, mappedBy: 'attachmentType')]
+    private Collection $amendments;
+
     public function __construct()
     {
         $this->versions = new ArrayCollection();
+        $this->amendments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -70,6 +77,36 @@ class AttachmentType
             // set the owning side to null (unless already changed)
             if ($version->getAttachmentType() === $this) {
                 $version->setAttachmentType(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Amendment>
+     */
+    public function getAmendments(): Collection
+    {
+        return $this->amendments;
+    }
+
+    public function addAmendment(Amendment $amendment): static
+    {
+        if (!$this->amendments->contains($amendment)) {
+            $this->amendments->add($amendment);
+            $amendment->setAttachmentType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAmendment(Amendment $amendment): static
+    {
+        if ($this->amendments->removeElement($amendment)) {
+            // set the owning side to null (unless already changed)
+            if ($amendment->getAttachmentType() === $this) {
+                $amendment->setAttachmentType(null);
             }
         }
 

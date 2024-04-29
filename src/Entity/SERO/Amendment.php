@@ -16,39 +16,29 @@ class Amendment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'amendments')]
-    private ?Application $application = null;
-
+  
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $purpose = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $changes = null;
 
+    #[ORM\ManyToOne(inversedBy: 'amendments')]
+    private ?Version $version = null;
+
   
-   
+    #[ORM\ManyToOne(inversedBy: 'amendments')]
+    private ?AttachmentType $attachmentType = null;
 
-    public function __construct()
-    {
-        // $this->amendments = new ArrayCollection();
-    }
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $attachment = null;
 
+    
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getApplication(): ?Application
-    {
-        return $this->application;
-    }
-
-    public function setApplication(?Application $application): static
-    {
-        $this->application = $application;
-
-        return $this;
-    }
+ 
 
     public function getPurpose(): ?string
     {
@@ -74,7 +64,41 @@ class Amendment
         return $this;
     }
 
+    public function getVersion(): ?Version
+    {
+        return $this->version;
+    }
+
+    public function setVersion(?Version $version): static
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
    
 
-    
+    public function getAttachmentType(): ?AttachmentType
+    {
+        return $this->attachmentType;
+    }
+
+    public function setAttachmentType(?AttachmentType $attachmentType): static
+    {
+        $this->attachmentType = $attachmentType;
+
+        return $this;
+    }
+
+    public function getAttachment(): ?string
+    {
+        return $this->attachment;
+    }
+
+    public function setAttachment(?string $attachment): static
+    {
+        $this->attachment = $attachment;
+
+        return $this;
+    }
 }
