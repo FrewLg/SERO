@@ -31,6 +31,12 @@ class DecisionType
     #[ORM\OneToMany(targetEntity: Version::class, mappedBy: 'decisionType')]
     private Collection $version;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $color = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $code = null;
+
     public function __construct()
     {
         $this->version = new ArrayCollection();
@@ -44,6 +50,11 @@ class DecisionType
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function __toString()
+    {
+       return $this->code;
     }
 
     public function setName(?string $name): static
@@ -89,7 +100,7 @@ class DecisionType
     {
         if (!$this->version->contains($version)) {
             $this->version->add($version);
-            $version->setDecisionType($this);
+            $version->setDecision($this);
         }
 
         return $this;
@@ -99,10 +110,34 @@ class DecisionType
     {
         if ($this->version->removeElement($version)) {
             // set the owning side to null (unless already changed)
-            if ($version->getDecisionType() === $this) {
-                $version->setDecisionType(null);
+            if ($version->getDecision() === $this) {
+                $version->setDecision(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): static
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): static
+    {
+        $this->code = $code;
 
         return $this;
     }

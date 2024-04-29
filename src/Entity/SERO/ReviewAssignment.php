@@ -54,6 +54,9 @@ class ReviewAssignment
     #[ORM\JoinColumn(nullable: false)]
     private ?ReviewForm $reviewForm = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $reviewerType = null;
+
     public function __construct()
     {
         $this->reviewerResponses = new ArrayCollection();
@@ -210,6 +213,18 @@ class ReviewAssignment
     public function setReviewForm(?ReviewForm $reviewForm): static
     {
         $this->reviewForm = $reviewForm;
+
+        return $this;
+    }
+
+    public function getReviewerType(): ?string
+    {
+        return $this->reviewerType;
+    }
+
+    public function setReviewerType(string $reviewerType): static
+    {
+        $this->reviewerType = $reviewerType;
 
         return $this;
     }

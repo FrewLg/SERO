@@ -1,0 +1,54 @@
+<div class="my-2">
+
+
+	{{ form_start(extform) }}
+			{# {{ form_widget(extform) }} #}
+
+	<div class="form-group  row">
+		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(extform.irbreviewer) }}
+		</label>
+
+		<div class="col-8">
+
+			{{ form_widget(extform.irbreviewer) }}
+
+		</div>
+	</div>
+	<div class="row">
+
+		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(extform.duedate) }}
+		</label>
+
+		<div class="col-8">
+
+			{{ form_widget(extform.duedate) }}
+
+		</div>
+	</div>
+	<div class="row">
+
+		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(extform.reviewForm) }}
+		</label>
+
+		<div class="col-8">
+
+			{{ form_widget(extform.reviewForm) }}
+
+		</div>
+	</div>
+
+	<div class="row">
+
+		<label class="col-form-label col-3 text-lg-right text-left"></label>
+
+		<div class="col-8">
+
+			<button type="submit" class="btn btn-light-primary  float-end">
+				Assign   reviewer
+			</button>
+		</div>
+	</div>
+
+
+	{{ form_end(extform) }}
+</div>

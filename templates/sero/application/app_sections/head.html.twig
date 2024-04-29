@@ -78,7 +78,7 @@
 						{% endif %}
 
 						<a href="#" class="btn btn-sm btn-light-info font-weight-bolder text-uppercase">{{ application.reviewAssignments|length}}
-							Reviewers assigned</a>
+							{% trans %}Reviewers assigned{% endtrans %}</a>
 						<a href="#" class="btn btn-sm btn-light-success font-weight-bolder text-uppercase">{{ application.versions|length}}Versions</a>
 					</div>
 				</div>
@@ -90,11 +90,11 @@
 					<div class="d-flex flex-wrap align-items-center py-2">
 						<div class="d-flex align-items-center mr-10">
 							<div class="mr-6">
-								<div class="font-weight-bold mb-2">Start Date</div>
+								<div class="font-weight-bold mb-2">{% trans %}Project start{% endtrans %}</div>
 								<span class="btn btn-sm btn-text btn-light-primary text-uppercase font-weight-bold">{{ application.startDate|date('d M y')}}</span>
 							</div>
 							<div class="">
-								<div class="font-weight-bold mb-2">Due Date</div>
+								<div class="font-weight-bold mb-2">{% trans %}Project end{% endtrans %}</div>
 								<span class="btn btn-sm btn-text btn-light-danger text-uppercase font-weight-bold">{{ application.endDate|date('d M y')}}</span>
 							</div>
 						</div>

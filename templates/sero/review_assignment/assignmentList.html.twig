@@ -44,7 +44,15 @@
 
 				</td>
 				<td>{{ review_assignment.irbreviewer.profile}}</td>
-				<td>{{ review_assignment.irbreviewer.profile}}</td>
+				<td>
+				{% if review_assignment.reviewerType ==1 %}
+				<span class="label label-light-success label-inline">
+					{% trans %}Primary{% endtrans %}</span>
+					{% elseif review_assignment.reviewerType ==2 %}
+				<span class="label label-light-info label-inline">
+					{% trans %}Secondary{% endtrans %}</span>
+				{% endif %} 
+				</td>
 				<td>{{ review_assignment.InvitationSentAt ? review_assignment.InvitationSentAt|date('Y-m-d') : '' }}</td>
 				<td>{{ review_assignment.duedate ? review_assignment.duedate|date('Y-m-d') : '' }}</td>
 

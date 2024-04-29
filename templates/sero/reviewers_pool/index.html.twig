@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReviewersPool index{% endblock %}
+
+{% block body %}
+    <h1>ReviewersPool index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Affiliation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reviewers_pool in reviewers_pools %}
+            <tr>
+                <td>{{ reviewers_pool.id }}</td>
+                <td>{{ reviewers_pool.name }}</td>
+                <td>{{ reviewers_pool.email }}</td>
+                <td>{{ reviewers_pool.affiliation }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_reviewers_pool_show', {'id': reviewers_pool.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_reviewers_pool_edit', {'id': reviewers_pool.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_reviewers_pool_new') }}">Create new</a>
+{% endblock %}

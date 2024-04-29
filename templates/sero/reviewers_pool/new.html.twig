@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReviewersPool{% endblock %}
+
+{% block body %}
+    <h1>Create new ReviewersPool</h1>
+
+    {{ include('sero/reviewers_pool/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_reviewers_pool_index') }}">back to list</a>
+{% endblock %}

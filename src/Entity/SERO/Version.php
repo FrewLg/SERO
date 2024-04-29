@@ -36,7 +36,7 @@ class Version
     private ?string $attachment = null;
 
     #[ORM\ManyToOne(inversedBy: 'version')]
-    private ?DecisionType $decisionType = null;
+    private ?DecisionType $decision = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $approved = null;
@@ -145,14 +145,14 @@ class Version
         return $this;
     }
 
-    public function getDecisionType(): ?DecisionType
+    public function getDecision(): ?DecisionType
     {
-        return $this->decisionType;
+        return $this->decision;
     }
 
-    public function setDecisionType(?DecisionType $decisionType): static
+    public function setDecision(?DecisionType $decision): static
     {
-        $this->decisionType = $decisionType;
+        $this->decision = $decision;
 
         return $this;
     }

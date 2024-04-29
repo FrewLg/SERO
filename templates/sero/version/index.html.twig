@@ -7,20 +7,22 @@
 	<b>
 		{% trans %}Version{% endtrans %}:
 		{{version.versionNumber }}
+
 	</b>
 </h4>
-
-
 <div class="card card-custom">
 	<div class="card-header ribbon ribbon-top">
 		<div class="ribbon-target bg-danger" style="top: -2px; right: 20px;">{% trans %}Version{% endtrans %}:{{version.versionNumber }}</div>
-		<h3 class="card-title">{{ application.ibcode }}- V -{{version.versionNumber }}
-		</h3>
+		<div class="card-title">
+			<h3 class="card-label">{{ application.ibcode }}- V -{{version.versionNumber }}
+				<small>
+					<p class="text-muted">
+						{{ version.createdAt ? version.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+				</small>
+			</h3>
+		</div>
 	</div>
 	<div class="card-body">
-		<span class="text-muted">
-			Created on:
-			{{ version.createdAt ? version.createdAt|date('Y-m-d H:i:s') : '' }}</span>
 		<p class="title">Changes Made:</p>
 		<p>
 			{{ version.changesMade }}</p>
@@ -28,10 +30,10 @@
 		<p>
 			{% if version.approved %}
 				<span class="label label-light-success label-inline">
-					Approved</span>
+					{% trans %}Approved{% endtrans %}</span>
 			{% else %}
 				<span class="label label-light-danger label-inline">
-					Not approved</span>
+					{% trans %}Not approved{% endtrans %}</span>
 			{% endif %}
 		</p>
 		<span class="text-primary">{{ version.date ? version.date|date('Y-m-d H:i:s') : '' }}</span>
@@ -72,24 +74,46 @@
 					{% endfor %}
 				</tbody>
 			</table>
-		{% endif %}
 
+
+		{% endif %}
+		<hr>
+		Initial decision
+		{% if is_granted('ROLE_ADMIN') %}
+
+			{% if version.decision %}
+				<span class="btn btn-sm btn-text btn-light-{{ version.decision.color}} text-uppercase font-weight-bold">{{ version.decision.name}}</span>
+
+			{% else %}
+
+				<div class="btn-group" role="group" aria-label="Basic example">
+
+					{% for decision in decisions %}
+						<a type="button" href="{{ path('initial_decision', {'dec': decision.id , 'id': version.id}) }}" onclick="return confirm('Are you sure you want to make a {{decision.name}} decision to this version of protocol?');" class="btn btn-light-{{decision.color}}">{{decision.name}}</a>
+
+
+					{% endfor %}
+
+				</div>
+			{% endif %}
+		{% endif %}
 
 	</div>
 	<div class="card-footer d-flex justify-content-between">
 		{{version.id}}
 		{% if version.isapproved %}
-		{{ include('sero/application/app_sections/ammendmentModal.html.twig') }}
+			{{ include('sero/application/app_sections/ammendmentModal.html.twig') }}
 
 			<a href="#" class="btn btn-secondary font-weight-bold">{% trans %}Ammendment Request{% endtrans %}</a>
 		{% endif %}
 
 		{# <a href="#" class="btn btn-primary font-weight-bold">{% trans %}Continuation Request{% endtrans %}</a>
-															<a href="#" class="btn btn-light-secondary font-weight-bold">{% trans %}Continuation{% endtrans %}
-															</a>
-															<a href="#" class="btn btn-outline-secondary mr-1">{% trans %}Continuation{% endtrans %}
-															</a> #}
+																																		<a href="#" class="btn btn-light-secondary font-weight-bold">{% trans %}Continuation{% endtrans %}
+																																		</a>
+																																		<a href="#" class="btn btn-outline-secondary mr-1">{% trans %}Continuation{% endtrans %}
+																																		</a> #}
 		{{ include('sero/application/app_sections/continueModal.html.twig') }}
+
 
 	</div>
 </div>

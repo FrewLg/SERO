@@ -5,14 +5,12 @@
 				<div class="card-title" data-toggle="collapse" data-target="#accordionCOllapse{{reviewResponse.id}}">
 					<i class="flaticon2-layers-1"></i>
 					{% trans %}Reviewer{% endtrans %}
-					{{ loop.index}}.
+					{{ loop.index}}:
 					{{   reviewResponse.irbreviewer}}
 				</div>
 			</div>
 			<div id="accordionCOllapse{{reviewResponse.id}}" class="collapse  " data-parent="#accordionExample{{reviewResponse.id}}">
 				<div class="card-body">
-
-
 					<div class="d-flex flex-wrap justify-content-between mt-1">
 						<div class="d-flex flex-column flex-grow-1 pr-8">
 							<div class="d-flex flex-wrap mb-4">

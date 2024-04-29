@@ -6,6 +6,7 @@ use App\Entity\SERO\Application;
 use App\Entity\SERO\Amendment;
 use App\Entity\SERO\ApplicationFeedback;
 use App\Entity\SERO\Continuation;
+use App\Entity\SERO\DecisionType;
 use App\Entity\SERO\ReviewChecklistGroup;
 use App\Form\SERO\ReviewChecklistGroupType;
 use App\Entity\SERO\ReviewAssignment;
@@ -31,6 +32,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Validator\Constraints\DateTime;
 use App\Helper\SEROHelper;
+use Doctrine\DBAL\Types\DecimalType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Entity;
 use Dompdf\Dompdf;
@@ -257,7 +259,8 @@ class ApplicationController extends AbstractController
         $applicationFeedback = new ApplicationFeedback();
         $feedbackForm = $this->createForm(ApplicationFeedbackType::class, $applicationFeedback);
          $irb_review_checklist_group = $entityManager->getRepository(ReviewChecklistGroup::class)->findAll();
-       ///
+         $decisions = $entityManager->getRepository(DecisionType::class)->findAll();
+         ///
          $ammendment = new Amendment;
         $ammendmentForm = $this->createForm(AmendmentType::class, $ammendment);
         ///
@@ -271,7 +274,7 @@ class ApplicationController extends AbstractController
             'irb_review_checklist_group' => $irb_review_checklist_group,
             'form' => $versionForm,
             'contuoationForm' => $contuoationForm,
-            
+            'decisions' => $decisions,
             'application' => $application,
             'versions' => array_reverse($existingVersion),
         ]);
@@ -347,6 +350,23 @@ if(!$request){
             'application' => $application,
             'form' => $form,
         ]);
+    }
+
+    
+    #[Route('/{id}/{dec}', name: 'initial_decision', methods: ['GET','POST'])]
+    public function decide(  DecisionType  $dec, Version $version,EntityManagerInterface $entityManager): Response
+    {
+ 
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+            $version->setDecision($dec);
+            $entityManager->persist($version);
+            $entityManager->flush();
+            $this->addFlash("success", "The Protocol version got  ".$dec->getName()." decision !");
+         
+        return $this->redirectToRoute('application_show', ["id" => $version->getApplication()->getId()],
+        Response::HTTP_SEE_OTHER);
+        // return $this->redirectToRoute('application_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'application_delete', methods: ['POST'])]
