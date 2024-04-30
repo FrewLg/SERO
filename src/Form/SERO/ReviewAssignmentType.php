@@ -3,6 +3,7 @@
 namespace App\Form\SERO;
 
 use App\Entity\SERO\Application;
+use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\ReviewAssignment;
 use App\Entity\SERO\ReviewersPool;
 use App\Entity\SERO\ReviewForm;
@@ -63,7 +64,7 @@ class ReviewAssignmentType extends AbstractType
 
                         return $qb->orderBy('u.email', 'ASC');
                     },
-                    'label' => 'Reveiwer',
+                    'label' => 'Primary Reveiwer',
                     'placeholder' => '-- Select a reveiwer from Board members--',
                     "attr" => [
                         "class" => "select2 form-control form-control-lg form-control-solid",
@@ -124,27 +125,15 @@ class SecondaryReviewerAssignmentType extends AbstractType
                 'secReviewer',
                 EntityType::class,
                 [
-                    "required" => false,
-                    'class' => User::class,
-
-                    // 'query_builder' => function (EntityRepository $er) use ($already_assigned) {
-                    //     $qb = $er->createQueryBuilder('u')
-                    //         ->andWhere("u.reviewersPools like '%ROLE_BOARD_MEMBER%'");
-                    //     if (sizeof($already_assigned->getValues()) > 0) {
-                    //         $qb->andWhere("u not in  (:irbreviewer)")
-                    //             ->setParameter('irbreviewer', $already_assigned->getValues());
-                    //     }
-
-                    //     return $qb->orderBy('u.email', 'ASC');
-                    // },
-                    'label' => 'Reveiwer',
-                    'placeholder' => "-- Select a reveiwer from Reviewer's pool--",
+                    'label' => 'Secondary Reveiwer',
+                    'placeholder' => "-- Select from Reviewer's pool--",
                     "attr" => [
                         "class" => "select2 form-control form-control-lg form-control-solid",
                     ],
-                    'choice_label' => "email",
-
-
+                    'class' => ReviewersPool::class,
+                    'choice_label' => function (ReviewersPool $category) {
+                        return $category->getUser();
+                    }
                 ]
             )
             ->add('duedate', DateType::class, array(

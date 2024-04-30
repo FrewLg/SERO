@@ -74,7 +74,7 @@
 					<div class="my-lg-0 my-1">
 						{% if   is_granted("ROLE_CHAIR") or  is_granted("ROLE_VICE_CHAIR") %}
 							<a href="{{ path('assign_reviewer', {'id': application.id}) }}" class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-3">
-								{% trans %}Add  Reviewer{% endtrans %}</a>
+								{% trans %}Assign Reviewer{% endtrans %}</a>
 						{% endif %}
 
 						<a href="#" class="btn btn-sm btn-light-info font-weight-bolder text-uppercase">{{ application.reviewAssignments|length}}

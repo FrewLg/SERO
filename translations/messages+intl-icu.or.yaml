@@ -147,3 +147,33 @@ Review: __Review
 Decision: __Decision
 'Reviewed date': '__Reviewed date'
 'Ammendment Request': '__Ammendment Request'
+Applications: __Applications
+Assgined: __Assgined
+versions: __versions
+'Submitted at': '__Submitted at'
+actions: __actions
+'Reviewers assigned': '__Reviewers assigned'
+'Project start': '__Project start'
+'Project end': '__Project end'
+Primary: __Primary
+Secondary: __Secondary
+'Primary reviewer': '__Primary reviewer'
+'Assign reviewer': '__Assign reviewer'
+'Secondary reviewer': '__Secondary reviewer'
+Approved: __Approved
+'Not approved': '__Not approved'
+'Reviewers pool': '__Reviewers pool'
+'Assign Reviewer': '__Assign Reviewer'
+'Board memebrs': '__Board memebrs'
+'External reviewers': '__External reviewers'
+users: __users
+'Protocol users': '__Protocol users'
+'Title:': '__Title:'
+'Code:': '__Code:'
+English: __English
+Amharic: __Amharic
+'Afaan Oromoo': '__Afaan Oromoo'
+'Sidaamu Afoo': '__Sidaamu Afoo'
+'Reviewer Response': '__Reviewer Response'
+Recommendation: __Recommendation
+'No review responses has been  given for this protocol yet': '__No review responses has been  given for this protocol yet'

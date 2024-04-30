@@ -96,6 +96,11 @@ class BoardMember
 
         return $this;
     }
+    public function __toString()
+    {
+        
+   return  "".$this->user;
+    }
 
     public function getStatus(): ?int
     {

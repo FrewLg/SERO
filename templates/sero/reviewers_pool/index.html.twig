@@ -23,17 +23,17 @@
                 <td>{{ reviewers_pool.email }}</td>
                 <td>{{ reviewers_pool.affiliation }}</td>
                 <td>
-                    <a href="{{ path('app_s_e_r_o_reviewers_pool_show', {'id': reviewers_pool.id}) }}">show</a>
-                    <a href="{{ path('app_s_e_r_o_reviewers_pool_edit', {'id': reviewers_pool.id}) }}">edit</a>
+                    {# <a href="{{ path('reviewers_pool_show', {'id': reviewers_pool.id}) }}">show</a>
+                    <a href="{{ path('reviewers_pool_edit', {'id': reviewers_pool.id}) }}">edit</a> #}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">No records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_s_e_r_o_reviewers_pool_new') }}">Create new</a>
+    <a href="{{ path('reviewers_pool_new') }}">Create new</a>
 {% endblock %}

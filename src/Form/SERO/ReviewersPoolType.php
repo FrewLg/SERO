@@ -14,6 +14,7 @@ class ReviewersPoolType extends AbstractType
         $builder
             ->add('name')
             ->add('email')
+            ->add('user')
             ->add('affiliation')
         ;
     }

@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\SERO\ReviewersPoolRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReviewersPoolRepository::class)]
@@ -35,6 +36,9 @@ class ReviewersPool
 
     #[ORM\ManyToOne(inversedBy: 'reviewersPools')]
     private ?User $user = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $dateRegistered = null;
 
     public function __construct()
     {
@@ -129,6 +133,18 @@ class ReviewersPool
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDateRegistered(): ?\DateTimeInterface
+    {
+        return $this->dateRegistered;
+    }
+
+    public function setDateRegistered(?\DateTimeInterface $dateRegistered): static
+    {
+        $this->dateRegistered = $dateRegistered;
 
         return $this;
     }

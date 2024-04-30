@@ -16,14 +16,12 @@
 					<div class="card-header" id="headingOne4">
 						<div class="card-title" data-toggle="collapse" data-target="#collapseOne4">
 							<i class="flaticon2-layers-1"></i>
-							Assign reviewer
+							{% trans %}Assign Reviewer{% endtrans %}
 						</div>
 					</div>
 					<div id="collapseOne4" class="collapse  " data-parent="#accordionExample4">
 						<div
 							class="card-body">
-
-
 							{# //// tabs #}
 
 							<div class="example-preview">
@@ -33,7 +31,7 @@
 											<span class="nav-icon">
 												<i class="fa fa-calendar"></i>
 											</span>
-											<span class="nav-text">Board memebrs
+											<span class="nav-text">{% trans %}Board memebrs{% endtrans %}
 												{% if irb_review_assignment|length>0%}
 
 													<span class="label label-sm label-primary mr-2">{{irb_review_assignment|length}}</span>
@@ -50,7 +48,7 @@
 											<span class="nav-icon">
 												<i class="fa fa-table"></i>
 											</span>
-											<span class="nav-text">External reviewers
+											<span class="nav-text">{% trans %}External reviewers{% endtrans %}
 												{# <span class="label label-sm label-danger mr-2">{{ myreviews|length + closeds|length}}</span> #}
 											</span>
 										</a>
@@ -84,8 +82,11 @@
 		<div class="col-12 ">
 			<div class="card bg-gray-100 my-1">
 				<div class="card-body ">
-					{{application.ibcode}}:
-					<span class="text-muted">{{application.title}}</span>
+					<a href="{{ path('application_show', {'id': application.id}) }}" class=" text-muted" type="button" data-toggle="tooltip" data-placement="top" title="{{application.ibcode}}">
+						<b>
+							{{application.ibcode}}:</b>
+						<span class="text-muted">{{application.title}}</span>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -134,5 +135,12 @@
 		$(document).ready(function () {
 $(".select2").select2();
 });
+
+// /Tooltip
+
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+// /Tooltip
 	</script>
 {% endblock %}

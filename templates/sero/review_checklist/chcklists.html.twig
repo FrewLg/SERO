@@ -17,89 +17,115 @@
 				<p>
 					{{review_assignment.reviewForm.instructionForReviewer|raw}}
 				</p>
+				<b>{% trans %}Title{% endtrans %}:</b>
 				<p class="font-weight-bold text-muted text-uppercase">
 					{{review_assignment.application.title}}</p>
-				<div>
-					<form method="POST" onsubmit="return confirm('Save changes')">
-						<input hidden name="review-checklist" value="true"/>
-						<input hidden name="review-comments" value="true"/>
-						<table class="table table-bordered table-hover">
-							<tbody>
-								{% for checklist_group in irb_review_checklist_group  %}
-									<tr>
-										<th>{{toAlpha(loop.index)}}.
-											{{checklist_group}}</th>
-										<th>{% trans %}Yes{% endtrans %}</th>
-										<th>{% trans %}No{% endtrans %}</th>
-										<th>{% trans %}NA{% endtrans %}</th>
-										<th>{% trans %}Comment{% endtrans %}</th>
-									</tr>
-									{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and   checklist.reviewForm == review_assignment.reviewForm)) %}
+				<b>{% trans %}IRB CODE{% endtrans %}:</b>
+				{{review_assignment.application.ibcode}}</p>
+			<div>
+				<form method="POST" class="form-group" onsubmit="return confirm('Submit a review response?')">
+					<input hidden name="review-checklist" value="true"/>
+					<input hidden name="review-comments" value="true"/>
+					<table class="table table-bordered ">
+						<tbody>
+							{% for checklist_group in irb_review_checklist_group  %}
+								<tr>
+									<th>{{toAlpha(loop.index)}}.
+										{{checklist_group}}</th>
+									<th>{% trans %}Yes{% endtrans %}</th>
+									<th>{% trans %}No{% endtrans %}</th>
+									<th>{% trans %}NA{% endtrans %}</th>
+									<th>{% trans %}Comment{% endtrans %}</th>
+								</tr>
+								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and   checklist.reviewForm == review_assignment.reviewForm)) %}
 
-										{% if checklist.reviewChecklists|length >0 %}
+									{% if checklist.reviewChecklists|length >0 %}
+										<tr>
+											<th>
+												<b style="margin-left:10px">{{ loop.index}}.
+													{{checklist}}</b>
+											</th>
+											<th>{% trans %}YES{% endtrans %}</th>
+											<th>{% trans %}NO{% endtrans %}</th>
+											<th>{% trans %}NA{% endtrans %}</th>
+											<th>{% trans %}Comment{% endtrans %}</th>
+										</tr>
+										{% for child in checklist.reviewChecklists %}
 											<tr>
 												<th>
-													<b style="margin-left:10px">{{ loop.index}}.
-														{{checklist}}</b>
+													<p style="margin-left:20px">{{loop.index}}.
+														{{child}}</p>
 												</th>
-												<th>{% trans %}YES{% endtrans %}</th>
-												<th>{% trans %}NO{% endtrans %}</th>
-												<th>{% trans %}NA{% endtrans %}</th>
-												<th>{% trans %}Comment{% endtrans %}</th>
-											</tr>
-											{% for child in checklist.reviewChecklists %}
-												<tr>
-													<th>
-														<p style="margin-left:20px">{{loop.index}}.
-															{{child}}</p>
-													</th>
-													<td><input type="radio" required name="checklist[{{child.id}}]" value="yes"></td>
-													<td><input type="radio" required name="checklist[{{child.id}}]" value="no"></td>
-													<td><input type="radio" required name="checklist[{{child.id}}]" value="na"></td>
-													<td>
-														<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
-
-													</td>
-												</tr>
-											{% endfor %}
-										{% else %}
-
-											<tr>
 												<td>
-													<p style="margin-left:10px">
-														{{loop.index}}.
-														{{checklist}}</p>
-												</td>
-												<td><input type="radio" required name="checklist[{{checklist.id}}]" value="yes"></td>
-												<td><input type="radio" required name="checklist[{{checklist.id}}]" value="no"></td>
-												<td><input type="radio" required name="checklist[{{checklist.id}}]" value="na"></td>
+
+													<input type="radio" class="radio" required name="checklist[{{child.id}}]" value="yes"></td>
+												<td><input type="radio" required name="checklist[{{child.id}}]" value="no"></td>
+												<td><input type="radio" required name="checklist[{{child.id}}]" value="na"></td>
 												<td>
-													{# <input type="text" required name="comment[{{checklist.id}}]"  > #}
 													<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
 
 												</td>
-
 											</tr>
-										{% endif %}
+										{% endfor %}
+									{% else %}
 
-									{% endfor %}
-									{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2 and   checklist.reviewForm == review_assignment.reviewForm) %}
-
-										<tr>
-											<td colspan="4">{{checklist}}
-												<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
-												<input type="hidden" name="comment[{{checklist.id}}]">
+										<tr class="radio-inline">
+											<td>
+												<p style="margin-left:10px">
+													{{loop.index}}.
+													{{checklist}}</p>
 											</td>
+											<td>
+												<div class="radio-inline">
+													<label class="radio radio-outline radio-outline-2x radio-success">
+														<input type="radio" required name="checklist[{{checklist.id}}]" value="yes">
+														<span></span>
+													</label>
+												</div>
+												{# <input type="radio" class="radio radio-rounded radio-success" required name="checklist[{{checklist.id}}]" value="yes"></td> #}
+											</td>
+											<td>
+												<div class="radio-inline">
+													<label class="radio radio-outline radio-outline-2x radio-success">
+														<input type="radio" required name="checklist[{{checklist.id}}]" value="no">
+														<span></span>
+													</label>
+												</div>
+											</td>
+											<td>
+												<div class="radio-inline">
+													<label class="radio radio-outline radio-outline-2x radio-success">
+														<input type="radio" required name="checklist[{{checklist.id}}]" value="na">
+														<span></span>
+													</label>
+												</div>
+											</td>
+											<td>
+												{# <input type="text" required name="comment[{{checklist.id}}]"  > #}
+												<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
+
+											</td>
+
 										</tr>
-									{% endfor %}
+									{% endif %}
 
 								{% endfor %}
-							</tbody>
-						</table>
-						<button class="btn btn-primary btn-lg">{{ button_label|default('Submit Review Response') }}</button>
-					</form>
-				</div>
+								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2 and   checklist.reviewForm == review_assignment.reviewForm) %}
+
+									<tr>
+										<td colspan="4">{{checklist}}
+											<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
+											<input type="hidden" name="comment[{{checklist.id}}]">
+										</td>
+									</tr>
+								{% endfor %}
+
+							{% endfor %}
+						</tbody>
+					</table>
+					<button class="btn btn-primary btn-lg">{{ button_label|default('Submit Review Response') }}</button>
+				</form>
 			</div>
 		</div>
 	</div>
-{% endblock %}
+</div>{% endblock %}

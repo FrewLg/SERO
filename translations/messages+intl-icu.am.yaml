@@ -16,13 +16,8 @@ days: ቀናት
 'Enter your details to login to your account:': 'ወደ መለያዎ ለመግባት ዝርዝሮችዎን ያስገቡ:'
 Home: መነሻ
 Logout: ውጣ
-Trainings: ስልጠናዎች
-Courses: __Courses
-'Training Requests': '__Training Requests'
-'Training Schedules': '__Training Schedules'
 'My request': 'የእኔ ማመልከቻዎች'
 Plan: እቅድ
-'Need Assesment': '__Need Assesment'
 results: __results
 Plans: እቅዶች
 Assesment: __Assesment
@@ -35,10 +30,10 @@ Reviewer: ገምጋሚ
 Primary: 'የመጀመሪያ ደረጃ'
 Secondary: 'ሁለተኛ ደረጃ'
 Response: ምላሽ
-'Add  Reviewer': 'ገምጋሚ ያክሉ'
-'Submited by': '__Submited by'
+'Assign Reviewer': 'ገምጋሚ ያክሉ'
+'Submited by': የላከው
 Role: __Role
-'Sumitted At': '__Sumitted At'
+'Sumitted At': 'የተላከው በ'
 Status: ሁኔታ
 'Application Type': 'ማመልከቻዎች ዓይነት'
 'No': በፍጹም
@@ -46,7 +41,7 @@ Status: ሁኔታ
 'Project Type': '__Project Type'
 'Poject Start Date': '__Poject Start Date'
 'Poject End Date': '__Poject End Date'
-Location: __Location
+Location: አካባቢ
 Members: __Members
 Attachments: __Attachments
 Amendment: __Amendment
@@ -58,7 +53,7 @@ Purpose: __Purpose
 Action: __Action
 'No record': 'ምንም መዝገብ አልተገኘም።'
 'Protocol applications': 'የፕሮቶኮል ማመልከቻዎች'
-'Applications': 'ማመልከቻዎች'
+Applications: ማመልከቻዎች
 'All applications': 'ሁሉም ማመልከቻዎች'
 'My assigned': የተመደብኩበት
 'My application': 'የእኔ ማመልከቻ'
@@ -130,25 +125,49 @@ Version: እትም
 NA: 'መልስ የለም'
 'YES': __YES
 'NO': __NO
-Protocol: __Protocol
+Protocol: ፕሮቶኮል
 'Add Schedule': 'የስብሰባ መርሃ ግብሮች ያክሉ'
 'New Schedule': 'አዲስ የስብሰባ መርሃ ግብሮች'
 Close: ዝጋ
-Training: __Training
-'Submit a new Ammendment request': '__Submit a new Ammendment request'
-'Ammendment request': '__Ammendment request'
-'Sent at': '__Sent at'
-'IRB CODE': '__IRB CODE'
-Withdraw: __Withdraw
-'Assigned reviewers': '__Assigned reviewers'
+'Submit a new Ammendment request': 'የማሻሻያ ጥያቄ ላክ'
+'Ammendment request': 'የማሻሻያ ጥያቄ'
+'Sent at': 'የተላከበት ቀን'
+'IRB CODE': ኮድ
+Withdraw: 'ማመልከቻዎን ይሰርዙ'
+'Assigned reviewers': 'የተመደቡ ገምጋሚዎች'
 Directorate: ዳይሬክቶሬት
-'Academic Rank': '__Academic Rank'
+'Academic Rank': 'የአካዳሚክ ደረጃ'
 'Date Assigned': 'የተመደበበት ቀን'
 'Due date': 'የሚያበቃበት ቀን'
-Actions: __Actions
+Actions: ድርጊቶች
 'Review due-date': 'ግምገማ የሚያበቃበት ቀን'
 'Reviewed at': 'የተገመገመበት ቀን'
 'No records found  under this section': 'በዚህ ክፍል ስር ምንም መዝገቦች አልተገኙም።'
 Decision: ውሳኔ
 'Reviewed date': 'የተገመገመበት ቀን'
-'Ammendment Request': '__Ammendment Request'
+'Ammendment Request': 'የማሻሻያ ጥያቄ'
+Assgined: የተመደበው
+versions: ስሪቶች
+'Submitted at': 'የተላከበት ቀን'
+actions: ድርጊቶች
+'Reviewers assigned': 'ገምጋሚዎች ተመድበዋል።'
+'Project start': 'የፕሮጀክት መነሻ ቀን'
+'Project end': 'የፕሮጀክት ማብቂያ ቀን'
+'Primary reviewer': 'ዋና ገምጋሚ'
+'Assign reviewer': 'ገምጋሚውን መድቡ'
+'Secondary reviewer': 'ሁለተኛ ደረጃ ገምጋሚ'
+Approved: ጸድቋል
+'Not approved': አልጸደቀም
+'Reviewers pool': 'የገምጋሚዎች ማከማቻ'
+'Add  Reviewer': '__Add  Reviewer'
+'Board memebrs': '__Board memebrs'
+'External reviewers': '__External reviewers'
+users: __users
+'Protocol users': '__Protocol users'
+English: እንግሊዝኛ
+Amharic: አማርኛ
+'Afaan Oromoo': 'አፋን ኦሮሞ'
+'Sidaamu Afoo': 'ሲዳሙ አፎ'
+'Reviewer Response': 'የገምጋሚ ምላሽ'
+Recommendation: 'የምክር ሀሳብ'
+'No review responses has been  given for this protocol yet': 'ምንም የግምገማ ምላሾች አልተሰጡም'
