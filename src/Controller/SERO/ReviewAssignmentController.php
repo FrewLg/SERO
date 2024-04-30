@@ -61,7 +61,9 @@ class ReviewAssignmentController extends AbstractController
             }
 
             $reviewAssignment->setApplication($application);
-             $reviewAssignment->setInvitationSentAt(new \DateTime());
+            $reviewAssignment->setInvitationSentAt(new \DateTime());
+            $reviewAssignment->setReviewerType(1);
+
             // dd($application->getId());
             // $reviewAssignment->getApplication()->setStatus($entityManager->getRepository(IRBStatus::class)->find(2));
 
@@ -122,8 +124,8 @@ class ReviewAssignmentController extends AbstractController
         ////////////////External reviewer
         return $this->render('sero/review_assignment/new.html.twig', [
             'irb_review_assignment' => $reviewAssignments,
-            'review_assignments' => $reviewAssignmentRepository->findBy(['irbreviewer'=>$this->getUser()]),
-            'application'=>$application,
+            'review_assignments' => $reviewAssignmentRepository->findBy(['irbreviewer' => $this->getUser()]),
+            'application' => $application,
             'extform' => $extform,
             'form' => $form->createView(),
 
@@ -134,7 +136,7 @@ class ReviewAssignmentController extends AbstractController
 
     public function myassigned(Request $request, ReviewAssignmentRepository $reviewAssignmentRepository, EntityManagerInterface $entityManager, PaginatorInterface $paginator): Response
     {
-///Use ROLE_CHAIR instead
+        ///Use ROLE_CHAIR instead
 
         $this->denyAccessUnlessGranted('ROLE_USER');
         $this_is_me = $this->getUser();

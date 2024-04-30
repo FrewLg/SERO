@@ -32,6 +32,8 @@ Application: ማመልከቻ
 Title: ርዕስ
 Reviewers: ገምጋሚዎች
 Reviewer: ገምጋሚ
+Primary: 'የመጀመሪያ ደረጃ'
+Secondary: 'ሁለተኛ ደረጃ'
 Response: ምላሽ
 'Add  Reviewer': 'ገምጋሚ ያክሉ'
 'Submited by': '__Submited by'
@@ -139,10 +141,10 @@ Training: __Training
 'IRB CODE': '__IRB CODE'
 Withdraw: __Withdraw
 'Assigned reviewers': '__Assigned reviewers'
-Directorate: __Directorate
+Directorate: ዳይሬክቶሬት
 'Academic Rank': '__Academic Rank'
 'Date Assigned': 'የተመደበበት ቀን'
-'Due date': '__Due date'
+'Due date': 'የሚያበቃበት ቀን'
 Actions: __Actions
 'Review due-date': 'ግምገማ የሚያበቃበት ቀን'
 'Reviewed at': 'የተገመገመበት ቀን'

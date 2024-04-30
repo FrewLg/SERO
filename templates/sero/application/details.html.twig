@@ -4,9 +4,7 @@
 	{% trans %}Protocol{% endtrans %}
 {% endblock  %}
 {% block body %}
-	{# {{ include('sero/application/app_sections/chat2.html.twig') }} #}
-	<div class="container">
-		{{ include('sero/application/app_sections/head.html.twig') }}
+ 		{{ include('sero/application/app_sections/head.html.twig') }}
 		<div class="row">
 			{% if versions %}
 				<div class="col-3">
@@ -169,7 +167,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
+		</div> 
+	{{ include('sero/application/app_sections/chat2.html.twig') }}
+
 {% endblock %}
 {% block javascripts %}{% endblock %}

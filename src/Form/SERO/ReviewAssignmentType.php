@@ -33,13 +33,12 @@ class ReviewAssignmentType extends AbstractType
         if (!$reviewAssignment instanceof ReviewAssignment) {
             return;
         }
-        $already_assigned = (new ArrayCollection($this->reviewAssignmentRepository->findBy(['application' => $options['application']])))->map(function ($element) 
-        {
+        $already_assigned = (new ArrayCollection($this->reviewAssignmentRepository->findBy(['application' => $options['application']])))->map(function ($element) {
             return $element->getIrbreviewer();
         });
 
         $builder
-             
+
             ->add('reviewForm', EntityType::class, [
                 'class' => ReviewForm::class,
                 'choice_label' => 'name',
@@ -50,7 +49,7 @@ class ReviewAssignmentType extends AbstractType
                 'irbreviewer',
                 EntityType::class,
                 [
-                    "required" => false,
+                    "required" => true,
                     'class' => User::class,
 
                     'query_builder' => function (EntityRepository $er) use ($already_assigned) {
@@ -104,17 +103,17 @@ class ReviewAssignmentType extends AbstractType
 
 class SecondaryReviewerAssignmentType extends AbstractType
 {
-     
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $reviewAssignment = $options['data'];
         if (!$reviewAssignment instanceof ReviewAssignment) {
             return;
         }
-       
+
 
         $builder
-             
+
             ->add('reviewForm', EntityType::class, [
                 'class' => ReviewForm::class,
                 'choice_label' => 'name',
@@ -122,16 +121,15 @@ class SecondaryReviewerAssignmentType extends AbstractType
             ])
 
             ->add(
-                'irbreviewer',
+                'secReviewer',
                 EntityType::class,
                 [
                     "required" => false,
-                    'class' => ReviewersPool::class,
+                    'class' => User::class,
 
                     // 'query_builder' => function (EntityRepository $er) use ($already_assigned) {
-
                     //     $qb = $er->createQueryBuilder('u')
-                    //         ->andWhere("u.roles like '%ROLE_BOARD_MEMBER%'");
+                    //         ->andWhere("u.reviewersPools like '%ROLE_BOARD_MEMBER%'");
                     //     if (sizeof($already_assigned->getValues()) > 0) {
                     //         $qb->andWhere("u not in  (:irbreviewer)")
                     //             ->setParameter('irbreviewer', $already_assigned->getValues());
@@ -140,11 +138,11 @@ class SecondaryReviewerAssignmentType extends AbstractType
                     //     return $qb->orderBy('u.email', 'ASC');
                     // },
                     'label' => 'Reveiwer',
-                    'placeholder' => '-- Select a reveiwer from Board members--',
+                    'placeholder' => "-- Select a reveiwer from Reviewer's pool--",
                     "attr" => [
                         "class" => "select2 form-control form-control-lg form-control-solid",
                     ],
-                    'choice_label' => "name",
+                    'choice_label' => "email",
 
 
                 ]

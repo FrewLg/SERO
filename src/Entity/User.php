@@ -11,6 +11,7 @@ use App\Entity\SERO\Meeting;
 use App\Entity\SERO\MeetingSchedule;
 use App\Entity\SERO\ReviewAssignment;
 use App\Entity\SERO\ReviewerResponse;
+use App\Entity\SERO\ReviewersPool;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -136,6 +137,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Continuation::class, mappedBy: 'approvedBy')]
     private Collection $continuationApprovals;
 
+    /**
+     * @var Collection<int, ReviewersPool>
+     */
+    #[ORM\OneToMany(targetEntity: ReviewersPool::class, mappedBy: 'user')]
+    private Collection $reviewersPools;
+
   
     public function __construct()
     {
@@ -157,6 +164,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->meetingSchedules = new ArrayCollection();
         $this->continuations = new ArrayCollection();
         $this->continuationApprovals = new ArrayCollection();
+        $this->reviewersPools = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -832,6 +840,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($continuationApproval->getApprovedBy() === $this) {
                 $continuationApproval->setApprovedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ReviewersPool>
+     */
+    public function getReviewersPools(): Collection
+    {
+        return $this->reviewersPools;
+    }
+
+    public function addReviewersPool(ReviewersPool $reviewersPool): static
+    {
+        if (!$this->reviewersPools->contains($reviewersPool)) {
+            $this->reviewersPools->add($reviewersPool);
+            $reviewersPool->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReviewersPool(ReviewersPool $reviewersPool): static
+    {
+        if ($this->reviewersPools->removeElement($reviewersPool)) {
+            // set the owning side to null (unless already changed)
+            if ($reviewersPool->getUser() === $this) {
+                $reviewersPool->setUser(null);
             }
         }
 

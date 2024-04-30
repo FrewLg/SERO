@@ -1,52 +1,34 @@
+<span class="label  label-light-success label-inline mr-2">{% trans %}Primary reviewer{% endtrans %}</span>
 <div class="my-2">
-
-
 	{{ form_start(form) }}
 	<div class="form-group  row">
 		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.irbreviewer) }}
 		</label>
-
 		<div class="col-8">
-
 			{{ form_widget(form.irbreviewer) }}
-
 		</div>
 	</div>
 	<div class="row">
-
 		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.duedate) }}
 		</label>
-
 		<div class="col-8">
-
 			{{ form_widget(form.duedate) }}
-
 		</div>
 	</div>
 	<div class="row">
-
 		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.reviewForm) }}
 		</label>
-
 		<div class="col-8">
-
 			{{ form_widget(form.reviewForm) }}
-
 		</div>
 	</div>
-
 	<div class="row">
-
 		<label class="col-form-label col-3 text-lg-right text-left"></label>
-
 		<div class="col-8">
-
 			<button type="submit" class="btn btn-light-primary  float-end">
-				Assign   reviewer
+				{% trans %}Assign reviewer{% endtrans %}
 			</button>
 		</div>
 	</div>
-
-
 	{{ form_end(form) }}
 </div>

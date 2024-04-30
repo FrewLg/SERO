@@ -32,7 +32,7 @@ class BoardMember
     #[ORM\OneToOne(cascade: ['persist' ])]
     // #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $user = null;
-
+ 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $assignedAt = null;
 

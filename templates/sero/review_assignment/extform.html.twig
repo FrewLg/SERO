@@ -1,3 +1,4 @@
+<span class="label  label-light-warning label-inline mr-2">{% trans %}Secondary reviewer{% endtrans %}</span>
 <div class="my-2">
 
 
@@ -5,12 +6,12 @@
 			{# {{ form_widget(extform) }} #}
 
 	<div class="form-group  row">
-		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(extform.irbreviewer) }}
+		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(extform.secReviewer) }}
 		</label>
 
 		<div class="col-8">
 
-			{{ form_widget(extform.irbreviewer) }}
+			{{ form_widget(extform.secReviewer) }}
 
 		</div>
 	</div>
@@ -44,7 +45,7 @@
 		<div class="col-8">
 
 			<button type="submit" class="btn btn-light-primary  float-end">
-				Assign   reviewer
+				{% trans %}Assign reviewer{% endtrans %}
 			</button>
 		</div>
 	</div>

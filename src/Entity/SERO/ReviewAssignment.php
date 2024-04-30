@@ -57,6 +57,9 @@ class ReviewAssignment
     #[ORM\Column(length: 255)]
     private ?string $reviewerType = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reviewAssignments')]
+    private ?ReviewersPool $secReviewer = null;
+
     public function __construct()
     {
         $this->reviewerResponses = new ArrayCollection();
@@ -225,6 +228,18 @@ class ReviewAssignment
     public function setReviewerType(string $reviewerType): static
     {
         $this->reviewerType = $reviewerType;
+
+        return $this;
+    }
+
+    public function getSecReviewer(): ?ReviewersPool
+    {
+        return $this->secReviewer;
+    }
+
+    public function setSecReviewer(?ReviewersPool $secReviewer): static
+    {
+        $this->secReviewer = $secReviewer;
 
         return $this;
     }
