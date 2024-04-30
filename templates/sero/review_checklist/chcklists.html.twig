@@ -26,7 +26,7 @@
 				<form method="POST" class="form-group" onsubmit="return confirm('Submit a review response?')">
 					<input hidden name="review-checklist" value="true"/>
 					<input hidden name="review-comments" value="true"/>
-					<table class="table table-bordered ">
+					<table class="table table- ">
 						<tbody>
 							{% for checklist_group in irb_review_checklist_group  %}
 								<tr>
@@ -112,8 +112,8 @@
 								{% endfor %}
 								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2 and   checklist.reviewForm == review_assignment.reviewForm) %}
 
-									<tr>
-										<td colspan="4">{{checklist}}
+									<tr >
+										<td colspan="5">{{checklist}}
 											<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
 											<input type="hidden" name="comment[{{checklist.id}}]">
 										</td>

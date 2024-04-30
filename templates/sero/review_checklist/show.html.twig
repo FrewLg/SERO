@@ -20,9 +20,11 @@
 						<i class="flaticon2-placeholder mr-2 font-size-lg"></i>
 						{{ review_assignment.irbreviewer.profile.dirctorate}}</a>
 				</div>
-				<span class="font-weight-bold text-dark-50"> {{ review_assignment.application.description}}  </span>
+				<span class="font-weight-bold text-dark-50">
+					{{ review_assignment.application.description}}
+				</span>
 				<span class=" text-hover-warning font-size-h5 font-weight-bold mr-3">
-					
+
 					{% trans %}Reviewed at{% endtrans %}:
 					{{ review_assignment.reviewedAt|date('h:m sa d/m/y')}}
 				</span>
@@ -39,7 +41,7 @@
 		<hr>
 
 		{% if review_assignment.reviewerResponses|length >0   %}
-			<table class="table table-bordered ">
+			<table class="table table- ">
 
 				<tbody>
 
@@ -63,21 +65,26 @@
 										<p style="margin-left:10px">{{ loop.index}}.
 											{{checklist}}</p>
 									</td>
-									<td>
+									<td {% if checklist.checklist.answerType ==2 %} colspan="2" {% endif %}>
 										{% if checklist.checklist.answerType ==1 and checklist.answer == 'yes' %}
 											<span class="label label-lg label-light-success label-inline">
 												<i class="fa fa-check text-success m-1 font-size-sm"></i>
 												{% trans %}Yes{% endtrans %}</span>
 
-										{% else %}
+										{% elseif checklist.checklist.answerType ==1 and checklist.answer == 'no' %}
 											<span class="label label-lg label-light-danger label-inline">
 												<i class="fa fa-times text-danger m-1 font-size-sm"></i>
 												{% trans %}No{% endtrans %}</span>
-
+										{% elseif checklist.checklist.answerType ==2  %}
+											{{ checklist.answer  }}
 										{% endif %}
 
 									</td>
-									<td>{{ checklist.comment }}</td>
+
+									<td>
+
+										{{ checklist.comment }}</td>
+
 								</tr>
 							{% endif %}
 
