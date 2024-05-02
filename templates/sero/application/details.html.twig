@@ -139,7 +139,15 @@
 						<div
 							class="tab-content pt-5">
 							<!--begin::Tab Content-->
-							<div class="tab-pane  " id="protocol_2" role="tabpanel"></div>
+							<div class="tab-pane  " id="protocol_2" role="tabpanel">
+							{# {{ form_start(icfForm, attr('add_icf','')}) }} #}
+			 <form method="post" action="{{ path('add_icf', {'id': application.id}) }}" >
+							
+    {{ form_widget(icfForm) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(icfForm) }}
+
+							</div>
 							<!--end::Tab Content-->
 							<!--begin::Tab Content-->
 							<div class="tab-pane active" id="protocol_3" role="tabpanel">
@@ -159,7 +167,9 @@
 							<!--end::Tab Content-->
 							<!--begin::Tab Content-->
 							<div class="tab-pane" id="protocol_1" role="tabpanel">
-								{{ include('sero/application/version.html.twig') }}
+							version
+							
+								{# {{ include('sero/application/version.html.twig') }} #}
 								{# {{ include('sero/application/app_sections/ammendmentModal.html.twig') }} #}
 							</div>
 							<!--end::Tab Content-->

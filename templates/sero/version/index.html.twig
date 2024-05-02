@@ -22,8 +22,8 @@
 			</h3>
 		</div>
 	</div>
-	<div class="card-body">
-		<p class="title">Changes Made:</p>
+	<div class="card-body m-0">
+		<p class="title">{% trans %}Changes Made{% endtrans %}:</p>
 		<p>
 			{{ version.changesMade }}</p>
 
@@ -79,6 +79,15 @@
 		{% endif %}
 		<hr>
 		Initial decision
+		{% if version.application.submittedBy == app.user %}
+
+			{% if version.decision=="EXEMPTED" %}
+				{{ include('sero/application/version.html.twig') }}
+
+			{% endif %}
+
+		{% endif %}
+
 		{% if is_granted('ROLE_ADMIN') %}
 
 			{% if version.decision %}
@@ -99,19 +108,48 @@
 		{% endif %}
 
 	</div>
-	<div class="card-footer d-flex justify-content-between">
+	<div class="card-footer m-0 d-flex justify-content-between">
 		{{version.id}}
-		{% if version.isapproved %}
-			{{ include('sero/application/app_sections/ammendmentModal.html.twig') }}
+		{# {% if version.isapproved %} #}
+		{# {{ include('sero/application/app_sections/ammendmentModal.html.twig') }} #}
+<!-- Button trigger modal-->
+<button type="button" class="btn btn-primary m-4" data-toggle="modal" data-target="#AmmendmentModal">
+	{% trans  %}Submit a new Ammendment request{% endtrans  %}
+</button>
 
-			<a href="#" class="btn btn-secondary font-weight-bold">{% trans %}Ammendment Request{% endtrans %}</a>
-		{% endif %}
+<!-- Modal-->
+<div class="modal fade" id="AmmendmentModal" tabindex="-1" role="dialog" aria-labelledby="AmmendmentModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="AmmendmentModalLabel">{% trans  %}Ammendment request{% endtrans  %}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<i aria-hidden="true" class="ki ki-close"></i>
+				</button>
+			</div>
+			<div
+				class="modal-body">
+ 				{{ form_start(ammendmentForm, {'id': version.id}) }}
+				{# {{ form_widget(ammendmentForm) }} #}
+
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{% trans  %}Close{% endtrans  %}</button>
+					<button class="btn btn-primary font-weight-bold">{{ button_label|default('Save')|trans }}</button>
+				</div>
+				{{ form_end(ammendmentForm) }}
+			</div>
+		</div>
+	</div>
+</div>
+
+		<a href="#" class="btn btn-secondary font-weight-bold"> {% trans %}Ammendment Request{% endtrans %}</a>
+		{# {% endif %} #}
 
 		{# <a href="#" class="btn btn-primary font-weight-bold">{% trans %}Continuation Request{% endtrans %}</a>
-																																		<a href="#" class="btn btn-light-secondary font-weight-bold">{% trans %}Continuation{% endtrans %}
-																																		</a>
-																																		<a href="#" class="btn btn-outline-secondary mr-1">{% trans %}Continuation{% endtrans %}
-																																		</a> #}
+		<a href="#" class="btn btn-light-secondary font-weight-bold">{% trans %}Continuation{% endtrans %}
+		</a>
+		<a href="#" class="btn btn-outline-secondary mr-1">{% trans %}Continuation{% endtrans %}
+		</a> #}
 		{{ include('sero/application/app_sections/continueModal.html.twig') }}
 
 

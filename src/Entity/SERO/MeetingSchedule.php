@@ -57,6 +57,11 @@ class MeetingSchedule
         return $this;
     }
 
+    public function __toString()
+    {
+            return $this->name;
+    }
+
     /**
      * @return Collection<int, Meeting>
      */

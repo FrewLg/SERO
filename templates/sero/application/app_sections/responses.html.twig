@@ -16,9 +16,11 @@
 							<div class="d-flex flex-wrap mb-4">
 								<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
 									<i class="flaticon2-new-email mr-2 font-size-lg"></i>
-								{% if reviewResponse.irbreviewer %}{{ reviewResponse.irbreviewer.email}}{% endif %}
-								
-									
+									{% if reviewResponse.irbreviewer %}
+										{{ reviewResponse.irbreviewer.email}}
+									{% endif %}
+
+
 								</a>
 								<a href="#" class="text-dark-50 text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
 									<i class="flaticon2-calendar-3 mr-2 font-size-lg"></i>
@@ -27,7 +29,9 @@
 								<a href="#" class="text-dark-50 text-hover-primary font-weight-bold">
 									<i class="flaticon2-placeholder mr-2 font-size-lg"></i>
 									{# {{ reviewResponse.irbreviewer.profile.dirctorate}} #}
-								{% if reviewResponse.irbreviewer %}{{ reviewResponse.irbreviewer.profile.dirctorate}}{% endif %}
+									{% if reviewResponse.irbreviewer %}
+										{{ reviewResponse.irbreviewer.profile.dirctorate}}
+									{% endif %}
 
 								</a>
 							</div>
@@ -76,17 +80,17 @@
 													<p style="margin-left:10px">{{ loop.index}}.
 														{{checklist}}</p>
 												</td>
-												<td>
+												<td {% if checklist.checklist.answerType ==2 %} colspan="2" {% endif %}>
 													{% if checklist.checklist.answerType ==1 and checklist.answer == 'yes' %}
 														<span class="label label-lg label-light-success label-inline">
 															<i class="fa fa-check text-success m-1 font-size-sm"></i>
 															{% trans %}Yes{% endtrans %}</span>
-
-													{% else %}
+													{% elseif checklist.checklist.answerType ==1 and checklist.answer == 'no' %}
 														<span class="label label-lg label-light-danger label-inline">
 															<i class="fa fa-times text-danger m-1 font-size-sm"></i>
 															{% trans %}No{% endtrans %}</span>
-
+													{% elseif checklist.checklist.answerType ==2  %}
+														{{ checklist.answer  }}
 													{% endif %}
 
 												</td>
@@ -120,7 +124,7 @@
 						</table>
 					{% else %}
 						<p class="text-danger">
-							Reviewer hasn't responded yet!</p>
+							{% trans %}Reviewer hasn't responded yet{% endtrans %}!</p>
 					{% endif %}
 				</div>
 			</div>
@@ -128,5 +132,5 @@
 
 	</div>
 {% else %}
-	<p class="text-danger">No reviewer sent any response on this application yet!</p>
+	<p class="text-danger">{% trans %}No reviewer sent any response on this application yet{% endtrans %}!</p>
 {% endfor %}

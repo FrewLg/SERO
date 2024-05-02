@@ -4,6 +4,7 @@ namespace App\Controller\SERO;
 
 use App\Entity\SERO\Meeting;
 use App\Entity\SERO\MeetingSchedule;
+use App\Entity\SERO\ScheduledProtocol;
 use App\Form\SERO\MeetingType;
 use App\Repository\SERO\MeetingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,20 +18,22 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MeetingController extends AbstractController
 {
-    #[Route('/{id}', name: 'meetings', methods: ['GET'])]
-    public function index(MeetingRepository $meetingRepository,
-     MeetingSchedule $meetingSchedule): Response
-    {
-        return $this->render('sero/meeting/index.html.twig', [
-            'meetings' => $meetingRepository->findBy(['meetingSchedule'=>$meetingSchedule]),
-        ]);
-    }
 
-    #[Route('/{id}/new', name: 'meeting_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, MeetingSchedule $meetingSchedule,
-    EntityManagerInterface $entityManager): Response
-    {
-        $meeting = new Meeting();
+
+    #[Route('/{id}/all', name: 'meetings', methods: ['GET', 'POST'])]
+    public function new(
+        Request $request,
+        MeetingSchedule $meetingSchedule,
+        MeetingRepository $meetingRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $meeting = $meetingRepository->findOneBy(['meetingSchedule' => $meetingSchedule]);
+if (!$meeting){
+    $meeting = new Meeting();
+
+}
         $form = $this->createForm(MeetingType::class, $meeting);
         $form->handleRequest($request);
 
@@ -39,22 +42,32 @@ class MeetingController extends AbstractController
             $meeting->setMinuteTakenBy($this->getUser());
             $meeting->setCreatedBy($this->getUser());
             $meeting->setStatus(1);
-            foreach($meeting->getApplications() as $vals){
-                $meeting->addApplication($vals);
-
-            }
-            
+            // dd($form->get('versions')->getData()  );
+            // foreach ($meeting->getApplications() as $vals) {
+            // $meeting->addApplication($vals);
+            // $entityManager->persist($meeting);
+            // }
+            // foreach ($form->get('versions')->getData()   as $vers) {
+            // // dd($vers);
+            // $meeting->addVersion($vers);
+            // $entityManager->persist($meeting);
+            // }
             $meeting->setMinuteTakenAt(new \DateTime());
             $entityManager->persist($meeting);
             $entityManager->flush();
             $this->addFlash("success", "New meeting has been added succesfully!");
 
-            return $this->redirectToRoute('meetings', ['id'=>$meetingSchedule->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('meetings', ['id' => $meetingSchedule->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/meeting/new.html.twig', [
             'meeting' => $meeting,
+            'meetingSchedule' => $meetingSchedule,
             'form' => $form,
+            'meetings' => $meetingRepository->findBy(['meetingSchedule' => $meetingSchedule]),
+            'allmeetings' => $meetingRepository->findBy(['meetingSchedule' => $meetingSchedule]),
+            'meetingscheduledProtocols' => $entityManager->getRepository(ScheduledProtocol::class)->findAll()//By(['meeting' => $meetingSchedule]),
+
         ]);
     }
 
@@ -75,7 +88,7 @@ class MeetingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('meeting_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('meetings', ['id' => $meeting->getMeetingSchedule()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('sero/meeting/edit.html.twig', [
@@ -87,7 +100,7 @@ class MeetingController extends AbstractController
     #[Route('/{id}', name: 'meeting_delete', methods: ['POST'])]
     public function delete(Request $request, Meeting $meeting, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$meeting->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $meeting->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($meeting);
             $entityManager->flush();
         }

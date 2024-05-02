@@ -7,6 +7,7 @@ use App\Entity\SERO\Amendment;
 use App\Entity\SERO\ApplicationFeedback;
 use App\Entity\SERO\Continuation;
 use App\Entity\SERO\DecisionType;
+use App\Entity\SERO\Icf;
 use App\Entity\SERO\ReviewChecklistGroup;
 use App\Form\SERO\ReviewChecklistGroupType;
 use App\Entity\SERO\ReviewAssignment;
@@ -17,6 +18,7 @@ use App\Form\SERO\ApplicationFeedbackType;
 use App\Form\SERO\ApplicationType;
 use App\Form\SERO\AmendmentType;
 use App\Form\SERO\ContinuationType;
+use App\Form\SERO\IcfType;
 use App\Form\SERO\VersionType;
 use App\Repository\ApplicationRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -101,27 +103,22 @@ class ApplicationController extends AbstractController
         $application = new Application();
         $form = $this->createForm(ApplicationType::class, $application);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
+             
+            ///
             //Add version//
             $protocolversion = $entityManager->getRepository(Version::class)->findBy(['application' => $application]);
             $protocolversions = count($protocolversion) + 1;
             $version = new Version();
             $version->setDate(new \DateTime());
             $version->setCreatedAt(new \DateTime());
+            $application->setCreatedAt(new \DateTime());
             $version->setVersionNumber($protocolversions);
             $version->setApplication($application);
             // end add version
             $application->setSubmittedBy($this->getUser());
+            $application->setIbcode($seroHelper->versionate($application));
             $entityManager->persist($application);
-
-            $appId = $form->getData(); 
-            $application->setIbcode($seroHelper->versionate($application) . $appId->getId());
-            // dd($appId->getId());
-            //attach
-            $entityManager->persist($application);
-
             if ($form->get('attachment')->getData()) {
                 $versionAttachement = $form->get('attachment')->getData();
                 $versionFileName = $seroHelper->fileNamer($version) . $versionAttachement->guessExtension();
@@ -132,11 +129,9 @@ class ApplicationController extends AbstractController
             //
             $entityManager->persist($version);
             $entityManager->flush();
-
             return $this->redirectToRoute('application_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->render('sero/application/new.html.twig', [
+         return $this->render('sero/application/new.html.twig', [
             'application' => $application,
             'form' => $form,
         ]);
@@ -268,6 +263,31 @@ class ApplicationController extends AbstractController
          $contuoation = new Continuation;
         $contuoationForm = $this->createForm(ContinuationType::class, $contuoation);
         ///
+         ///
+         $icf = new Icf;
+        $icfForm = $this->createForm(IcfType::class, $icf);
+        $icfForm->handleRequest($request);
+
+        if ($icfForm->isSubmitted() && $icfForm->isValid()) {
+            $icf->setApplication($application);
+            $icf->setCreatedAt(new \DateTime());
+            $icf->setVersionNumber($seroHelper->icfVersion($application));
+
+            if ($icfForm->get('attachment')->getData()) {
+                $ver = $icfForm->getData();
+                $icfAttachement = $icfForm->get('attachment')->getData();
+                $icfFileName = $seroHelper->icfFileNamer($ver).$icfAttachement->guessExtension();
+                $icfAttachement->move($this->getParameter('uploads_folder'), $icfFileName);
+                $icf->setAttachment($icfFileName);
+            }
+
+            $entityManager->persist($icf);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('application_show', ["id" => $application->getId()],
+            Response::HTTP_SEE_OTHER);
+                }
+        ///
         return $this->render('sero/application/details.html.twig', [
             'appfeedbfrom' => $feedbackForm->createView(),
             'ammendmentForm' => $ammendmentForm->createView(),
@@ -275,11 +295,45 @@ class ApplicationController extends AbstractController
             'form' => $versionForm,
             'contuoationForm' => $contuoationForm,
             'decisions' => $decisions,
+            'icfForm' => $icfForm,
             'application' => $application,
             'versions' => array_reverse($existingVersion),
         ]);
     }
     
+    #[Route('/{id}/addicf', name: 'add_icf', methods:['POST'] )]
+    public function addicf(Request $request , SEROHelper $seroHelper, EntityManagerInterface $entityManager, Application $application): Response
+    {
+        $icf = new Icf;
+        $icfForm = $this->createForm(IcfType::class, $icf);
+        $icfForm->handleRequest($request);
+
+        if ($icfForm->isSubmitted() && $icfForm->isValid()) {
+            $icf->setApplication($application);
+            $icf->setCreatedAt(new \DateTime());
+            $icf->setVersionNumber($seroHelper->icfVersion($application));
+dd($icfForm->get('attachment')->getData());
+            if ($icfForm->get('attachment')->getData()) {
+                $ver = $icfForm->getData();
+                $icfAttachement = $icfForm->get('attachment')->getData();
+                $icfFileName = $seroHelper->icfFileNamer($ver).$icfAttachement->guessExtension();
+                $icfAttachement->move($this->getParameter('uploads_folder'), $icfFileName);
+                $icf->setAttachment($icfFileName);
+            }
+
+            $entityManager->persist($icf);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('application_show', ["id" => $application->getId()],
+            Response::HTTP_SEE_OTHER);
+                }
+        ///
+        return $this->render('sero/application/details.html.twig', [
+             'icfForm' => $icfForm,
+            'application' => $application,
+         ]);
+    }
+
     #[Route('/{id}/export',   name: 'export', methods: ['GET','POST'])]
 
     public function exportnow(EntityManagerInterface $em, Application $uid) {

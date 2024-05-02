@@ -57,11 +57,31 @@ class Version
     #[ORM\OneToMany(targetEntity: Amendment::class, mappedBy: 'version')]
     private Collection $amendments;
 
+    // /**
+    //  * @var Collection<int, Meeting>
+    //  */
+    // #[ORM\ManyToMany(targetEntity: Meeting::class, mappedBy: 'versions')]
+    // private Collection $meetings;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $status = null;
+
+ 
+
+    /**
+     * @var Collection<int, ScheduledProtocol>
+     */
+    #[ORM\OneToMany(targetEntity: ScheduledProtocol::class, mappedBy: 'protocol')]
+    private Collection $scheduledProtocols;
+
+ 
    
     public function __construct()
     {
         // $this->application = new ArrayCollection();
         $this->amendments = new ArrayCollection();
+  
+        $this->scheduledProtocols = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -229,6 +249,51 @@ class Version
             // set the owning side to null (unless already changed)
             if ($amendment->getVersion() === $this) {
                 $amendment->setVersion(null);
+            }
+        }
+
+        return $this;
+    }
+ 
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    
+
+    /**
+     * @return Collection<int, ScheduledProtocol>
+     */
+    public function getScheduledProtocols(): Collection
+    {
+        return $this->scheduledProtocols;
+    }
+
+    public function addScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    {
+        if (!$this->scheduledProtocols->contains($scheduledProtocol)) {
+            $this->scheduledProtocols->add($scheduledProtocol);
+            $scheduledProtocol->setProtocol($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    {
+        if ($this->scheduledProtocols->removeElement($scheduledProtocol)) {
+            // set the owning side to null (unless already changed)
+            if ($scheduledProtocol->getProtocol() === $this) {
+                $scheduledProtocol->setProtocol(null);
             }
         }
 

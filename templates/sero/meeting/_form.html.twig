@@ -1,4 +1,16 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_widget(form) }}
+
+{% for protocol in form.versions %}
+	<div class="row ">
+		{{ _self.displayVersion(protocol) }}
+	</div>
+{% endfor %}
+
+<button type="button" class="btn btn-primary add-another-collection-widget btn btn-sm btn-bd-primary float-right " data-list-selector="#objective-fields-list">
+															<span aria-hidden="true">+</span>
+															Add protocol Titles
+														</button>
+
+<button class="btn btn-light-success my-4">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

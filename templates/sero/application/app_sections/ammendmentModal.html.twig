@@ -1,21 +1,18 @@
 <!-- Button trigger modal-->
-<button type="button" class="btn btn-primary m-4" data-toggle="modal" data-target="#AmmendmentModal">
+<button type="button" class="btn btn-primary m-4" data-toggle="modal" data-target="#AmmendmentModal{{version.versionNumber}}">
 	{% trans  %}Submit a new Ammendment request{% endtrans  %}
 </button>
 
-<!-- Modal-->
-<div class="modal fade" id="AmmendmentModal" tabindex="-1" role="dialog" aria-labelledby="AmmendmentModalLabel" aria-hidden="true">
+<div class="modal fade" id="AmmendmentModal{{version.versionNumber}}" tabindex="-1" role="dialog" aria-labelledby="AmmendmentModalLabel{{version.versionNumber}}" aria-hidden="true">
 	<div class="modal-dialog" role="document">
-		<div class="modal-content">
+		<div class="modal-content {{version.versionNumber}}">
 			<div class="modal-header">
-				<h5 class="modal-title" id="AmmendmentModalLabel">{% trans  %}Ammendment request{% endtrans  %}</h5>
+				<h5 class="modal-title" id="AmmendmentModalLabel{{version.versionNumber}}">{% trans  %}Ammendment request{% endtrans  %}</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<i aria-hidden="true" class="ki ki-close"></i>
 				</button>
 			</div>
-			<div
-				class="modal-body">
-				{# <form method="post" action="{{ path('new_ammendment', {'id': version.id}) }}" > #}
+			<div class="modal-body am{{version.versionNumber}}">
 				{{ form_start(ammendmentForm, {'id': version.id}) }}
 				{{ form_widget(ammendmentForm) }}
 
@@ -23,7 +20,7 @@
 					<button type="submit" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{% trans  %}Close{% endtrans  %}</button>
 					<button class="btn btn-primary font-weight-bold">{{ button_label|default('Save')|trans }}</button>
 				</div>
-				{# </form> #}
+				{{ form_end(ammendmentForm) }}
 			</div>
 		</div>
 	</div>

@@ -57,9 +57,7 @@ class Application
     #[ORM\OneToMany(targetEntity: IrbCertificate::class, mappedBy: 'irbApplication')]
     private Collection $irbCertificates;
 
-    #[ORM\ManyToOne(inversedBy: 'applications')]
-    private ?Meeting $meeting = null;
-
+ 
     /**
      * @var Collection<int, ApplicationFeedback>
      */
@@ -85,6 +83,12 @@ class Application
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ibcode = null;
+
+    /**
+     * @var Collection<int, Icf>
+     */
+    #[ORM\OneToMany(targetEntity: Icf::class, mappedBy: 'application', orphanRemoval: true)]
+    private Collection $icfs;
  
     public function __construct()
     {
@@ -94,13 +98,17 @@ class Application
         $this->applicationFeedback = new ArrayCollection();
         $this->versions = new ArrayCollection();
         $this->continuations = new ArrayCollection();
+        $this->icfs = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
+    public function __toString()
+    {
+            return "[".$this->ibcode ."] ".$this->title;
+    }
     public function getTitle(): ?string
     {
         return $this->title;
@@ -275,17 +283,7 @@ class Application
         return $this;
     }
 
-    public function getMeeting(): ?Meeting
-    {
-        return $this->meeting;
-    }
-
-    public function setMeeting(?Meeting $meeting): static
-    {
-        $this->meeting = $meeting;
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, ApplicationFeedback>
@@ -398,6 +396,36 @@ class Application
     public function setIbcode(?string $ibcode): static
     {
         $this->ibcode = $ibcode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Icf>
+     */
+    public function getIcfs(): Collection
+    {
+        return $this->icfs;
+    }
+
+    public function addIcf(Icf $icf): static
+    {
+        if (!$this->icfs->contains($icf)) {
+            $this->icfs->add($icf);
+            $icf->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIcf(Icf $icf): static
+    {
+        if ($this->icfs->removeElement($icf)) {
+            // set the owning side to null (unless already changed)
+            if ($icf->getApplication() === $this) {
+                $icf->setApplication(null);
+            }
+        }
 
         return $this;
     }

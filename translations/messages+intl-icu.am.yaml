@@ -48,7 +48,7 @@ Amendment: __Amendment
 Revisions: __Revisions
 'Research team': 'የምርምር ቡድን'
 Amendments: ማሻሻያዎች
-Purpose: __Purpose
+Purpose: ዓላማ
 'Requested At': 'የተጠየቀው በ'
 Action: __Action
 'No record': 'ምንም መዝገብ አልተገኘም።'
@@ -85,7 +85,7 @@ Comment: አስተያየት
 Reports: ሪፖርቶች
 Dashboard: __Dashboard
 'Protocol Applications': '__Protocol Applications'
-'Make Revision': '__Make Revision'
+'Make Revision': 'ገምግም'
 'Protocol assesment form': '__Protocol assesment form'
 'My Review Assignments': 'የተመደብኩበት '
 'All Active': 'ሁሉም ተጠባባቂ'

@@ -38,7 +38,7 @@ class CalendarSubscriber implements EventSubscriberInterface
         foreach ($dates as $training) {
 
             $trainingEvent = new Event(
-                $training->getName()." at ",
+                $training->getName()." - ".count($training->getMeetings())." Meetings",
                 $training->getStartingDate(),
                 $training->getEndDate()
             );

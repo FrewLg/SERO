@@ -53,20 +53,31 @@ class Meeting
     #[ORM\ManyToOne(inversedBy: 'meetings')]
     private ?User $minuteTakenBy = null;
 
-    /**
-     * @var Collection<int, Application>
-     */
-    #[ORM\OneToMany(targetEntity: Application::class, mappedBy: 'meeting')]
-    private Collection $applications;
+   
 
     #[ORM\ManyToOne(inversedBy: 'meetings')]
     private ?MeetingSchedule $meetingSchedule = null;
 
+ 
+
+    /**
+     * @var Collection<int, ScheduledProtocol>
+     */
+    #[ORM\OneToMany(targetEntity: ScheduledProtocol::class, mappedBy: 'meeting', cascade:["persist"] , orphanRemoval: true)]
+    private Collection $scheduledProtocols;
+
+
+     
+
     public function __construct()
     {
         $this->attendee = new ArrayCollection();
-        $this->applications = new ArrayCollection();
+         // $this->versions = new ArrayCollection();
+        $this->scheduledProtocols = new ArrayCollection();
     }
+
+
+     
 
     public function getId(): ?int
     {
@@ -180,36 +191,7 @@ class Meeting
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Application>
-     */
-    public function getApplications(): Collection
-    {
-        return $this->applications;
-    }
-
-    public function addApplication(Application $application): static
-    {
-        if (!$this->applications->contains($application)) {
-            $this->applications->add($application);
-            $application->setMeeting($this);
-        }
-
-        return $this;
-    }
-
-    public function removeApplication(Application $application): static
-    {
-        if ($this->applications->removeElement($application)) {
-            // set the owning side to null (unless already changed)
-            if ($application->getMeeting() === $this) {
-                $application->setMeeting(null);
-            }
-        }
-
-        return $this;
-    }
+ 
 
     public function getMeetingSchedule(): ?MeetingSchedule
     {
@@ -222,4 +204,35 @@ class Meeting
 
         return $this;
     }
+ 
+    /**
+     * @return Collection<int, ScheduledProtocol>
+     */
+    public function getScheduledProtocols(): Collection
+    {
+        return $this->scheduledProtocols;
+    }
+
+    public function addScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    {
+        if (!$this->scheduledProtocols->contains($scheduledProtocol)) {
+            $this->scheduledProtocols->add($scheduledProtocol);
+            $scheduledProtocol->setMeeting($this);
+        }
+
+        return $this;
+    }
+
+    public function removeScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    {
+        if ($this->scheduledProtocols->removeElement($scheduledProtocol)) {
+            // set the owning side to null (unless already changed)
+            if ($scheduledProtocol->getMeeting() === $this) {
+                $scheduledProtocol->setMeeting(null);
+            }
+        }
+
+        return $this;
+    }
+    
 }
