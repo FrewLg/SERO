@@ -58,13 +58,19 @@ class Meeting
     #[ORM\ManyToOne(inversedBy: 'meetings')]
     private ?MeetingSchedule $meetingSchedule = null;
 
+    /**
+     * @var Collection<int, Version>
+     */
+    #[ORM\ManyToMany(targetEntity: Version::class, inversedBy: 'meetings')]
+    private Collection $scheduledProtocols;
+
  
 
-    /**
-     * @var Collection<int, ScheduledProtocol>
-     */
-    #[ORM\OneToMany(targetEntity: ScheduledProtocol::class, mappedBy: 'meeting', cascade:["persist"] , orphanRemoval: true)]
-    private Collection $scheduledProtocols;
+    // /**
+    //  * @var Collection<int, ScheduledProtocol>
+    //  */
+    // #[ORM\OneToMany(targetEntity: ScheduledProtocol::class, mappedBy: 'meeting', cascade:["persist"] , orphanRemoval: true)]
+    // private Collection $scheduledProtocols;
 
 
      
@@ -72,7 +78,7 @@ class Meeting
     public function __construct()
     {
         $this->attendee = new ArrayCollection();
-         // $this->versions = new ArrayCollection();
+        //  $this->versions = new ArrayCollection();
         $this->scheduledProtocols = new ArrayCollection();
     }
 
@@ -205,32 +211,56 @@ class Meeting
         return $this;
     }
  
+    // /**
+    //  * @return Collection<int, ScheduledProtocol>
+    //  */
+    // public function getScheduledProtocols(): Collection
+    // {
+    //     return $this->scheduledProtocols;
+    // }
+
+    // public function addScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    // {
+    //     if (!$this->scheduledProtocols->contains($scheduledProtocol)) {
+    //         $this->scheduledProtocols->add($scheduledProtocol);
+    //         $scheduledProtocol->setMeeting($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    // {
+    //     if ($this->scheduledProtocols->removeElement($scheduledProtocol)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($scheduledProtocol->getMeeting() === $this) {
+    //             $scheduledProtocol->setMeeting(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
+
     /**
-     * @return Collection<int, ScheduledProtocol>
+     * @return Collection<int, Version>
      */
     public function getScheduledProtocols(): Collection
     {
         return $this->scheduledProtocols;
     }
 
-    public function addScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    public function addScheduledProtocol(Version $scheduledProtocol): static
     {
         if (!$this->scheduledProtocols->contains($scheduledProtocol)) {
             $this->scheduledProtocols->add($scheduledProtocol);
-            $scheduledProtocol->setMeeting($this);
         }
 
         return $this;
     }
 
-    public function removeScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    public function removeScheduledProtocol(Version $scheduledProtocol): static
     {
-        if ($this->scheduledProtocols->removeElement($scheduledProtocol)) {
-            // set the owning side to null (unless already changed)
-            if ($scheduledProtocol->getMeeting() === $this) {
-                $scheduledProtocol->setMeeting(null);
-            }
-        }
+        $this->scheduledProtocols->removeElement($scheduledProtocol);
 
         return $this;
     }

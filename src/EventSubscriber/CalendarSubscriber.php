@@ -2,7 +2,7 @@
 
 namespace App\EventSubscriber;
 
-// use App\Repository\TrainingRepository;
+// use App\Repository\meetingRepository;
 use CalendarBundle\CalendarEvents;
 use App\Repository\SERO\MeetingScheduleRepository;
 use CalendarBundle\Entity\Event;
@@ -35,24 +35,24 @@ class CalendarSubscriber implements EventSubscriberInterface
     {
          
         $dates=$this->meetingScheduleRepository->findAll();
-        foreach ($dates as $training) {
+        foreach ($dates as $meeting) {
 
-            $trainingEvent = new Event(
-                $training->getName()." - ".count($training->getMeetings())." Meetings",
-                $training->getStartingDate(),
-                $training->getEndDate()
+            $meetingEvent = new Event(
+                $meeting->getName()." - ".count($meeting->getMeetings())." Meetings",
+                $meeting->getStartingDate(),
+                $meeting->getEndDate()
             );
  
-            $trainingEvent->setOptions([
+            $meetingEvent->setOptions([
                 'backgroundColor' => "#6993FF",
                 'borderColor' => "#6993FF",
             ]);
-            $trainingEvent->addOption(
+            $meetingEvent->addOption(
                 'url',
-                $this->router->generate('meetings',['id'=>$training->getId()])
+                $this->router->generate('meetings',['id'=>$meeting->getId()])
             );
 
-            $calendar->addEvent($trainingEvent);
+            $calendar->addEvent($meetingEvent);
         }
          
     }

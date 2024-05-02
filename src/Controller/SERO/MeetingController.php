@@ -66,8 +66,7 @@ if (!$meeting){
             'form' => $form,
             'meetings' => $meetingRepository->findBy(['meetingSchedule' => $meetingSchedule]),
             'allmeetings' => $meetingRepository->findBy(['meetingSchedule' => $meetingSchedule]),
-            'meetingscheduledProtocols' => $entityManager->getRepository(ScheduledProtocol::class)->findAll()//By(['meeting' => $meetingSchedule]),
-
+ 
         ]);
     }
 

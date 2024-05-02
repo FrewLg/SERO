@@ -4,6 +4,7 @@ namespace App\Form\SERO;
 
 use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\Meeting;
+use App\Entity\SERO\Version;
 use App\Repository\SERO\VersionRepository;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -33,15 +34,15 @@ class MeetingType extends AbstractType
                 'widget' => 'single_text',
                 'attr' => ['class' => 'form-control multiple col-9']
             ])
-            ->add('scheduledProtocols', CollectionType::class, [
-                'entry_type' => VersionForMeetingType::class,
-                // 'entry_options' => ['label' => false],
-                'allow_add' => true,
-                'allow_delete' => true,
-                'label' => false,
-                'by_reference' => false,
-                'allow_delete' => true,
-            ])
+            // ->add('scheduledProtocols', CollectionType::class, [
+            //     'entry_type' => VersionForMeetingType::class,
+            //     // 'entry_options' => ['label' => false],
+            //     'allow_add' => true,
+            //     'allow_delete' => true,
+            //     'label' => false,
+            //     'by_reference' => false,
+            //     'allow_delete' => true,
+            // ])
             ->add('note', TextareaType::class, [
                 'attr' => ['class' => 'form-control multiple col-9']
             ])
@@ -66,18 +67,18 @@ class MeetingType extends AbstractType
             //         'class' => 'select2 chosen-select form-control',
             //     ),
             // ))
-            // ->add('versions', EntityType::class, [
-            //     'class' => Version::class,
-            //     'choice_label' => function(Version $version) {
-            //         // return sprintf('(%d) %s', $version->getVersionNumber(), $version->getApplication())
-            //         return $version->getApplication();
-            //     },
-            //     'placeholder' => 'Choose a protocol',
-            //     'multiple' => true,
-            //     'label' => "Protocol",
-            //     'attr'=> ['class'=>'select2 multiple form-control-solid py-4 m-8 col-9'],
-            //     'choices' => $this->versionRepository->findBy(['status'=>1]),
-            // ])
+            ->add('scheduledProtocols', EntityType::class, [
+                'class' => Version::class,
+                'choice_label' => function(Version $version) {
+                    // return sprintf('(%d) %s', $version->getVersionNumber(), $version->getApplication())
+                    return $version->getApplication();
+                },
+                'placeholder' => 'Choose a protocol',
+                'multiple' => true,
+                'label' => "Protocol",
+                'attr'=> ['class'=>'select2 multiple form-control-solid py-4 m-8 col-9'],
+                'choices' => $this->versionRepository->findBy(['status'=>1]),
+            ])
 
 
 

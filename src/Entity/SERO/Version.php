@@ -57,31 +57,19 @@ class Version
     #[ORM\OneToMany(targetEntity: Amendment::class, mappedBy: 'version')]
     private Collection $amendments;
 
-    // /**
-    //  * @var Collection<int, Meeting>
-    //  */
-    // #[ORM\ManyToMany(targetEntity: Meeting::class, mappedBy: 'versions')]
-    // private Collection $meetings;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $status = null;
 
- 
-
     /**
-     * @var Collection<int, ScheduledProtocol>
+     * @var Collection<int, Meeting>
      */
-    #[ORM\OneToMany(targetEntity: ScheduledProtocol::class, mappedBy: 'protocol')]
-    private Collection $scheduledProtocols;
-
- 
-   
+    #[ORM\ManyToMany(targetEntity: Meeting::class, mappedBy: 'scheduledProtocols')]
+    private Collection $meetings;
+  
     public function __construct()
     {
-        // $this->application = new ArrayCollection();
         $this->amendments = new ArrayCollection();
-  
-        $this->scheduledProtocols = new ArrayCollection();
+         $this->meetings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,32 +257,30 @@ class Version
     }
 
     
+ 
 
     /**
-     * @return Collection<int, ScheduledProtocol>
+     * @return Collection<int, Meeting>
      */
-    public function getScheduledProtocols(): Collection
+    public function getMeetings(): Collection
     {
-        return $this->scheduledProtocols;
+        return $this->meetings;
     }
 
-    public function addScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    public function addMeeting(Meeting $meeting): static
     {
-        if (!$this->scheduledProtocols->contains($scheduledProtocol)) {
-            $this->scheduledProtocols->add($scheduledProtocol);
-            $scheduledProtocol->setProtocol($this);
+        if (!$this->meetings->contains($meeting)) {
+            $this->meetings->add($meeting);
+            $meeting->addScheduledProtocol($this);
         }
 
         return $this;
     }
 
-    public function removeScheduledProtocol(ScheduledProtocol $scheduledProtocol): static
+    public function removeMeeting(Meeting $meeting): static
     {
-        if ($this->scheduledProtocols->removeElement($scheduledProtocol)) {
-            // set the owning side to null (unless already changed)
-            if ($scheduledProtocol->getProtocol() === $this) {
-                $scheduledProtocol->setProtocol(null);
-            }
+        if ($this->meetings->removeElement($meeting)) {
+            $meeting->removeScheduledProtocol($this);
         }
 
         return $this;

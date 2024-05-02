@@ -21,25 +21,18 @@ class VersionForMeetingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('protocol', EntityType::class, [
-            //     'class' => Version::class,
-            //     'choice_label' => 'id',
-            // ])
-
             ->add('protocol', EntityType::class, [
                 'class' => Version::class,
-                'choice_label' => function(Version $version) {
+                'choice_label' => function (Version $version) {
                     return $version->getApplication();
                 },
                 'placeholder' => 'Choose a protocol',
                 // 'multiple' => true,
-                'label' => "Protocol",
-                 'attr' => ['class' => 'form-control select2 col-11'],
+                'label' => false,
+                'attr' => ['class' => 'select2 form-control ', 'id' => "select2"],
 
-                'choices' => $this->versionRepository->findBy(['status'=>1]),
-            ])
-           
-        ;
+                'choices' => $this->versionRepository->findBy(['status' => 1]),
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

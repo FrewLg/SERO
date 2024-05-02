@@ -1,13 +1,177 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Meeting{% endblock %}
+{% block title %}New Meeting
+{% endblock %}
 
+
+{# {% macro displayVersion(protocol) %}
+
+
+	<div class="row ">
+		<div class="col-9 my-1">
+			<table>
+				<tr>
+					<td>
+						{{form_widget(protocol.protocol)}}
+					</td>
+					<td>
+
+						<button type="button" class=" btn btn-danger btn-sm close  remove-collection-widget   ">
+							<span aria-hidden="true">×</span>
+						</button>
+					</td>
+				</tr>
+			</table>
+			<div class="col-2 my-1"></div>
+		</div>
+	</div>
+{% endmacro %} #}
 {% block body %}
-    <h1>Edit Meeting</h1>
+	<h1>Create new Meeting</h1>
 
-    {{ include('sero/meeting/_form.html.twig', {'button_label': 'Update'}) }}
+	<div class="card">
+		<div class="card-header">
+			<h5 class="font-weight-bold  text-uppercase">{{ meetingSchedule}}
+			</h5>
+			{# {{meetingSchedule}} #}
+		</div>
+		<div class="card-body">
+			<h5 class="text-title">{% trans %}Meeting Agendas{% endtrans %}</h5>
 
-    {# <a href="{{ path('app_s_e_r_o_meeting_index') }}">back to list</a>
+			{{ form_start(form) }}
+			{{ form_label(form.number) }}
+			{{ form_widget(form.number) }}
+			{{ form_label(form.heldAt) }}
+			{{ form_widget(form.heldAt) }}
+			{{ form_label(form.note) }}
+			{{ form_widget(form.note) }}
+			{{ form_label(form.minuteTakenAt) }}
+			{{ form_widget(form.minuteTakenAt) }}
+			{{ form_label(form.attendee) }}
+			{{ form_widget(form.attendee) }}
+            {{ form_label(form.scheduledProtocols) }}
+			{{ form_widget(form.scheduledProtocols) }}
 
-    {{ include('sero/meeting/_delete_form.html.twig') }} #}
+			<div class="row my-4 m-1">
+				<button type="button" class="btn btn-primary add-another-collection-widget btn btn-sm btn-bd-primary float-right " data-list-selector="#objective-fields-list">
+					<span aria-hidden="true">+</span>
+					Add protocols
+				</button>
+				<hr>
+			</div>
+			{# <ul id="objective-fields-list" class="m-t-5 m-2" data-prototype="{{_self.displayVersion(form.scheduledProtocols.vars.prototype)|e }}" data-widget-tags="{{ '<div class="row "></div>'|e }}" data-widget-counter="{{ form.scheduledProtocols|length }}">
+
+				{% for protocol in form.scheduledProtocols %}
+					<div class="row  ">
+						{{ _self.displayVersion(protocol) }}
+					</div>
+				{% endfor %}
+			</ul> #}
+			<div class="row my-4 m-1">
+
+				<button class="btn btn-light-success my-4">{{ button_label|default('Save') }}</button>
+			</div>
+		</div>
+
+		{{ form_end(form) }}
+
+
+		{# </div> #}
+	</div>
+
+	<div class="card">
+		<div class="card-header">
+			<h5 class="font-weight-bold  text-uppercase">{{ meeting.meetingSchedule}}
+			</h5>
+
+			date</div>
+		<div class="card-body">
+			<h5 class="text-title">{% trans %}Meeting Agendas{% endtrans %}</h5>
+			<hr>
+			<div class="row">
+				<div class="col-12 py-4">
+					{% for item in meetings %}
+						<ol>
+							{% for attendee in item.attendee %}
+								<li class="font-weight-bold  text-uppercase">{{attendee.user}}
+									from
+									{{attendee.user.profile.dirctorate}}</li>
+							{% endfor %}
+						</ol>
+
+                        <ol>
+							{% for attendee in item.scheduledProtocols %}
+								<li class="font-weight-bold  text-uppercase">{{attendee.versionNumber}}
+									from
+									{{attendee.application}}</li>
+							{% endfor %}
+						</ol>
+
+						{# <div class="accordion  accordion-toggle-arrow" id="accordionExample{{item.id}}">
+							<div class="card">
+								<div class="card-header" id="headingOne4">
+									<div class="card-title" data-toggle="collapse" data-target="#collapseOne{{item.id}}">
+										<i class="flaticon2-layers-1"></i>
+										Meeting
+										{{loop.index}}
+										under schedule
+										{{item.meetingschedule}},	Meeting Number:{{item.number}}
+									</div>
+								</div>
+								<div id="collapseOne{{item.id}}" class="collapse  " data-parent="#accordionExample{{item.id}}">
+									<div class="card-body">
+										<span class="font-weight-bold  text-uppercase">Agenda:</span>
+										<table class="table">
+											<th>
+												#</th>
+											<th>
+												Title</th>
+											<th>
+												PI</th>
+											<tbody>
+												{% for protocol in meetingscheduledProtocols|filter(  protocol =>  (protocol.meeting ==  item) ) %}
+
+													<tr>
+														<td>{{loop.index}}</td>
+														<td>{{protocol.protocol.application}}</td>
+														<td>{{protocol.protocol.application.submittedBy}}</td>
+													</tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div> #}
+
+					{% endfor %}
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock  %}
+
+{% block javascripts %}
+
+	<script type='text/javascript'>
+		jQuery(document).ready(function () {
+$(document).on('click', '.remove-collection-widget', function (e) {
+$(this).closest('.row').fadeOut().remove();
+});
+$(document).on('click', '.add-another-collection-widget', function (e) {
+
+var list = jQuery(jQuery(this).attr('data-list-selector'));
+
+var counter = list.data('widget-counter') || list.children().length;
+var newWidget = list.attr('data-prototype');
+newWidget = newWidget.replace(/__name__/g, counter);
+counter++;
+list.data('widget-counter', counter);
+var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+newElem.appendTo(list);
+});
+});
+	</script>
 {% endblock %}
