@@ -28,9 +28,7 @@ class Directorate
     #[ORM\OneToMany(targetEntity: Profile::class, mappedBy: 'dirctorate', orphanRemoval: true)]
     private Collection $profiles;
 
-    #[ORM\OneToMany(targetEntity: Coupon::class, mappedBy: 'directorate')]
-    private Collection $coupons;
-
+ 
     #[ORM\Column(length: 255)]
     private ?string $acronym = null;
 
@@ -40,20 +38,12 @@ class Directorate
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(targetEntity: TrainingRequest::class, mappedBy: 'inclusion')]
-    private Collection $trainingRequestInclusions;
-
-    #[ORM\ManyToMany(targetEntity: TrainingRequest::class, mappedBy: 'inclusions')]
-    private Collection $trainingRequests;
-
-    
+   
     public function __construct()
     {
         $this->profiles = new ArrayCollection();
-        $this->coupons = new ArrayCollection();
-        $this->users = new ArrayCollection();
-        $this->trainingRequests = new ArrayCollection();
-     }
+         $this->users = new ArrayCollection();
+      }
 
     public function getId(): ?int
     {
@@ -126,36 +116,7 @@ class Directorate
         return $this;
     }
 
-    /**
-     * @return Collection<int, Coupon>
-     */
-    public function getCoupons(): Collection
-    {
-        return $this->coupons;
-    }
-
-    public function addCoupon(Coupon $coupon): static
-    {
-        if (!$this->coupons->contains($coupon)) {
-            $this->coupons->add($coupon);
-            $coupon->setDirectorate($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCoupon(Coupon $coupon): static
-    {
-        if ($this->coupons->removeElement($coupon)) {
-            // set the owning side to null (unless already changed)
-            if ($coupon->getDirectorate() === $this) {
-                $coupon->setDirectorate(null);
-            }
-        }
-
-        return $this;
-    }
-
+   
     public function getAcronym(): ?string
     {
         return $this->acronym;
@@ -210,33 +171,7 @@ class Directorate
         return $this;
     }
 
-    /**
-     * @return Collection<int, TrainingRequest>
-     */
-    public function getTrainingRequests(): Collection
-    {
-        return $this->trainingRequests;
-    }
-
-    public function addTrainingRequest(TrainingRequest $trainingRequest): static
-    {
-        if (!$this->trainingRequests->contains($trainingRequest)) {
-            $this->trainingRequests->add($trainingRequest);
-            $trainingRequest->addInclusion($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrainingRequest(TrainingRequest $trainingRequest): static
-    {
-        if ($this->trainingRequests->removeElement($trainingRequest)) {
-            $trainingRequest->removeInclusion($this);
-        }
-
-        return $this;
-    }
- 
+   
     public function __toString()
     {
         

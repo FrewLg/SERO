@@ -47,32 +47,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Profile $profile = null;
 
-    #[ORM\OneToMany(targetEntity: TrainingMaterial::class, mappedBy: 'uploadedBy', orphanRemoval: true)]
-    private Collection $trainingMaterials;
-
+  
     #[ORM\OneToMany(targetEntity: Feedback::class, mappedBy: 'sentBy')]
     private Collection $feedback;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Directorate $directorate = null;
 
-    #[ORM\OneToMany(targetEntity: TrainingRequest::class, mappedBy: 'requestedBy', orphanRemoval: true)]
-    private Collection $trainingRequests;
-
-    #[ORM\OneToMany(targetEntity: Course::class, mappedBy: 'createdBy')]
-    private Collection $preparedCourses;
-
+   
     #[ORM\ManyToMany(targetEntity: UserGroup::class, mappedBy: 'users')]
     private Collection $userGroup;
 
     #[ORM\ManyToMany(targetEntity: Permission::class, inversedBy: 'users')]
     private Collection $permissions;
-
-    #[ORM\OneToMany(targetEntity: Fund::class, mappedBy: 'createdBy')]
-    private Collection $regFunds;
-
-    #[ORM\OneToMany(targetEntity: FundTransaction::class, mappedBy: 'createdBy')]
-    private Collection $fundTransactions;
+ 
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $locale = null;
@@ -146,15 +134,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
   
     public function __construct()
     {
-        $this->trainingMaterials = new ArrayCollection();
-        $this->feedback = new ArrayCollection();
-        $this->trainingRequests = new ArrayCollection();
-        $this->preparedCourses = new ArrayCollection();
         $this->userGroup = new ArrayCollection();
         $this->permissions = new ArrayCollection();
-        $this->regFunds = new ArrayCollection();
-        $this->fundTransactions = new ArrayCollection();
-        $this->reviewAssignments = new ArrayCollection();
+         $this->reviewAssignments = new ArrayCollection();
         $this->boardMembers = new ArrayCollection();
         $this->irbCertificates = new ArrayCollection();
         $this->meetings = new ArrayCollection();
@@ -291,35 +273,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, TrainingMaterial>
-     */
-    public function getTrainingMaterials(): Collection
-    {
-        return $this->trainingMaterials;
-    }
-
-    public function addTrainingMaterial(TrainingMaterial $trainingMaterial): static
-    {
-        if (!$this->trainingMaterials->contains($trainingMaterial)) {
-            $this->trainingMaterials->add($trainingMaterial);
-            $trainingMaterial->setUploadedBy($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrainingMaterial(TrainingMaterial $trainingMaterial): static
-    {
-        if ($this->trainingMaterials->removeElement($trainingMaterial)) {
-            // set the owning side to null (unless already changed)
-            if ($trainingMaterial->getUploadedBy() === $this) {
-                $trainingMaterial->setUploadedBy(null);
-            }
-        }
-
-        return $this;
-    }
+    
 
     /**
      * @return Collection<int, Feedback>
@@ -363,65 +317,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, TrainingRequest>
-     */
-    public function getTrainingRequests(): Collection
-    {
-        return $this->trainingRequests;
-    }
-
-    public function addTrainingRequest(TrainingRequest $trainingRequest): static
-    {
-        if (!$this->trainingRequests->contains($trainingRequest)) {
-            $this->trainingRequests->add($trainingRequest);
-            $trainingRequest->setRequestedBy($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrainingRequest(TrainingRequest $trainingRequest): static
-    {
-        if ($this->trainingRequests->removeElement($trainingRequest)) {
-            // set the owning side to null (unless already changed)
-            if ($trainingRequest->getRequestedBy() === $this) {
-                $trainingRequest->setRequestedBy(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Course>
-     */
-    public function getPreparedCourses(): Collection
-    {
-        return $this->preparedCourses;
-    }
-
-    public function addPreparedCourse(Course $preparedCourse): static
-    {
-        if (!$this->preparedCourses->contains($preparedCourse)) {
-            $this->preparedCourses->add($preparedCourse);
-            $preparedCourse->setCreatedBy($this);
-        }
-
-        return $this;
-    }
-
-    public function removePreparedCourse(Course $preparedCourse): static
-    {
-        if ($this->preparedCourses->removeElement($preparedCourse)) {
-            // set the owning side to null (unless already changed)
-            if ($preparedCourse->getCreatedBy() === $this) {
-                $preparedCourse->setCreatedBy(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, UserGroup>
@@ -473,67 +369,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Fund>
-     */
-    public function getRegFunds(): Collection
-    {
-        return $this->regFunds;
-    }
-
-    public function addRegFund(Fund $regFund): static
-    {
-        if (!$this->regFunds->contains($regFund)) {
-            $this->regFunds->add($regFund);
-            $regFund->setCreatedBy($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRegFund(Fund $regFund): static
-    {
-        if ($this->regFunds->removeElement($regFund)) {
-            // set the owning side to null (unless already changed)
-            if ($regFund->getCreatedBy() === $this) {
-                $regFund->setCreatedBy(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, FundTransaction>
-     */
-    public function getFundTransactions(): Collection
-    {
-        return $this->fundTransactions;
-    }
-
-    public function addFundTransaction(FundTransaction $fundTransaction): static
-    {
-        if (!$this->fundTransactions->contains($fundTransaction)) {
-            $this->fundTransactions->add($fundTransaction);
-            $fundTransaction->setCreatedBy($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFundTransaction(FundTransaction $fundTransaction): static
-    {
-        if ($this->fundTransactions->removeElement($fundTransaction)) {
-            // set the owning side to null (unless already changed)
-            if ($fundTransaction->getCreatedBy() === $this) {
-                $fundTransaction->setCreatedBy(null);
-            }
-        }
-
-        return $this;
-    }
-
+ 
     public function getLocale(): ?string
     {
         return $this->locale;

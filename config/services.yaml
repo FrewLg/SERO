@@ -6,7 +6,7 @@ parameters:
     certtemplates: '%kernel.project_dir%/uploads/cert_templates'
     project_dir: '%kernel.project_dir%/'
     uploads_folder: '%kernel.project_dir%/uploads'
-    profile_pictures: '%kernel.project_dir%/uploads/files/profile_pictures'
+    profile_pictures: '%kernel.project_dir%/public/uploads/files/profile_pictures'
     site_setting: '%kernel.project_dir%/uploads/files/site_setting/ephi2.jpg'
     ldap_dc_value : '%env(resolve:LDAP_DC_VALUE)%'
     # app_name  : 'EPHI-NTC'

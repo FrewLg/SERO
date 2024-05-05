@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Board Meeting</h1>
+	<h1 class="font-weight-bold  text-uppercase">Board Meeting</h1>
 	<div class="row my-4 m-1">
 
 		<div class="card col-12">
@@ -13,7 +13,6 @@
 				</h5>
 			</div>
 			<div class="card-body">
-
 				{{ form_start(form ) }}
 				{{ form_label(form.number) }}
 				{{ form_widget(form.number) }}
@@ -25,8 +24,7 @@
 				{{ form_widget(form.minuteTakenAt) }}
 				{{ form_label(form.attendee) }}<br>
 				{{ form_widget(form.attendee) }}<br><br>
-				{# {{ form_label(form.scheduledProtocols) }} #}
-                Protocols awaiting
+				Protocols awaiting
 				<br>
 				{{ form_widget(form.scheduledProtocols) }}
 
@@ -52,28 +50,28 @@
 
 				<div class="row">
 					<div class="col-12 py-4">
-						<h5 class="text-title">{% trans %}Attendee{% endtrans %}</h5>
+						<h5 class="text-title font-weight-bold  text-uppercase">{% trans %}Attendee{% endtrans %}</h5>
 
 						{% for item in meetings %}
 							<ol>
 								{% for attendee in item.attendee %}
-									<li class="font-weight-bold  text-uppercase">{{attendee.user}}
+									<li class="font-weight-bold  ">{{attendee.user}}
 
 										{{attendee.user.profile.dirctorate}}</li>
 								{% endfor %}
 							</ol>
-							<h5 class="text-title">{% trans %}Meeting Agendas{% endtrans %}</h5>
+							<h5 class="text-title  font-weight-bold  text-uppercase">{% trans %}Meeting Agendas{% endtrans %}</h5>
 
 							<ol>
 								{% for attendee in item.scheduledProtocols %}
-									<li class="font-weight-bold  text-uppercase">{{attendee.application.id}}
-										from
+									<li class="font-weight-bold">{{attendee.application.id}}
+
 										{{attendee.application}}
-                                        
-                                        {% for response in attendee.application.reviewAssignments %}
-                                            {{response.recommendation}}
-                                        {% endfor %}
-                                        </li>
+
+										{% for response in attendee.application.reviewAssignments %}
+											{{response.recommendation}}
+										{% endfor %}
+									</li>
 								{% endfor %}
 							</ol>
 						{% endfor %}

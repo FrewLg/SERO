@@ -94,27 +94,4 @@ class ProfileType extends AbstractType
 }
 
   
- 
-class UserProfilePictureType extends AbstractType {
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-
-        $builder
-
-            ->add('image', FileType::class, [
-                'label' => false,
-                'mapped' => false,
-                'required' => false,
-                "attr" => [
-                    "accept" => "image/*",
-                    "class" => "form-control form-group",
-
-                ],
-            ]);
-    }
-
-    public function configureOptions(OptionsResolver $resolver) {
-        $resolver->setDefaults([
-            'data_class' => Profile::class,
-        ]);
-    }
-}
+  

@@ -9,6 +9,7 @@ twig:
         navbar_background: dark, 
         acronym: 'SERO', 
         corporate_color: '#54b4', 
+        profile_pictures: 'uploads/files/profile_pictures',
         motto: 'Motto',  
         site_setting: '%kernel.project_dir%/uploads/files/site_setting/ephi.png',
         contact_us: 'SNTC -EPHI', 

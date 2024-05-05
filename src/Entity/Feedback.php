@@ -20,10 +20,7 @@ class Feedback
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $message = null;
 
-    #[ORM\ManyToOne(inversedBy: 'feedback')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Training $training = null;
-
+  
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
 
@@ -56,17 +53,7 @@ class Feedback
         return $this;
     }
 
-    public function getTraining(): ?Training
-    {
-        return $this->training;
-    }
-
-    public function setTraining(?Training $training): static
-    {
-        $this->training = $training;
-
-        return $this;
-    }
+   
 
     public function getCreatedAt(): ?\DateTimeInterface
     {

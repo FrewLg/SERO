@@ -80,12 +80,12 @@ Review: ገምግም
 'Statistics and archive': 'ስታቲስቲክስ እና ማህደር'
 Feedbacks: __Feedbacks
 Archives: በማህደር
-'Archived applications': 'በማህደር የተቀመጡ የስራ ማመልከቻዎች'
+'Archived applications': 'በማህደር የተቀመጡ ማመልከቻዎች'
 Comment: አስተያየት
 Reports: ሪፖርቶች
 Dashboard: __Dashboard
 'Protocol Applications': '__Protocol Applications'
-'Make Revision': 'ገምግም'
+'Make Revision': ገምግም
 'Protocol assesment form': '__Protocol assesment form'
 'My Review Assignments': 'የተመደብኩበት '
 'All Active': 'ሁሉም ተጠባባቂ'
@@ -171,3 +171,10 @@ Amharic: አማርኛ
 'Reviewer Response': 'የገምጋሚ ምላሽ'
 Recommendation: 'የምክር ሀሳብ'
 'No review responses has been  given for this protocol yet': 'ምንም የግምገማ ምላሾች አልተሰጡም'
+'Continuation request': '__Continuation request'
+"Reviewer hasn't responded yet": "ገምጋሚ እስካሁን ምላሽ አልሰጠም!"
+'No reviewer sent any response on this application yet': 'በዚህ መተግበሪያ ላይ እስካሁን ምንም ምላሽ የላከ ማንም ገምጋሚ የለም'
+'Changes Made': 'ለውጦች ተደርገዋል'
+Attendee: __Attendee
+'Meeting Agendas': 'የስብሰባ አጀንዳዎች'
+'Submit a Review Response': 'የግምገማ ምላሽ አስገባ'

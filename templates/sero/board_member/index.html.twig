@@ -62,7 +62,7 @@
 										<li class="navi-separator mb-3 opacity-70"></li>
 
 										<li class="navi-item">
-											<form method="post" action="{{ path('app_s_e_r_o_board_member_delete', {'id': board_member.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+											<form method="post" action="{{ path('app_s_e_r_o_board_member_delete', {'id': board_member.id}) }}" onsubmit="return confirm('Are you sure you want to delete this board member?');">
 												<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ board_member.id) }}">
 												<button class="btn btn-light-danger float-end btn-block btn-sm ">Delete</button>
 											</form>
@@ -84,18 +84,12 @@
 									class="symbol symbol-circle symbol-lg-75">
 									{# <img src="assets/media/users/300_1.jpg" alt="image"> #}
 									{% if board_member.user.profile and  board_member.user.profile.image %}
-
-
-										<img src="{{ asset('files/profile_pictures/'~ board_member.user.profile.image ) }}" alt="user">
-
-
+										<img src="{{ asset(profile_pictures~'/'~app.user.profile.image) }}" alt="user">
 									{% else %}
-
-										<img src="{{ asset('files/profile_pictures/defaultuser.png') }}" alt="user">
-
-									{% endif %} 
+										<img src="{{ asset('defaultuser.png') }}" alt="user">
+									{% endif %}
 								</div>
-								 
+
 							</div>
 							<!--end::Pic-->
 							<!--begin::Title-->
@@ -140,30 +134,21 @@
 								<optgroup label="Select Role">
 									<option class="" value="Chair" {{board_member.role=='Chair'?"selected":""}}>Chair</option>
 									<option value="Vice Chair" {{board_member.role=='Vice Chair'?"selected":""}}>Vice Chair</option>
-									<option value="Secretary" {{board_member.role=='Secretary'?"selected":""}} class="form-control">
-										Secretary</option>
-
+									<option value="Secretary" {{board_member.role=='Secretary'?"selected":""}} class="form-control">Secretary</option>
 									<option value="Coordinator" {{board_member.role=='Coordinator'?"selected":""}}>Coordinator</option>
 									<option value="Member" {{board_member.role=='Member'?"selected":""}}>Member</option>
-
 								</optgroup>
-
 							</select>
 						</form>
-
 					</div>
 					<!--end::Body-->
 				</div>
 				<!--end::Card-->
 			</div>
-
 		{% else %}
 			No records found
-
 		{% endfor %}
 	</div>
-
-
 {% endblock %}
 {% block javascripts %}
 	<script type="text/javascript">

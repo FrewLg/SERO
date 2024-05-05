@@ -13,15 +13,18 @@
 				</h5>
 			</div>
 			<div class="card-body">
-				<h5 class="text-title">{% trans %}Instruction for Reviewer{% endtrans %}</h5>
-				<p>
-					{{review_assignment.reviewForm.instructionForReviewer|raw}}
-				</p>
+
 				<b>{% trans %}Title{% endtrans %}:</b>
 				<p class="font-weight-bold text-muted text-uppercase">
 					{{review_assignment.application.title}}</p>
 				<b>{% trans %}IRB CODE{% endtrans %}:</b>
 				{{review_assignment.application.ibcode}}</p>
+
+			<h5 class="text-title">{% trans %}Instruction for Reviewer{% endtrans %}</h5>
+			<p>
+				{{review_assignment.reviewForm.instructionForReviewer|raw}}
+			</p>
+
 			<div>
 				<form method="POST" class="form-group" onsubmit="return confirm('Submit a review response?')">
 					<input hidden name="review-checklist" value="true"/>
@@ -112,7 +115,7 @@
 								{% endfor %}
 								{% for checklist in checklist_group.reviewChecklists|filter(checklist =>  checklist.answerType==2 and   checklist.reviewForm == review_assignment.reviewForm) %}
 
-									<tr >
+									<tr>
 										<td colspan="5">{{checklist}}
 											<textarea name="checklist[{{checklist.id}}]" class=" form-control"></textarea>
 											<input type="hidden" name="comment[{{checklist.id}}]">
@@ -123,7 +126,7 @@
 							{% endfor %}
 						</tbody>
 					</table>
-					<button class="btn btn-primary btn-lg">{{ button_label|default('Submit Review Response') }}</button>
+					<button class="btn btn-primary btn-lg"> {% trans %}Submit a Review Response{% endtrans %}</button>
 				</form>
 			</div>
 		</div>
