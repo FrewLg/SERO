@@ -22,7 +22,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(Request $request,UserRepository $userRepository, PaginatorInterface $paginator,): Response
+    public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator,): Response
     {
 
         $res = $paginator->paginate(
@@ -46,10 +46,10 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-        $profile = new Profile();
-        $profile->setUser($user);
-        $profile->setFirstName($form->get('email')->getData());
-        $profile->setLastName($form->get('email')->getData());
+            $profile = new Profile();
+            $profile->setUser($user);
+            $profile->setFirstName($form->get('email')->getData());
+            $profile->setLastName($form->get('email')->getData());
             $entityManager->persist($user);
             $entityManager->persist($profile);
             $entityManager->flush();
@@ -63,8 +63,8 @@ class UserController extends AbstractController
         ]);
     }
 
-   
-    #[Route('/profiles', name: 'my_psrofile', methods: ['GET','POST'])]
+
+    #[Route('/profiles', name: 'my_psrofile', methods: ['GET', 'POST'])]
     public function rofile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted("ROLE_USER");
@@ -80,64 +80,62 @@ class UserController extends AbstractController
         // else{
         //  $userInfo=$user->getProfile();
         // }
-        $userInfo=$user->getProfile();
+        $userInfo = $user->getProfile();
         $profileform = $this->createForm(ProfileType::class, $userInfo);
-        if ($profileform->isSubmitted() && $profileform->isValid()){
-                $entityManager->persist($profileform);
-                $entityManager->flush();
+        if ($profileform->isSubmitted() && $profileform->isValid()) {
+            $entityManager->persist($profileform);
+            $entityManager->flush();
             $this->addFlash('success', "Profile picture  has been updated successfully!");
         }
         $profilepictureform = $this->createForm(UserProfilePictureType::class, $userInfo);
         // $profilepictureform->handleRequest($request);
         if ($profilepictureform->isSubmitted() && $profilepictureform->isValid()) {
             $prifilepicture = $profilepictureform->get('image')->getData();
-             if ($prifilepicture == NULL) {
+            if ($prifilepicture == NULL) {
                 echo 'Image not uploaded';
-                 $prifilepicture = '';
+                $prifilepicture = '';
             } else {
-                 $fileName3 = 'DP-'.  md5(uniqid()) . '.' . $prifilepicture->guessExtension();
+                $fileName3 = 'DP-' .  md5(uniqid()) . '.' . $prifilepicture->guessExtension();
                 $prifilepicture->move($this->getParameter('profile_pictures'), $fileName3);
                 $userInfo->setImage($fileName3);
                 $entityManager->persist($profilepictureform);
                 $entityManager->flush();
-            $this->addFlash('success', "Profile picture  has been updated successfully!   ");
- 
+                $this->addFlash('success', "Profile picture  has been updated successfully!   ");
             }
         }
-      return $this->render('user/profile.html.twig', [
+        return $this->render('user/profile.html.twig', [
             // 'published_research' => $publishedResearch,
             'user' => $user,
             'allform' => $profileform->createView(),
             'form' => $profilepictureform->createView(),
         ]);
     }
- 
+
     #[Route('/batchimport', name: 'generate_batchimport', methods: ['GET', 'POST'])]
-    public function batchimport( DirectorateRepository $directorateRepository,
-     EntityManagerInterface $entityManager): Response
-    {
-         
-                $totalPossiblecoupons=   100;
-               
-                $alldirectorates=  $directorateRepository->findAll();
-                 
-            foreach ($alldirectorates as  $value) {
-                for ($i=0; $i < $totalPossiblecoupons; $i++) {  
-                $coupon = new User(); 
+    public function batchimport(
+        DirectorateRepository $directorateRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
 
-                 $coupon->setEmail("f".$i."irew".$value->getAcronym().".legese74". $i."@gmail.com" );
-                 $coupon->setDirectorate($value ); 
-                 $coupon->setRoles(["ROLE_ADMIN"]);
-                 $coupon->setPassword($i."frew.legese@gmail.com");
-                $entityManager->persist($coupon); 
+        $totalPossiblecoupons =   100;
+
+        $alldirectorates =  $directorateRepository->findAll();
+
+        foreach ($alldirectorates as  $value) {
+            for ($i = 0; $i < $totalPossiblecoupons; $i++) {
+                $coupon = new User();
+
+                $coupon->setEmail("f" . $i . "irew" . $value->getAcronym() . ".legese74" . $i . "@gmail.com");
+                $coupon->setDirectorate($value);
+                $coupon->setRoles(["ROLE_ADMIN"]);
+                $coupon->setPassword($i . "frew.legese@gmail.com");
+                $entityManager->persist($coupon);
                 $entityManager->flush();
-                }
             }
+        }
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-
-        
     }
-    
+
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -167,7 +165,7 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
         }
