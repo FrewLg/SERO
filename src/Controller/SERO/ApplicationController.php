@@ -47,7 +47,7 @@ class ApplicationController extends AbstractController
     #[Route('/', name: 'application_index', methods: ['GET', 'POST'])]
     public function index(Request $request, EntityManagerInterface $em,   PaginatorInterface $paginatorInterface): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        // $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $allApps =  array_reverse( $em->getRepository(Application::class)->findAll());
         $app = new Application();
@@ -99,7 +99,7 @@ class ApplicationController extends AbstractController
         EntityManagerInterface $entityManager,
         SEROHelper $seroHelper
     ): Response {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN_ALLER');
         $application = new Application();
         $form = $this->createForm(ApplicationType::class, $application);
         $form->handleRequest($request);
@@ -152,7 +152,7 @@ class ApplicationController extends AbstractController
     public function makerevise(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
     {
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('REVISE');
         if ($reviewAssignment->getIrbreviewer()->getId() == $this->getUser()->getId() && $reviewAssignment->getReviewedAt() !== NULL) {
             $this->addFlash("warning", "Review response hase been already sent!.");
 

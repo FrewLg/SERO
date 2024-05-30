@@ -39,7 +39,7 @@ class ApplicationType extends AbstractType
                 'attr' => [
                     'class' => 'form-control select2 my-4' ,
                  ],
-                'required' => true,
+                'required' => false,
 
                 'choice_label'=>'name',
              ])

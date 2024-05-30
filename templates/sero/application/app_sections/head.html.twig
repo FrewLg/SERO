@@ -76,6 +76,7 @@
 							<a href="{{ path('assign_reviewer', {'id': application.id}) }}" class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-3">
 								{% trans %}Assign Reviewer{% endtrans %}</a>
 						{% endif %}
+							<a href="{{ path('assign_reviewer', {'id': application.id}) }}" class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-3">
 
 						<a href="#" class="btn btn-sm btn-light-info font-weight-bolder text-uppercase">{{ application.reviewAssignments|length}}
 							{% trans %}Reviewers assigned{% endtrans %}</a>

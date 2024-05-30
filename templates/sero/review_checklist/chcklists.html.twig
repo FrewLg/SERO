@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'widebase.html.twig' %}
 {% block title %}
 	{% trans %}Make Revision{% endtrans %}
 {% endblock %}
@@ -35,9 +35,9 @@
 								<tr>
 									<th>{{toAlpha(loop.index)}}.
 										{{checklist_group}}</th>
-									<th>{% trans %}Yes{% endtrans %}</th>
-									<th>{% trans %}No{% endtrans %}</th>
-									<th>{% trans %}NA{% endtrans %}</th>
+									{# <th>{% trans %}Yes{% endtrans %}</th>
+																		<th>{% trans %}No{% endtrans %}</th>
+																		<th>{% trans %}NA{% endtrans %}</th> #}
 									<th>{% trans %}Comment{% endtrans %}</th>
 								</tr>
 								{% for checklist in checklist_group.reviewChecklists  |filter(checklist =>  (checklist.answerType==1 and   checklist.reviewForm == review_assignment.reviewForm)) %}
@@ -48,27 +48,27 @@
 												<b style="margin-left:10px">{{ loop.index}}.
 													{{checklist}}</b>
 											</th>
-											<th>{% trans %}YES{% endtrans %}</th>
-											<th>{% trans %}NO{% endtrans %}</th>
-											<th>{% trans %}NA{% endtrans %}</th>
+											{# <th>{% trans %}YES{% endtrans %}</th>
+																						<th>{% trans %}NO{% endtrans %}</th>
+																						<th>{% trans %}NA{% endtrans %}</th> #}
 											<th>{% trans %}Comment{% endtrans %}</th>
 										</tr>
 										{% for child in checklist.reviewChecklists %}
-											<tr>
-												<th>
-													<p style="margin-left:20px">{{loop.index}}.
-														{{child}}</p>
-												</th>
-												<td>
-
-													<input type="radio" class="radio" required name="checklist[{{child.id}}]" value="yes"></td>
-												<td><input type="radio" required name="checklist[{{child.id}}]" value="no"></td>
-												<td><input type="radio" required name="checklist[{{child.id}}]" value="na"></td>
-												<td>
-													<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
-
-												</td>
-											</tr>
+											{# <tr>
+																							<th>
+																								<p style="margin-left:20px">{{loop.index}}.
+																									{{child}}</p>
+																							</th>
+																							<td>
+											
+																								<input type="radio" class="radio" required name="checklist[{{child.id}}]" value="yes"></td>
+																							<td><input type="radio" required name="checklist[{{child.id}}]" value="no"></td>
+																							<td><input type="radio" required name="checklist[{{child.id}}]" value="na"></td>
+																							<td>
+																								<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
+											
+																							</td>
+																						</tr> #}
 										{% endfor %}
 									{% else %}
 
@@ -77,34 +77,20 @@
 												<p style="margin-left:10px">
 													{{loop.index}}.
 													{{checklist}}</p>
-											</td>
-											<td>
+											
+											{% for choice in checklist.answers %}
 												<div class="radio-inline">
 													<label class="radio radio-outline radio-outline-2x radio-success">
-														<input type="radio" required name="checklist[{{checklist.id}}]" value="yes">
+														<input type="radio" required name="checklist[{{checklist.id}}]" value="{{ choice.choiceName}}">
 														<span></span>
+														{{ choice.choiceName}}
 													</label>
 												</div>
-												{# <input type="radio" class="radio radio-rounded radio-success" required name="checklist[{{checklist.id}}]" value="yes"></td> #}
+
+											{% endfor %}
 											</td>
+
 											<td>
-												<div class="radio-inline">
-													<label class="radio radio-outline radio-outline-2x radio-success">
-														<input type="radio" required name="checklist[{{checklist.id}}]" value="no">
-														<span></span>
-													</label>
-												</div>
-											</td>
-											<td>
-												<div class="radio-inline">
-													<label class="radio radio-outline radio-outline-2x radio-success">
-														<input type="radio" required name="checklist[{{checklist.id}}]" value="na">
-														<span></span>
-													</label>
-												</div>
-											</td>
-											<td>
-												{# <input type="text" required name="comment[{{checklist.id}}]"  > #}
 												<textarea name="comment[{{checklist.id}}]" class=" form-control"></textarea>
 
 											</td>
@@ -126,9 +112,10 @@
 							{% endfor %}
 						</tbody>
 					</table>
-					<button class="btn btn-primary btn-lg"> {% trans %}Submit a Review Response{% endtrans %}</button>
+					<button class="btn btn-primary btn-lg">
+						{% trans %}Submit a Review Response{% endtrans %}</button>
 				</form>
 			</div>
 		</div>
 	</div>
-</div>{% endblock %}
+{% endblock %}

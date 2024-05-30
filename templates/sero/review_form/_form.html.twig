@@ -1,18 +1,47 @@
 <div class="my-2">
 
 
+	<div class="modal fade" id="exampleModalSizeDefault" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeDefault" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Add new form section</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i aria-hidden="true" class="ki ki-close"></i>
+					</button>
+				</div>
+				<div class="modal-body">
+					{{form_start(reviewChecklistGroupform)}}
+					{{form_widget(reviewChecklistGroupform)}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+					<button class="btn btn-primary font-weight-bold">Save</button>
+					{{form_end(reviewChecklistGroupform)}}
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	{{ form_start(form) }}
 	<div class="form-group  row">
 		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.checklistGroup) }}
 		</label>
 
-		<div class="col-8">
+		<div class="col-6">
 
 			{{ form_widget(form.checklistGroup) }}
 
 		</div>
+		<div class="col-3">
+			<button type="button" class="btn btn-light-primary btn-sm   " data-toggle="modal" data-target="#exampleModalSizeDefault">
+				<span aria-hidden="true">+</span>
+				Questionaire section</button>
+		</div>
 	</div>
-    <div class="form-group  row">
+	<div class="form-group  row">
 		<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.name) }}
 		</label>
 
@@ -32,7 +61,31 @@
 
 		</div>
 	</div>
-	
+
+	<div class="container">
+
+		<div class="col-md-8   ">
+			<button type="button" class="btn  add-another-collection-widget   btn-sm btn-light-primary float-center " data-list-selector="#objective-fields-list">
+				<span aria-hidden="true">+</span>
+				Add choice
+			</button>
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="row ">
+			<div class="col-6 "></div>
+			<div class="col-6 ">
+				<ul id="objective-fields-list" class="form-group" data-prototype="{{_self.displayVersion(form.answers.vars.prototype)|e }}" data-widget-tags="{{ '<div class="row "></div>'|e }}" data-widget-counter="{{ form.answers|length }}">
+
+					{% for protocol in form.answers %}
+						<div class="col-12 ">
+							{{ _self.displayVersion(questionaire) }}
+						</div>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
 
 	<div class="row">
 

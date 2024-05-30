@@ -22,22 +22,20 @@ class ReviewChecklist
     private ?int $answerType = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'reviewChecklists')]
-    private ?self $parent = null; 
+    private ?self $parent = null;
 
     /**
      * @var Collection<int, self>
      */
-    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent' , cascade: ['persist', 'remove'])]
     private Collection $reviewChecklists;
 
     /**
      * @var Collection<int, ReviewerResponse>
      */
-    #[ORM\OneToMany(targetEntity: ReviewerResponse::class, mappedBy: 'checklist', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: ReviewerResponse::class, mappedBy: 'checklist', orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $reviewerResponses;
-
-   
-
+ 
     #[ORM\ManyToOne(inversedBy: 'reviewChecklists')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ReviewChecklistGroup $checklistGroup = null;
@@ -45,9 +43,16 @@ class ReviewChecklist
     #[ORM\ManyToOne(inversedBy: 'reviewChecklists')]
     private ?ReviewForm $reviewForm = null;
 
+    /**
+     * @var Collection<int, Choice>
+     */
+    #[ORM\OneToMany(targetEntity: Choice::class, mappedBy: 'checkList' ,  cascade: ['persist', 'remove'])]
+    private Collection $answers;
+
     public function __construct()
     {
         $this->reviewChecklists = new ArrayCollection();
+        $this->answers = new ArrayCollection();
         $this->reviewerResponses = new ArrayCollection();
     }
 
@@ -84,6 +89,8 @@ class ReviewChecklist
 
         return $this;
     }
+
+    
 
     public function getParent(): ?self
     {
@@ -179,6 +186,36 @@ class ReviewChecklist
     public function setReviewForm(?ReviewForm $reviewForm): static
     {
         $this->reviewForm = $reviewForm;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Choice>
+     */
+    public function getAnswers(): Collection
+    {
+        return $this->answers;
+    }
+
+    public function addAnswer(Choice $answer): static
+    {
+        if (!$this->answers->contains($answer)) {
+            $this->answers->add($answer);
+            $answer->setCheckList($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnswer(Choice $answer): static
+    {
+        if ($this->answers->removeElement($answer)) {
+            // set the owning side to null (unless already changed)
+            if ($answer->getCheckList() === $this) {
+                $answer->setCheckList(null);
+            }
+        }
 
         return $this;
     }

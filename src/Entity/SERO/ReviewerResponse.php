@@ -17,7 +17,7 @@ class ReviewerResponse
 
     #[ORM\ManyToOne(inversedBy: 'reviewerResponses')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?ReviewChecklist $checklist = null; 
+    private ?ReviewChecklist $checklist = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $answer = null;

@@ -285,6 +285,7 @@
 										</div>
 										<!--end::Dropdown-->
 									</div>
+											{% if is_granted("ROLE_USER")%}
 
 									<div class="topbar-item">
 										<div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
@@ -311,6 +312,8 @@
 											</span>
 										</div>
 									</div>
+												{% endif %}
+
 									<!--end::User-->
 								</div>
 								<!--end::Topbar-->
@@ -355,7 +358,7 @@
 									<!--begin::Entry-->
 									<div class="d-flex flex-column-fluid">
 										<div class="container">
-											{% include "head.html.twig" %}
+											{% include "flash_messages.html.twig" %}
 
 											{% block body %}{# {{ file_url(item.content['#file'].getFileUri()) }} #}
 												{# {% set url = file_url(content.field_pdf_file|render|striptags|trim) %} #}

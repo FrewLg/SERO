@@ -3,7 +3,7 @@
 {% block title %}User Group
 {% endblock %}
 {% block maintitle %}
-User Group Users
+	User Group Users
 {% endblock %}
 {% block breadcrumb %}
 	<li class="breadcrumb-item ">
@@ -12,71 +12,52 @@ User Group Users
 	<li class="breadcrumb-item active">User list</li>
 {% endblock %}
 {% block styles %}
-
 	<link rel="stylesheet" href="{{asset('bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
 {% endblock %}
 {% block body %}
 
-
-	<div class="card ">
-
-		<div class="card-header">
-			<h3 class="card-title">
-				{{ user_group.name }}
-			</h3>
-			<div class="card-tools">
-				<a href="{{ path('app_user_group_index') }}" class="btn btn-primary btn-sm">Back</a>
-			</div>
-		</div>
-		<form method="POST">
-		<div class="card-body">
-			<div class="row">
-				<div class="col-12">
-						<div class="form-group">
-							<input hidden value="{{ user_group.id}}" name="usergroupuser">
-							<select class="duallistbox" multiple="multiple" name="user[]">
-								{% for user in user_group.users %}
-								{% if user.profile %}
-									
-									<option selected value="{{user.id}}" >{{ user.profile }}
-									 
-										-
-										{{ user.profile.id }}</option>
-								{% endif %}
-								{% endfor %}
-								{% for user in users %}
-								{% if user.profile %}
-									<option value="{{user.id}}">{{ user.profile }}
-										 
-										-
-										{{ user.profile.id }}</option>
-								{% endif %}
-								
-								{% endfor %}
-
-
-							</select>
-						</div>
-						<!-- /.form-group -->
-					
+	<div class="col-xxl-12  order-xxl-1">
+		<div class="card card-custom  ">
+			<div class="card-header mt-2 ">
+				<h4 class="card-title align-items-start flex-column">
+					<span class="card-label font-weight-bolder text-dark">{% trans %}User Group{% endtrans %}</span>
+					<span class="text-muted   font-weight-bold font-size-sm">{{ user_group.name }}</span>
+				</h4>
+				<div class="card-title  m-0 ">
+					<a href="{{ path('app_user_group_index') }}" class="btn btn-light-warning m-0">
+						<i class="fa fa-arrow-left"></i>
+						Back</a>
 				</div>
-				<!-- /.col -->
 			</div>
-			<!-- /.row -->
-		</div>
-		<!-- /.card-body -->
-		<div class="card-footer float-right">
-			<div class="float-right">
-				<a href="{{path('app_user_group_index')}}" class="btn btn-primary">Cancel</a>
-				<button class="btn btn-info  ">Save</button>
+
+			<div class="card-body">
+				<form method="POST">
+					<input hidden value="{{ user_group.id}}" name="usergroupuser">
+					<select class="duallistbox" multiple="multiple" name="users[]">
+						{% for user in user_group.users %}
+							{% if user.profile %}
+								<option selected value="{{user.id}}">{{ user.profile }}</option>
+							{% endif %}
+						{% endfor %}
+						{% for user in users %}
+							{% if user.profile %}
+								<option  value="{{user.id}}">{{ user.profile }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+					<div class="card-footer float-right">
+						<div class="float-right">
+							<a href="{{path('app_user_group_index')}}" class="btn btn-primary">Cancel</a>
+							<button class="btn btn-info  ">Save</button>
 
 
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
-		</form>
 	</div>
-	<!-- /.card -->
-
+	<!-- #region -->
 {% endblock %}
 {% block javascripts %}
 
@@ -84,16 +65,16 @@ User Group Users
 	<script>
 		$(function () {
 $('.duallistbox').bootstrapDualListbox({
-	nonSelectedListLabel: 'User List',
-  selectedListLabel: 'Users In The Group',
-  preserveSelectionOnMove: 'moved',
-  moveOnSelect: false,
-  moveSelectedLabel: "Add Selected Users to This Group",
-  moveAllLabel: "Add All Users to This Group ",
-  removeSelectedLabel: "Remove Selected Users From This Group",
-  removeAllLabel: "Remove All Users From This Group",
-  selectorMinimalHeight: "600"
-  }); 
+nonSelectedListLabel: 'All Users',
+selectedListLabel: 'Users In The Group',
+preserveSelectionOnMove: 'moved',
+moveOnSelect: true,
+moveSelectedLabel: "Add Selected Users to This Group",
+moveAllLabel: "Add All Users to This Group ",
+removeSelectedLabel: "Remove Selected Users From This Group",
+removeAllLabel: "Remove All Users From This Group",
+selectorMinimalHeight: "200"
+});
 })
 	</script>
 {% endblock %}

@@ -5,4 +5,4 @@ framework:
         transports:
             main: '%env(MAILER_URL)%'
  #           alternative: '%env(MAILER_DSN_IMPORTANT)%'
-#
+#MAILER_URL

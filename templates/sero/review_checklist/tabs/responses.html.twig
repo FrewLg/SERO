@@ -76,7 +76,7 @@
 												{{checklist}}</p>
 										</td>
 										<td {% if checklist.checklist.answerType ==2 %} colspan="2" {% endif %}>
-											{% if checklist.checklist.answerType ==1 and checklist.answer == 'yes' %}
+											{% if checklist.checklist.answerType ==1 and checklist.answer == 'Yes' %}
 												<span class="label label-lg label-light-success label-inline">
 													<i class="fa fa-check text-success m-1 font-size-sm"></i>
 													{% trans %}Yes{% endtrans %}</span>
@@ -86,15 +86,12 @@
 													<i class="fa fa-times text-danger m-1 font-size-sm"></i>
 													{% trans %}No{% endtrans %}</span>
 											{% elseif checklist.checklist.answerType ==2  %}
+											{% else    %}
 												{{ checklist.answer  }}
 											{% endif %}
-
 										</td>
-
 										<td>
-
 											{{ checklist.comment }}</td>
-
 									</tr>
 								{% endif %}
 

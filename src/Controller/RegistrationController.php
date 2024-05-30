@@ -42,7 +42,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            
         ##################
         if (!$resp->isSuccess()) {
             // Do something if the submit wasn't valid ! Use the message to show something
@@ -54,8 +54,7 @@ class RegistrationController extends AbstractController
         $user->setRoles(["ROLE_USER"]);
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // generate a signed url and email it to the user
+             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('ntc@ephi.gov.et', 'EPHI- National Training Center'))
@@ -65,7 +64,7 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_training_index');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [

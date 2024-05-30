@@ -91,6 +91,9 @@
 															{% trans %}No{% endtrans %}</span>
 													{% elseif checklist.checklist.answerType ==2  %}
 														{{ checklist.answer  }}
+
+														{% else    %}
+												{{ checklist.answer  }}
 													{% endif %}
 
 												</td>

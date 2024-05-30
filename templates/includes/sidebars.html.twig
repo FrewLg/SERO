@@ -55,6 +55,7 @@
 							</a>
 
 						</li>
+						{% if is_granted("ROLE_ADMIN")%}
 						<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 							<a href="{{ path('protocol_application_new') }}" class="menu-link menu-toggle">
 								<i class="menu-bullet menu-bullet-dot">
@@ -65,6 +66,7 @@
 
 						</li>
 
+{% endif %}
 						<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 							<a href="{{ path('my_assignment') }}" class="menu-link menu-toggle">
 								<i class="menu-bullet menu-bullet-dot">

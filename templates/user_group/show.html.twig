@@ -15,46 +15,36 @@
 {% endblock %}
 {% block body %}
 
-
 	<div class="card ">
-
 		<div class="card-header">
 			<h3 class="card-title">
-			<span class="badge bg-info ">	{{ user_group.name }}</span>
+				<span class="badge bg-info ">
+					{{ user_group.name }}</span>
 				User Group
 			</h3>
-
 			<div class="card-tools">
 				<a href="{{ path('app_user_group_index') }}" class="btn btn-primary btn-sm">back</a>
-
 			</div>
 			<!-- /.card-tools -->
 		</div>
 		<!-- /.card-header -->
 		<form method="POST">
 			<div class="card-body">
-
-
 				<div class="row">
 					<div class="col-12">
-
-
 						<div class="form-group">
-
-							<input hidden value="{{ user_group.id}}" name="usergrouppermission">
+ 							<input hidden value="{{ user_group.id}}" name="usergrouppermission">
 							<select class="duallistbox" multiple="multiple" name="permission[]">
+								
 								{% for permission in user_group.permission %}
-									<option selected value="{{permission.id}}" title="{{permission}}">{{ permission }}</option>
+									<option selected  value="{{permission.id}}" title="{{permission}}">{{ permission }}</option>
 								{% endfor %}
 								{% for permission in permissions %}
-									<option value="{{permission.id}}" title="{{permission}}">{{ permission }}</option>
+									<option    value="{{permission.id}}" title="{{permission}}">{{ permission }}</option>
 								{% endfor %}
-
-
 							</select>
 						</div>
 						<!-- /.form-group -->
-
 					</div>
 					<!-- /.col -->
 				</div>
@@ -65,17 +55,13 @@
 				<div class="float-right">
 					<a href="{{path('app_user_group_index')}}" class="btn btn-primary">Cancel</a>
 					<button class="btn btn-info  ">Save</button>
-
-
 				</div>
 			</div>
 		</form>
 	</div>
 	<!-- /.card -->
-
 {% endblock %}
 {% block javascripts %}
-
 	<script src="{{asset('bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')}}"></script>
 	<script>
 		$(function () {
@@ -83,12 +69,12 @@ $('.duallistbox').bootstrapDualListbox({
 nonSelectedListLabel: 'List of Privileges',
 selectedListLabel: 'Granted Privilages',
 preserveSelectionOnMove: 'moved',
-moveOnSelect: false,
+moveOnSelect: true,
 moveSelectedLabel: "Grant Selected Privileges",
 moveAllLabel: "Grant All Privilages ",
 removeSelectedLabel: "Revoke Selected Privileges",
 removeAllLabel: "Revoke All privileges",
-selectorMinimalHeight: "400"
+selectorMinimalHeight: "200"
 });
 })
 	</script>

@@ -131,6 +131,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: ReviewersPool::class, mappedBy: 'user')]
     private Collection $reviewersPools;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isSuperAdmin = null;
+
   
     public function __construct()
     {
@@ -708,6 +711,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $reviewersPool->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isSuperAdmin(): ?bool
+    {
+        return $this->isSuperAdmin;
+    }
+
+    public function setSuperAdmin(?bool $isSuperAdmin): static
+    {
+        $this->isSuperAdmin = $isSuperAdmin;
 
         return $this;
     }

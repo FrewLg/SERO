@@ -1,42 +1,87 @@
-{% extends 'base.html.twig' %}
+{% extends 'widebase.html.twig' %}
 
-{% block title %}Review Form{% endblock %}
+{% block title %}Review Form
+{% endblock %}
 
 {% block body %}
-    <h1>Review Form</h1>
+	<div
+		class="col col-xxl-12  ">
+		<!--begin::Advance Table Widget 2-->
+		<div
+			class="card card-custom  ">
+			<!--begin::Header-->
+			<div class="card-header border-0 pt-5">
+				<h3 class="card-title align-items-start flex-column">
+					<span class="card-label font-weight-bolder text-dark">{% trans %}Review form{% endtrans %}</span>
+					<span class="text-muted mt-3 font-weight-bold font-size-sm">{% trans %}Allforms{% endtrans %}</span>
+				</h3>
+				<div class="card-title border-0  ">
+					<a href="{{ path('app_s_e_r_o_review_form_new') }}" class="btn btn-light-primary">
+						<i class="fa fa-plus"></i>
+						Create new form</a>
+				</div>
+			</div>
+			<!--end::Header-->
+			<!--begin::Body-->
+			<div
+				class="card-body   pb-0">
+				<!--begin::Table-->
+				<div class="table-responsive">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                {# <th>Description</th> #}
-                <th>Created At</th>
-                <th>Status</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for review_form in review_forms %}
-            <tr>
-                <td>{{ review_form.id }}</td>
-                <td>{{ review_form.name }}</td>
-                {# <td>{{ review_form.description }}</td> #}
-                <td>{{ review_form.createdAt ? review_form.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ review_form.active  ? 'Active' : 'Inactive'}}</td>
-                <td>
-                    {# <a href="{{ path('add_checklists', {'id': review_form.id}) }}" class="btn btn-light-primary btn-sm">Build Review Form Fields</a> #}
-                    <a href="{{ path('review_form_show', {'id': review_form.id}) }}" class="btn btn-light-success btn-sm">Show Form checklists</a>
-                    <a href="{{ path('app_s_e_r_o_review_form_edit', {'id': review_form.id}) }}" class="btn btn-light-danger btn-sm">Edit form</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								{# <th>Description</th> #}
+								<th>Created At</th>
+								<th>Status</th>
+								<th>actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for review_form in review_forms %}
+								<tr>
+									<td>{{ loop.index }}</td>
+									<td>{{ review_form.name }}</td>
+									{# <td>{{ review_form.description }}</td> #}
+									<td>{{ review_form.createdAt ? review_form.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+									<td>
 
-    <a href="{{ path('app_s_e_r_o_review_form_new') }}">Create new</a>
+										<form
+											class="form" action="{{path('review_form_index')}}" method="POST">
+											{# <input type="radio" required name="checklist[{{checklist.id}}]" value="{{ choice.choiceName}}"> #}
+											<input hidden name="status-change" value="{{ review_form.id}}"/>
+											<div class="form-group row">
+												<div class="col-3">
+													<span class="switch switch-sm switch-outline switch-icon switch-success">
+														<label>
+															<input type="checkbox" title='Activete' tooltip="sfsd" onclick="{this.form.submit()}" {% if review_form.active %} checked="checked" {% endif %} name="{{ review_form.name}}" value="{{ review_form.id}}">
+															<span></span>
+														</label>
+													</span>
+												</div>
+											</div>
+										</form>
+
+										{# {{ review_form.active  ? 'Active' : 'Inactive'}}</td> #}
+									<td>
+										{# <a href="{{ path('add_checklists', {'id': review_form.id}) }}" class="btn btn-light-primary btn-sm">Build Review Form Fields</a> #}
+										<a href="{{ path('review_form_show', {'id': review_form.id}) }}" class="btn btn-light-success btn-sm">Show Form checklists</a>
+										<a href="{{ path('app_s_e_r_o_review_form_edit', {'id': review_form.id}) }}" class="btn btn-light-danger btn-sm">Edit form</a>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="6">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

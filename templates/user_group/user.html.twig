@@ -3,7 +3,7 @@
 {% block title %}User Group
 {% endblock %}
 {% block maintitle %}
-User Group Users
+	User Group Users
 {% endblock %}
 {% block breadcrumb %}
 	<li class="breadcrumb-item ">
@@ -31,50 +31,43 @@ User Group Users
 			</div>
 			<!-- /.card-tools -->
 		</div>
-					<form method="POST">
+		<form
+			method="POST">
 
-		<!-- /.card-header -->
-		<div class="card-body">
-
-
-			<div class="row">
-				<div class="col-12">
+			<!-- /.card-header -->
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12">
 
 						<div class="form-group">
-							<input hidden value="{{ user_group.id}}" name="usergroupuser">
-							<select class="duallistbox" multiple="multiple" name="user[]">
+							{# <input hidden value="{{ user_group.id}}" name="usergroupuser">
+							<select class="duallistbox" multiple="multiple" name="user">
 								{% for user in user_group.users %}
-									<option selected value="{{user.id}}" >{{ user.userInfo }}
-										 
-										-
-										{{ user.userInfo.id }}</option>
+									<option selected value="{{user.id}}">{{ user.userInfo }}</option>
 								{% endfor %}
 								{% for user in users %}
-									<option value="{{user.id}}">{{ user.userInfo }}
-										 
-										-
-										{{ user.userInfo.id }}</option>
+									<option value="{{user.id}}">{{ user.userInfo }}</option>
 								{% endfor %}
 
 
-							</select>
+							</select> #}
 						</div>
 						<!-- /.form-group -->
-					
+
+					</div>
+					<!-- /.col -->
 				</div>
-				<!-- /.col -->
+				<!-- /.row -->
 			</div>
-			<!-- /.row -->
-		</div>
-		<!-- /.card-body -->
-		<div class="card-footer float-right">
-			<div class="float-right">
-				<a href="{{path('app_user_group_index')}}" class="btn btn-primary">Cancel</a>
-				<button class="btn btn-info  ">Save</button>
+			<!-- /.card-body -->
+			<div class="card-footer float-right">
+				<div class="float-right">
+					<a href="{{path('app_user_group_index')}}" class="btn btn-primary">Cancel</a>
+					<button class="btn btn-info  ">Save</button>
 
 
+				</div>
 			</div>
-		</div>
 		</form>
 	</div>
 	<!-- /.card -->
@@ -86,16 +79,16 @@ User Group Users
 	<script>
 		$(function () {
 $('.duallistbox').bootstrapDualListbox({
-	nonSelectedListLabel: 'User List',
-  selectedListLabel: 'Users In The Group',
-  preserveSelectionOnMove: 'moved',
-  moveOnSelect: false,
-  moveSelectedLabel: "Add Selected Users to This Group",
-  moveAllLabel: "Add All Users to This Group ",
-  removeSelectedLabel: "Remove Selected Users From This Group",
-  removeAllLabel: "Remove All Users From This Group",
-  selectorMinimalHeight: "600"
-  });
+nonSelectedListLabel: 'User List',
+selectedListLabel: 'Users In The Group',
+preserveSelectionOnMove: 'moved',
+moveOnSelect: false,
+moveSelectedLabel: "Add Selected Users to This Group",
+moveAllLabel: "Add All Users to This Group ",
+removeSelectedLabel: "Remove Selected Users From This Group",
+removeAllLabel: "Remove All Users From This Group",
+selectorMinimalHeight: "200"
+});
 })
 	</script>
 {% endblock %}

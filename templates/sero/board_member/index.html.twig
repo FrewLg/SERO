@@ -130,7 +130,7 @@
 						<form action="" method="POST">
 							<input hidden name="change-role" value="true"/>
 							<input hidden name="board_member" value="{{board_member.id}}"/>
-							<select name="roles" class="form-control select2" onchange="if(confirm('Are you sure you want to save member role changes?')){this.form.submit()}">
+							<select name="roles" class="form-control select2"  onchange="if(confirm('Are you sure you want to save member role changes?')){this.form.submit()}">
 								<optgroup label="Select Role">
 									<option class="" value="Chair" {{board_member.role=='Chair'?"selected":""}}>Chair</option>
 									<option value="Vice Chair" {{board_member.role=='Vice Chair'?"selected":""}}>Vice Chair</option>
