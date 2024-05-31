@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MultiSiteCollaboration{% endblock %}
+
+{% block body %}
+    <h1>Create new MultiSiteCollaboration</h1>
+
+    {{ include('sero/multi_site_collaboration/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_multi_site_collaboration_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MultiSiteCollaboration index{% endblock %}
+
+{% block body %}
+    <h1>MultiSiteCollaboration index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for multi_site_collaboration in multi_site_collaborations %}
+            <tr>
+                <td>{{ multi_site_collaboration.id }}</td>
+                <td>{{ multi_site_collaboration.name }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_multi_site_collaboration_show', {'id': multi_site_collaboration.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_multi_site_collaboration_edit', {'id': multi_site_collaboration.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_multi_site_collaboration_new') }}">Create new</a>
+{% endblock %}

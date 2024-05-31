@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InvestigationalNewDrug{% endblock %}
+
+{% block body %}
+    <h1>InvestigationalNewDrug</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ investigational_new_drug.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ investigational_new_drug.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_investigational_new_drug_index') }}">back to list</a>
+
+    <a href="{{ path('app_s_e_r_o_investigational_new_drug_edit', {'id': investigational_new_drug.id}) }}">edit</a>
+
+    {{ include('sero/investigational_new_drug/_delete_form.html.twig') }}
+{% endblock %}

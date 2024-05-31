@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FinancialDisclosure index{% endblock %}
+
+{% block body %}
+    <h1>FinancialDisclosure index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for financial_disclosure in financial_disclosures %}
+            <tr>
+                <td>{{ financial_disclosure.id }}</td>
+                <td>{{ financial_disclosure.name }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_financial_disclosure_show', {'id': financial_disclosure.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_financial_disclosure_edit', {'id': financial_disclosure.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_financial_disclosure_new') }}">Create new</a>
+{% endblock %}

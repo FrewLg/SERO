@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ProceedureUse{% endblock %}
+
+{% block body %}
+    <h1>Create new ProceedureUse</h1>
+
+    {{ include('sero/proceedure_use/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_proceedure_use_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_s_e_r_o_multi_site_collaboration_delete', {'id': multi_site_collaboration.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ multi_site_collaboration.id) }}">
+    <button class="btn">Delete</button>
+</form>

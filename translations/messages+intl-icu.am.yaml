@@ -56,12 +56,12 @@ Action: __Action
 Applications: ማመልከቻዎች
 'All applications': 'ሁሉም ማመልከቻዎች'
 'My assigned': የተመደብኩበት
-'My application': 'የእኔ ማመልከቻ'
+'My application': 'የእኔ ማመልከቻዎች'
 'Board members': 'የቦርድ አባላት'
 'Board Members': 'የቦርድ አባላት'
 Minutes: __Minutes
 'Meeting Schedules': 'የስብሰባ መርሃ ግብሮች'
-'Protocol submissions': 'የፕሮቶኮል ማቅረቢያዎች'
+'Protocol submissions': 'የፕሮቶኮል ማመልከቻዎች'
 'Email Management': 'የኢሜል አስተዳደር'
 Messages: መልዕክቶች
 'User Management': 'የተጠቃሚ አስተዳደር'
@@ -114,6 +114,8 @@ Compliants: __Compliants
 'Please sign in': 'እባክዎ ይግቡ'
 'Remember me': አስታውሰኝ
 'Forget Password ?': 'የይለፍ ቃል ረስተዋል?'
+'--Select a reveiwer from board members--': '--ከቦርድ አባላት ገምጋሚ ​​ይምረጡ--'
+"-- Select from reviewers' poll--": '- ከገምጋሚዎች ማህደሮች ይምረጡ --'
 "Don't have an account yet?": 'እስካሁን መለያ የለህም?'
 'Sign Up!': ተመዝገብ
 'New application': 'አዲስ ማመልከቻ'

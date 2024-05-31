@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StudyPopulation{% endblock %}
+
+{% block body %}
+    <h1>Create new StudyPopulation</h1>
+
+    {{ include('sero/study_population/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_study_population_index') }}">back to list</a>
+{% endblock %}

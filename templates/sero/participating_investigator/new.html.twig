@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ParticipatingInvestigator{% endblock %}
+
+{% block body %}
+    <h1>Create new ParticipatingInvestigator</h1>
+
+    {{ include('sero/participating_investigator/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_participating_investigator_index') }}">back to list</a>
+{% endblock %}

@@ -7,7 +7,7 @@ use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\ReviewAssignment;
 use App\Entity\SERO\ReviewersPool;
 use App\Entity\SERO\ReviewForm;
-use App\Entity\User;
+use App\Entity\User;use Symfony\Component\Translation\TranslatableMessage;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\SERO\ReviewAssignmentRepository;
 use Doctrine\ORM\EntityRepository;
@@ -43,6 +43,7 @@ class ReviewAssignmentType extends AbstractType
             ->add('reviewForm', EntityType::class, [
                 'class' => ReviewForm::class,
                 'choice_label' => 'name',
+                'help' => new TranslatableMessage('reviewForm', ['%order_id%' => $reviewAssignment->getId()], 'store'),
                 'attr' => ['class' => 'form-control form-control-lg form-control-solid  select2 mb-4 p-4'],
             ])
 
@@ -65,7 +66,7 @@ class ReviewAssignmentType extends AbstractType
                         return $qb->orderBy('u.email', 'ASC');
                     },
                     'label' => 'Primary Reveiwer',
-                    'placeholder' => '-- Select a reveiwer from Board members--',
+                    'placeholder' => '--Select a reveiwer from board members--',
                     "attr" => [
                         "class" => "select2 form-control form-control-lg form-control-solid",
                     ],
@@ -117,7 +118,7 @@ class SecondaryReviewerAssignmentType extends AbstractType
 
             ->add('reviewForm', EntityType::class, [
                 'class' => ReviewForm::class,
-                'choice_label' => 'name',
+                'choice_label' => 'name',    'label' => 'app.reviewForm',
                 'attr' => ['class' => 'form-control form-control-lg form-control-solid  select2 mb-4 p-4'],
             ])
 
@@ -126,7 +127,7 @@ class SecondaryReviewerAssignmentType extends AbstractType
                 EntityType::class,
                 [
                     'label' => 'Secondary Reveiwer',
-                    'placeholder' => "-- Select from Reviewer's pool--",
+                    'placeholder' => "--Select from reviewers' poll--",
                     "attr" => [
                         "class" => "select2 form-control form-control-lg form-control-solid",
                     ],

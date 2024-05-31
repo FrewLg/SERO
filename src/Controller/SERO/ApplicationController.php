@@ -49,7 +49,7 @@ class ApplicationController extends AbstractController
     {
         // $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-        $allApps =  array_reverse( $em->getRepository(Application::class)->findAll());
+        $allApps =  array_reverse($em->getRepository(Application::class)->findAll());
         $app = new Application();
         $form = $this->createForm(ApplicationType::class, $app);
         $form->handleRequest($request);
@@ -99,14 +99,15 @@ class ApplicationController extends AbstractController
         EntityManagerInterface $entityManager,
         SEROHelper $seroHelper
     ): Response {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN_ALLER');
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $application = new Application();
         $form = $this->createForm(ApplicationType::class, $application);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-             
+
             ///
             //Add version//
+            // dd($application);
             $protocolversion = $entityManager->getRepository(Version::class)->findBy(['application' => $application]);
             $protocolversions = count($protocolversion) + 1;
             $version = new Version();
@@ -118,22 +119,29 @@ class ApplicationController extends AbstractController
             // end add version
             $application->setSubmittedBy($this->getUser());
             $application->setIbcode($seroHelper->versionate($application));
+            $application->setStatus(1);
             $entityManager->persist($application);
+            $reviewfile = $form->get('attachment')->getData();
+
+            // dd($form->get('attachment')->getData());
             if ($form->get('attachment')->getData()) {
                 $versionAttachement = $form->get('attachment')->getData();
                 $versionFileName = $seroHelper->fileNamer($version) . $versionAttachement->guessExtension();
                 $versionAttachement->move($this->getParameter('uploads_folder'), $versionFileName);
                 $version->setAttachment($versionFileName);
+                dd($form->get('attachmentType')->getData());
                 $version->setAttachmentType($form->get('attachmentType')->getData());
             }
             //
+
             $entityManager->persist($version);
             $entityManager->flush();
             return $this->redirectToRoute('application_index', [], Response::HTTP_SEE_OTHER);
         }
-         return $this->render('sero/application/new.html.twig', [
+        return $this->render('sero/application/nativeWizard.html.twig', [
+            // return $this->render('sero/application/new.html.twig', [
             'application' => $application,
-            'form' => $form,
+            'protocolForm' => $form,
         ]);
     }
 
@@ -152,7 +160,7 @@ class ApplicationController extends AbstractController
     public function makerevise(Request $request, ReviewAssignment $reviewAssignment, EntityManagerInterface $entityManager): Response
     {
 
-        $this->denyAccessUnlessGranted('REVISE');
+        $this->denyAccessUnlessGranted('ROLE_USER');
         if ($reviewAssignment->getIrbreviewer()->getId() == $this->getUser()->getId() && $reviewAssignment->getReviewedAt() !== NULL) {
             $this->addFlash("warning", "Review response hase been already sent!.");
 
@@ -226,8 +234,11 @@ class ApplicationController extends AbstractController
             } else {
                 $this->addFlash("danger", "You can't renew IRB clearance for this application");
             }
-            return $this->redirectToRoute('application_show', ["id" => $application->getId()],
-             Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'application_show',
+                ["id" => $application->getId()],
+                Response::HTTP_SEE_OTHER
+            );
         }
         $version = new Version();
         $versionForm = $this->createForm(VersionType::class, $version);
@@ -242,29 +253,32 @@ class ApplicationController extends AbstractController
             if ($versionForm->get('attachment')->getData()) {
                 $ver = $versionForm->getData();
                 $versionAttachement = $versionForm->get('attachment')->getData();
-                $versionFileName = $seroHelper->fileNamer($ver).$versionAttachement->guessExtension();
+                $versionFileName = $seroHelper->fileNamer($ver) . $versionAttachement->guessExtension();
                 $versionAttachement->move($this->getParameter('uploads_folder'), $versionFileName);
                 $version->setAttachment($versionFileName);
             }
             $entityManager->persist($version);
             $entityManager->flush();
-            return $this->redirectToRoute('application_show', ["id" => $application->getId()],
-            Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute(
+                'application_show',
+                ["id" => $application->getId()],
+                Response::HTTP_SEE_OTHER
+            );
         }
         $applicationFeedback = new ApplicationFeedback();
         $feedbackForm = $this->createForm(ApplicationFeedbackType::class, $applicationFeedback);
-         $irb_review_checklist_group = $entityManager->getRepository(ReviewChecklistGroup::class)->findAll();
-         $decisions = $entityManager->getRepository(DecisionType::class)->findAll();
-         ///
-         $ammendment = new Amendment;
+        $irb_review_checklist_group = $entityManager->getRepository(ReviewChecklistGroup::class)->findAll();
+        $decisions = $entityManager->getRepository(DecisionType::class)->findAll();
+        ///
+        $ammendment = new Amendment;
         $ammendmentForm = $this->createForm(AmendmentType::class, $ammendment);
         ///
-         ///
-         $contuoation = new Continuation;
+        ///
+        $contuoation = new Continuation;
         $contuoationForm = $this->createForm(ContinuationType::class, $contuoation);
         ///
-         ///
-         $icf = new Icf;
+        ///
+        $icf = new Icf;
         $icfForm = $this->createForm(IcfType::class, $icf);
         $icfForm->handleRequest($request);
 
@@ -276,7 +290,7 @@ class ApplicationController extends AbstractController
             if ($icfForm->get('attachment')->getData()) {
                 $ver = $icfForm->getData();
                 $icfAttachement = $icfForm->get('attachment')->getData();
-                $icfFileName = $seroHelper->icfFileNamer($ver).$icfAttachement->guessExtension();
+                $icfFileName = $seroHelper->icfFileNamer($ver) . $icfAttachement->guessExtension();
                 $icfAttachement->move($this->getParameter('uploads_folder'), $icfFileName);
                 $icf->setAttachment($icfFileName);
             }
@@ -284,9 +298,12 @@ class ApplicationController extends AbstractController
             $entityManager->persist($icf);
             $entityManager->flush();
 
-            return $this->redirectToRoute('application_show', ["id" => $application->getId()],
-            Response::HTTP_SEE_OTHER);
-                }
+            return $this->redirectToRoute(
+                'application_show',
+                ["id" => $application->getId()],
+                Response::HTTP_SEE_OTHER
+            );
+        }
         ///
         return $this->render('sero/application/details.html.twig', [
             'appfeedbfrom' => $feedbackForm->createView(),
@@ -300,9 +317,9 @@ class ApplicationController extends AbstractController
             'versions' => array_reverse($existingVersion),
         ]);
     }
-    
-    #[Route('/{id}/addicf', name: 'add_icf', methods:['POST'] )]
-    public function addicf(Request $request , SEROHelper $seroHelper, EntityManagerInterface $entityManager, Application $application): Response
+
+    #[Route('/{id}/addicf', name: 'add_icf', methods: ['POST'])]
+    public function addicf(Request $request, SEROHelper $seroHelper, EntityManagerInterface $entityManager, Application $application): Response
     {
         $icf = new Icf;
         $icfForm = $this->createForm(IcfType::class, $icf);
@@ -312,11 +329,11 @@ class ApplicationController extends AbstractController
             $icf->setApplication($application);
             $icf->setCreatedAt(new \DateTime());
             $icf->setVersionNumber($seroHelper->icfVersion($application));
-dd($icfForm->get('attachment')->getData());
+            dd($icfForm->get('attachment')->getData());
             if ($icfForm->get('attachment')->getData()) {
                 $ver = $icfForm->getData();
                 $icfAttachement = $icfForm->get('attachment')->getData();
-                $icfFileName = $seroHelper->icfFileNamer($ver).$icfAttachement->guessExtension();
+                $icfFileName = $seroHelper->icfFileNamer($ver) . $icfAttachement->guessExtension();
                 $icfAttachement->move($this->getParameter('uploads_folder'), $icfFileName);
                 $icf->setAttachment($icfFileName);
             }
@@ -324,21 +341,25 @@ dd($icfForm->get('attachment')->getData());
             $entityManager->persist($icf);
             $entityManager->flush();
 
-            return $this->redirectToRoute('application_show', ["id" => $application->getId()],
-            Response::HTTP_SEE_OTHER);
-                }
+            return $this->redirectToRoute(
+                'application_show',
+                ["id" => $application->getId()],
+                Response::HTTP_SEE_OTHER
+            );
+        }
         ///
         return $this->render('sero/application/details.html.twig', [
-             'icfForm' => $icfForm,
+            'icfForm' => $icfForm,
             'application' => $application,
-         ]);
+        ]);
     }
 
-    #[Route('/{id}/export',   name: 'export', methods: ['GET','POST'])]
+    #[Route('/{id}/export',   name: 'export', methods: ['GET', 'POST'])]
 
-    public function exportnow(EntityManagerInterface $em, Application $uid) {
+    public function exportnow(EntityManagerInterface $em, Application $uid)
+    {
 
-     
+
         $submission = $em->getRepository(Application::class)->findOneBy(['id' => $uid->getId()]);
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -370,15 +391,14 @@ dd($icfForm->get('attachment')->getData());
             "Attachment" => false,
         ]);
     }
-/////
+    /////
     #[Route('/{filename}/download',   name: 'download', methods: ['POST'])]
     public function download(Request $request, $filename)
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
-if(!$request){
-    $this->addFlash("danger", "The requested file could not be found!");
-
-}
+        if (!$request) {
+            $this->addFlash("danger", "The requested file could not be found!");
+        }
         if ($filename) {
 
             return $this->file($this->getParameter('uploads_folder') . '/' . $filename);
@@ -406,20 +426,23 @@ if(!$request){
         ]);
     }
 
-    
-    #[Route('/{id}/{dec}', name: 'initial_decision', methods: ['GET','POST'])]
-    public function decide(  DecisionType  $dec, Version $version,EntityManagerInterface $entityManager): Response
+
+    #[Route('/{id}/{dec}', name: 'initial_decision', methods: ['GET', 'POST'])]
+    public function decide(DecisionType  $dec, Version $version, EntityManagerInterface $entityManager): Response
     {
- 
+
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
-            $version->setDecision($dec);
-            $entityManager->persist($version);
-            $entityManager->flush();
-            $this->addFlash("success", "The Protocol version got  ".$dec->getName()." decision !");
-         
-        return $this->redirectToRoute('application_show', ["id" => $version->getApplication()->getId()],
-        Response::HTTP_SEE_OTHER);
+        $version->setDecision($dec);
+        $entityManager->persist($version);
+        $entityManager->flush();
+        $this->addFlash("success", "The Protocol version got  " . $dec->getName() . " decision !");
+
+        return $this->redirectToRoute(
+            'application_show',
+            ["id" => $version->getApplication()->getId()],
+            Response::HTTP_SEE_OTHER
+        );
         // return $this->redirectToRoute('application_index', [], Response::HTTP_SEE_OTHER);
     }
 

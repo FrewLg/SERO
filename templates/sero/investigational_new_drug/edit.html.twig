@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit InvestigationalNewDrug{% endblock %}
+
+{% block body %}
+    <h1>Edit InvestigationalNewDrug</h1>
+
+    {{ include('sero/investigational_new_drug/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_s_e_r_o_investigational_new_drug_index') }}">back to list</a>
+
+    {{ include('sero/investigational_new_drug/_delete_form.html.twig') }}
+{% endblock %}

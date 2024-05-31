@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New FinancialDisclosure{% endblock %}
+
+{% block body %}
+    <h1>Create new FinancialDisclosure</h1>
+
+    {{ include('sero/financial_disclosure/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_financial_disclosure_index') }}">back to list</a>
+{% endblock %}

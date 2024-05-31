@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StudyPopulation{% endblock %}
+
+{% block body %}
+    <h1>StudyPopulation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ study_population.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ study_population.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_study_population_index') }}">back to list</a>
+
+    <a href="{{ path('app_s_e_r_o_study_population_edit', {'id': study_population.id}) }}">edit</a>
+
+    {{ include('sero/study_population/_delete_form.html.twig') }}
+{% endblock %}

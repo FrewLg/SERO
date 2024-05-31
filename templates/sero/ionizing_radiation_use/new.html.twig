@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New IonizingRadiationUse{% endblock %}
+
+{% block body %}
+    <h1>Create new IonizingRadiationUse</h1>
+
+    {{ include('sero/ionizing_radiation_use/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_ionizing_radiation_use_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProceedureUse index{% endblock %}
+
+{% block body %}
+    <h1>ProceedureUse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for proceedure_use in proceedure_uses %}
+            <tr>
+                <td>{{ proceedure_use.id }}</td>
+                <td>{{ proceedure_use.name }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_proceedure_use_show', {'id': proceedure_use.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_proceedure_use_edit', {'id': proceedure_use.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_proceedure_use_new') }}">Create new</a>
+{% endblock %}

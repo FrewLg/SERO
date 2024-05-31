@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IonizingRadiationUse index{% endblock %}
+
+{% block body %}
+    <h1>IonizingRadiationUse index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ionizing_radiation_use in ionizing_radiation_uses %}
+            <tr>
+                <td>{{ ionizing_radiation_use.id }}</td>
+                <td>{{ ionizing_radiation_use.name }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_ionizing_radiation_use_show', {'id': ionizing_radiation_use.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_ionizing_radiation_use_edit', {'id': ionizing_radiation_use.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_ionizing_radiation_use_new') }}">Create new</a>
+{% endblock %}

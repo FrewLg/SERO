@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ParticipatingInvestigator index{% endblock %}
+
+{% block body %}
+    <h1>ParticipatingInvestigator index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FullName</th>
+                <th>LicenceNumber</th>
+                <th>Institution</th>
+                <th>Telephone</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participating_investigator in participating_investigators %}
+            <tr>
+                <td>{{ participating_investigator.id }}</td>
+                <td>{{ participating_investigator.fullName }}</td>
+                <td>{{ participating_investigator.licenceNumber }}</td>
+                <td>{{ participating_investigator.institution }}</td>
+                <td>{{ participating_investigator.telephone }}</td>
+                <td>{{ participating_investigator.email }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_participating_investigator_show', {'id': participating_investigator.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_participating_investigator_edit', {'id': participating_investigator.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_participating_investigator_new') }}">Create new</a>
+{% endblock %}

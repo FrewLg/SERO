@@ -1,0 +1,292 @@
+{# {% set condition = is_granted("ROLE_USER") %} #}
+{% if  is_granted("ROLE_USER")=='' %}
+	{% extends 'widebase.html.twig' %}
+	{% else %}
+	{# {% extends 'widebase.html.twig' %} #}
+{% endif %}
+{% block title %}
+	{% trans %}Respond to survey{% endtrans %}
+{% endblock %}
+
+{% block styles %}
+	<link href="{{ asset('theme/assets/css/pages/wizard/wizard-1.css' ) }}" rel="stylesheet" type="text/css"/>
+{% endblock %}
+
+
+{% macro litCoPIs(researchMember) %}
+
+
+	<div class="col-md-3">
+		<div class="form-group select-wizard">
+			<label class="bmd-label-floating">Full Name</label>
+			{{form_widget(researchMember.fullName)}}
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="form-group select-wizard">
+			<label class="bmd-label-floating">Email</label>
+			{{form_widget(researchMember.email)}}
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="form-group select-wizard">
+			<label class="bmd-label-floating">Telephone</label>
+			{{form_widget(researchMember.telephone)}}
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div class="form-group select-wizard">
+			<label class="bmd-label-floating">Institution</label>
+
+			{{form_widget(researchMember.institution )}}
+
+		</div>
+	</div>
+	<div class="col-md-1">
+		<div class="form-group">
+
+			<button type="button" class=" btn btn-light-danger btn-sm close  remove-collection-widget mt-10   bgc-h-danger-l2 radius-round ">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+	</div>
+{% endmacro %}
+{% block body %}
+
+	<div class="card card-custom">
+		<div class="card-body p-0">
+			<div class="wizard wizard-1" id="kt_wizard_v1" data-wizard-state="step-first" data-wizard-clickable="false">
+				<div class="wizard-nav border-bottom">
+					<div class="wizard-steps p-8 p-lg-10">
+
+						<div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+							<div class="wizard-label">
+								<i class="wizard-icon flaticon-bus-stop"></i>
+								<h3 class="wizard-title">1  Protocol Details
+
+								</h3>
+							</div>
+							<span class="svg-icon svg-icon-xl wizard-arrow">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<polygon points="0 0 24 0 24 24 0 24"></polygon>
+										<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1"></rect>
+										<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)"></path>
+									</g>
+								</svg>
+							</span>
+						</div>
+						<div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+							<div class="wizard-label">
+								<i class="wizard-icon flaticon-bus-stop"></i>
+								<h3 class="wizard-title">2  Members
+
+								</h3>
+							</div>
+							<span class="svg-icon svg-icon-xl wizard-arrow">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<polygon points="0 0 24 0 24 24 0 24"></polygon>
+										<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1"></rect>
+										<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)"></path>
+									</g>
+								</svg>
+							</span>
+						</div>
+						<div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+							<div class="wizard-label">
+								<i class="wizard-icon flaticon-bus-stop"></i>
+								<h3 class="wizard-title">3 attachment
+
+								</h3>
+							</div>
+							<span class="svg-icon svg-icon-xl wizard-arrow">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<polygon points="0 0 24 0 24 24 0 24"></polygon>
+										<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1"></rect>
+										<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)"></path>
+									</g>
+								</svg>
+							</span>
+						</div>
+						<div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
+							<div class="wizard-label">
+								<i class="wizard-icon flaticon-bus-stop"></i>
+								<h3 class="wizard-title">Confirm
+
+								</h3>
+							</div>
+							<span class="svg-icon svg-icon-xl wizard-arrow">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewbox="0 0 24 24" version="1.1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<polygon points="0 0 24 0 24 24 0 24"></polygon>
+										<rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1"></rect>
+										<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)"></path>
+									</g>
+								</svg>
+							</span>
+						</div>
+					</div>
+				</div>
+				<!--end::Wizard Nav-->
+				<!--begin::Wizard Body-->
+				<div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
+					<div
+						class="col-xl-10 col-xxl-7">
+						{# {{form_start(protocolForm,{id:'kt_form'})}} #}
+
+						<form class="form  " method="POST" id="kt_form" onsubmit="return confirm('{% trans %}Submit a survey response?{% endtrans %}')">
+							<input hidden name="protocolform" value="true"/>
+
+							<div class="pb-5" id="tab1" data-wizard-type="step-content" data-wizard-state="current">
+								<h3 class="mb-10 font-weight-bold text-dark">Part name</h3>
+								<div class="separator separator-dashed separator-border-2"></div>
+
+
+								{{form_label(protocolForm.title)}}
+								{{form_widget(protocolForm.title,{id:'title'})}}
+
+
+								{{form_label(protocolForm.description)}}
+								{{form_widget(protocolForm.description,{id:'description'})}}
+
+
+								{{form_label(protocolForm.studyType)}}
+								{{form_widget(protocolForm.studyType,{id:'studyType'})}}
+
+								{{form_label(protocolForm.proceedureUse)}}
+								{{form_widget(protocolForm.proceedureUse,{id:'proceedureUse'})}}
+
+								{{form_label(protocolForm.startDate)}}
+								{{form_widget(protocolForm.startDate,{id:'startDate'})}}
+
+
+								{{form_label(protocolForm.endDate)}}
+								{{form_widget(protocolForm.endDate,{id:'endDate'})}}
+
+								{{form_label(protocolForm.investigationalNewDrug)}}
+								{{form_widget(protocolForm.investigationalNewDrug,{id:'investigationalNewDrug'})}}
+
+
+								{{form_label(protocolForm.ionizingRadiationUse)}}
+								{{form_widget(protocolForm.ionizingRadiationUse,{id:'ionizingRadiationUse'})}}
+
+
+								{{form_label(protocolForm.specialResourceRequirement)}}
+								{{form_widget(protocolForm.specialResourceRequirement,{id:'specialResourceRequirement'})}}
+
+
+								{{form_label(protocolForm.studyPopulation)}}
+								{{form_widget(protocolForm.studyPopulation,{id:'studyPopulation'})}}
+
+
+							</div>
+
+
+							<div class="pb-5" id="tab2" data-wizard-type="step-content" data-wizard-state="current">
+								<h3 class="mb-10 font-weight-bold text-dark">Part name</h3>
+								<div class="separator separator-dashed separator-border-2"></div>
+
+								<h5 class="m-1">PARTICIPATING INVESTIGATORS:</h5>
+								<span class="m-1 text-muted">Click the button when you want to add a new researcher</span>
+								<button type="button" class="btn btn-light-primary  add-another-collection-widget btn-sm" data-list-selector="#researchMember-fields-list">
+									<span aria-hidden="true">+</span>
+									Add PARTICIPATING INVESTIGATORS
+								</button>
+
+								<ul id="researchMember-fields-list" class="m-t-5" data-prototype="{{_self.litCoPIs(protocolForm.participatingInvestigators.vars.prototype)|e }}" data-widget-tags="{{ '<div class="row "></div>'|e }}" data-widget-counter="{{ protocolForm.participatingInvestigators|length }}">
+									{% for researcher in protocolForm.participatingInvestigators %}
+										<div class="row ">
+											{{ _self.litCoPIs(researcher) }}
+										</div>
+									{% endfor %}
+								</ul>
+
+
+							</div>
+							<div class="pb-5" id="tab3" data-wizard-type="step-content" data-wizard-state="current">
+								<h3 class="mb-10 font-weight-bold text-dark">Part name</h3>
+								{{form_label(protocolForm.financialDisclosure)}}
+								{{form_widget(protocolForm.financialDisclosure,{id:'financialDisclosure'})}}
+
+
+								{{form_label(protocolForm.multiSiteCollaboration)}}
+								{{form_widget(protocolForm.multiSiteCollaboration,{id:'multiSiteCollaboration'})}}
+
+
+								{{form_label(protocolForm.attachment)}}
+								{{form_widget(protocolForm.attachment)}}
+
+								{{form_label(protocolForm.attachmentType)}}
+								{{form_widget(protocolForm.attachmentType )}}
+
+
+								{{form_label(protocolForm.location)}}
+								{{form_widget(protocolForm.location,{id:'location'})}}
+
+
+							</div>
+
+							<div class="pb-5" id="tab4" data-wizard-type="step-content" data-wizard-state="current">
+								<h3 class="mb-10 font-weight-bold text-dark">Part name</h3>
+
+								{{form_label(protocolForm.participantCharacter)}}
+								{{form_widget(protocolForm.participantCharacter,{id:'participantCharacter'})}}
+
+							</div>
+
+
+							<div class="d-flex justify-content-between border-top mt-5 pt-10">
+								<div class="mr-2">
+									<button class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-prev">Previous</button>
+								</div>
+								<div>
+									<button class="btn btn-success btn-lg" data-wizard-type="action-submit">{% trans %}Submit survey response{% endtrans %}</button>
+									<button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" data-wizard-type="action-next">Next
+									</button>
+								</div>
+							</div>
+							{# </form> #}
+							{{form_end(protocolForm)}}
+
+							<!--end::Wizard Form-->
+						</div>
+
+					</div>
+				</div>
+				<!--end::Wizard-->
+			</div>
+		</div>
+
+	{% endblock %}
+
+	{% block javascripts %}
+		<script src="{{ asset('theme/assets/js/pages/custom/wizard/wizard-1.js' ) }}"></script>
+		<script type="text/javascript" src="./js/demo.js"></script>
+
+
+		<script type='text/javascript'>
+			jQuery(document).ready(function () {
+
+$(document).on('click', '.remove-collection-widget', function (e) {
+$(this).closest('.row').fadeOut().remove();
+});
+$(document).on('click', '.add-another-collection-widget', function (e) {
+
+var list = jQuery(jQuery(this).attr('data-list-selector'));
+
+var counter = list.data('widget-counter') || list.children().length;
+var newWidget = list.attr('data-prototype');
+newWidget = newWidget.replace(/__name__/g, counter);
+counter++;
+list.data('widget-counter', counter);
+var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+newElem.appendTo(list);
+$(".select").select2("destroy").select2();
+
+});
+});
+		</script>
+
+	{% endblock %}

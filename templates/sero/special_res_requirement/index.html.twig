@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SpecialResRequirement index{% endblock %}
+
+{% block body %}
+    <h1>SpecialResRequirement index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for special_res_requirement in special_res_requirements %}
+            <tr>
+                <td>{{ special_res_requirement.id }}</td>
+                <td>{{ special_res_requirement.name }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_special_res_requirement_show', {'id': special_res_requirement.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_special_res_requirement_edit', {'id': special_res_requirement.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_special_res_requirement_new') }}">Create new</a>
+{% endblock %}

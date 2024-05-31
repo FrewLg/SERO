@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ParticipantCharacter{% endblock %}
+
+{% block body %}
+    <h1>Create new ParticipantCharacter</h1>
+
+    {{ include('sero/participant_character/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_participant_character_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IonizingRadiationUse{% endblock %}
+
+{% block body %}
+    <h1>IonizingRadiationUse</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ionizing_radiation_use.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ ionizing_radiation_use.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_ionizing_radiation_use_index') }}">back to list</a>
+
+    <a href="{{ path('app_s_e_r_o_ionizing_radiation_use_edit', {'id': ionizing_radiation_use.id}) }}">edit</a>
+
+    {{ include('sero/ionizing_radiation_use/_delete_form.html.twig') }}
+{% endblock %}

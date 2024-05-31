@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ParticipatingInvestigator{% endblock %}
+
+{% block body %}
+    <h1>ParticipatingInvestigator</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ participating_investigator.id }}</td>
+            </tr>
+            <tr>
+                <th>FullName</th>
+                <td>{{ participating_investigator.fullName }}</td>
+            </tr>
+            <tr>
+                <th>LicenceNumber</th>
+                <td>{{ participating_investigator.licenceNumber }}</td>
+            </tr>
+            <tr>
+                <th>Institution</th>
+                <td>{{ participating_investigator.institution }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ participating_investigator.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ participating_investigator.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_participating_investigator_index') }}">back to list</a>
+
+    <a href="{{ path('app_s_e_r_o_participating_investigator_edit', {'id': participating_investigator.id}) }}">edit</a>
+
+    {{ include('sero/participating_investigator/_delete_form.html.twig') }}
+{% endblock %}

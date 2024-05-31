@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New InvestigationalNewDrug{% endblock %}
+
+{% block body %}
+    <h1>Create new InvestigationalNewDrug</h1>
+
+    {{ include('sero/investigational_new_drug/_form.html.twig') }}
+
+    <a href="{{ path('app_s_e_r_o_investigational_new_drug_index') }}">back to list</a>
+{% endblock %}

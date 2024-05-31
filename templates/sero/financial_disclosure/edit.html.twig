@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit FinancialDisclosure{% endblock %}
+
+{% block body %}
+    <h1>Edit FinancialDisclosure</h1>
+
+    {{ include('sero/financial_disclosure/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_s_e_r_o_financial_disclosure_index') }}">back to list</a>
+
+    {{ include('sero/financial_disclosure/_delete_form.html.twig') }}
+{% endblock %}

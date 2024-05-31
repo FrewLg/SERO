@@ -89,6 +89,54 @@ class Application
      */
     #[ORM\OneToMany(targetEntity: Icf::class, mappedBy: 'application', orphanRemoval: true)]
     private Collection $icfs;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    private ?StudyType $studyType = null;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?StudyPopulation $studyPopulation = null;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ParticipantCharacter $participantCharacter = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $requestedExclusionParticipant = null;
+
+    /**
+     * @var Collection<int, SpecialResRequirement>
+     */
+    #[ORM\ManyToMany(targetEntity: SpecialResRequirement::class, inversedBy: 'applications')]
+    private Collection $specialResourceRequirement;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?IonizingRadiationUse $ionizingRadiationUse = null;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?InvestigationalNewDrug $investigationalNewDrug = null;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    private ?ProceedureUse $proceedureUse = null;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?MultiSiteCollaboration $multiSiteCollaboration = null;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?FinancialDisclosure $financialDisclosure = null;
+
+    /**
+     * @var Collection<int, ParticipatingInvestigator>
+     */
+    #[ORM\OneToMany(targetEntity: ParticipatingInvestigator::class, mappedBy: 'application', orphanRemoval: true , cascade:["persist","remove"])]
+    private Collection $participatingInvestigators;
+
+    #[ORM\Column]
+    private ?int $status = null;
  
     public function __construct()
     {
@@ -99,6 +147,8 @@ class Application
         $this->versions = new ArrayCollection();
         $this->continuations = new ArrayCollection();
         $this->icfs = new ArrayCollection();
+        $this->specialResourceRequirement = new ArrayCollection();
+        $this->participatingInvestigators = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -426,6 +476,180 @@ class Application
                 $icf->setApplication(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStudyType(): ?StudyType
+    {
+        return $this->studyType;
+    }
+
+    public function setStudyType(?StudyType $studyType): static
+    {
+        $this->studyType = $studyType;
+
+        return $this;
+    }
+
+    public function getStudyPopulation(): ?StudyPopulation
+    {
+        return $this->studyPopulation;
+    }
+
+    public function setStudyPopulation(?StudyPopulation $studyPopulation): static
+    {
+        $this->studyPopulation = $studyPopulation;
+
+        return $this;
+    }
+
+    public function getParticipantCharacter(): ?ParticipantCharacter
+    {
+        return $this->participantCharacter;
+    }
+
+    public function setParticipantCharacter(?ParticipantCharacter $participantCharacter): static
+    {
+        $this->participantCharacter = $participantCharacter;
+
+        return $this;
+    }
+
+    public function getRequestedExclusionParticipant(): ?string
+    {
+        return $this->requestedExclusionParticipant;
+    }
+
+    public function setRequestedExclusionParticipant(?string $requestedExclusionParticipant): static
+    {
+        $this->requestedExclusionParticipant = $requestedExclusionParticipant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpecialResRequirement>
+     */
+    public function getSpecialResourceRequirement(): Collection
+    {
+        return $this->specialResourceRequirement;
+    }
+
+    public function addSpecialResourceRequirement(SpecialResRequirement $specialResourceRequirement): static
+    {
+        if (!$this->specialResourceRequirement->contains($specialResourceRequirement)) {
+            $this->specialResourceRequirement->add($specialResourceRequirement);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialResourceRequirement(SpecialResRequirement $specialResourceRequirement): static
+    {
+        $this->specialResourceRequirement->removeElement($specialResourceRequirement);
+
+        return $this;
+    }
+
+    public function getIonizingRadiationUse(): ?IonizingRadiationUse
+    {
+        return $this->ionizingRadiationUse;
+    }
+
+    public function setIonizingRadiationUse(?IonizingRadiationUse $ionizingRadiationUse): static
+    {
+        $this->ionizingRadiationUse = $ionizingRadiationUse;
+
+        return $this;
+    }
+
+    public function getInvestigationalNewDrug(): ?InvestigationalNewDrug
+    {
+        return $this->investigationalNewDrug;
+    }
+
+    public function setInvestigationalNewDrug(?InvestigationalNewDrug $investigationalNewDrug): static
+    {
+        $this->investigationalNewDrug = $investigationalNewDrug;
+
+        return $this;
+    }
+
+    public function getProceedureUse(): ?ProceedureUse
+    {
+        return $this->proceedureUse;
+    }
+
+    public function setProceedureUse(?ProceedureUse $proceedureUse): static
+    {
+        $this->proceedureUse = $proceedureUse;
+
+        return $this;
+    }
+
+    public function getMultiSiteCollaboration(): ?MultiSiteCollaboration
+    {
+        return $this->multiSiteCollaboration;
+    }
+
+    public function setMultiSiteCollaboration(?MultiSiteCollaboration $multiSiteCollaboration): static
+    {
+        $this->multiSiteCollaboration = $multiSiteCollaboration;
+
+        return $this;
+    }
+
+    public function getFinancialDisclosure(): ?FinancialDisclosure
+    {
+        return $this->financialDisclosure;
+    }
+
+    public function setFinancialDisclosure(?FinancialDisclosure $financialDisclosure): static
+    {
+        $this->financialDisclosure = $financialDisclosure;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ParticipatingInvestigator>
+     */
+    public function getParticipatingInvestigators(): Collection
+    {
+        return $this->participatingInvestigators;
+    }
+
+    public function addParticipatingInvestigator(ParticipatingInvestigator $participatingInvestigator): static
+    {
+        if (!$this->participatingInvestigators->contains($participatingInvestigator)) {
+            $this->participatingInvestigators->add($participatingInvestigator);
+            $participatingInvestigator->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeParticipatingInvestigator(ParticipatingInvestigator $participatingInvestigator): static
+    {
+        if ($this->participatingInvestigators->removeElement($participatingInvestigator)) {
+            // set the owning side to null (unless already changed)
+            if ($participatingInvestigator->getApplication() === $this) {
+                $participatingInvestigator->setApplication(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

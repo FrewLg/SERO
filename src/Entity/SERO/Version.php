@@ -42,7 +42,7 @@ class Version
     private ?bool $approved = null;
 
     #[ORM\ManyToOne(inversedBy: 'versions')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?AttachmentType $attachmentType = null;
 
     #[ORM\Column(nullable: true)]

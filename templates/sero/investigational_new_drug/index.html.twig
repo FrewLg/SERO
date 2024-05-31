@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InvestigationalNewDrug index{% endblock %}
+
+{% block body %}
+    <h1>InvestigationalNewDrug index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for investigational_new_drug in investigational_new_drugs %}
+            <tr>
+                <td>{{ investigational_new_drug.id }}</td>
+                <td>{{ investigational_new_drug.name }}</td>
+                <td>
+                    <a href="{{ path('app_s_e_r_o_investigational_new_drug_show', {'id': investigational_new_drug.id}) }}">show</a>
+                    <a href="{{ path('app_s_e_r_o_investigational_new_drug_edit', {'id': investigational_new_drug.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_s_e_r_o_investigational_new_drug_new') }}">Create new</a>
+{% endblock %}
