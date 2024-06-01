@@ -7,7 +7,8 @@ use App\Entity\SERO\BoardMember;
 use App\Entity\SERO\ReviewAssignment;
 use App\Entity\SERO\ReviewersPool;
 use App\Entity\SERO\ReviewForm;
-use App\Entity\User;use Symfony\Component\Translation\TranslatableMessage;
+use App\Entity\User;
+use Symfony\Component\Translation\TranslatableMessage;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\SERO\ReviewAssignmentRepository;
 use Doctrine\ORM\EntityRepository;
@@ -112,16 +113,12 @@ class SecondaryReviewerAssignmentType extends AbstractType
         if (!$reviewAssignment instanceof ReviewAssignment) {
             return;
         }
-
-
         $builder
-
             ->add('reviewForm', EntityType::class, [
                 'class' => ReviewForm::class,
                 'choice_label' => 'name',    'label' => 'app.reviewForm',
                 'attr' => ['class' => 'form-control form-control-lg form-control-solid  select2 mb-4 p-4'],
             ])
-
             ->add(
                 'secReviewer',
                 EntityType::class,
@@ -132,9 +129,10 @@ class SecondaryReviewerAssignmentType extends AbstractType
                         "class" => "select2 form-control form-control-lg form-control-solid",
                     ],
                     'class' => ReviewersPool::class,
-                    'choice_label' => function (ReviewersPool $category) {
-                        return $category->getUser();
-                    }
+                    // 'choice_label' => function (ReviewersPool $category) {
+                    //     return $category->getUser();
+                    // }
+                    'choice_label' => 'name',
                 ]
             )
             ->add('duedate', DateType::class, array(

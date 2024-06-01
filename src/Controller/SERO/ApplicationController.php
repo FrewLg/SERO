@@ -39,6 +39,9 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Entity;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\Mailer\Exception\TransportException;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Email;
 
 #[Route('{_locale<%app.supported_locales%>}/protocol')]
 
@@ -97,6 +100,7 @@ class ApplicationController extends AbstractController
     public function new(
         Request $request,
         EntityManagerInterface $entityManager,
+        MailerInterface $mailer,
         SEROHelper $seroHelper
     ): Response {
         $this->denyAccessUnlessGranted('ROLE_USER');
@@ -121,19 +125,42 @@ class ApplicationController extends AbstractController
             $application->setIbcode($seroHelper->versionate($application));
             $application->setStatus(1);
             $entityManager->persist($application);
-            $reviewfile = $form->get('attachment')->getData();
-
-            // dd($form->get('attachment')->getData());
+            // $reviewfile = $request->get('attachment');
+            // dd($form->get('attachment'));
             if ($form->get('attachment')->getData()) {
                 $versionAttachement = $form->get('attachment')->getData();
                 $versionFileName = $seroHelper->fileNamer($version) . $versionAttachement->guessExtension();
                 $versionAttachement->move($this->getParameter('uploads_folder'), $versionFileName);
                 $version->setAttachment($versionFileName);
-                dd($form->get('attachmentType')->getData());
+                // dd($form->get('attachmentType')->getData());
                 $version->setAttachmentType($form->get('attachmentType')->getData());
             }
             //
+            // dd($this->getParameter('app_email'));
+            // send email
+            $email = (new TemplatedEmail())
+                ->from(new Address($this->getParameter('app_email'), $this->getParameter('app_name')))
+                ->to($application->getSubmittedBy()->getEmail())
+                ->bcc('frew.legese@gmail.com')
+                ->replyTo('frew.legese@gmail.com')
+                ->subject('Your application has been received!')
+                ->htmlTemplate('emails/news.html.twig')
+                ->context([
+                    'subject' => "Your application has been received",
+                    "body" => "We have received your protocol application successfully. You have obtained a protol number:" . $application->getIbcode() .
+                        ". Hence you can track your application status using a <a href='http://127.0.0.1:8008/en/protocol/" . $application->getId() . "/details'>link</a>",
+                    'name' => $application->getSubmittedBy(),
+                    'Authoremail' => $application->getSubmittedBy()->getEmail(),
+                ]);
+            try {
+                $mailer->send($email);
+                $this->addFlash("success", "Application has been submitted successfully!.");
+                // dd($application->getSubmittedBy()->getEmail());
+            } catch (TransportExceptionInterface $e) {
+                $this->addFlash("danger", "Error sending email!." . $e);
+            }
 
+            // endsend email
             $entityManager->persist($version);
             $entityManager->flush();
             return $this->redirectToRoute('application_index', [], Response::HTTP_SEE_OTHER);
@@ -153,6 +180,31 @@ class ApplicationController extends AbstractController
             'application' => $application,
 
         ]);
+    }
+
+    #[Route('/email', name: 'email_send', methods: ['GET', 'POST'])]
+    public function sendEmail(MailerInterface $mailer): Response
+    {
+        $email = (new Email())
+            ->from("SERO -EPHI <sero@ephi.gov.et>")
+            ->to('frew.legese@gmail.com')
+            // ->bcc('fikereyohans@gmail.com')
+            ->bcc('firewlegese74@gmail.com')
+            ->replyTo('frew.legese@gmail.com')
+            ->priority(Email::PRIORITY_HIGH)
+            ->subject('Second journals@ephi.gov.et  Time for Test Symfony Mailer!')
+            ->text('Sending a journals@ephi.gov.etss Test emails 465 here again!')
+            ->html('<br> It worked under the following Conf. Thanks! <br>
+            <p>  Configuration line is here:  MAILER_URL=smtp://ntcms@ephi.gov.et:n7cf455p4ssw0r6@mail.ephi.gov.et:587?encryption=tls&auth_mode=oauth !</p>');
+        try {
+            $mailer->send($email);
+            // dd();
+            $this->addFlash("success", "Email sent successfully!");
+        } catch (TransportExceptionInterface $e) {
+
+            $this->addFlash("danger", $e); //."Unable to send email!");
+        }
+        return $this->redirectToRoute('application_index', [], Response::HTTP_SEE_OTHER);
     }
 
 

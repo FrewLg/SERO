@@ -9,7 +9,8 @@ parameters:
     profile_pictures: '%kernel.project_dir%/public/uploads/files/profile_pictures'
     site_setting: '%kernel.project_dir%/uploads/files/site_setting/ephi2.jpg'
     ldap_dc_value : '%env(resolve:LDAP_DC_VALUE)%'
-    # app_name  : 'EPHI-NTC'
+    app_name  : 'SERO-EPHI'
+    app_email: sero@ephi.gov.et
     google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
     app.supported_locales: 'en|am|fr|or|sd|af|tg|so'
 services:

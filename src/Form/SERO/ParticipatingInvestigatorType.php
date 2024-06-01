@@ -26,8 +26,10 @@ class ParticipatingInvestigatorType extends AbstractType
             ->add('licenceNumber', TextType::class,[
                 'attr'=>[
                     'class'=>'form-control',
-                    'placeholder'=>'Enter licence Number'
-                    ]
+                    'placeholder'=>'Enter license number',
+                'label'=>'license number',
+
+                ],
             ])
             ->add('institution', TextType::class,[
                 'attr'=>[

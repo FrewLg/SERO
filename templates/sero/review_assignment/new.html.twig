@@ -14,21 +14,28 @@
 			<div class="accordion  accordion-toggle-arrow" id="accordionExample4">
 				<div class="card">
 					<div class="card-header" id="headingOne4">
-						<div class="card-title" >
+						<div class="card-title">
 							<i class="flaticon2-layers-1"></i>
 							{% trans %}Assign Reviewer{% endtrans %}
+
+
 						</div>
+						
+						<a href="{{ path('application_show', {'id': application.id}) }}" class=" text-muted ml-8" data-toggle="tooltip" data-placement="top" title="{{application.ibcode}}">
+
+							{{application.ibcode}}
+						</a>
+						<br><br>
 					</div>
-					<div  >
-						<div
-							class="card-body"> 
+					<div>
+						<div class="card-body">
 
 							<div class="example-preview">
 								<ul class="nav nav-tabs" id="myTab" role="tablist">
 									<li class="nav-item">
-										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home">
+										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#board-members-list">
 											<span class="nav-icon">
-												<i class="fa fa-calendar"></i>
+												<i class="fa fa-users text-success"></i>
 											</span>
 											<span class="nav-text">{% trans %}Board memebrs{% endtrans %}
 												{% if irb_review_assignment|length>0%}
@@ -43,9 +50,9 @@
 										</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link " id="board-members-tab" data-toggle="tab" href="#board-members" aria-controls="board-members">
+										<a class="nav-link " id="board-members-tab" data-toggle="tab" href="#non-members" aria-controls="board-members">
 											<span class="nav-icon">
-												<i class="fa fa-table"></i>
+												<i class="fa fa-database text-warning	"></i>
 											</span>
 											<span class="nav-text">{% trans %}External reviewers{% endtrans %}
 												{# <span class="label label-sm label-danger mr-2">{{ myreviews|length + closeds|length}}</span> #}
@@ -55,10 +62,10 @@
 
 								</ul>
 								<div class="tab-content mt-5" id="myTabContent">
-									<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
+									<div class="tab-pane fade active show" id="board-members-list" role="tabpanel" aria-labelledby="home-tab">
 										{{ include('sero/review_assignment/_form.html.twig') }}
 									</div>
-									<div class="tab-pane fade " id="board-members" role="tabpanel" aria-labelledby="board-members-tab">
+									<div class="tab-pane fade " id="non-members" role="tabpanel" aria-labelledby="board-members-tab">
 										{{ include('sero/review_assignment/extform.html.twig') }}
 
 									</div>

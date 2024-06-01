@@ -1,8 +1,15 @@
 # config/packages/mailer.yaml
 framework:
     mailer:
-#        dsn: '%env(MAILER_DSN)%'
+        # dsn: '%env(MAILER_DSN)%'
         transports:
-            main: '%env(MAILER_URL)%'
- #           alternative: '%env(MAILER_DSN_IMPORTANT)%'
-#MAILER_URL
+            # main: '%env(MAILER_URL)%'
+            alternative: '%env(MAILER_URL)%'
+
+        envelope:
+            sender: 'SERO EPHI <sero@ephi.gov.et>'
+        headers:
+            From: 'SERO EPHI <sero@ephi.gov.et>'
+            # Bcc: 'baz@example.com'
+            X-Custom-Header: 'SERO EPHI'
+        message_bus: false

@@ -115,7 +115,7 @@ Compliants: __Compliants
 'Remember me': አስታውሰኝ
 'Forget Password ?': 'የይለፍ ቃል ረስተዋል?'
 '--Select a reveiwer from board members--': '--ከቦርድ አባላት ገምጋሚ ​​ይምረጡ--'
-"-- Select from reviewers' poll--": '- ከገምጋሚዎች ማህደሮች ይምረጡ --'
+"--Select from reviewers' poll--": '- ከገምጋሚዎች ማህደሮች ይምረጡ --'
 "Don't have an account yet?": 'እስካሁን መለያ የለህም?'
 'Sign Up!': ተመዝገብ
 'New application': 'አዲስ ማመልከቻ'
@@ -162,8 +162,8 @@ Approved: ጸድቋል
 'Not approved': አልጸደቀም
 'Reviewers pool': 'የገምጋሚዎች ማከማቻ'
 'Add  Reviewer': '__Add  Reviewer'
-'Board memebrs': '__Board memebrs'
-'External reviewers': '__External reviewers'
+'Board memebrs': 'የቦርድ አባላት'
+'External reviewers': 'የውጭ ገምጋሚዎች'
 users: __users
 'Protocol users': '__Protocol users'
 English: እንግሊዝኛ

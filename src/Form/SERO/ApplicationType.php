@@ -169,7 +169,7 @@ class ApplicationType extends AbstractType
             ])
             ->add('attachment', FileType::class, [
                 'label' => 'Upload attachment',
-                'mapped' => false,
+                // 'mapped' => false,
                 'attr' => [
                     'class' => 'form-control my-4',
                 ],
@@ -182,7 +182,7 @@ class ApplicationType extends AbstractType
                 'attr' => [
                     'class' => '  form-control form-control-lg form-control-solid',
                 ],
-                'mapped' => false,
+                // 'mapped' => false,
                 'required' => false,
                 'choice_label' => 'name',
             ]);

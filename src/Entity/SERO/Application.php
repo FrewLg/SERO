@@ -137,6 +137,12 @@ class Application
 
     #[ORM\Column]
     private ?int $status = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $attachment = null;
+
+    #[ORM\ManyToOne(inversedBy: 'applications')]
+    private ?AttachmentType $attachmentType = null;
  
     public function __construct()
     {
@@ -650,6 +656,30 @@ class Application
     public function setStatus(int $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getAttachment(): ?string
+    {
+        return $this->attachment;
+    }
+
+    public function setAttachment(?string $attachment): static
+    {
+        $this->attachment = $attachment;
+
+        return $this;
+    }
+
+    public function getAttachmentType(): ?AttachmentType
+    {
+        return $this->attachmentType;
+    }
+
+    public function setAttachmentType(?AttachmentType $attachmentType): static
+    {
+        $this->attachmentType = $attachmentType;
 
         return $this;
     }

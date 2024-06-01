@@ -1,9 +1,10 @@
 twig:
     globals:  { 
         app_name: 'SERO-EPHI', 
-        app_description: 'Scientific and Ethical Review Online', 
+        app_description: 'Scientific and Ethical Review Office Online', 
         organization: null, 
         app_url: ntc.ephi.gov.et, 
+        app_email: sero@ephi.gov.et,
         site_logo: ephi.png, 
         copyright: 'SNTC -EPHI', 
         navbar_background: dark, 
