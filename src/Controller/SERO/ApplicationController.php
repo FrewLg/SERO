@@ -188,17 +188,16 @@ class ApplicationController extends AbstractController
         $email = (new Email())
             ->from("SERO -EPHI <sero@ephi.gov.et>")
             ->to('frew.legese@gmail.com')
-            // ->bcc('fikereyohans@gmail.com')
             ->bcc('firewlegese74@gmail.com')
             ->replyTo('frew.legese@gmail.com')
             ->priority(Email::PRIORITY_HIGH)
-            ->subject('Second journals@ephi.gov.et  Time for Test Symfony Mailer!')
-            ->text('Sending a journals@ephi.gov.etss Test emails 465 here again!')
+            ->subject('SERO@ephi.gov.et  Time for Test Symfony Mailer!')
+            ->text('Sending a ser0@ephi.gov.etss Test emails 465 here again!')
             ->html('<br> It worked under the following Conf. Thanks! <br>
-            <p>  Configuration line is here:  MAILER_URL=smtp://ntcms@ephi.gov.et:n7cf455p4ssw0r6@mail.ephi.gov.et:587?encryption=tls&auth_mode=oauth !</p>');
+            <p>  Configuration line is here: MAILER_URL=smtp://ntcms@ephi.gov.et:n7cf455p4ssw0r6@mail.ephi.gov.et:587?encryption=tls&auth_mode=oauth !</p>');
         try {
             $mailer->send($email);
-            // dd();
+            // dd();TransportExceptionInterface
             $this->addFlash("success", "Email sent successfully!");
         } catch (TransportExceptionInterface $e) {
 

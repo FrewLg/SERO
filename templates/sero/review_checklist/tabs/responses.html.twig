@@ -12,9 +12,14 @@
 		<div class="card-header flex-wrap border-0 pt-3 pb-0">
 			<div class="card-title">
 				<h3 class="card-label">{% trans %}Reviewer Response{% endtrans %}
-					<span class="d-block text-muted pt-2 font-size-sm">{{ review_assignment.application.title}}</span>
+					<span class="d-block text-muted pt-2 font-size-sm">{{ review_assignment.application.ibcode}}</span>
 				</h3>
+
 			</div>
+			<span class="card-title text-success font-size-sm">
+				<i class="fa fa-check text-success m-1"></i>
+				{% trans %}Submitted{% endtrans %}
+			</span>
 		</div>
 		<div class="card-body">
 			<div class="d-flex flex-wrap justify-content-between mt-1">
@@ -31,9 +36,9 @@
 							{{ review_assignment.irbreviewer.profile.dirctorate}}</a>
 					</div>
 					<span class="font-weight-bold text-dark-50">
-						{{ review_assignment.application.description}}
+						{{ review_assignment.application.title}}
 					</span>
-					<span class=" text-hover-warning font-size-h5 font-weight-bold mr-3">
+					<span class=" text-hover-warning   font-weight-bold mr-3">
 
 						{% trans %}Reviewed at{% endtrans %}:
 						{{ review_assignment.reviewedAt|date('h:m sa d/m/y')}}
