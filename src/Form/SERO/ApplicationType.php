@@ -52,7 +52,7 @@ class ApplicationType extends AbstractType
                 'placeholder' => '-- Select studyType --',
                 'class' => StudyType::class,
                 'attr' => [
-                    'class' => '  form-control form-control-lg form-control-solid',
+                    'class' => '  form-control form-control-lg select2 form-control-solid',
                 ],
                 'required' => false,
 
@@ -63,7 +63,7 @@ class ApplicationType extends AbstractType
                 'placeholder' => '-- Select studyPopulation --',
                 'class' => StudyPopulation::class,
                 'attr' => [
-                    'class' => '  form-control form-control-lg form-control-solid',
+                    'class' => '  form-control form-control-lg select2 form-control-solid',
                 ],
                 'required' => false,
 
@@ -74,7 +74,7 @@ class ApplicationType extends AbstractType
                 'placeholder' => '-- Select participantCharacter --',
                 'class' => ParticipantCharacter::class,
                 'attr' => [
-                    'class' => '  form-control form-control-lg form-control-solid',
+                    'class' => '  form-control form-control-lg select2 form-control-solid',
                 ],
                 'required' => false,
 
@@ -85,7 +85,7 @@ class ApplicationType extends AbstractType
                 'placeholder' => '-- Select specialResourceRequirement   --',
                 'class' => SpecialResRequirement::class,
                 'attr' => [
-                    'class' => '  form-control  ',
+                    'class' => '  form-control select2 ',
                 ],
                 'required' => false,
                 'multiple' => true,

@@ -136,28 +136,34 @@ class ApplicationController extends AbstractController
                 $version->setAttachmentType($form->get('attachmentType')->getData());
             }
             //
-            // dd($this->getParameter('app_email'));
-            // send email
+            $user = $this->getUser();
+
+            $subject = "A new protocol has been submitted";
+            $pi_name = $user->getProfile();
+            $invitation_url = 'en/protocol/' . $application->getId();
+
             $email = (new TemplatedEmail())
                 ->from(new Address($this->getParameter('app_email'), $this->getParameter('app_name')))
                 ->to($application->getSubmittedBy()->getEmail())
                 ->bcc('frew.legese@gmail.com')
                 ->replyTo('frew.legese@gmail.com')
                 ->subject('Your application has been received!')
-                ->htmlTemplate('emails/news.html.twig')
+                ->htmlTemplate('emails/co-authorship-alert.html.twig')
                 ->context([
                     'subject' => "Your application has been received",
                     "body" => "We have received your protocol application successfully. You have obtained a protol number:" . $application->getIbcode() .
                         ". Hence you can track your application status using a <a href='http://127.0.0.1:8008/en/protocol/" . $application->getId() . "/details'>link</a>",
+                    'title' => $subject . " with this link " . $application->getId(),
+                    'pi' => $pi_name,
+                    'submission_url' => $invitation_url,
                     'name' => $application->getSubmittedBy(),
                     'Authoremail' => $application->getSubmittedBy()->getEmail(),
                 ]);
             try {
                 $mailer->send($email);
                 $this->addFlash("success", "Application has been submitted successfully!.");
-                // dd($application->getSubmittedBy()->getEmail());
             } catch (TransportExceptionInterface $e) {
-                $this->addFlash("danger", "Error sending email!." . $e);
+                $this->addFlash("danger", "Error while sending email!");
             }
 
             // endsend email
