@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\UserInfo\WorkExperience;
 use App\Repository\ProfileRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -51,6 +54,23 @@ class Profile
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    /**
+     * @var Collection<int, WorkExperience>
+     */
+    #[ORM\OneToMany(targetEntity: WorkExperience::class, mappedBy: 'profile', orphanRemoval: true,  cascade: ['persist', 'remove'])]
+    private Collection $workExperiences;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $region = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $gender = null;
+
+    public function __construct()
+    {
+        $this->workExperiences = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,8 +79,7 @@ class Profile
     public function __toString()
     {
         
-//    return $this->firstName."";
-   return $this->firstName." ".$this->lastName."";
+   return $this->firstName." " .$this->lastName;
     }
 
     
@@ -204,6 +223,60 @@ class Profile
     public function setImage(?string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WorkExperience>
+     */
+    public function getWorkExperiences(): Collection
+    {
+        return $this->workExperiences;
+    }
+
+    public function addWorkExperience(WorkExperience $workExperience): static
+    {
+        if (!$this->workExperiences->contains($workExperience)) {
+            $this->workExperiences->add($workExperience);
+            $workExperience->setProfile($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkExperience(WorkExperience $workExperience): static
+    {
+        if ($this->workExperiences->removeElement($workExperience)) {
+            // set the owning side to null (unless already changed)
+            if ($workExperience->getProfile() === $this) {
+                $workExperience->setProfile(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?string $region): static
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    public function isGender(): ?bool
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?bool $gender): static
+    {
+        $this->gender = $gender;
 
         return $this;
     }

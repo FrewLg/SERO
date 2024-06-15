@@ -506,9 +506,12 @@ class ApplicationController extends AbstractController
     #[Route('/{id}', name: 'application_delete', methods: ['POST'])]
     public function delete(Request $request, Application $application, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $application->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($application);
+        if ($this->isCsrfTokenValid('delete'.$application->getId(), $request->getPayload()->get('_token'))) {
+            $application->setStatus('withdrawn');
+            $entityManager->persist($application);
             $entityManager->flush();
+        $this->addFlash("success", "The Protocol has been withdrawn!");
+
         }
 
         return $this->redirectToRoute('application_index', [], Response::HTTP_SEE_OTHER);

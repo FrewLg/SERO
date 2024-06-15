@@ -174,9 +174,28 @@ Amharic: አማርኛ
 Recommendation: 'የምክር ሀሳብ'
 'No review responses has been  given for this protocol yet': 'ምንም የግምገማ ምላሾች አልተሰጡም'
 'Continuation request': '__Continuation request'
-"Reviewer hasn't responded yet": "ገምጋሚ እስካሁን ምላሽ አልሰጠም!"
+"Reviewer hasn't responded yet": 'ገምጋሚ እስካሁን ምላሽ አልሰጠም!'
 'No reviewer sent any response on this application yet': 'በዚህ መተግበሪያ ላይ እስካሁን ምንም ምላሽ የላከ ማንም ገምጋሚ የለም'
 'Changes Made': 'ለውጦች ተደርገዋል'
 Attendee: __Attendee
 'Meeting Agendas': 'የስብሰባ አጀንዳዎች'
 'Submit a Review Response': 'የግምገማ ምላሽ አስገባ'
+'Survey Form': '__Survey Form'
+'Build a questionaire form': '__Build a questionaire form'
+'Add new questionaire section': '__Add new questionaire section'
+Save: __Save
+'Questionaire section': '__Questionaire section'
+'Answer Type': '__Answer Type'
+'Required?': '__Required?'
+'Save questionaire': '__Save questionaire'
+Form: __Form
+'Review form': '__Review form'
+Allforms: __Allforms
+'Build a review form': '__Build a review form'
+'Save form': '__Save form'
+'Add new review form section': '__Add new review form section'
+Submitted: __Submitted
+Revise: __Revise
+'User Group': '__User Group'
+'Add Participating Investigators': 'ተሳታፊ መርማሪዎችን ያክሉ'
+'PARTICIPATING INVESTIGATORS': 'ተሳታፊ መርማሪዎች'
