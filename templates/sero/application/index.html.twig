@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% trans  %}Application{% endtrans  %}
+{% block title %}
+	{% trans  %}Application{% endtrans  %}
 {% endblock %}
 
 {% block body %}
@@ -107,8 +108,8 @@
 						</div>
 					</div>
 					{# <div id="div" class="col-lg-3 col-xl-3 col-md-9 mt-5 mt-lg-0">
-																					<a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
-																				</div> #}
+																										<a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
+																									</div> #}
 
 
 				</div>
@@ -143,24 +144,31 @@
 											<span></span>
 										</label>
 									</td>
-											<td><b class="text-muted"> {{  application.ibcode }} :
-											</b><br>
-										<span class='label label-light-info label-inline'>{{ application.versions|length }}
-											{% trans %}Version{% endtrans  %}
+									<td>
+										<b class="text-muted">
+											{{  application.ibcode }}
+											 <span class='label label-light-warning label-inline'>{{ application.versions|length }}
+											{% trans %}V{% endtrans  %}
 										</span>
-													{{ application.title }}
-													<br><span class="text-muted title-text ">	{{ application.createdAt ? application.createdAt|date('h:i D-m-y ') : '' }}</span>
-											  
+										</b><br>
+										
+										{{ application.title }}
+										<br>
+										<p class="font-weight-lighter text-muted">
+											<small>
+												{{ application.createdAt ? application.createdAt|date('h:i D-m-y ') : '' }}
+											</small>
+										</p>
 
 
-												</td> 
+									</td>
 									<td>
 										{# {% if application.meeting %}
-											{{application.meeting.status }}
-										{% endif %} #}
+																					{{application.meeting.status }}
+																				{% endif %} #}
 									</td>
 
- 									<td>
+									<td>
 										{# {{ application.reviewAssignments|length }} #}
 										{% if application.reviewAssignments|length>=0 %}
 											{% set count = 0 %}
@@ -203,7 +211,7 @@
 													</span>
 
 													{# <span class='label label-light-success label-inline'>ddd
-																										</span> #}
+																																							</span> #}
 												{% endif %}
 											{% else %}
 
@@ -211,18 +219,20 @@
 												</span>
 											{% endfor %}
 											{# {% elseif confirmation.status()  %}
-																						<span class='label label-light-success label-inline'>responded
-																						</span> #}
+																																	<span class='label label-light-success label-inline'>responded
+																																	</span> #}
 										{% endif %}
 
 									</td>
-									 
+
 									{# <td></td> #}
-									<td nowrap="nowrap">
+									<td
+										nowrap="nowrap">
 
 										{# <a href="{{ path('app_history', {'id': application.id}) }}" class='btn btn-light-primary btn-sm'>history</a> #}
 										<a href="{{ path('application_show', {'id': application.id}) }}" class='btn btn-light-success btn-sm'>show</a>
- 										<a href="{{ path('ethical_clearance_cert', {'id': application.id}) }}" class='btn btn-light-info btn-sm'>Certify</a>
+										 <a href="{{ path('ethical_clearance_cert', {'id': application.id}) }}" class='btn btn-light-info btn-sm'>Certify</a>
+										<a href="{{ path('app_approve', {'id': application.id}) }}" class='btn btn-light-info btn-sm'>Approve</a>
 										{# <a href="{{ path('statement', {'id': application.id}) }}" class='btn btn-light-warning btn-sm'>statement</a> #}
 									</td>
 								</tr>
@@ -272,22 +282,22 @@ $("#searchResult").css("display" : none);
 	{# <script src="https://code.jquery.com/jquery-3.7.0.js"></script> #}
 
 	{# <script type="text/javascript">
-				// select all checkboxes
-		$("#select_all").change(function () { // "select all" change
-		$(".checkbox").prop('checked', $(this).prop("checked")); // change all ".checkbox" checked status
-		});
-		
-		// ".checkbox" change
-		$('.checkbox').change(function () { // uncheck "select all", if one of the listed checkbox item is unchecked
-		if (false == $(this).prop("checked")) { // if this item is unchecked
-		$("#select_all").prop('checked', false); // change "select all" checked status to false
-		}
-		// check "select all" if all checkbox items are checked
-		if ($('.checkbox:checked').length == $('.checkbox').length) {
-		$("#select_all").prop('checked', true);
-		}
-		});
-			</script> #}<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"> </script>
+					// select all checkboxes
+			$("#select_all").change(function () { // "select all" change
+			$(".checkbox").prop('checked', $(this).prop("checked")); // change all ".checkbox" checked status
+			});
+			
+			// ".checkbox" change
+			$('.checkbox').change(function () { // uncheck "select all", if one of the listed checkbox item is unchecked
+			if (false == $(this).prop("checked")) { // if this item is unchecked
+			$("#select_all").prop('checked', false); // change "select all" checked status to false
+			}
+			// check "select all" if all checkbox items are checked
+			if ($('.checkbox:checked').length == $('.checkbox').length) {
+			$("#select_all").prop('checked', true);
+			}
+			});
+				</script> #}<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"> </script>
 	<script type="text/javascript">
 		$("#live_search").keyup(function () {
 var input = $($this).val();

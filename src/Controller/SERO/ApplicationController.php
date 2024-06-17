@@ -8,6 +8,7 @@ use App\Entity\SERO\ApplicationFeedback;
 use App\Entity\SERO\Continuation;
 use App\Entity\SERO\DecisionType;
 use App\Entity\SERO\Icf;
+use App\Entity\SERO\IrbCertificate;
 use App\Entity\SERO\ReviewChecklistGroup;
 use App\Form\SERO\ReviewChecklistGroupType;
 use App\Entity\SERO\ReviewAssignment;
@@ -181,6 +182,59 @@ class ApplicationController extends AbstractController
     #[Route('/{id}/history', name: 'app_history', methods: ['GET'])]
     public function history(Application $application, Request $request, EntityManagerInterface $entityManager, ApplicationFeedbackRepository $appferepo, MailerInterface $mailer): Response
     {
+
+        return $this->render('sero/application/application-history.html.twig', [
+            'application' => $application,
+
+        ]);
+    }
+
+    #[Route('/{id}/approve', name: 'app_approve', methods: ['GET'])]
+    public function approve(Application $application,
+    SEROHelper $seroHelper,
+    Request $request, EntityManagerInterface $entityManager, ApplicationFeedbackRepository $appferepo, MailerInterface $mailer): Response
+    {
+
+
+        $cert= new IrbCertificate();
+        $cert->setIrbApplication($application);
+        $cert->setValidUntil(new \DateTime('+6 months'));
+        $certCode=$seroHelper->certIdGenerator($application);
+        $cert->setCertificateCode( $certCode);
+        $cert->setApprovedAt(new \DateTime());
+        $cert->setApprovedBy($this->getUser());
+        $entityManager->persist($cert);
+        $entityManager->flush();
+
+        $user = $application->getSubmittedBy();
+
+        $subject =  $certCode." ";
+        $pi_name = $user->getProfile();
+        $invitation_url = 'en/protocol/' . $application->getId();
+
+        $email = (new TemplatedEmail())
+            ->from(new Address($this->getParameter('app_email'), $this->getParameter('app_name')))
+            ->to($application->getSubmittedBy()->getEmail())
+            ->bcc('frew.legese@gmail.com')
+            ->replyTo('frew.legese@gmail.com')
+            ->subject('Your protocol application status')
+            ->htmlTemplate('emails/co-authorship-alert.html.twig')
+            ->context([
+                'subject' => "Your application has been approved",
+                "body" => "We have reviewed your protocol application and approved. You have obtained a IRB ethical clearance certificate number:" . $certCode .
+                    ". Hence you can view your protocol application status using a <a href='http://127.0.0.1:8008/en/protocol/" . $application->getId() . "/details'> link </a>",
+                'title' => $subject . " with this link " . $application->getIbcode(),
+                'pi' => $pi_name,
+                'submission_url' => $invitation_url,
+                'name' => $application->getSubmittedBy(),
+                'Authoremail' => $application->getSubmittedBy()->getEmail(),
+            ]);
+        try {
+            $mailer->send($email);
+            $this->addFlash("success", "Application has been approved and mailed to the researcher successfully!.");
+        } catch (TransportExceptionInterface $e) {
+            $this->addFlash("danger", "Error while sending email!");
+        }
 
         return $this->render('sero/application/application-history.html.twig', [
             'application' => $application,

@@ -2,7 +2,7 @@ twig:
     globals:  { 
         app_name: 'SERO-EPHI', 
         app_description: 'Scientific and Ethical Review Office Online', 
-        organization: null, 
+        organization: EPHI, 
         app_url: sero.ephi.gov.et, 
         app_email: sero@ephi.gov.et,
         site_logo: ephi.png, 

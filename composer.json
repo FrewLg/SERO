@@ -15,6 +15,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.0",
         "dompdf/dompdf": "^2.0",
+        "endroid/qr-code": "^5.0",
         "enyo/dropzone": "^5.9",
         "google/recaptcha": "~1.1",
         "intervention/image": "^3.6",

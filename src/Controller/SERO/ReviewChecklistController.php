@@ -42,7 +42,7 @@ class ReviewChecklistController extends AbstractController
 
     
 
-    #[Route('/{id}', name: 'app_s_e_r_o_review_checklist_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'review_checklist_delete', methods: ['POST'])]
     public function delete(Request $request, ReviewChecklist $reviewChecklist, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete' . $reviewChecklist->getId(), $request->getPayload()->get('_token'))) {

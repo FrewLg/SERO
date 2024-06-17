@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{% trans %}Review Form{% endtrans %}
+	{% trans %}Survey Form{% endtrans %}
 {% endblock %}
 
-{% macro displayVersion(questionaire) %}
+{% macro displayVersion(reviewerForm) %}
 
-	<table class="table">
+	<table class="table table-borderless" style="margin: 0;">
 		<tr>
 			<td></td>
 			<td>
-				{{form_widget(questionaire)}}
+				{{form_widget(reviewerForm)}}
 			</td>
-			<td>
+			<td style="width: 5%;">
 
-				<button type="button" class="btn   btn-danger close  remove-collection-widget btn-lg mt-8">
+				<button type="button" class="btn align-left  btn-danger close  remove-collection-widget btn-lg mt-9">
 					<span aria-hidden="true" class="btn   btn-sm  btn-danger">×</span>
 				</button>
 			</td>
@@ -24,254 +24,316 @@
 {% endmacro %}
 
 {% block body %}
-
-
 	<div class="container">
-		<div class="row  ">
-			<div class="card my-4  ">
-				<div class="card-header">
+		<div class="row">
+			<div class="card my-8">
+				<div class="card-header" id="headingOne4">
 					<h5 class="card-title">
 						<i class="flaticon2-layers-1"></i>
+
 						{{ reviewForm.name}}
 					</h5>
 					<span class="text-muted">
-						{% trans %}Build a review form{% endtrans %}
+						{% trans %}Build a reviewer form{% endtrans %}
 					</span>
 				</div>
 				<div class="card-body">
+					<div class="my-2">
+						<div class="modal fade" id="exampleModalSizeDefault" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeDefault" style="display: none;" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">{% trans %}Add new form section{% endtrans %}</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<i aria-hidden="true" class="ki ki-close"></i>
+										</button>
+									</div>
+									<div class="modal-body">
+										{{form_start(reviewChecklistGroupform)}}
 
-					{{ form_start(form) }}
-					<div class="form-group  row">
-						<label class="col-form-label col-3 text-lg-right text-left">
-							{{ form_label(form.checklistGroup) }}
-						</label>
-						<div class="col-6">
-							{{ form_widget(form.checklistGroup) }}
+										{{form_widget(reviewChecklistGroupform)}}
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
+										<button class="btn btn-primary font-weight-bold">{% trans %}Save{% endtrans %}</button>
+										{{form_end(reviewChecklistGroupform)}}
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="col-3">
-							<button type="button" class="btn btn-light-primary btn-sm   " data-toggle="modal" data-target="#exampleModalSizeDefault">
-								<span aria-hidden="true">+</span>
-								{% trans %}Questionaire section{% endtrans %}</button>
+
+						{{ form_start(form) }}
+						<div class="form-group  row">
+							<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.checklistGroup) }}
+							</label>
+
+							<div class="col-6">
+
+								{{ form_widget(form.checklistGroup) }}
+
+							</div>
+							<div class="col-3">
+								<button type="button" class="btn btn-light-primary btn-sm   " data-toggle="modal" data-target="#exampleModalSizeDefault">
+									<span aria-hidden="true">+</span>
+									{% trans %}reviewerForm section{% endtrans %}</button>
+							</div>
 						</div>
-					</div>
-					<div class="form-group  row">
-						<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.name) }}
-						</label>
-						<div class="col-8">
-							{{ form_widget(form.name) }}
+						<div class="form-group  row">
+							<label class="col-form-label col-3 text-lg-right text-left">{{ form_label(form.name) }}
+							</label>
+							<div class="col-8">
+								{{ form_widget(form.name) }}
+							</div>
 						</div>
-					</div>
 
-					<div class="form-group   ">
-						<div class="row">
+						<div class="form-group  container">
+							<div class="row">
 
-							<div class="col-12 ">
-								<div class="form-group">
-									<p class="font-weight-bold">{% trans %}Answer Type{% endtrans %}:</p>
-									<div class="row">
+								<div class="col-12 ">
+									<div class="form-group">
+										<p class="font-weight-bold">{% trans %}Answer Type{% endtrans %}:</p>
+										<div class="row">
 
 
-										<div class="col-lg-3">
-											<label class="option option option-plain">
-												<span class="option-control">
-													<span class="radio">
-														<input type="radio" onclick="javascript:textFunction();" id="yesCheck" name="answer_type" value="3">
-														<span></span>
-													</span>
-												</span>
-												<span class="option-label">
-													<span class="option-head">
-														<span class="option-title">TextArea feedback</span>
-													</span>
-													<span class="option-body">A user can give an answer using his own words in a texarea
-													</span>
-												</span>
-											</label>
-										</div>
-										<div class="col-lg-3">
-											<label class="option option option-plain">
-												<span class="option-control">
-													<span class="radio">
-														<input type="radio" onclick="javascript:textFunction();" id="textboxCheck" name="answer_type" value="4">
-														<span></span>
-													</span>
-												</span>
-												<span class="option-label">
-													<span class="option-head">
-														<span class="option-title">TextBox feedback</span>
-													</span>
-													<span class="option-body">A user can give an answer using his own words in a textbox</span>
-												</span>
-											</label>
-										</div>
-										<div class="col-lg-3">
-											<label class="option option-plain">
-												<span class="option-control">
-													<span class="radio">
-														<input type="radio" onclick="javascript:choicesFunction();" id="choiceCheck" name="answer_type" value="1">
-														<span></span>
-													</span>
-												</span>
-												<span class="option-label">
-													<span class="option-head">
-														<span class="option-title">Single choice
+											<div class="col-lg-3">
+												<label class="option option option-plain">
+													<span class="option-control">
+														<span class="radio">
+															<input type="radio" onclick="javascript:textFunction();" id="yesCheck" name="answer_type" value="3">
+															<span></span>
 														</span>
 													</span>
-													<span class="option-body">A user can only choose one answer at time</span>
-												</span>
-											</label>
-										</div>
-										<div class="col-lg-3">
-											<label class="option option option-plain">
-												<span class="option-control">
-													<span class="radio">
-														<input type="radio" onclick="javascript:choicesFunction();" id="choiceCheck" name="answer_type" value="2">
-														<span></span>
+													<span class="option-label">
+														<span class="option-head">
+															<span class="option-title">TextArea feedback</span>
+														</span>
+														<span class="option-body">
+															Texarea input
+														</span>
 													</span>
-												</span>
-												<span class="option-label">
-													<span class="option-head">
-														<span class="option-title">Multiple choice</span>
+												</label>
+											</div>
+											<div class="col-lg-3">
+												<label class="option option option-plain">
+													<span class="option-control">
+														<span class="radio">
+															<input type="radio" onclick="javascript:textFunction();" id="textboxCheck" name="answer_type" value="4">
+															<span></span>
+														</span>
 													</span>
-													<span class="option-body">A user can give a multiple answer with checkbox</span>
-												</span>
-											</label>
-										</div>
-                                {# <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"> #}
+													<span class="option-label">
+														<span class="option-head">
+															<span class="option-title">TextBox feedback</span>
+														</span>
+														<span class="option-body">Textbox input</span>
+													</span>
+												</label>
+											</div>
+											<div class="col-lg-3">
+												<label class="option option-plain">
+													<span class="option-control">
+														<span class="radio">
+															<input type="radio" onclick="javascript:choicesFunction();" id="choiceCheck" name="answer_type" value="1">
+															<span></span>
+														</span>
+													</span>
+													<span class="option-label">
+														<span class="option-head">
+															<span class="option-title">Single choice
+															</span>
+														</span>
+														<span class="option-body">Single answer radiobox</span>
+													</span>
+												</label>
+											</div>
+											<div class="col-lg-3">
+												<label class="option option option-plain">
+													<span class="option-control">
+														<span class="radio">
+															<input type="radio" onclick="javascript:choicesFunction();" id="choiceCheck" name="answer_type" value="2">
+															<span></span>
+														</span>
+													</span>
+													<span class="option-label">
+														<span class="option-head">
+															<span class="option-title">Multiple choice</span>
+														</span>
+														<span class="option-body">Multiple answer checkbox</span>
+													</span>
+												</label>
+											</div>
 
-										<div class="col-lg-3">
-											<label class="option option option-plain">
-												<span class="option-control">
-													<span class="radio">
-														<input type="radio" required onclick="javascript:dateFunction();" id="noCheck" name="answer_type" value="5">
-														<span></span>
+											<div class="col-lg-3">
+												<label class="option option option-plain">
+													<span class="option-control">
+														<span class="radio">
+															<input type="radio" onclick="javascript:choicesFunction();" id="choiceCheck" name="answer_type" value="9">
+															<span></span>
+														</span>
 													</span>
-												</span>
-												<span class="option-label">
-													<span class="option-head">
-														<span class="option-title">Date choice</span>
+													<span class="option-label">
+														<span class="option-head">
+															<span class="option-title">Dropdown choice</span>
+														</span>
+														<span class="option-body">Selection box</span>
 													</span>
-													<span class="option-body">A user can answer with date selector</span>
-												</span>
-											</label>
+												</label>
+											</div>
+
+											<div class="col-lg-3">
+												<label class="option option option-plain">
+													<span class="option-control">
+														<span class="radio">
+															<input type="radio" required onclick="javascript:dateFunction();" id="noCheck" name="answer_type" value="5">
+															<span></span>
+														</span>
+													</span>
+													<span class="option-label">
+														<span class="option-head">
+															<span class="option-title">Date choice</span>
+														</span>
+														<span class="option-body">Date selector</span>
+													</span>
+												</label>
+											</div>
+											<div class="col-lg-3">
+												<label class="option option option-plain">
+													<span class="option-control">
+														<span class="radio">
+															<input type="radio" required onclick="javascript:dateFunction();" id="noCheck" name="answer_type" value="6">
+															<span></span>
+														</span>
+													</span>
+													<span class="option-label">
+														<span class="option-head">
+															<span class="option-title">Number choice</span>
+														</span>
+														<span class="option-body">Numeral input</span>
+													</span>
+												</label>
+											</div>
+											{# <div class="col-lg-3">
+																																		<label class="option option option-plain">
+																																			<span class="option-control">
+																																				<span class="radio">
+																																					<input type="radio" required onclick="javascript:dateFunction();" id="noCheck" name="answer_type" value="7">
+																																					<span></span>
+																																				</span>
+																																			</span>
+																																			<span class="option-label">
+																																				<span class="option-head">
+																																					<span class="option-title">File choice</span>
+																																				</span>
+																																				<span class="option-body">A user can answer with file upload/ integer in a field</span>
+																																			</span>
+																																		</label>
+																																	</div> #}
+											<div class="col-lg-3">
+												<label class="option option option-plain">
+													<span class="option-control">
+														<span class="radio">
+															<input type="radio" required onclick="javascript:dateFunction();" id="noCheck" name="answer_type" value="8">
+															<span></span>
+														</span>
+													</span>
+													<span class="option-label">
+														<span class="option-head">
+															<span class="option-title">Email select choice</span>
+														</span>
+														<span class="option-body">Email input</span>
+													</span>
+												</label>
+											</div>
 										</div>
-										<div class="col-lg-3">
-											<label class="option option option-plain">
-												<span class="option-control">
-													<span class="radio">
-														<input type="radio" required onclick="javascript:dateFunction();" id="noCheck" name="answer_type" value="6">
-														<span></span>
-													</span>
-												</span>
-												<span class="option-label">
-													<span class="option-head">
-														<span class="option-title">Number choice</span>
-													</span>
-													<span class="option-body">A user can answer with number/ integer in a field</span>
-												</span>
-											</label>
-										</div>
-										<div class="col-lg-3">
-											<label class="option option option-plain">
-												<span class="option-control">
-													<span class="radio">
-														<input type="radio" required onclick="javascript:dateFunction();" id="noCheck" name="answer_type" value="7">
-														<span></span>
-													</span>
-												</span>
-												<span class="option-label">
-													<span class="option-head">
-														<span class="option-title">File choice</span>
-													</span>
-													<span class="option-body">A user can answer with file upload/ integer in a field</span>
-												</span>
-											</label>
-										</div>
-										<div class="col-lg-3">
-											<label class="option option option-plain">
-												<span class="option-control">
-													<span class="radio">
-														<input type="radio" required onclick="javascript:dateFunction();" id="noCheck" name="answer_type" value="8">
-														<span></span>
-													</span>
-												</span>
-												<span class="option-label">
-													<span class="option-head">
-														<span class="option-title">Email select choice</span>
-													</span>
-													<span class="option-body">A user can enter an email addresses</span>
-												</span>
-											</label>
+									</div>
+								</div>
+
+							</div>
+
+							<div id="ifNo" style="display:none;" class="text-muted">
+								<i class="la la-info text-danger"></i>
+								User Will enter a text in a text box for this answer type.
+							</div>
+
+							<div id="dateSection" style="display:none;" class="text-muted mb-4">
+								<i class="la la-info text-danger"></i>
+								User Will select and/or insert their input  for this answer type.
+							</div>
+							<div id="ifYes" style="display:none;">
+
+								<div class="container">
+
+									<div class="col-md-8   ">
+										<button type="button" required="required" class="btn  add-another-collection-widget   btn-sm btn-light-primary float-center " data-list-selector="#objective-fields-list">
+											<span aria-hidden="true">+</span>
+											{% trans %}Add choice{% endtrans %}
+										</button>
+									</div>
+								</div>
+								<div class="form-group  ">
+									<div
+										class="row ">
+										{# <div class="col-6 "></div> #}
+										<div class="col-12 ">
+											<ul id="objective-fields-list" class="form-group" data-prototype="{{_self.displayVersion(form.answers.vars.prototype)|e }}" data-widget-tags="{{ '<div class=""></div>'|e }}" data-widget-counter="{{ form.answers|length }}">
+												{% for protocol in form.answers %}
+													{# <div class="col-12 "> #}
+													{{ _self.displayVersion(reviewerForm) }}
+													{# </div> #}
+												{% endfor %}
+											</ul>
 										</div>
 									</div>
 								</div>
 							</div>
 
-						</div>
-					</div>
-
-					<div id="ifNo" style="display:none;" class="text-muted">
-						<i class="la la-info text-danger"></i>
-						User Will enter a text in a text box for this answer type.
-					</div>
-
-					<div id="dateSection" style="display:none;" class="text-muted mb-4">
-						<i class="la la-info text-danger"></i>
-						User Will select and/or insert their input  for this answer type.
-					</div>
-					<div id="ifYes" style="display:none;">
-
-						<div class="container">
-
-							<div class="col-md-8   ">
-								<button type="button" required="required" class="btn  add-another-collection-widget   btn-sm btn-light-primary float-center " data-list-selector="#objective-fields-list">
-									<span aria-hidden="true">+</span>
-									Add choice
-								</button>
-							</div>
-						</div>
-						<div class="form-group  ">
-							<div class="row ">
-								<div class="col-6 "></div>
-								<div class="col-6 ">
-									<ul id="objective-fields-list" data-prototype="{{_self.displayVersion(form.answers.vars.prototype)|e }}" data-widget-tags="{{ '<div class="row "></div>'|e }}" data-widget-counter="{{ form.answers|length }}">
-										{% for protocol in form.answers %}
-											<div class="col-12 ">
-												{{ _self.displayVersion(questionaire) }}
-											</div>
-										{% endfor %}
-									</ul>
+							<div class="form-group">
+								<p class="font-weight-bold">{% trans %}Required?{% endtrans %}:</p>
+								<div class="row">
+									<div class="col-lg-3">
+										<label class="option option option-plain">
+											<span class="option-control">
+												<span class="radio">
+													<input type="radio" name="required" value="0">
+													<span></span>
+												</span>
+											</span>
+											<span class="option-label">
+												<span class="option-head">
+													<span class="option-title">Optional</span>
+												</span>
+												<span class="option-body">
+													.</span>
+											</span>
+										</label>
+									</div>
+									<div class="col-lg-3">
+										<label class="option option-plain">
+											<span class="option-control">
+												<span class="radio">
+													<input type="radio" name="required" value="1">
+													<span></span>
+												</span>
+											</span>
+											<span class="option-label">
+												<span class="option-head">
+													<span class="option-title">Required
+													</span>
+												</span>
+												<span class="option-body">.</span>
+											</span>
+										</label>
+									</div>
 								</div>
 							</div>
+							<div
+								class="modal-footer">
+								{# <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{% trans %}Close{% endtrans %}</button> #}
+								<button class="btn btn-primary font-weight-bold">{% trans %}Save reviewerForm{% endtrans %}</button>
+
+							</div>
+							{{ form_end(form) }}
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary font-weight-bold">{% trans %}Save form{% endtrans %}</button>
-
-					</div>
-					{{ form_end(form) }}
-				</div>
-			</div>
-		</div>
-
-		<div class="modal fade" id="exampleModalSizeDefault" tabindex="-1" role="dialog" aria-labelledby="exampleModalSizeDefault" style="display: none;" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">{% trans %}Add new review form section{% endtrans %}</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<i aria-hidden="true" class="ki ki-close"></i>
-						</button>
-					</div>
-					<div class="modal-body">
-						{{form_start(reviewChecklistGroupform)}}
-
-						{{form_widget(reviewChecklistGroupform)}}
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{% trans %}Close{% endtrans %}</button>
-						<button class="btn btn-primary font-weight-bold">{% trans %}Save{% endtrans %}</button>
-						{{form_end(reviewChecklistGroupform)}}
 					</div>
 				</div>
 			</div>
@@ -295,7 +357,7 @@
 						<div class="tab-content mt-5" id="myTabContent">
 							<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
 								{% for checklist in checklist_group %}
-									{% set questions = checklist.reviewChecklists  |filter(review_checklist =>  (review_checklist.reviewForm == reviewForm))|length  %}
+									{% set questions = checklist.reviewChecklists  |filter(review_checklist =>  (review_checklist.reviewForm== reviewForm))|length  %}
 									{% if questions >0 %}
 										<b style="margin-left:10px">
 											<span class="text-success">
@@ -310,7 +372,7 @@
 											{% for review_checklist in checklist.reviewChecklists  |filter(review_checklist =>  (review_checklist.reviewForm == reviewForm)) %}
 												<li>
 													<b style="margin-right:5">
-														<form method="post" action="{{ path('app_s_e_r_o_review_checklist_delete', {'id': review_checklist.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+														<form method="post" action="{{ path('review_checklist_delete', {'id': review_checklist.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
 															{{ loop.index}}.
 															{{review_checklist.name}}
 															<p class="text-muted">
@@ -321,11 +383,13 @@
 																	{% elseif review_checklist.answerType==6 %}Number Choice
 																	{% elseif review_checklist.answerType==8 %}Email type
 																	{% elseif review_checklist.answerType==4 %}Text box
+																	{% elseif review_checklist.answerType==9 %}Dropdown selector
 																{% endif %})
 															</p>
 															<ul style="list-style: none;">
 																{% for item in review_checklist.answers %}
-																	<li>{{toAlpha(loop.index)}}.
+																	<li>
+																		{# {{toRoman(loop.index)}}. #}
 																		{{item.choiceName}}
 																	</li>
 																{% endfor %}
@@ -333,7 +397,7 @@
 														</b>
 														{% if review_checklist.reviewerResponses|length>0 %}
 															{% else %}
-																<a href="{{ path('app_s_e_r_o_review_checklist_edit', {'id': review_checklist.id}) }}" class="btn btn-light-warning btn-sm">edit</a>
+																{# <a href="{{ path('review_checklist_edit', {'id': review_checklist.id}) }}" class="btn btn-light-warning btn-sm">edit</a> #}
 
 																<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ review_checklist.id) }}">
 																<button class="btn btn-light-danger btn-sm">Delete</button>
@@ -345,15 +409,16 @@
 									{% endif %}
 								{% endfor %}
 							</div>
+							<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Tab content 3</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 {% endblock %}
 {% block javascripts %}
+
 	<script>
 		var x = document.getElementById("ifYes");
 var d = document.getElementById("dateSection");

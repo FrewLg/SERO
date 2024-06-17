@@ -239,11 +239,11 @@
 					<div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
 						<form id="form-2" method="post" class="row row-cols-1 ms-5 me-5 needs-validation" novalidate>
 
-							<h5 class="m-1">PARTICIPATING INVESTIGATORS:</h5>
-							<span class="m-1 text-muted">Click the button when you want to add a new researcher</span>
+							<h5 class="m-1">{% trans  %} PARTICIPATING INVESTIGATORS{% endtrans  %}:</h5>
+							<span class="m-1 text-muted">{% trans  %}Click the button to add a new researcher{% endtrans  %}</span>
 							<button type="button" class="btn btn-light-primary  add-another-collection-widget btn-sm" data-list-selector="#researchMember-fields-list">
 								<span aria-hidden="true">+</span>
-								Add PARTICIPATING INVESTIGATORS
+								{% trans  %}Add PARTICIPATING INVESTIGATORS{% endtrans  %}
 							</button>
 
 							<ul id="researchMember-fields-list" class="m-t-5" data-prototype="{{_self.litCoPIs(protocolForm.participatingInvestigators.vars.prototype)|e }}" data-widget-tags="{{ '<div class="row "></div>'|e }}" data-widget-counter="{{ protocolForm.participatingInvestigators|length }}">

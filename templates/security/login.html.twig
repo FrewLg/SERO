@@ -4,7 +4,17 @@
 	{% trans %}Log in{% endtrans %}
 {% endblock %}
 
+{% block bodytitle %}
+	<div class="mb-4">
+		<h4 class=" font-weight-bold  ">{% trans %}Please sign in{% endtrans %}
+		</h4>
+		<div class="text-muted font-weight-bold">{% trans %}Enter your email and password to login{% endtrans %}</div>
+	</div>
+{% endblock  %}
+
 {% block body %}
+ 
+
 	<form method="post" name="form">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -18,8 +28,7 @@
 			</div>
 		{% endif %}
 
-		<h1 class="h3 mb-3 font-weight-normal">{% trans %}Please sign in{% endtrans %}</h1>
-
+ 
 		{# <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control h-auto form-control-solid py-4 px-8" autocomplete="email" required autofocus>
 		         <input  type="password" name="_password" id="password" class="form-control h-auto form-control-solid py-4 px-8" autocomplete="current-password" required> #}
 		{# ? #}
