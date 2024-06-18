@@ -113,10 +113,10 @@
 				<div
 					class="d-flex align-items-center flex-wrap py-25 px-5">
 					<!--begin::Heading-->
-					<h2 class="text-dark font-weight-bolder mr-12">Verify Ethical Clearance Certificate here</h2>
+					<h2 class="text-dark font-weight-bolder mr-12">{% trans %}Verify Ethical Clearance Certificate here{% endtrans %}</h2>
 					<!--end::Heading-->
 					<!--begin::Form-->
-					<form action="{{path('irb_validate')}}" class="d-flex position-relative flex-row-fluid">
+					<form action="{{path('irb_validate')}}" method="post" class="d-flex position-relative flex-row-fluid">
 						<div
 							class="input-group shadow-sm">
 							<!--begin::SVG-->
@@ -139,7 +139,7 @@
 							<!--end::SVG-->
 							<!--begin::Input-->
 							<input
-							type="text" class="form-control h-auto border-0 font-size-lg py-7 px-1" placeholder="Search here using certificate CODE">
+							type="text" class="form-control h-auto border-0 font-size-lg py-7 px-1" placeholder="{% trans %}Search here using certificate CODE{% endtrans %}">
 						<!--end::Input-->
 						</div>
 					</form>

@@ -38,8 +38,8 @@ Status: ሁኔታ
 'Application Type': 'ማመልከቻዎች ዓይነት'
 'No': በፍጹም
 'Yes': አዎን
-'Project Type': '__Project Type'
-'Poject Start Date': '__Poject Start Date'
+'Project Type': 'የፕሮጀክት ዓይነት'
+'Poject Start Date': 'የፕሮጀክት መነሻ ቀን'
 'Poject End Date': '__Poject End Date'
 Location: አካባቢ
 Members: __Members
@@ -210,3 +210,24 @@ Telephone: __Telephone
 Institution: __Institution
 'Click the button to add a new researcher': 'አዲስ ተመራማሪ ለማከል ቁልፉን ጠቅ ያድርጉ'
 'Add PARTICIPATING INVESTIGATORS': 'ተሳታፊ መርማሪዎችን አክል'
+'Build a reviewer form': '__Build a reviewer form'
+'Add new form section': '__Add new form section'
+'reviewerForm section': '__reviewerForm section'
+'Add choice': '__Add choice'
+'Save reviewerForm': '__Save reviewerForm'
+'Project PI': 'የፕሮጀክት ዋና መርማሪ'
+'Project Start': 'የፕሮጀክት መነሻ ቀን'
+'Project End': 'የፕሮጀክት መጨረሻ'
+'Clearance Valid until': 'የስነምግባር ማረጋገጫ ሰነድ ያገለግላል እስከ'
+'Verify here': 'እዚህ ያረጋግጡ'
+V: __V
+'Validate IRB clearance here': 'የIRB የምስክር ወረቀት ሰነድ እዚህ ያረጋግጡ'
+Check: ይመልከቱ
+'Valid Status': 'ትክክለኛ ሁኔታ'
+'IRB Ethical Clearance': 'IRB ወረቀት ሰነድ ማረጋገጫ'
+'Reference code': 'የማጣቀሻ ኮድ'
+'The IRB of': '__The IRB of'
+'has reviewed research project': '__has reviewed research project'
+'Not Approved': አልተፈቀደም
+'Verify Ethical Clearance Certificate here': 'የሥነምግባር ማረጋገጫ ሰርተፍኬት እዚህ ያረጋግጡ'
+'Search here using certificate CODE': 'የሰርቲፊኬት ልዩ ቁጥር በመጠቀም እዚህ ይፈልጉ'

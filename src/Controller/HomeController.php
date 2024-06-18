@@ -45,8 +45,8 @@ class HomeController extends AbstractController
         ]);
     }
 
-    #[Route('/irb-clearancdess/{certificateCode}', name: 'irb_validate2')]
-    #[Route('{_locale<%app.supported_locales%>}/irb-clearance/', name: 'irb_validate')]
+    // #[Route('{_locale<%app.supported_locales%>}/irb-clearancdesd/{certificateCode}', name: 'irb_validate2')]
+    #[Route('{_locale<%app.supported_locales%>}/irb-clearance/', name: 'irb_validate', methods: ['GET','POST'])]
     public function home(Request $request, EntityManagerInterface $em, IrbCertificate $irbCertificate = null): Response
     {
         $sentCode = $request->request->get('validate');
@@ -80,7 +80,7 @@ class HomeController extends AbstractController
         return $this->render('sero/clearance.html.twig', []);
     }
 
-    #[Route('/verify-here/{certificateCode}', name: 'verify_by_link', methods: ['GET','POST'])]
+    #[Route('{_locale<%app.supported_locales%>}/verify-here/{certificateCode}', name: 'verify_by_link', methods: ['GET','POST'])]
     public function clicktlinkoverify(EntityManagerInterface $em,   $certificateCode): Response
     {
 

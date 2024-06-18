@@ -11,11 +11,9 @@
 
 	{% if  not irb is defined %}
 		<div class="container aos-init aos-animate p-10" data-aos="fade-up">
-
-
 			<div class="section-title">
 				<h2>
-					Validate IRB clearance here
+					{% trans %}Validate IRB clearance here{% endtrans %}
 				</h2>
 			</div>
 			<div class="section-title">
@@ -25,36 +23,33 @@
 							<input type="text" name="validate" class="form-control" id="name" placeholder="Code" required=""/>
 						</div>
 					</div>
-					<button class="mt-2 btn-lg btn btn-success" type="submit">Check</button>
+					<button class="mt-2 btn-lg btn btn-success" type="submit">{% trans %}Check{% endtrans %}</button>
 				</form>
 			</div>
 		</div>
 
 	{% else %}
-
-
 		<div class="card  m-4">
 			<div class="ribbon ribbon-top">
-				<div class="ribbon-target bg-info" style="top: -2px; right: 20px;">Valid Status</div>
-				 
+				<div class="ribbon-target bg-success" style="top: -2px; right: 20px;">{% trans %}Valid Status{% endtrans %}</div>
 			</div>
 			<div class="cards p-34 aos-init aos-animate" data-aos="fade-up">
 				<div class="p-10" data-aos="fade-up">
-
+					<img width="50" alt="Logo" src="{{ asset('files/site_setting/'~site_logo ) }}"/>
+					<br>
 					<div class="section-title my-4">
-						<h2>IRB Ethical Clearance</h2>
+						<h2>{% trans %}IRB Ethical Clearance{% endtrans %}</h2>
 					</div>
-					<p class="float-end">Reference code :<u>
+					<p class="float-end">{% trans %}Reference code{% endtrans %}
+						:<u>
 							<b>{{ irb.certificateCode }}</b>
 						</u>
 					</p>
-					<img width="50" alt="Logo" src="{{ asset('files/site_setting/'~site_logo ) }}"/>
-					<br>
 					<br>
 					<p>
-						The IRB of
+						{% trans %}The IRB of{% endtrans %}
 						{{app_name}}
-						has reviewed research project
+						{% trans %}has reviewed research project{% endtrans %}
 						<u>
 							<b>"{{ irb.irbApplication.title }}".</b>
 						</u>
@@ -71,56 +66,48 @@
 					</ol>
 					<div class="row content">
 						<div class="col-lg-6">
-
-
 							<p>
-								<b>Project Type:</b>
+								<b>{% trans %}Project Type{% endtrans %}:</b>
 								{# {{ irb.irbApplication.projectType }} #}
 							</p>
 							<p>
-								<b>Project PI:</b>
+								<b>{% trans %}Project PI{% endtrans %}:</b>
 								{# {{ irb.irbApplication.pi ? irb.irbApplication.pi  : irb.irbApplication.submittedBy  }} #}
-
 							</p>
 							<p>
-								<b>Project Start:</b>
+								<b>{% trans %}Project Start{% endtrans %}:</b>
 								{{ irb.irbApplication.startDate | date('Y-m-d') }}
 
 							</p>
 							<p>
-								<b>Project End:</b>
+								<b>{% trans %}Project End{% endtrans %}:</b>
 								{{ irb.irbApplication.endDate | date('Y-m-d') }}
 							</p>
 
 						</div>
 						<div class="col-lg-6 pt-4 pt-lg-0">
 							<p>
-								<b>Clearance Valid until</b>:
-								{{ irb.validUntil | date('Y-m-d') }}
+								<b>{% trans %}Clearance Valid until{% endtrans %}</b>:
+								{{ irb.validUntil | date('Y-M')|trans }}
 							</p>
 							<br>
 							{% if irb.approvedBy %}
 								{{irb.approvedBy}}
 								<br>
-								<img src="{{ asset('files/signatures/'~irb.approvedBy.profile ) }}" alt="" width="100" ;height="100">
+								{# <img src="{{ asset('files/signatures/'~irb.approvedBy.profile ) }}" alt="" width="100" ;height="100"> #}
 
 							{% else %}
-								Not Approved
+								{% trans %}Not Approved{% endtrans %}
 							{% endif %}
-
 						</div>
-
 					</div>
-
 					<span class="separator"></span>
 					<div class="separator separator-dashed"></div>
 					<img src="{{ qr_code }}" alt="QR Code" style="width: 100; height: 100px;">
-
 					<br>
 					<div class="separator separator-dashed"></div>
-					<b class=" font-weight-bold">Verify here:</b>
-					<a href="http://127.0.0.1:8008/verify-here/{{irb.certificateCode}}">{{app_url}}/verify-here/{{irb.certificateCode}}</a>
-
+					<b class=" font-weight-bold">{% trans %}Verify here{% endtrans %}:</b>
+					<a href="{{app_url}}/{{ app.request.getLocale() }}/verify-here/{{irb.certificateCode}}">{{app_url}}/{{ app.request.getLocale() }}/verify-here/{{irb.certificateCode}}</a>
 				{% endif %}
 			</div>
 		</div>
