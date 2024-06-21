@@ -59,6 +59,14 @@
 
 {% block body %}
 
+ <div {{ react_component('Hello' ) }}>
+        Loading... <i class="fas fa-cog fa-spin fa-3x"></i>
+    </div>
+
+    {# Component living in a subdirectory: "assets/react/controllers/Admin/OtherComponent" #}
+    <div {{ react_component('Admin/OtherComponent') }}></div>
+
+	
 	<div class="contasiner">
 		<div class="card card-custom gutter-b shadow-lg p-3 mb-5  bg-body rounded">
 			<div class="card-body">

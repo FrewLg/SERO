@@ -203,11 +203,11 @@ Revise: __Revise
 'Respond to survey': '__Respond to survey'
 'Click the button when you want to add a new researcher': 'አዲስ ተመራማሪ ለማከል ቁልፉን ጠቅ ያድርጉ'
 Submit: 'ማመልከቻ አስገባ'
-'Full Name': '__Full Name'
-Email: __Email
-Telephone: __Telephone
-'License Number': '__License Number'
-Institution: __Institution
+'Full Name': 'ሙሉ ስም'
+Email: ኢሜል
+Telephone: ስልክ
+'License Number': 'የፍቃድ ቁጥር'
+Institution: ተቋም
 'Click the button to add a new researcher': 'አዲስ ተመራማሪ ለማከል ቁልፉን ጠቅ ያድርጉ'
 'Add PARTICIPATING INVESTIGATORS': 'ተሳታፊ መርማሪዎችን አክል'
 'Build a reviewer form': '__Build a reviewer form'
