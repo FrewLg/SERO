@@ -19,10 +19,6 @@ APP_ENV=dd
 APP_DEBUG=1
 APP_SECRET=1285d4d969efd2f90a9c43d9f451dc03
 ###< symfony/framework-bundle ###
-# MAILER_DSN=gmail://journals@ephi.gov.et:welcome@ephi@localhost?encryption=tls&auth_mode=oauth
-MAILER_URL=gmail://no-reply@wgu.edu.et:Pass@Admin121?@localhost?encryption=tls&auth_mode=oauth
-MAILER_DSN=gmail://no-reply@wgu.edu.et:Pass@Admin121?@localhost?encryption=tls&auth_mode=oauth
-
 ###> doctrine/doctrine-bundle ###
 # Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url
 # IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml
